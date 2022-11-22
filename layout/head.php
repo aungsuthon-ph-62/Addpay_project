@@ -10,7 +10,7 @@
     </title>
 
     <!-- FAVICON -->
-    <link rel="shortcut icon" href="image/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="image/addpaylogo.png" type="image/x-icon">
     <!-- FAVICON -->
 
     <!-- CSS -->
