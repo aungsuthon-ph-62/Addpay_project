@@ -2,6 +2,7 @@
 include 'layout/head.php';
 ?>
 
+
 <body>
     <?php if (isset($_GET['login'])) {
         include 'view/login.php';
