@@ -1,11 +1,8 @@
-body {
-  font-family: "Kanit", sans-serif;
-  font-family: "Noto Sans", sans-serif;
-  font-family: "Noto Sans Thai", sans-serif;
-  font-family: "Poppins", sans-serif;
-  font-family: "Prompt", sans-serif;
+.dashboardNav-bg{
+  background-color: #046197;
 }
 
+/* Login Register */
 .divider:after,
 .divider:before {
   content: "";
@@ -13,3 +10,4 @@ body {
   height: 1px;
   background: #eee;
 }
+
