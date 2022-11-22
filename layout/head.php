@@ -17,6 +17,10 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- CSS -->
 
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <!-- Dashboard CSS -->
+
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     <!-- jQuery -->
