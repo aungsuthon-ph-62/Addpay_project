@@ -1,5 +1,5 @@
 <?php 
-    include "Location: layout/head.php";
+    include "layout/head.php";
 ?>
 
 <body>
@@ -7,5 +7,5 @@
 
 
 <?php 
-    include "Location: layout/footer";
+    include "layout/footer";
 ?>
