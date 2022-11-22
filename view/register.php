@@ -8,7 +8,6 @@
                         <img class="rounded-2" src="image/logorebg.png" style="width: auto; height: 3rem;">
                     </a>
                 </div>
-
                 <!-- back to login -->
                 <div class="nav col-lg-auto text-small ">
                     <a href="index.php" class="nav-link text-light bg-dark rounded-2 px-sm-4 px-md-5">
@@ -17,11 +16,9 @@
                     </a>
                 </div>
             </div>
-
             <!-- form register -->
             <div class="d-flex align-items-center justify-content-center">
                 <div class="col-md-7 col-lg-5 col-xl-5 ">
-
                     <div class="text-center" id="title" name="title">
                         <h3>สมัครสมาชิก</h3>
                     </div>
@@ -34,10 +31,7 @@
                             <i class="fa-solid fa-triangle-exclamation"></i>
                             A simple danger alert—check it out!
                         </div>
-
-
                     </div>
-
                     <form class="container">
                         <div class="form-floating mb-4">
                             <select class="form-select " id="inputTname" name="inputTname" required />
@@ -48,7 +42,6 @@
                             </select>
                             <label for="inputTname" class="">คำนำหน้า</label>
                         </div>
-
                         <div class="form-floating mb-4">
                             <input type="text" class="form-control form-control-lg"" id=" inputFname" name="inputFname" placeholder="กรอกชื่อ" required />
                             <label for="inputFname" class="form-label">ชื่อ</label>
@@ -57,21 +50,17 @@
                             <input type="text" class="form-control form-control-lg"" id=" inputLname" name="inputLname" placeholder="กรอกนามสกุล" required />
                             <label for="inputLname" class="form-label">นามสกุล</label>
                         </div>
-
-
                         <!-- username input -->
                         <div class="form-floating mb-4">
                             <input type="text" class="form-control form-control-lg"" id=" inputLname" name="inputLname" placeholder="กรอกชื่ผู้ใช้" required />
                             <label for="inputLname" class="form-label">
                                 ชื่อผู้ใช้</label>
                         </div>
-
                         <!-- Password input -->
                         <div class="form-floating mb-4">
                             <input type="password" class="form-control form-control-lg" id="inputPassword" name="inputPassword" placeholder="กรอกรหัสผ่าน" required />
                             <label for="inputPassword" class="form-label">รหัสผ่าน</label>
                         </div>
-
                         <div class="justify-content-around align-items-center mb-4">
                             <!-- Checkbox -->
                             <div class="form-check">
@@ -79,13 +68,10 @@
                                 <label class="form-check-label" for="form1Example3"> ยืนยันข้อมูล </label>
                             </div>
                         </div>
-
                         <!-- Submit button -->
                         <div class="d-grid gap-2 col-12 mx-auto mb-4">
                             <button type="submit" name="submit" class="btn p-3 mt-3 text-white" style="background-color:#FE9100 ;">สมัครสมาชิก</button>
                         </div>
-
-
                     </form>
                 </div>
             </div>
