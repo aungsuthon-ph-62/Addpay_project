@@ -1,7 +1,7 @@
 <section class="vh-100 " style="background-color:#07AAF2">
   <div class="container py-5 h-100 ">
     <div class="row d-flex align-items-center justify-content-center h-100 bg-white rounded-5">
-      
+
       <div class="col-12 col-md-5 col-lg-6 col-xl-5 text-center border-sm-0 border-end">
         <div class="img">
           <img src="image/logo.png" class="img-fluid" alt="Responsive image">
@@ -11,7 +11,7 @@
             เปลี่ยนทุกไอเดีย ให้เป็นไอที
           </label>
         </div>
-</div>
+      </div>
       <div class="col-12 col-md-5 col-lg-6 col-xl-5 p-5 ">
         <h1 class="mb-5">เข้าสู่ระบบ</h1>
         <form>
