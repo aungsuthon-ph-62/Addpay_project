@@ -9,10 +9,11 @@ include 'layout/head.php';
     } else if (isset($_GET['register'])) {
         include 'view/register.php';
         exit;
+    } else {
+        include 'view/dashboard.php';
+        exit;
     }
     ?>
-
-
 
     <?php
     include 'layout/footer.php';
