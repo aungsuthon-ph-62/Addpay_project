@@ -21,7 +21,7 @@
                     <!-- Password input -->
                     <div class="form-outline mb-4">
                         <input type="password" id="form1Example23" class="form-control form-control-lg" />
-                        <label class="form-label" for="form1Example23">Password</label>
+                        <label class="form-label" for="form1Example23">gbjhbjhjbh</label>
                     </div>
 
                     <div class="d-flex justify-content-around align-items-center mb-4">
