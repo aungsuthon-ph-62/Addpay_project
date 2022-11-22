@@ -7,7 +7,7 @@ include 'layout/head.php';
         include 'view/login.php';
         exit;
     } else if (isset($_GET['register'])) {
-        include 'view/login.php';
+        include 'view/register.php';
         exit;
     } else {
         include 'view/dashboard.php';
