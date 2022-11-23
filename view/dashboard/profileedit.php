@@ -1,3 +1,17 @@
+<script>
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            $('#previewprofile')
+                .attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
 <div class="modal fade" id="profileeditdataModal" tabindex="-1" aria-labelledby="profileeditdataModalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
@@ -80,10 +94,10 @@
                     <input type="hidden" name="" value="">
                     <div class="px-4 text-center">
                         <input class="form-control form-control-sm " id="profile" name="profile" type="file"
-                            accept="image/*" oninput="preview.src=window.URL.createObjectURL(this.files[0])" />
+                            accept="image/*" onchange="readURL(this);" />
                         <br>
                         <div class="p-3">
-                            <img class="img-fluid" id='preview' width="250px" />
+                            <img class="img-fluid" id='previewprofile' width="250px" />
                         </div>
                     </div>
                     <div class="modal-footer">
