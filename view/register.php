@@ -1,4 +1,4 @@
-<section class="vh-100 p-3 px-md-5 py-md-5" style="background-color: #07aaf2 ;">
+<section class="vh-100 p-3 px-md-5 py-md-5 custom-gradient-bg">
   <div class="container rounded-5 py-5 px-3 px-md-5 py-md-3 bg-white h-100">
     <!--  -->
     <div class="d-flex flex-wrap align-items-center justify-content-between mb-3">
@@ -6,7 +6,7 @@
         <img class="rounded-2" src="image/logorebg.png" style="width: auto; height: 3rem;">
       </a>
       <!-- back to login -->
-      <a href="index.php" class="btn btn-dark border-0" style="background-color: #046197;">
+      <a href="?login" class="btn btn-dark border-0" style="background-color: #046197;">
         <i class="fa-solid fa-right-to-bracket"></i>
         Login
       </a>
@@ -33,7 +33,7 @@
     <div class="container mb-4">
       <form action="" method="post" class="px-md-5 ">
 
-        <select class="form-select mb-4" id="inputTname" name="inputTname">
+        <select class="form-select mb-4 rounded-pill" id="inputTname" name="inputTname">
           <option selected disabled>--คำนำหน้าชื่อ--</option>
           <option value="นาย">นาย</option>
           <option value="นาง">นาง</option>
@@ -68,7 +68,7 @@
 
         <!-- Submit button -->
         <div class="d-grid gap-2 col-12 mx-auto mb-md-4">
-          <button type="submit" name="submit" class="btn p-3 mt-3 text-white" style="background-color:#FE9100 ;">สมัครสมาชิก</button>
+          <button type="submit" name="submit" class="btn p-3 mt-3 text-white rounded-pill fs-5 fw-bold" style="background-color:#FE9100 ;">สมัครสมาชิก</button>
         </div>
 
       </form>

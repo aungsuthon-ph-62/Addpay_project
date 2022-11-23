@@ -1,4 +1,4 @@
-<section class="vh-100 p-3" style="background-color:#07AAF2">
+<section class="vh-100 p-3 custom-gradient-bg">
   <div class="container py-5 py-sm-4 py-md-5">
     <div class="row d-flex align-items-center justify-content-center h-100 bg-white rounded-5 px-md-5 py-md-4">
       <!-- content -->
@@ -20,7 +20,7 @@
 
       <!-- login input -->
       <div class="col-12 col-md-6 px-4 py-4 py-md-0">
-        <div class="mb-md-3 mb-lg-3" id="title" name="title">
+        <div class="mb-md-3 mb-lg-3 text-center text-md-start" id="title" name="title">
           <h2>เข้าสู่ระบบ</h2>
         </div>
 
@@ -50,9 +50,9 @@
             </div>
           </div>
           <!-- Submit button -->
-          <div class="form-row mb-2">
-            <div class="d-grid gap-2 col-12 mx-auto mb-4">
-              <button type="submit" name="submit" class="btn p-3 mt-3 text-white" style="background-color:#FE9100 ;">เข้าสู่ระบบ <i class="fa-solid fa-right-to-bracket"></i></button>
+          <div class="form-row mb-3 mb-md-4">
+            <div class="d-grid gap-2 col-12 mx-auto">
+              <button type="submit" name="submit" class="btn p-3 mt-3 text-white rounded-pill fs-5 fw-bold" style="background-color:#FE9100 ;">เข้าสู่ระบบ <i class="fa-solid fa-right-to-bracket"></i></button>
             </div>
           </div>
           <p class="text-center"> ยังไม่มีบัญชีผู้ใช้ ?
