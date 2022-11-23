@@ -1,3 +1,4 @@
+<?php require("profileedit.php");?>
 <div class="container">
     <div class="main-body">
         <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
@@ -16,8 +17,9 @@
                                 <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="profile" width="260"
                                     class="img-thumbnail">
                             </div>
-                            <a class="btn p-2 mt-3 text-white" style="background-color:#FE9100 ;" href=""><i
-                                    class="fa-solid fa-pen-to-square">แก้ไขรูปภาพโปรไฟล์</i></a>
+                            <button type="button" class="btn p-2 mt-3 text-white" data-bs-toggle="modal"
+                                data-bs-target="#profileeditimgModal" style="background-color:#FE9100 ;"><i
+                                    class="fa-solid fa-pen-to-square">แก้ไขรูปภาพโปรไฟล์</i></button>
                         </div>
                     </div>
                 </div>
