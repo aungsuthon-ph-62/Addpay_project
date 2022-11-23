@@ -1,5 +1,5 @@
 <section class="vh-100 p-3 px-md-5 py-md-5 bg-primary-addpay">
-  <div class="container rounded-5 py-5 px-3 px-md-5 py-md-3 bg-white h-100">
+  <div class="container rounded-5 py-3 py-md-5 px-3 px-md-5 bg-white h-100">
     <!--  -->
     <div class="d-flex flex-wrap align-items-center justify-content-between mb-3">
       <a href="?register">
@@ -30,8 +30,8 @@
 
 
 
-    <div class="container mb-4">
-      <form action="" method="post" class="px-md-5 ">
+    <div class="container mb-4 py-3 px-md-5">
+      <form action="" method="post">
 
         <select class="form-select mb-4 rounded-pill" id="inputTname" name="inputTname">
           <option selected disabled>--คำนำหน้าชื่อ--</option>
