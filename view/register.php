@@ -1,5 +1,5 @@
-<section class="py-3 py-md-5 px-2 px-md-5 bg-primary-addpay overflow-hidden">
-  <div class="rounded-5 py-5 px-md-5 mx-md-5 bg-white">
+<section class="py-4 py-md-5 px-2 px-md-5 bg-primary-addpay overflow-hidden">
+  <div class="rounded-5 py-5 px-md-5 mx-md-5 my-5 my-md-0 bg-white">
 
     <div class="d-flex flex-wrap align-items-center justify-content-between mb-3 px-3 px-md-5">
       <a href="?register">
@@ -19,10 +19,10 @@
       </div>
 
       <div class="container px-md-5">
-        <div class="alert alert-success" role="alert">
+        <!-- <div class="alert alert-success" role="alert">
           <i class="fa-solid fa-circle-check"></i>
           A simple success alert—check it out!
-        </div>
+        </div> -->
         <!-- <div class="alert alert-danger" role="alert">
               <i class="fa-solid fa-triangle-exclamation"></i>
               A simple danger alert—check it out!
@@ -31,9 +31,9 @@
 
 
 
-      <div class="container pb-md-0">
+      <div class="container pb-md-0 mb-5">
         <form action="" method="post" class="px-md-5">
-          <select class="form-select mb-4 rounded-pill shadow" id="inputTname" name="inputTname">
+          <select class="form-select mb-4 rounded-pill" id="inputTname" name="inputTname">
             <option selected disabled>--คำนำหน้าชื่อ--</option>
             <option value="นาย">นาย</option>
             <option value="นาง">นาง</option>
@@ -67,7 +67,7 @@
           </div>
 
           <!-- Submit button -->
-          <div class="d-grid gap-2 col-12 mx-auto mb-5 mb-md-0">
+          <div class="d-grid gap-2 col-12 mx-auto">
             <button type="submit" name="submit" class="btn p-3 mt-3 text-white rounded-pill fs-5 fw-bold btn-addpay">สมัครสมาชิก</button>
           </div>
         </form>
