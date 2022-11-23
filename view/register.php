@@ -1,5 +1,5 @@
 <section class="py-3 py-md-5 px-2 px-md-5 bg-primary-addpay overflow-hidden">
-  <div class="rounded-5 py-5 py-md-3 px-md-5 mx-md-5 bg-white">
+  <div class="rounded-5 py-5 px-md-5 mx-md-5 bg-white">
 
     <div class="d-flex flex-wrap align-items-center justify-content-between mb-3 px-3 px-md-5">
       <a href="?register">
@@ -18,7 +18,7 @@
         <h3>สมัครสมาชิก</h3>
       </div>
 
-      <div class="container px-5">
+      <div class="container px-md-5">
         <div class="alert alert-success" role="alert">
           <i class="fa-solid fa-circle-check"></i>
           A simple success alert—check it out!
@@ -31,7 +31,7 @@
 
 
 
-      <div class="container mb-5 mb-md-0 py-5 py-md-3 px-md-5">
+      <div class="container pb-md-0">
         <form action="" method="post" class="px-md-5">
           <select class="form-select mb-4 rounded-pill shadow" id="inputTname" name="inputTname">
             <option selected disabled>--คำนำหน้าชื่อ--</option>
