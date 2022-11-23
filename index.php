@@ -11,6 +11,7 @@ include 'layout/head.php';
     }
 </style>
 
+
 <body>
     <?php if (isset($_GET['login'])) {
         require 'view/login.php';
