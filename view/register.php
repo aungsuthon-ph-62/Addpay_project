@@ -1,4 +1,4 @@
-<section class="vh-100 p-3" style="background-color: #07aaf2 ;">
+<section class="vh-100 p-3 px-md-5 py-md-5" style="background-color: #07aaf2 ;">
   <div class="container rounded-5 py-5 px-3 px-md-5 py-md-4 bg-white h-100">
     <!--  -->
     <div class="d-flex flex-wrap align-items-center justify-content-between mb-5">
@@ -28,45 +28,47 @@
             </div> -->
     </div>
 
-    <form action="" method="post">
+    <div class="container">
+      <form action="" method="post" class="px-md-5">
 
-      <select class="form-select mb-4" id="inputTname" name="inputTname">
-        <option selected disabled>--คำนำหน้าชื่อ--</option>
-        <option value="นาย">นาย</option>
-        <option value="นาง">นาง</option>
-        <option value="นางสาว">นางสาว</option>
-      </select>
+        <select class="form-select mb-4" id="inputTname" name="inputTname">
+          <option selected disabled>--คำนำหน้าชื่อ--</option>
+          <option value="นาย">นาย</option>
+          <option value="นาง">นาง</option>
+          <option value="นางสาว">นางสาว</option>
+        </select>
 
-      <div class="form-floating mb-4">
-        <input type="text" class="form-control form-control-lg" id=" inputFname" name="inputFname" placeholder="กรอกชื่อ">
-        <label for="inputFname" class="form-label">ชื่อ</label>
-      </div>
-      <div class="form-floating mb-4">
-        <input type="text" class="form-control form-control-lg" id=" inputLname" name="inputLname" placeholder="กรอกนามสกุล">
-        <label for="inputLname" class="form-label">นามสกุล</label>
-      </div>
-      <!-- username input -->
-      <div class="form-floating mb-4">
-        <input type="text" class="form-control form-control-lg" id=" inputUsername" name="inputUsername" placeholder="กรอกชื่ผู้ใช้">
-        <label for="inputLname" class="form-label">
-          ชื่อผู้ใช้</label>
-      </div>
-      <!-- Password input -->
-      <div class="form-floating mb-4">
-        <input type="password" class="form-control form-control-lg" id="inputPassword" name="inputPassword" placeholder="กรอกรหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="พาสเวิร์ดต้องมีตัวเลขอย่างน้อยหนึ่งตัว, มีตัวพิมพ์ใหญ่และพิมพ์เล็ก และมีความยาวไม่น้อยกว่า 8 ตัวอักษร !">
-        <label for="inputPassword" class="form-label">รหัสผ่าน</label>
-      </div>
+        <div class="form-floating mb-4">
+          <input type="text" class="form-control form-control-lg border border-start-0 border-top-0 border-end-0 rounded-0" id=" inputFname" name="inputFname" placeholder="กรอกชื่อ">
+          <label for="inputFname" class="form-label">ชื่อ</label>
+        </div>
+        <div class="form-floating mb-4">
+          <input type="text" class="form-control form-control-lg border border-start-0 border-top-0 border-end-0 rounded-0" id=" inputLname" name="inputLname" placeholder="กรอกนามสกุล">
+          <label for="inputLname" class="form-label">นามสกุล</label>
+        </div>
+        <!-- username input -->
+        <div class="form-floating mb-4">
+          <input type="text" class="form-control form-control-lg border border-start-0 border-top-0 border-end-0 rounded-0" id=" inputUsername" name="inputUsername" placeholder="กรอกชื่ผู้ใช้">
+          <label for="inputLname" class="form-label">
+            ชื่อผู้ใช้</label>
+        </div>
+        <!-- Password input -->
+        <div class="form-floating mb-4">
+          <input type="password" class="form-control form-control-lg border border-start-0 border-top-0 border-end-0 rounded-0" id="inputPassword" name="inputPassword" placeholder="กรอกรหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="พาสเวิร์ดต้องมีตัวเลขอย่างน้อยหนึ่งตัว, มีตัวพิมพ์ใหญ่และพิมพ์เล็ก และมีความยาวไม่น้อยกว่า 8 ตัวอักษร !">
+          <label for="inputPassword" class="form-label">รหัสผ่าน</label>
+        </div>
 
-      <!-- Checkbox -->
-      <div class="form-check mb-4">
-        <input class="form-check-input" type="checkbox" id="inputConfirm">
-        <label class="form-check-label" for="inputConfirm"> ยืนยันข้อมูล </label>
-      </div>
+        <!-- Checkbox -->
+        <div class="form-check mb-4">
+          <input class="form-check-input" type="checkbox" id="inputConfirm">
+          <label class="form-check-label" for="inputConfirm"> ยืนยันข้อมูล </label>
+        </div>
 
-      <!-- Submit button -->
-      <div class="d-grid gap-2 col-12 mx-auto mb-4">
-        <button type="submit" name="submit" class="btn p-3 mt-3 text-white" style="background-color:#FE9100 ;">สมัครสมาชิก</button>
-      </div>
-    </form>
+        <!-- Submit button -->
+        <div class="d-grid gap-2 col-12 mx-auto mb-4">
+          <button type="submit" name="submit" class="btn p-3 mt-3 text-white" style="background-color:#FE9100 ;">สมัครสมาชิก</button>
+        </div>
+      </form>
+    </div>
   </div>
 </section>
