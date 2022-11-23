@@ -1,4 +1,3 @@
-<<<<<<<<< Temporary merge branch 1
 <section class="" style="background-color: #07aaf2 ;">
     <div class="container py-3 py-sm-4 py-md-5 ">
         <div class="container rounded-5  px-md-5 py-md-4" style="background-color: #fff;">
@@ -41,7 +40,7 @@
 
                     <form class="container">
                         <div class="form-floating mb-4">
-                            <select class="form-select " id="inputTname" name="inputTname" required />
+                            <select class="form-select " id="inputTname" name="inputTname" required >
                             <option value="" selected disabled>--คำนำหน้าชื่อ--</option>
                             <option value="นาย">นาย</option>
                             <option value="นาง">นาง</option>
@@ -51,18 +50,18 @@
                         </div>
 
                         <div class="form-floating mb-4">
-                            <input type="text" class="form-control form-control-lg"" id=" inputFname" name="inputFname" placeholder="กรอกชื่อ" required />
+                            <input type="text" class="form-control form-control-lg" id=" inputFname" name="inputFname" placeholder="กรอกชื่อ" required />
                             <label for="inputFname" class="form-label">ชื่อ</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <input type="text" class="form-control form-control-lg"" id=" inputLname" name="inputLname" placeholder="กรอกนามสกุล" required />
+                            <input type="text" class="form-control form-control-lg" id=" inputLname" name="inputLname" placeholder="กรอกนามสกุล" required />
                             <label for="inputLname" class="form-label">นามสกุล</label>
                         </div>
 
 
                         <!-- username input -->
                         <div class="form-floating mb-4">
-                            <input type="text" class="form-control form-control-lg"" id=" inputLname" name="inputLname" placeholder="กรอกชื่ผู้ใช้" required />
+                            <input type="text" class="form-control form-control-lg" id=" inputLname" name="inputLname" placeholder="กรอกชื่ผู้ใช้" required />
                             <label for="inputLname" class="form-label">
                                 ชื่อผู้ใช้</label>
                         </div>
@@ -93,58 +92,4 @@
         </div>
     </div>
 </section>
-=========
-<section class="vh-100">
-    <div class="container py-5 h-100">
-        <div class="row d-flex align-items-center justify-content-center h-100">
-            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                <form>
-                    <div  class="form-outline mb-4">
-                        <select class="form-select" aria-label="Default select example" id="student_type" name="student_type" require>
-                        <option value="none" selected disabled>คำนำหน้า</option>
-                        <option value="นาย">นาย</option>
-                        <option value="นาง">นาง</option>
-                        <option value="นางสาว">นางสาว</option>
-                    </select>
-                    </div>
-                    
 
-                    <div class="form-outline mb-4">
-                        <input type="email" id="form1Example13" class="form-control form-control-lg" />
-                        <label class="form-label" for="form1Example13">Email address</label>
-                    </div>
-
-                    <!-- Password input -->
-                    <div class="form-outline mb-4">
-                        <input type="password" id="form1Example23" class="form-control form-control-lg" />
-                        <label class="form-label" for="form1Example23">gbjhbjhjbh</label>
-                    </div>
-
-                    <div class="d-flex justify-content-around align-items-center mb-4">
-                        <!-- Checkbox -->
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
-                            <label class="form-check-label" for="form1Example3"> Remember me </label>
-                        </div>
-                        <a href="#!">Forgot password?</a>
-                    </div>
-
-                    <!-- Submit button -->
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
-
-                    <div class="divider d-flex align-items-center my-4">
-                        <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
-                    </div>
-
-                    <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!" role="button">
-                        <i class="fab fa-facebook-f me-2"></i>Continue with Facebook
-                    </a>
-                    <a class="btn btn-primary btn-lg btn-block" style="background-color: #55acee" href="#!" role="button">
-                        <i class="fab fa-twitter me-2"></i>Continue with Twitter</a>
-
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
->>>>>>>>> Temporary merge branch 2
