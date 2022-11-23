@@ -1,7 +1,7 @@
 <section class="vh-100 p-3 px-md-5 py-md-5" style="background-color: #07aaf2 ;">
-  <div class="container rounded-5 py-5 px-3 px-md-5 py-md-4 bg-white h-100">
+  <div class="container rounded-5 py-5 px-3 px-md-5 py-md-3 bg-white h-100">
     <!--  -->
-    <div class="d-flex flex-wrap align-items-center justify-content-between mb-5">
+    <div class="d-flex flex-wrap align-items-center justify-content-between mb-3">
       <a href="?register">
         <img class="rounded-2" src="image/logorebg.png" style="width: auto; height: 3rem;">
       </a>
@@ -17,19 +17,21 @@
       <h3>สมัครสมาชิก</h3>
     </div>
 
-    <div class="alert">
-      <!-- <div class="alert alert-success" role="alert">
+    <div class="container px-5">
+      <div class="alert alert-success" role="alert">
         <i class="fa-solid fa-circle-check"></i>
         A simple success alert—check it out!
       </div>
-      <div class="alert alert-danger" role="alert">
+      <!-- <div class="alert alert-danger" role="alert">
               <i class="fa-solid fa-triangle-exclamation"></i>
               A simple danger alert—check it out!
             </div> -->
     </div>
 
-    <div class="container">
-      <form action="" method="post" class="px-md-5">
+
+
+    <div class="container mb-4">
+      <form action="" method="post" class="px-md-5 ">
 
         <select class="form-select mb-4" id="inputTname" name="inputTname">
           <option selected disabled>--คำนำหน้าชื่อ--</option>
@@ -65,9 +67,10 @@
         </div>
 
         <!-- Submit button -->
-        <div class="d-grid gap-2 col-12 mx-auto mb-4">
+        <div class="d-grid gap-2 col-12 mx-auto mb-md-4">
           <button type="submit" name="submit" class="btn p-3 mt-3 text-white" style="background-color:#FE9100 ;">สมัครสมาชิก</button>
         </div>
+
       </form>
     </div>
   </div>
