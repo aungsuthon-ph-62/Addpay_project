@@ -1,10 +1,7 @@
-/* Dashboard Nav bar */
-.dashboardNav-bg {
-  background-color: #046197;
-}
+/* Addpay Color */
 
-/* Gradient Background */
-.custom-gradient-bg {
+/* Skyblue Background Color */
+.bg-primary-addpay {
   /* fallback for old browsers */
   background: #07aaf2;
 
@@ -12,5 +9,29 @@
   background: -webkit-linear-gradient(to right, #07aaf2, #50b4df);
 
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(to bottom, #07aaf2, #50b4df, #079ad9);
+  background: linear-gradient(to bottom, #079ad9, #07aaf2, #50b4df);
+}
+
+/* Darkblue Background Color */
+.bg-secondary-addpay {
+  /* fallback for old browsers */
+  background: #046197;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, #046197, #034266);
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to bottom, #046197, #034266);
+}
+
+/* Button Color */
+.btn-addpay {
+  /* fallback for old browsers */
+  background: #fe9100;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, #fdb04c, #fe9100);
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to bottom, #fdb04c, #fe9100);
 }

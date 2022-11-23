@@ -1,4 +1,4 @@
-<header class="navbar navbar-dark sticky-top dashboardNav-bg shadow">
+<header class="navbar navbar-dark sticky-top bg-secondary-addpay shadow">
     <div class="d-flex col-12 col-md-3 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between align-items-center">
         <a class="navbar-brand ps-3 ps-md-5" href="#">
             <img src="image/logo-removebg-preview (1).png" class="img-fluid" alt="" style="width: auto; height: 3rem;">

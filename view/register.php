@@ -1,4 +1,4 @@
-<section class="vh-100 p-3 px-md-5 py-md-5 custom-gradient-bg">
+<section class="vh-100 p-3 px-md-5 py-md-5 bg-primary-addpay">
   <div class="container rounded-5 py-5 px-3 px-md-5 py-md-3 bg-white h-100">
     <!--  -->
     <div class="d-flex flex-wrap align-items-center justify-content-between mb-3">
@@ -6,7 +6,7 @@
         <img class="rounded-2" src="image/logorebg.png" style="width: auto; height: 3rem;">
       </a>
       <!-- back to login -->
-      <a href="?login" class="btn btn-dark border-0" style="background-color: #046197;">
+      <a href="?login" class="btn btn-dark border-0 bg-secondary-addpay">
         <i class="fa-solid fa-right-to-bracket"></i>
         Login
       </a>
@@ -68,7 +68,7 @@
 
         <!-- Submit button -->
         <div class="d-grid gap-2 col-12 mx-auto mb-md-4">
-          <button type="submit" name="submit" class="btn p-3 mt-3 text-white rounded-pill fs-5 fw-bold" style="background-color:#FE9100 ;">สมัครสมาชิก</button>
+          <button type="submit" name="submit" class="btn p-3 mt-3 text-white rounded-pill fs-5 fw-bold btn-addpay">สมัครสมาชิก</button>
         </div>
 
       </form>

@@ -1,4 +1,4 @@
-<section class="vh-100 p-3 custom-gradient-bg">
+<section class="vh-100 p-3 bg-primary-addpay">
   <div class="container py-5 py-sm-4 py-md-5">
     <div class="row d-flex align-items-center justify-content-center h-100 bg-white rounded-5 px-md-5 py-md-4">
       <!-- content -->
@@ -52,7 +52,7 @@
           <!-- Submit button -->
           <div class="form-row mb-3 mb-md-4">
             <div class="d-grid gap-2 col-12 mx-auto">
-              <button type="submit" name="submit" class="btn p-3 mt-3 text-white rounded-pill fs-5 fw-bold" style="background-color:#FE9100 ;">เข้าสู่ระบบ <i class="fa-solid fa-right-to-bracket"></i></button>
+              <button type="submit" name="submit" class="btn p-3 mt-3 text-white rounded-pill fs-5 fw-bold btn-addpay">เข้าสู่ระบบ <i class="fa-solid fa-right-to-bracket"></i></button>
             </div>
           </div>
           <p class="text-center"> ยังไม่มีบัญชีผู้ใช้ ?
