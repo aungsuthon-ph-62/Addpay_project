@@ -16,7 +16,7 @@ include 'layout/head.php';
     <?php if (isset($_GET['login'])) {
         require 'view/login.php';
     } else if (isset($_GET['register'])) {
-        include 'view/login.php';
+        include 'view/register.php';
         exit;
     } else {
         require 'view/dashboard.php';
