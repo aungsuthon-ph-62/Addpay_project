@@ -83,12 +83,12 @@
                         <hr>
                         <div class="row text-center text-md-start">
                             <div class="col-12 mt-3">
-                                <button type="button" class="btn p-2 mb-3 text-white btn-addpay rounded-pill" data-bs-toggle="modal" data-bs-target="#profileeditdataModal">
+                                <button type="button" class="btn p-2 mb-3 mx-md-2 text-white btn-addpay rounded-pill" data-bs-toggle="modal" data-bs-target="#profileeditdataModal">
                                     <i class="fa-solid fa-user-gear"></i>
                                     แก้ไขข้อมูลส่วนตัว
                                 </button>
 
-                                <button type="button" class="btn p-2 mb-3 text-white btn-addpay rounded-pill" data-bs-toggle="modal" data-bs-target="#profileedituserModal">
+                                <button type="button" class="btn p-2 mb-3 mx-md-2 text-white btn-addpay rounded-pill" data-bs-toggle="modal" data-bs-target="#profileedituserModal">
                                     <i class="fa-solid fa-user-pen"></i>
                                     แก้ไขชื่อผู้ใช้และรหัสผ่าน
                                 </button>
