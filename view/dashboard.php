@@ -16,7 +16,10 @@ include 'layout/dashboardNav.php';
             <h1 class="h5 pt-5">หน้าหลัก</h1>
             <hr>
             
-
+            <?php 
+                include 'dashboard/profile.php';
+            ?>
+            
         </main>
     </div>
 </div>
