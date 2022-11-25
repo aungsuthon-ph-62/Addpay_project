@@ -34,6 +34,7 @@ include "../layout/head.php"
                             <label for="editExpenses" class="form-label ">จำนวนเงิน</label>
                             <input class="form-control" id="editExpenses" name="editExpenses" type="number">
                         </div>
+                        <label for="editExpenses" class="form-label ">เลือกประเภท</label>
                         <select class="form-select mb-4 rounded-pill" id="inputTname" name="inputTname">
                             <option selected disabled>--ประเภท--</option>
                             <option value="ประจำ">ประจำ</option>
