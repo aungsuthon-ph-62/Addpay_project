@@ -1,33 +1,6 @@
 <?php
 include("../../layout/head.php");
 ?>
-
-
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    <script>
-        $(function() {
-            $("body").on("click", "#add_sub", function(e) {
-                e.preventDefault()
-                $(this).closest("#row_sub_add").append("<div id='row_sub_remove' class='mt-1 form-inline '> <p class='col-md-1'><input class='form-control w-100' mane='[]' placeholder='ที่' require></p> <p class='col-md-4'><input class='form-control w-100' mane='[]' placeholder='รายการ' require></p> <p class='col-md-2'><input class='form-control w-100' mane='[]' placeholder='จำนวน' require></p> <p class='col-md-2'><input class='form-control w-100' mane='[]' placeholder='ราคา/หน่วย' require></p> <p class='col-md-2'><input class='form-control w-100' mane='[]' placeholder='280.00' disabled></p> <p class='col-md-1'><button type='button' class='float-right mr-1 btn btn-danger btn-sm' id='remove_sub'><i class='fa-solid fa-trash-can'></i></button></p> </div>")
-            });
-
-            $("body").on("click", "#remove_sub", function(e) {
-                e.preventDefault()
-                $(this).closest("#row_sub_remove").remove()
-            });
-
-        });
-    </script>
-    </script>
-
-    </script>
-</head>
-
 <style>
     body {
         font-family: "Kanit", sans-serif;
@@ -37,6 +10,35 @@ include("../../layout/head.php");
         font-family: "Prompt", sans-serif;
     }
 </style>
+
+<script>
+    var items = 0;
+
+    function addItem() {
+        items++;
+
+        var html = "<tr>";
+        html += "<th scope='row'>" + items + "</th>";
+        html += "<td><input type='text' class='form-control w-100' placeholder='รายการ' name='itemName[]'></td>";
+        html += "<td><input type='number' class='form-control w-100' placeholder='จำนวน' name='itemamount[]'></td>";
+        html += "<td><input type='number' class='form-control w-100' placeholder='ราตาต่อหน่วย' name='itemprice[]'></td>";
+        html += "<td><input type='text' class='form-control w-100' placeholder='280.00' name='itemresult[]' disabled></td>";
+        html += "<td><button type='button' class='float-end mr-1 btn btn-danger btn-sm' onclick='deleteRow(this);'><i class='fa-solid fa-trash-can'></i></button></td>"
+        html += "</tr>";
+
+        var row = document.getElementById("tbody").insertRow();
+        row.innerHTML = html;
+    }
+
+    function deleteRow(button) {
+        items--
+        button.parentElement.parentElement.remove();
+        // first parentElement will be td and second will be tr.
+    }
+</script>
+
+
+
 
 <div class="container">
     <div class="main-body">
@@ -103,27 +105,30 @@ include("../../layout/head.php");
                     </div>
 
 
-                    <div class="border border-secondary rounded-3 py-md-3" id="main_row">
-                        <div id="row_sub_add" class="row d-flex align-items-center">
-                            <div class="form-inline">
-                                <p class="col-md-1 ">ลำดับที่</p>
-                                <p class="col-md-4 ">รายการ / Description</p>
-                                <p class="col-md-2 text-center ">จำนวน <br> Amount</p>
-                                <p class="col-md-2 text-center ">ราคา/หน่วย <br> Price / Unit</p>
-                                <p class="col-md-2 text-center ">จำนวนเงิน <br> บาท </p>
-                                <p class="col-md-1 text-center"><button type="button" class="btn btn-success btn-outline-success text-light rounded-4 btn-sm mr-1 float-right" id="add_sub"><i class="fa fa-plus-circle text-white"></i> เพิ่มรายการ</button></p>
-                            </div>
-                            <div id="row_sub_remove" class="mt-1 form-inline">
-                                <p class="col-md-1"><input class="form-control w-100" placeholder="ที่" required></p>
-                                <p class="col-md-4"><input class="form-control w-100" placeholder="รายการ" required></p>
-                                <p class="col-md-2"><input class="form-control w-100" placeholder="จำนวน" required></p>
-                                <p class="col-md-2"><input class="form-control w-100" placeholder="ราคา/หน่วย" required></p>
-                                <p class="col-md-2"><input class="form-control w-100" placeholder="280.00" disabled></p>
-                                <p class="col-md-1"><button type="button" class="float-right mr-1 btn btn-danger btn-sm" id="remove_sub"><i class="fa-solid fa-trash-can"></i></button></p>
-                            </div>
+                    <div class="border border-secondary rounded-3 py-md-4 px-md-4" id="main_row">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr class="align-top">
+                                        <th scope="col" style="width:3%">ลำดับ</th>
+                                        <th scope="col" style="width:47%" >รายการ / Description</th>
+                                        <th scope="col" style="width:10%" class=" text-center">จำนวน <br> Amount</th>
+                                        <th scope="col" style="width:20%" class=" text-center">ราคา/หน่วย <br> Price / Unit</th>
+                                        <th scope="col" style="width:20%" class=" text-center">จำนวนเงิน <br> บาท </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody"></tbody>
+
+
+                            </table>
                         </div>
+                        <div class="text-center">
+                            <button type="button" onclick="addItem();" class="btn btn-success px-4 rounded-pill fs-5 fw-bold " id="add_sub"><i class="fa fa-plus-circle text-white"></i> เพิ่มรายการ</button>
+                        </div>
+
                     </div>
                 </div>
+
 
                 <div class="row">
                     <div class="col-md-6">
@@ -215,4 +220,4 @@ include("../../layout/head.php");
 
 
     </div>
-</div> 
+</div>
