@@ -107,8 +107,8 @@ include "../layout/head.php"
                         </select>
                         <!-- File input -->
                         <div class="form-floating mb-4">
-                        <label for="editExpenses" class="form-label">เพิ่มไฟล์ที่นี่</label>
-                            <input class="form-control" id="editExpenses" name="editExpenses" type="file">
+                            <input type="file" class="form-control form-control-lg border border-start-0 border-top-0 border-end-0 rounded-0" id=" inputPrice" name="inputPrice" placeholder="กรอกนามสกุล">
+                            <!-- <label for="inputPrice" class="form-label">เพิ่มไฟล์ที่นี่</label> -->
                         </div>
                     </div>
                 </div>
