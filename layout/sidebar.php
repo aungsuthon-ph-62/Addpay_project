@@ -14,7 +14,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="navผ-link" href="#">
                             <span data-feather="shopping-cart" class="align-text-bottom"></span>
                             Products
                         </a>
