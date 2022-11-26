@@ -41,17 +41,17 @@
           </select>
 
           <div class="form-floating mb-4">
-            <input type="text" class="form-control form-control-lg border border-start-0 border-top-0 border-end-0 rounded-0" id=" inputFname" name="inputFname" placeholder="กรอกชื่อ">
+            <input type="text" class="form-control form-control-lg border border-start-0 border-top-0 border-end-0 rounded-0" id="inputFname" name="inputFname" placeholder="กรอกชื่อ">
             <label for="inputFname" class="form-label">ชื่อ</label>
           </div>
           <div class="form-floating mb-4">
-            <input type="text" class="form-control form-control-lg border border-start-0 border-top-0 border-end-0 rounded-0" id=" inputLname" name="inputLname" placeholder="กรอกนามสกุล">
+            <input type="text" class="form-control form-control-lg border border-start-0 border-top-0 border-end-0 rounded-0" id="inputLname" name="inputLname" placeholder="กรอกนามสกุล">
             <label for="inputLname" class="form-label">นามสกุล</label>
           </div>
           <!-- username input -->
           <div class="form-floating mb-4">
-            <input type="text" class="form-control form-control-lg border border-start-0 border-top-0 border-end-0 rounded-0" id=" inputUsername" name="inputUsername" placeholder="กรอกชื่ผู้ใช้">
-            <label for="inputLname" class="form-label">
+            <input type="text" class="form-control form-control-lg border border-start-0 border-top-0 border-end-0 rounded-0" id="inputUsername" name="inputUsername" placeholder="กรอกชื่ผู้ใช้">
+            <label for="inputUsername" class="form-label">
               ชื่อผู้ใช้</label>
           </div>
           <!-- Password input -->
