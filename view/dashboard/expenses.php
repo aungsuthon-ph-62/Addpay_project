@@ -1,19 +1,29 @@
 <?php
-include "../layout/head.php"
+include_once '../../layout/head.php';
 ?>
 
+<style>
+    body {
+        font-family: "Kanit", sans-serif;
+        font-family: "Noto Sans", sans-serif;
+        font-family: "Noto Sans Thai", sans-serif;
+        font-family: "Poppins", sans-serif;
+        font-family: "Prompt", sans-serif;
+    }
+</style>
 
 <div class="container py-5">
     <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="../dashboard.php">Dashboard</a></li>
             <li class="breadcrumb-item"><a href="#">การเงิน บัญชี</a></li>
             <li class="breadcrumb-item active" aria-current="page">ใบสำคัญจ่าย</li>
         </ol>
     </nav>
     <hr>
     <div class="d-flex flex-row-reverse mb-3">
-        <a class="btn btn-primary" role="button" aria-disabled="true" data-bs-toggle="modal" data-bs-target="#addExpensesModal" href="../view/add_expenses.php">เพิ่มข้อมูล <i class="fa-solid fa-plus"></i></a>
+         <a class="btn btn-primary" role="button" href="../dashboard/add_expenses.php">เพิ่มข้อมูล <i class="fa-solid fa-plus"></i></a>
+        <!-- <a class="btn btn-primary" role="button" aria-disabled="true" data-bs-toggle="modal" data-bs-target="#addExpensesModal" href="../dashboard/add_expenses.php">เพิ่มข้อมูล <i class="fa-solid fa-plus"></i></a> -->
         <!-- <button type="button" class="btn btn-primary" > 
             <a href="../view/add_expenses.php">
             เพิ่มข้อมูล <i class="fa-solid fa-pen-to-square"></i>
@@ -58,7 +68,7 @@ include "../layout/head.php"
                             <td>
                                 <!-- <?php echo $rows['expenses_file']; ?> -->
                             </td>
-                            <td><a href="../view/edit_expenses.php" class="data-bs-toggle='modal' data-bs-target='#editReportModal'">
+                            <td><a href="../dashboard/edit_expenses.php" class="data-bs-toggle='modal' data-bs-target='#editReportModal'">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                             </td>
@@ -78,7 +88,7 @@ include "../layout/head.php"
 
 
 <!-- add expenses -->
-<div class="modal fade" id="addExpensesModal" tabindex="-1" aria-labelledby="addExpensesModal" aria-hidden="true">
+<!-- <div class="modal fade" id="addExpensesModal" tabindex="-1" aria-labelledby="addExpensesModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -105,10 +115,10 @@ include "../layout/head.php"
                             <option value="ประจำ">ประจำ</option>
                             <option value="ไม่ประจำ">ไม่ประจำ</option>
                         </select>
-                        <!-- File input -->
+                        
                         <div class="form-floating mb-4">
                             <input type="file" class="form-control form-control-lg border border-start-0 border-top-0 border-end-0 rounded-0" id=" inputPrice" name="inputPrice" placeholder="กรอกนามสกุล">
-                            <!-- <label for="inputPrice" class="form-label">เพิ่มไฟล์ที่นี่</label> -->
+                            
                         </div>
                     </div>
                 </div>
@@ -121,4 +131,4 @@ include "../layout/head.php"
             </form>
         </div>
     </div>
-</div>
+</div> -->

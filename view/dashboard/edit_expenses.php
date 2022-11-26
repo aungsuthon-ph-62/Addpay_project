@@ -1,5 +1,5 @@
 <?php
-include "../layout/head.php"
+include_once '../../layout/head.php';
 ?>
 
 
@@ -7,9 +7,16 @@ include "../layout/head.php"
    .font{
     font-size: 1rem;
    }
+   body {
+        font-family: "Kanit", sans-serif;
+        font-family: "Noto Sans", sans-serif;
+        font-family: "Noto Sans Thai", sans-serif;
+        font-family: "Poppins", sans-serif;
+        font-family: "Prompt", sans-serif;
+    }
 </style>
 
-<div class="container">
+<div class="container ">
     <div class="modal modal-sheet d-block" tabindex="-1">
         <div class="modal-dialog">
             <form action="../../php/action.php" method="post" enctype="multipart/form-data">
@@ -19,7 +26,7 @@ include "../layout/head.php"
                 <div class="modal-content rounded-4 shadow">
                     <div class="modal-header border-bottom-0">
                         <h1 class="modal-title fs-5"><i class="fa-solid fa-gear"></i> แก้ไขข้อมูลใบสำคัญจ่าย </h1>
-                        <a href="../view/expenses.php" class="btn-close"></a>
+                        <a href="../dashboard/expenses.php" class="btn-close"></a>
                     </div>
                     <div class="modal-body pt-5">
                         <div class="mb-3">
