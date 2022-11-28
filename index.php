@@ -16,14 +16,14 @@ include 'layout/head.php';
     <?php if (isset($_GET['login'])) {
         require 'view/login.php';
     } else if (isset($_GET['register'])) {
-        include 'view/register.php';
-        exit;
+        require 'view/register.php';
     } else {
         require 'view/dashboard.php';
+        require 'view/dashboard/profileedit.php';
     }
     ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 
