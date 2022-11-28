@@ -2,89 +2,111 @@
 include("../../layout/head.php");
 ?>
 <style>
-    body {
-        font-family: "Kanit", sans-serif;
-        font-family: "Noto Sans", sans-serif;
-        font-family: "Noto Sans Thai", sans-serif;
-        font-family: "Poppins", sans-serif;
-        font-family: "Prompt", sans-serif;
-    }
+body {
+    font-family: "Kanit", sans-serif;
+    font-family: "Noto Sans", sans-serif;
+    font-family: "Noto Sans Thai", sans-serif;
+    font-family: "Poppins", sans-serif;
+    font-family: "Prompt", sans-serif;
+}
 </style>
 
 <script>
-    var items = 0;
-    function addItem() {
-        items++;
+var items = 0;
 
-        var html = "<tr class='rows'>";
-        html += "<th scope='row'>" + items + "</th>";
-        html += "<td><input type='text' class='form-control w-100 items-title' placeholder='รายการ' name='itemName[]'></td>";
-        html += "<td><input type='number' class='form-control w-100 items-amount' placeholder='จำนวน' name='itemamount[]' value='1' id='itemamount' '></td>";
-        html += "<td><input type='number' class='form-control w-100 items-price' placeholder='ราตาต่อหน่วย' name='itemprice[]' value='0.00' id='itemprice' onblur='resultofitem()' ></td>";
-        html += "<td><input type='text' class='form-control w-100 items-result' placeholder='0.00' name='itemresult[]' id='itemresult' disabled></td>";
-        html += "<td><button type='button' class='float-end mr-1 btn btn-danger btn-sm' onclick='deleteRow(this);'><i class='fa-solid fa-trash-can'></i></button></td>"
-        html += "</tr>";
+function addItem() {
+    items++;
+    var itemamount = 'itemamount' + items;
+    var itemprice = 'itemprice' + items;
+    var itemresult = 'itemresult' + items;
+    console.log(itemamount);
+    console.log(itemprice);
+    console.log(itemresult);
 
-        var row = document.getElementById("tbody").insertRow();
-        row.innerHTML = html;
+    var html = "<tr class='rows'>";
+    html += "<th scope='row'>" + items + "</th>";
+    html +=
+        "<td><input type='text' class='form-control w-100 items-title' placeholder='รายการ' name='itemName[]'></td>";
+    html +=
+        '<td><input type="number" class="form-control w-100 items-amount" placeholder = "จำนวน" name = "itemamount[]" id = "' +
+        itemamount + '"></td>';
+    html +=
+        '<td><input type="number" class="form-control w-100 items-price" placeholder = "ราตาต่อหน่วย" name = "itemprice[]" id = "' +
+        itemprice + '" onblur="resultofitem(this)"></td>';
+    html +=
+        '<td><input type="text " class ="form-control w-100 items-result" placeholder = "0.00" name = "itemresult[]"id = "' +
+        itemresult + '" disabled></td>';
+    html +=
+        "<td><button type='button' class='float-end mr-1 btn btn-danger btn-sm' onclick='deleteRow(this);'><i class='fa-solid fa-trash-can'></i></button></td>"
+    html += "</tr>";
 
-
-    }
-
-    function deleteRow(button) {
-        items--
-        button.parentElement.parentElement.remove();
-        // first parentElement will be td and second will be tr.
-    }
-
-    function resultofitem() {
-        var amount = document.getElementById('itemamount').value;
-        var price = document.getElementById('itemprice').value;
-        result = (price * amount)
-
-        result = Math.round(result * 100) / 100
-        document.getElementById('itemresult').value = result ;
-
-    }
+    var row = document.getElementById("tbody").insertRow();
+    row.innerHTML = html;
 
 
+}
+
+function deleteRow(button) {
+    items--
+    button.parentElement.parentElement.remove();
+    // first parentElement will be td and second will be tr.
+}
+
+function resultofitem(element) {
+    // x.rowIndex;
+    // console.log(x);
+
+    var rowJavascript = element.parentNode.parentNode;
+    // var rowjQuery = $(element).closest("tr");
+    console.log(rowJavascript.rowIndex);
+    itm = rowJavascript.rowIndex;
+    // console.log(rowjQuery[0].rowIndex);
+    var amount = document.getElementById('itemamount' + itm).value;
+    var price = document.getElementById('itemprice' + itm).value;
+    result = (price * amount)
+
+    result = Math.round(result * 100) / 100
+    document.getElementById('itemresult' + itm).value = result;
+
+}
 
 
-    // if (document.readyState == 'loading') {
-    //     document.addEventListener('DOMContentLoaded', ready)
-    // } else {
-    //     ready()
-    // }
 
-    // function ready() {
-    //     var amountInputs = document.getElementsByClassName('items-amount')
-    //     for (var i = 0; i < amountInputs.length; i++) {
-    //         var input = amountInputs[i]
-    //         input.addEventListener('change', amountChanged)
-    //     }
-    //     var priceInputs = document.getElementsByClassName('items-price')
-    //     for (var i = 0; i < priceInputs.length; i++) {
-    //         var input = priceInputs[i]
-    //         input.addEventListener('change', priceChanged)
-    //     }
-    // }
 
-    // function amountChanged(event) {
-    //     var input = event.target
-    //     if (isNaN(input.value) || input.value <= 0) {
-    //         input.value = 1
-    //     }
-    //     updateresult()
-    // }
+// if (document.readyState == 'loading') {
+//     document.addEventListener('DOMContentLoaded', ready)
+// } else {
+//     ready()
+// }
 
-    // function priceChanged(event) {
-    //     var input = event.target
-    //     if (isNaN(input.value) || input.value <= 0) {
-    //         input.value = 1
-    //     }
-    //     updateresult()
-    // }
+// function ready() {
+//     var amountInputs = document.getElementsByClassName('items-amount')
+//     for (var i = 0; i < amountInputs.length; i++) {
+//         var input = amountInputs[i]
+//         input.addEventListener('change', amountChanged)
+//     }
+//     var priceInputs = document.getElementsByClassName('items-price')
+//     for (var i = 0; i < priceInputs.length; i++) {
+//         var input = priceInputs[i]
+//         input.addEventListener('change', priceChanged)
+//     }
+// }
 
+// function amountChanged(event) {
+//     var input = event.target
+//     if (isNaN(input.value) || input.value <= 0) {
+//         input.value = 1
+//     }
+//     updateresult()
+// }
+
+// function priceChanged(event) {
+//     var input = event.target
+//     if (isNaN(input.value) || input.value <= 0) {
+//         input.value = 1
+//     }
+//     updateresult()
+// }
 </script>
 
 
@@ -95,7 +117,8 @@ include("../../layout/head.php");
         <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page" ><a href="../dashboard/quotation_appraisal_list.php">ใบเสนอราคากลาง</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a
+                        href="../dashboard/quotation_appraisal_list.php">ใบเสนอราคากลาง</a></li>
                 <li class="breadcrumb-item active" aria-current="page">สร้างใบเสนอราคากลาง</li>
             </ol>
         </nav>
@@ -147,7 +170,8 @@ include("../../layout/head.php");
                     </div>
 
                     <div class="col-md-8">
-                        <input type="text" id="inputrev" class="form-control " pattern="[0-9]{13}" title="กรุณากรอกตัวเลข 0-9 จำนวน 13 หลัก ไม่มี (-)" required>
+                        <input type="text" id="inputrev" class="form-control " pattern="[0-9]{13}"
+                            title="กรุณากรอกตัวเลข 0-9 จำนวน 13 หลัก ไม่มี (-)" required>
                     </div>
                 </div>
                 <div class="row g-3 align-items-center mb-3">
@@ -164,7 +188,8 @@ include("../../layout/head.php");
                                         <th scope="col" style="width:3%">ลำดับ</th>
                                         <th scope="col" style="width:47%">รายการ / Description</th>
                                         <th scope="col" style="width:10%" class=" text-center">จำนวน <br> Amount</th>
-                                        <th scope="col" style="width:20%" class=" text-center">ราคา/หน่วย <br> Price / Unit</th>
+                                        <th scope="col" style="width:20%" class=" text-center">ราคา/หน่วย <br> Price /
+                                            Unit</th>
                                         <th scope="col" style="width:20%" class=" text-center">จำนวนเงิน <br> บาท </th>
                                     </tr>
                                 </thead>
@@ -174,7 +199,9 @@ include("../../layout/head.php");
                             </table>
                         </div>
                         <div class="text-center">
-                            <button type="button" onclick="addItem();" class="btn btn-success px-4 rounded-pill fs-5 fw-bold " id="add_sub"><i class="fa fa-plus-circle text-white"></i> เพิ่มรายการ</button>
+                            <button type="button" onclick="addItem();"
+                                class="btn btn-success px-4 rounded-pill fs-5 fw-bold " id="add_sub"><i
+                                    class="fa fa-plus-circle text-white"></i> เพิ่มรายการ</button>
                         </div>
 
                     </div>
@@ -208,7 +235,8 @@ include("../../layout/head.php");
                             </div>
 
                             <div class="col-md-5">
-                                <input type="text" id="inputdis" class="form-control " placeholder="20.00" title="กรุณากรอกส่วนลด หากไม่มี (-)" required>
+                                <input type="text" id="inputdis" class="form-control " placeholder="20.00"
+                                    title="กรุณากรอกส่วนลด หากไม่มี (-)" required>
                             </div>
                         </div>
                         <div class="row g-3 align-items-center mb-3">
@@ -255,8 +283,12 @@ include("../../layout/head.php");
 
                 <!-- Submit button -->
                 <div class="mx-auto d-flex justify-content-end">
-                    <button type="reset" class="col-md-3 btn btn-outline-danger btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold"><i class="fa-solid fa-eraser"></i> ล้างข้อมูล</button>
-                    <button type="submit" class="ms-3 col-md-3 btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold">ต่อไป <i class="fa-solid fa-angles-right"></i></button>
+                    <button type="reset"
+                        class="col-md-3 btn btn-outline-danger btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold"><i
+                            class="fa-solid fa-eraser"></i> ล้างข้อมูล</button>
+                    <button type="submit"
+                        class="ms-3 col-md-3 btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold">ต่อไป <i
+                            class="fa-solid fa-angles-right"></i></button>
                 </div>
 
 
