@@ -25,7 +25,7 @@ include_once '../../layout/head.php';
                 <input type="hidden" name="hdn_file" value="<?= $rows['Expenses_file'] ?>"> -->
                 <div class="modal-content rounded-4 shadow">
                     <div class="modal-header border-bottom-0">
-                        <h1 class="modal-title fs-5"><i class="fa-solid fa-gear"></i> แก้ไขข้อมูลใบสำคัญจ่าย </h1>
+                        <h1 class="modal-title fs-5"><i class="fa-solid fa-pen-to-square"></i> แก้ไขข้อมูลใบสำคัญจ่าย </h1>
                         <a href="../dashboard/expenses.php" class="btn-close"></a>
                     </div>
                     <div class="modal-body pt-5">
