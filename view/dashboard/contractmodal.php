@@ -104,9 +104,8 @@
                 <form class="row" id="" method="post" action="">
                     <input type="hidden" name="ide" id="ide">
                     <div class="col-md-12 mb-2">
-                        <label class="form-label">ชื่อสัญญา</label>
-                        <input type="text" class="form-control form-control-sm" id="connamed" name="connamed"
-                            disabled="true">
+                        <label class="form-label">ชื่อสัญญา :</label>
+                        <p id="testc"></p>
                     </div>
                     <div class=" modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

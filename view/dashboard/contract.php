@@ -33,7 +33,7 @@ $(document).ready(function() {
         console.log(data);
 
         $('#idd').val(data[0]);
-        $('#connamed').val(data[3]);
+        document.getElementById("testc").innerHTML = data[3];
     });
 });
 </script>
