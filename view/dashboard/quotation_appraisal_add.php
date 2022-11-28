@@ -96,6 +96,7 @@ include("../../layout/head.php");
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
                 <li class="breadcrumb-item active" aria-current="page">ใบเสนอราคากลาง</li>
+                <li class="breadcrumb-item active" aria-current="page">สร้างใบเสนอราคากลาง</li>
             </ol>
         </nav>
         <hr>
