@@ -95,7 +95,7 @@ include("../../layout/head.php");
         <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">ใบเสนอราคากลาง</li>
+                <li class="breadcrumb-item active" aria-current="page" ><a href="../dashboard/quotation_appraisal_list.php">ใบเสนอราคากลาง</a></li>
                 <li class="breadcrumb-item active" aria-current="page">สร้างใบเสนอราคากลาง</li>
             </ol>
         </nav>
@@ -255,8 +255,8 @@ include("../../layout/head.php");
 
                 <!-- Submit button -->
                 <div class="mx-auto d-flex justify-content-end">
-                    <button type="reset" class="col-md-3 btn btn-outline-danger btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold btn-addpay"><i class="fa-solid fa-eraser"></i> ล้างข้อมูล</button>
-                    <button type="submit" class="ms-3 col-md-3 btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold btn-addpay">ต่อไป <i class="fa-solid fa-angles-right"></i></button>
+                    <button type="reset" class="col-md-3 btn btn-outline-danger btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold"><i class="fa-solid fa-eraser"></i> ล้างข้อมูล</button>
+                    <button type="submit" class="ms-3 col-md-3 btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold">ต่อไป <i class="fa-solid fa-angles-right"></i></button>
                 </div>
 
 
