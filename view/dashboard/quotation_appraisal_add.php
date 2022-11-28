@@ -13,21 +13,22 @@ include("../../layout/head.php");
 
 <script>
     var items = 0;
-
     function addItem() {
         items++;
 
-        var html = "<tr>";
+        var html = "<tr class='rows'>";
         html += "<th scope='row'>" + items + "</th>";
-        html += "<td><input type='text' class='form-control w-100' placeholder='รายการ' name='itemName[]'></td>";
-        html += "<td><input type='number' class='form-control w-100' placeholder='จำนวน' name='itemamount[]'></td>";
-        html += "<td><input type='number' class='form-control w-100' placeholder='ราตาต่อหน่วย' name='itemprice[]'></td>";
-        html += "<td><input type='text' class='form-control w-100' placeholder='280.00' name='itemresult[]' disabled></td>";
+        html += "<td><input type='text' class='form-control w-100 items-title' placeholder='รายการ' name='itemName[]'></td>";
+        html += "<td><input type='number' class='form-control w-100 items-amount' placeholder='จำนวน' name='itemamount[]' value='1' id='itemamount' '></td>";
+        html += "<td><input type='number' class='form-control w-100 items-price' placeholder='ราตาต่อหน่วย' name='itemprice[]' value='0.00' id='itemprice' onblur='resultofitem()' ></td>";
+        html += "<td><input type='text' class='form-control w-100 items-result' placeholder='0.00' name='itemresult[]' id='itemresult' disabled></td>";
         html += "<td><button type='button' class='float-end mr-1 btn btn-danger btn-sm' onclick='deleteRow(this);'><i class='fa-solid fa-trash-can'></i></button></td>"
         html += "</tr>";
 
         var row = document.getElementById("tbody").insertRow();
         row.innerHTML = html;
+
+
     }
 
     function deleteRow(button) {
@@ -35,6 +36,55 @@ include("../../layout/head.php");
         button.parentElement.parentElement.remove();
         // first parentElement will be td and second will be tr.
     }
+
+    function resultofitem() {
+        var amount = document.getElementById('itemamount').value;
+        var price = document.getElementById('itemprice').value;
+        result = (price * amount)
+
+        result = Math.round(result * 100) / 100
+        document.getElementById('itemresult').value = result ;
+
+    }
+
+
+
+
+    // if (document.readyState == 'loading') {
+    //     document.addEventListener('DOMContentLoaded', ready)
+    // } else {
+    //     ready()
+    // }
+
+    // function ready() {
+    //     var amountInputs = document.getElementsByClassName('items-amount')
+    //     for (var i = 0; i < amountInputs.length; i++) {
+    //         var input = amountInputs[i]
+    //         input.addEventListener('change', amountChanged)
+    //     }
+    //     var priceInputs = document.getElementsByClassName('items-price')
+    //     for (var i = 0; i < priceInputs.length; i++) {
+    //         var input = priceInputs[i]
+    //         input.addEventListener('change', priceChanged)
+    //     }
+    // }
+
+    // function amountChanged(event) {
+    //     var input = event.target
+    //     if (isNaN(input.value) || input.value <= 0) {
+    //         input.value = 1
+    //     }
+    //     updateresult()
+    // }
+
+    // function priceChanged(event) {
+    //     var input = event.target
+    //     if (isNaN(input.value) || input.value <= 0) {
+    //         input.value = 1
+    //     }
+    //     updateresult()
+    // }
+
 </script>
 
 
@@ -109,15 +159,15 @@ include("../../layout/head.php");
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
-                                    <tr class="align-top">
+                                    <tr class="align-top" class="rows">
                                         <th scope="col" style="width:3%">ลำดับ</th>
-                                        <th scope="col" style="width:47%" >รายการ / Description</th>
+                                        <th scope="col" style="width:47%">รายการ / Description</th>
                                         <th scope="col" style="width:10%" class=" text-center">จำนวน <br> Amount</th>
                                         <th scope="col" style="width:20%" class=" text-center">ราคา/หน่วย <br> Price / Unit</th>
                                         <th scope="col" style="width:20%" class=" text-center">จำนวนเงิน <br> บาท </th>
                                     </tr>
                                 </thead>
-                                <tbody id="tbody"></tbody>
+                                <tbody id="tbody" class="items"></tbody>
 
 
                             </table>
@@ -148,7 +198,7 @@ include("../../layout/head.php");
                             </div>
 
                             <div class="col-md-5">
-                                <input type="text" id="inputsum" class="form-control " placeholder="280.00" disabled>
+                                <input type="text" id="inputsum" class="form-control " placeholder="0.00" disabled>
                             </div>
                         </div>
                         <div class="row g-3 align-items-center mb-3">
@@ -166,7 +216,7 @@ include("../../layout/head.php");
                             </div>
 
                             <div class="col-md-5">
-                                <input type="text" id="afterdis" class="form-control " placeholder="260.00" disabled>
+                                <input type="text" id="afterdis" class="form-control " placeholder="0.00" disabled>
                             </div>
                         </div>
                         <div class="row g-3 align-items-center mb-3">
@@ -175,7 +225,7 @@ include("../../layout/head.php");
                             </div>
 
                             <div class="col-md-5">
-                                <input type="text" id="vat" class="form-control " placeholder="280.00" disabled>
+                                <input type="text" id="vat" class="form-control " placeholder="0.00" disabled>
                             </div>
                         </div>
                         <div class="row g-3 align-items-center mb-3">
@@ -184,7 +234,7 @@ include("../../layout/head.php");
                             </div>
 
                             <div class="col-md-5">
-                                <input type="text" id="total" class="form-control " placeholder="280.00" disabled>
+                                <input type="text" id="total" class="form-control " placeholder="0.00" disabled>
                             </div>
                         </div>
                     </div>
