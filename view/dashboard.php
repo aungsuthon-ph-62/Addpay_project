@@ -70,7 +70,7 @@ include 'layout/dashboardNav.php';
             <hr>
             <?php
                 
-                include 'dashboard/profile.php';
+                include 'dashboard/contract.php';
             ?>
 
         </main>
