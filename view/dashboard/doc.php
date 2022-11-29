@@ -16,7 +16,7 @@ include_once '../../layout/head.php';
     <div class="main-body">
         <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="../dashboard.php">Dashboard</a></li>
                 <li class="breadcrumb-item active" aria-current="page">หนังสือ</li>
             </ol>
         </nav>
