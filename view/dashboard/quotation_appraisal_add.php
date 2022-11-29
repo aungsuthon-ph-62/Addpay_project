@@ -15,24 +15,26 @@ body {
 var items = 0;
 
 function addItem() {
+
     items++;
+    var itemtitle = 'itemtitle' + items;
     var itemamount = 'itemamount' + items;
     var itemprice = 'itemprice' + items;
     var itemresult = 'itemresult' + items;
-    console.log(itemamount);
-    console.log(itemprice);
-    console.log(itemresult);
+
+    console.log(itemtitle, itemamount, itemprice, itemresult);
 
     var html = "<tr class='rows'>";
     html += "<th scope='row'>" + items + "</th>";
     html +=
-        "<td><input type='text' class='form-control w-100 items-title' placeholder='รายการ' name='itemName[]'></td>";
+        '<td><input type="text" class="form-control w-100 items-title" placeholder = "รายการ" name = "itemtitle[]" id = "' +
+        itemtitle + '" onblur="checktitle(this)" onchange="resultofitem(this)"></td>';
     html +=
         '<td><input type="number" class="form-control w-100 items-amount" placeholder = "จำนวน" name = "itemamount[]" id = "' +
-        itemamount + '"></td>';
+        itemamount + '" onblur="checkamount(this)" onchange="resultofitem(this)" disabled></td>';
     html +=
         '<td><input type="number" class="form-control w-100 items-price" placeholder = "ราตาต่อหน่วย" name = "itemprice[]" id = "' +
-        itemprice + '" onblur="resultofitem(this)"></td>';
+        itemprice + '" onblur="checkprice(this)" onchange="resultofitem(this)" disabled></td>';
     html +=
         '<td><input type="text " class ="form-control w-100 items-result" placeholder = "0.00" name = "itemresult[]"id = "' +
         itemresult + '" disabled></td>';
@@ -43,13 +45,65 @@ function addItem() {
     var row = document.getElementById("tbody").insertRow();
     row.innerHTML = html;
 
-
 }
 
 function deleteRow(button) {
     items--
     button.parentElement.parentElement.remove();
     // first parentElement will be td and second will be tr.
+}
+
+function checktitle(element) {
+    var rowJavascript = element.parentNode.parentNode;
+    itm = rowJavascript.rowIndex;
+    console.log(itm);
+    var title = document.getElementById('itemtitle' + itm).value;
+    var amount = document.getElementById('itemamount' + itm).value;
+    var price = document.getElementById('itemprice' + itm).value;
+
+    if (title.length > 0) {
+        document.getElementById('itemamount' + itm).disabled = false;
+        if (price.length > 0) {
+            document.getElementById('itemprice' + itm).disabled = false;
+        }
+    } else {
+        document.getElementById('itemamount' + itm).disabled = true;
+        document.getElementById('itemprice' + itm).disabled = true;
+        alert("กรุณากรอกรายการ");
+        return false;
+    }
+}
+
+function checkamount(element) {
+    var rowJavascript = element.parentNode.parentNode;
+    itm = rowJavascript.rowIndex;
+    console.log(itm);
+    var amount = document.getElementById('itemamount' + itm).value;
+    var price = document.getElementById('itemprice' + itm).value;
+
+    if (amount.length > 0) {
+        document.getElementById('itemprice' + itm).disabled = false;
+
+    } else {
+        document.getElementById('itemprice' + itm).disabled = true;
+        alert("กรุณากรอกจำนวน");
+        return false;
+    }
+}
+
+function checkprice(element) {
+    var rowJavascript = element.parentNode.parentNode;
+    itm = rowJavascript.rowIndex;
+    console.log(itm);
+    var title = document.getElementById('itemtitle' + itm).value;
+    var amount = document.getElementById('itemamount' + itm).value;
+    var price = document.getElementById('itemprice' + itm).value;
+
+    if (price.length <= 0) {
+        alert("กรุณากรอกราคา");
+        return false;
+
+    }
 }
 
 function resultofitem(element) {
@@ -61,12 +115,16 @@ function resultofitem(element) {
     console.log(rowJavascript.rowIndex);
     itm = rowJavascript.rowIndex;
     // console.log(rowjQuery[0].rowIndex);
+
+    var title = document.getElementById('itemtitle' + itm).value;
     var amount = document.getElementById('itemamount' + itm).value;
     var price = document.getElementById('itemprice' + itm).value;
-    result = (price * amount)
 
+    result = (price * amount)
     result = Math.round(result * 100) / 100
     document.getElementById('itemresult' + itm).value = result;
+
+
 
 }
 
