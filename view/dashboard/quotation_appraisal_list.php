@@ -28,7 +28,7 @@ include("../../layout/head.php");
 </style>
 
 
-<div class="container">
+<div class="container py-5">
     <div class="main-body">
         <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
             <ol class="breadcrumb">
