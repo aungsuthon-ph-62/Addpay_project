@@ -73,8 +73,8 @@ include("../../layout/head.php");
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4" data-bs-toggle="dropdown" aria-expanded="false"><b>เลือก</b> </button>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">พิมพ์เอกสาร</a></li>
-                                                <li><a class="dropdown-item" href="#">แก้ไข</a></li>
+                                                <li><a class="dropdown-item" href="../dashboard/quotation_appraisal_form.php">พิมพ์เอกสาร</a></li>
+                                                <li><a class="dropdown-item" href="../dashboard/quotation_appraisal_edit.php">แก้ไข</a></li>
                                                 <li><a class="dropdown-item" href="#">ลบ</a></li>
 
                                             </ul>
@@ -102,8 +102,8 @@ include("../../layout/head.php");
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4" data-bs-toggle="dropdown" aria-expanded="false"><b>เลือก</b> </button>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">พิมพ์เอกสาร</a></li>
-                                                <li><a class="dropdown-item" href="#">แก้ไข</a></li>
+                                                <li><a class="dropdown-item" href="../dashboard/quotation_appraisal_form.php">พิมพ์เอกสาร</a></li>
+                                                <li><a class="dropdown-item" href="../dashboard/quotation_appraisal_edit.php">แก้ไข</a></li>
                                                 <li><a class="dropdown-item" href="#">ลบ</a></li>
 
                                             </ul>
@@ -131,8 +131,8 @@ include("../../layout/head.php");
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4" data-bs-toggle="dropdown" aria-expanded="false"><b>เลือก</b> </button>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">พิมพ์เอกสาร</a></li>
-                                                <li><a class="dropdown-item" href="#">แก้ไข</a></li>
+                                                <li><a class="dropdown-item" href="../dashboard/quotation_appraisal_form.php">พิมพ์เอกสาร</a></li>
+                                                <li><a class="dropdown-item" href="../dashboard/quotation_appraisal_edit.php">แก้ไข</a></li>
                                                 <li><a class="dropdown-item" href="#">ลบ</a></li>
 
                                             </ul>

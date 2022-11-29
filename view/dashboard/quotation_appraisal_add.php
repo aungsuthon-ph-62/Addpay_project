@@ -87,15 +87,12 @@ include("../../layout/head.php");
 
 </script>
 
-
-
-
 <div class="container">
     <div class="main-body">
         <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page" ><a href="../dashboard/quotation_appraisal_list.php">ใบเสนอราคากลาง</a></li>
+                <li class="breadcrumb-item active" aria-current="page" >quotation_appraisal_listใบเสนอราคากลาง</a></li>
                 <li class="breadcrumb-item active" aria-current="page">สร้างใบเสนอราคากลาง</li>
             </ol>
         </nav>

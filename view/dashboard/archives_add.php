@@ -4,10 +4,11 @@ include_once '../../layout/head.php';
 
 
 <style>
-   .font{
-    font-size: 1rem;
-   }
-   body {
+    .font {
+        font-size: 1rem;
+    }
+
+    body {
         font-family: "Kanit", sans-serif;
         font-family: "Noto Sans", sans-serif;
         font-family: "Noto Sans Thai", sans-serif;
@@ -16,34 +17,50 @@ include_once '../../layout/head.php';
     }
 </style>
 
-<div class="container">
-    <div class="modal modal-sheet d-block" tabindex="-1">
-        <div class="modal-dialog">
-            <form action="../../php/action.php" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="action" value="addArchives">
-                <!-- <input type="hidden" name="ExpensesID" value="<?= $rows['id'] ?>">
-                <input type="hidden" name="hdn_file" value="<?= $rows['Expenses_file'] ?>"> -->
-                <div class="modal-content rounded-4 shadow">
-                    <div class="modal-header border-bottom-0">
-                        <h1 class="modal-title fs-5"><i class="fa-solid fa-gear"></i> เพิ่มข้อมูลเอกสารสำคัญ </h1>
-                        <a href="../dashboard/archives.php" class="btn-close"></a>
-                    </div>
-                    <div class="modal-body pt-5">
-                        <div class="mb-3">
-                            <label for="addArchives" class="form-label ">ชื่อเรื่อง</label>
-                            <input class="form-control" id="addArchives" name="addArchives" type="text">
+<div class="container py-5">
+    <div class="main-body">
+        <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="../dashboard/quotation_appraisal_list.php">ใบเสนอราคากลาง</a></li>
+                <li class="breadcrumb-item active" aria-current="page">เพิ่มเอกสารสำคัญ</li>
+            </ol>
+        </nav>
+        <hr>
+
+        <div id="paperquotation" class="container pb-md-0 mb-5">
+            <div>
+                <h3>เอกสารสำคัญ</h3>
+            </div>
+            <div class="px-md-5 py-md-4 d-flex justify-content-center">
+                <div class="p-2 px-md-5 py-md-4 border rounded-3 ">
+                    <form action="" method="post" class="">
+                        <div class="row g-3 align-items-center mb-3">
+                            <div class="col-md-3">
+                                <label for="Archiname" class="col-form-label">ชื่อเรื่อง </label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" id="Archiname" class="form-control " required>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="addArchives" class="form-label ">เพิ่มไฟล์ที่นี่</label>
-                            <input class="form-control" id="addArchives" name="addArchives" type="file">
+                        <div class="row g-3 align-items-center mb-3">
+                            <div class="col-md-3">
+                                <label for="Archifile" class="col-form-label">เพิ่มไฟล์ที่นี่ </label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="file" id="Archifile" class="form-control " required>
+                            </div>
                         </div>
 
-                    </div>
-                    <div class="modal-footer flex-column border-top-0 pt-5">
-                        <button type="submit" class="btn btn-lg btn-primary w-100 mx-0 mb-2">บันทึกข้อมูล</button>
-                    </div>
+                        <!-- Submit button -->
+                        <div class="mx-auto d-flex justify-content-end">
+                            <button type="reset" class="btn btn-outline-danger btn btn-outline-success px-2 mt-2 rounded-3 fw-bold"><i class="fa-solid fa-eraser"></i> ล้างข้อมูล</button>
+                            <button type="submit" class="ms-3  btn btn-outline-success px-2 mt-2 rounded-3  fw-bold">บันทึก <i class="fa-solid fa-angles-right"></i></button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
+
     </div>
 </div>
