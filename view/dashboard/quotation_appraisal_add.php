@@ -107,6 +107,9 @@ function checkprice(element) {
 }
 
 function resultofitem(element) {
+    // var nrow = $('#tbqou').index(tr);
+    // console.log(nrow);
+
     // x.rowIndex;
     // console.log(x);
 
@@ -124,10 +127,13 @@ function resultofitem(element) {
     result = Math.round(result * 100) / 100
     document.getElementById('itemresult' + itm).value = result;
 
-
-
 }
-
+$(document).ready(function() {
+    // var table = document.getElementById("tbqou");
+    // var tbodyRowCount = table.rows.length;
+    var rowCount = $("#tbqou td").closest("tr").length;
+    console.log(rowCount);
+});
 
 
 
@@ -240,7 +246,7 @@ function resultofitem(element) {
 
                     <div class="border border-secondary rounded-3 py-md-4 px-md-4" id="main_row">
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table" id="tbqou">
                                 <thead>
                                     <tr class="align-top" class="rows">
                                         <th scope="col" style="width:3%">ลำดับ</th>
@@ -289,12 +295,12 @@ function resultofitem(element) {
                         </div>
                         <div class="row g-3 align-items-center mb-3">
                             <div class="col-md-6 ">
-                                <label for="inputdis" class="col-form-label text-danger">หักส่วนลดพิเศษ :</label>
+                                <label for="inputdis" class="col-form-label text-danger">หักส่วนลดพิเศษ(บาท) :</label>
                             </div>
 
                             <div class="col-md-5">
-                                <input type="text" id="inputdis" class="form-control " placeholder="20.00"
-                                    title="กรุณากรอกส่วนลด หากไม่มี (-)" required>
+                                <input type="number" id="inputdis" class="form-control " placeholder="0.00"
+                                    title="กรุณากรอกส่วนลด(หากมี)">
                             </div>
                         </div>
                         <div class="row g-3 align-items-center mb-3">
