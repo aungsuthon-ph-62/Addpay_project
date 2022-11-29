@@ -1,6 +1,7 @@
 <?php
 include("../../layout/head.php");
 ?>
+
 <style>
     body {
         font-family: "Kanit", sans-serif;
@@ -92,7 +93,7 @@ include("../../layout/head.php");
         <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page" >quotation_appraisal_listใบเสนอราคากลาง</a></li>
+                <li class="breadcrumb-item active" aria-current="page" ><a href="quotation_appraisal_list.php">ใบเสนอราคากลาง</a></li>
                 <li class="breadcrumb-item active" aria-current="page">สร้างใบเสนอราคากลาง</li>
             </ol>
         </nav>

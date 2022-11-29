@@ -15,7 +15,7 @@ include("../../layout/head.php");
     }
 </style>
 
-<div class="container  py-md-5 px-md-4">
+<div class="container  py-md-5 px-md-4" style="width: 80%;">
     <div class="main-body">
         <div id="quotationForm" class="container pb-md-0 mb-5 mt-5">
             <div class="row text-center">
@@ -25,16 +25,16 @@ include("../../layout/head.php");
                     </div>
                     <div class="text-center p-md-3 px-md-5">
                         <div class="border border-dark border-3 p-md-3 px-md-4">
-                            <p class="fs-4 fw-bold mb-md-4">ข้อมูลใบเสนอราคา</p>
-                            <p class="fs-4 fw-bold">Quotation</p>
+                            <p class="fw-bold mb-md-4">ข้อมูลใบเสนอราคา</p>
+                            <p class="fw-bold">Quotation</p>
                         </div>
                     </div>
 
                 </div>
                 <div class="col-md-8 p-md-2 pt-md-5">
                     <div class="text-center mb-md-5">
-                        <p class="fs-4 fw-bold mb-md-4">บริษัท แอดเพย์ เซอร์วิสพอยท์ จํากัด</p>
-                        <p class="fs-4">406 หมู่ 18 ตําบลขามใหญ่ อําเภอเมือง จังหวัดอุบลราชธานี โทร. 045-317123</p>
+                        <p class="fw-bold mb-md-4">บริษัท แอดเพย์ เซอร์วิสพอยท์ จํากัด</p>
+                        <p class="">406 หมู่ 18 ตําบลขามใหญ่ อําเภอเมือง จังหวัดอุบลราชธานี โทร. 045-317123</p>
                     </div>
                     <div class="float-end col-md-5">
                         <div class="text-center">
