@@ -100,4 +100,31 @@ function register()
         header("Location: ?register");
         exit;
     }
+
+    $password_hash = password_hash($password, PASSWORD_DEFAULT);
+
+
+    // check duplicate data
+    $user_check_query = "SELECT * FROM users WHERE fname = '$fname' AND lname = '$lname'";
+    $query = mysqli_query($conn, $user_check_query);
+    $check = mysqli_fetch_assoc($query);
+
+    if ($check) {
+        $_SESSION['error'] = "ชื่อจริงหรือนามสกุลนี้มีในระบบแล้ว!";
+        header("Location: ?register");
+        exit;
+    } else {
+        $query = "INSERT INTO users (prefix, fname, lname, username, password, create_at)
+VALUES ('$tname', '$fname', '$lname', '$username', '$password_hash', '$date')";
+        $result_query =  mysqli_query($conn, $query);
+        if ($result_query) {
+            $_SESSION['success'] = "สมัครสมาชิกสำเร็จ!";
+            header("Location: ?login");
+            exit;
+        } else {
+            $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
+            header("Location: ?register");
+            exit;
+        }
+    }
 }
