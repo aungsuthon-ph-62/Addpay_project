@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once 'layout/head.php';
 ?>
 <style>
@@ -24,7 +25,9 @@ include_once 'layout/head.php';
     ?>
 
 
-
+<?php
+include_once 'view/alert.php';
+?>
 </body>
 
 </html>
