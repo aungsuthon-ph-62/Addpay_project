@@ -66,32 +66,38 @@ function register()
     $confirm = mysqli_real_escape_string($conn, $_POST['inputConfirm']);
 
     if (empty($tname)) {
-        // the tname is empty
-        $errors['tname'] = 'กรุณาเลือกคำนำหน้าชื่อ';
+        $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
+        header("Location: ?register");
+        exit;
     }
 
     if (empty($fname)) {
-        // the tname is empty
-        $errors['fname'] = 'กรุณากรอกชื่อจริง';
+        $_SESSION['error'] = "กรุณากรอกชื่อจริง";
+        header("Location: ?register");
+        exit;
     }
 
     if (empty($lname)) {
-        // the tname is empty
-        $errors['lname'] = 'กรุณากรอกนามสกุล';
+        $_SESSION['error'] = "กรุณากรอกนามสกุล";
+        header("Location: ?register");
+        exit;
     }
 
     if (empty($username)) {
-        // the username is empty
-        $errors['username'] = 'กรุณากรอกชื่อผู้ใช้';
+        $_SESSION['error'] = "กรุณากรอกชื่อผู้ใช้";
+        header("Location: ?register");
+        exit;
     }
 
     if (empty($password)) {
-        // the password is empty
-        $errors['password'] = 'กรุณากรอกรหัสผ่าน';
+        $_SESSION['error'] = "กรุณากรอกรหัสผ่าน";
+        header("Location: ?register");
+        exit;
     }
 
     if (empty($confirm)) {
-        // the password is empty
-        $errors['confirm'] = 'กรุณาติ๊กที่ช่องยืนยันข้อมูลก่อน';
+        $_SESSION['error'] = "กรุณาติ๊กที่ช่องยืนยัน";
+        header("Location: ?register");
+        exit;
     }
 }

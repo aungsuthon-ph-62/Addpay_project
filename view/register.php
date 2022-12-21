@@ -57,7 +57,7 @@
           </div>
           <!-- Password input -->
           <div class="form-floating mb-4">
-            <input type="password" class="form-control form-control-lg border border-start-0 border-top-0 border-end-0 rounded-0" id="inputPassword" name="inputPassword" placeholder="กรอกรหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="พาสเวิร์ดต้องมีตัวเลขอย่างน้อยหนึ่งตัว, มีตัวพิมพ์ใหญ่และพิมพ์เล็ก และมีความยาวไม่น้อยกว่า 8 ตัวอักษร !">
+            <input type="password" class="form-control form-control-lg border border-start-0 border-top-0 border-end-0 rounded-0" id="inputPassword" name="inputPassword" placeholder="กรอกรหัสผ่าน">
             <label for="inputPassword" class="form-label">รหัสผ่าน</label>
           </div>
 
