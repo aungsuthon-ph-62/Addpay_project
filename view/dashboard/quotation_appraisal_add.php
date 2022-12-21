@@ -9,6 +9,20 @@ body {
     font-family: "Poppins", sans-serif;
     font-family: "Prompt", sans-serif;
 }
+
+table {
+    counter-reset: rowNumber;
+}
+
+table tr:not(:first-child) {
+    counter-increment: rowNumber;
+}
+
+table tr td:first-child::before {
+    content: counter(rowNumber);
+    min-width: 1em;
+    margin-right: 0.5em;
+}
 </style>
 <div class="container-fluid">
     <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
@@ -72,45 +86,35 @@ body {
             </div>
             <div class="border border-secondary rounded-3 py-md-4 px-md-4">
                 <div class="table-responsive">
-                    <table class="table">
+                    <table id="quotation-item-table" class="table ">
                         <tr>
-                            <td colspan=" 2">
+                            <th width="7%">ลำดับ <br>Number</th>
+                            <th width="40%">รายการ <br> Description </th>
+                            <th width="13%">จำนวน <br> Amount</th>
+                            <th width="15%">ราคา/หน่วย <br> Price/Unit</th>
+                            <th width="20%">จำนวนเงิน(บาท)</th>
+                            <th width="5%">ลบ</th>
+                        </tr>
 
-                                <table id="quotation-item-table" class="table ">
-                                    <tr>
-                                        <th width="7%">ลำดับ <br>Number</th>
-                                        <th width="40%">รายการ <br> Description </th>
-                                        <th width="13%">จำนวน <br> Amount</th>
-                                        <th width="15%">ราคา/หน่วย <br> Price/Unit</th>
-                                        <th width="20%">จำนวนเงิน(บาท)</th>
-                                        <th width="5%">ลบ</th>
-
-                                    </tr>
-
-                                    <tr>
-                                        <td><span id="sr_no">1</span></td>
-                                        <td><input type="text" name="item_name[]" id="item_name1"
-                                                class="form-control input-sm" />
-                                        </td>
-                                        <td><input type="number" name="item_amount[]" id="item_amount1" data-srno="1"
-                                                class="form-control input-sm item_amount" /></td>
-                                        <td><input type="number" name="item_price[]" id="item_price1" data-srno="1"
-                                                class="form-control input-sm number_only item_price" />
-                                        </td>
-                                        <td><input type="text" name="total_price[]" id="total_price1" data-srno="1"
-                                                class="form-control input-sm total_price" readonly />
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                </table>
-                                <div class="text-center">
-                                    <button type="button" id="add_row"
-                                        class="btn btn-success px-4 rounded-pill fs-5 fw-bold " id="add_sub"><i
-                                            class="fa fa-plus-circle text-white"></i> เพิ่มรายการ</button>
-                                </div>
+                        <tr>
+                            <td><span id="sr_no"></span></td>
+                            <td><input type="text" name="item_name[]" id="item_name1" class="form-control input-sm" />
                             </td>
+                            <td><input type="number" name="item_amount[]" id="item_amount1" data-srno="1"
+                                    class="form-control input-sm item_amount" /></td>
+                            <td><input type="number" name="item_price[]" id="item_price1" data-srno="1"
+                                    class="form-control input-sm number_only item_price" />
+                            </td>
+                            <td><input type="text" name="total_price[]" id="total_price1" data-srno="1"
+                                    class="form-control input-sm total_price" readonly />
+                            </td>
+                            <td></td>
                         </tr>
                     </table>
+                    <div class="text-center">
+                        <button type="button" id="add_row" class="btn btn-success px-4 rounded-pill fs-5 fw-bold "
+                            id="add_sub"><i class="fa fa-plus-circle text-white"></i> เพิ่มรายการ</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -204,7 +208,7 @@ body {
             $('#total_item').val(count);
             var html_code = '';
             html_code += '<tr id="row_id_' + count + '">';
-            html_code += '<td><span id="sr_no">' + count + '</span></td>';
+            html_code += '<td><span id="sr_no"></span></td>';
 
             html_code += '<td><input type="text" name="item_name[]" id="item_name' + count +
                 '" class="form-control input-sm" /></td>';
@@ -231,6 +235,7 @@ body {
             $('#row_id_' + row_id).remove();
             $('#total_item').val(count);
             cal_final_total(count);
+
         });
 
         function cal_final_total(count) {
