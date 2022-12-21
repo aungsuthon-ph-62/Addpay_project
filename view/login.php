@@ -1,6 +1,6 @@
 <section class="vh-100 p-3 bg-primary-addpay">
   <div class="container py-5 py-sm-4 py-md-5">
-    <div class="row d-flex align-items-center justify-content-center h-100 bg-white rounded-5 px-md-5 py-md-4">
+    <div class="row d-flex align-items-center justify-content-center h-100 bg-white rounded-5 px-md-5 py-md-4 shadow-lg">
       <!-- content -->
       <div class="col-12 col-md-5 text-center">
         <div class="img p-5 p-md-0">
