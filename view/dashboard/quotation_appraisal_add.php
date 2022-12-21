@@ -106,7 +106,7 @@ table tr td:first-child::before {
                                     class="form-control input-sm number_only item_price" />
                             </td>
                             <td><input type="text" name="total_price[]" id="total_price1" data-srno="1"
-                                    class="form-control input-sm total_price" readonly />
+                                    class="form-control input-sm total_price" disabled />
                             </td>
                             <td></td>
                         </tr>
@@ -223,7 +223,7 @@ table tr td:first-child::before {
             html_code +=
                 '<td><input type="text" name="total_price[]" id="total_price' +
                 count + '" data-srno="' + count +
-                '" class="form-control input-sm total_price" readonly /></td>';
+                '" class="form-control input-sm total_price" disabled /></td>';
             html_code += '<td><button type="button" name="remove_row" id="' + count +
                 '" class="btn btn-danger btn-xs remove_row">X</button></td>';
             html_code += '</tr>';
@@ -248,22 +248,22 @@ table tr td:first-child::before {
                 if (quantity > 0) {
                     price = $('#item_price' + j).val();
                     if (price > 0) {
-                        total_price = parseFloat(quantity) * parseFloat(price);
-                        $('#total_price' + j).val(total_price);
+                        total_price = (quantity * price);
+                        $('#total_price' + j).val(total_price.toFixed(2));
 
-                        final_total_price = parseFloat(final_total_price) + parseFloat(total_price);
+                        final_total_price = (final_total_price + total_price);
 
                     }
                 }
             }
-            $('#final_total_price').val(final_total_price);
+            $('#final_total_price').val(final_total_price.toFixed(2));
             var discount = 0;
             var afterdis = 0;
             var vat7per = 0;
             var aftervat = 0;
             discount = $('#inputdis').val();
             afterdis = (final_total_price - discount);
-            $('#afterdis').val(afterdis);
+            $('#afterdis').val(afterdis.toFixed(2));
             vat7per = (afterdis * 0.07);
             $('#vat').val(vat7per.toFixed(2));
             aftervat = (afterdis + vat7per);
