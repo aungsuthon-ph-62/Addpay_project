@@ -2,7 +2,11 @@
 
 require_once __DIR__ . '../../../vendor/autoload.php';
 
-$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8']);
+
+$mpdf = new \Mpdf\Mpdf();
+$mpdf->allow_charset_conversion = true;
+$mpdf->charset_in = 'macthai';
+
 ob_start();
 
 ?>
@@ -16,7 +20,7 @@ ob_start();
     <title>
         Addpay-Project
     </title>
-
+  
     <!-- FAVICON -->
     <link rel="shortcut icon" href="image/addpaylogo.png" type="image/x-icon">
     <!-- FAVICON -->
@@ -36,9 +40,6 @@ ob_start();
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500&display=swap" rel="stylesheet">
     <!-- Font Form -->
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-    <!-- jQuery -->
 </head>
 <style>
     body {
@@ -94,16 +95,21 @@ ob_start();
                 </div>
             </div>
         </div>
+
+        
         <?php
 
-        $html = ob_get_contents();
         ob_end_flush();
+
+        $html = ob_get_contents();
         $mpdf->WriteHTML($html);
         $mpdf->Output('quotation_appraisal.pdf');
         
         ?>
+
+        
     </div>
-    <div class="mx-auto d-flex justify-content-end">
+    <div class="mx-auto d-flex justify-content-end me-5">
         <a class="btn btn-danger px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button" href="./quotation_appraisal.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
     </div>
 </body>
