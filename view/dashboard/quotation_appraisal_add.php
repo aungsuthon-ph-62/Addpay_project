@@ -196,7 +196,7 @@ body {
     </form>
     <script>
     $(document).ready(function() {
-        // var final_total_price = $('#final_total_price').text();
+        var final_total_price = $('#final_total_price').text();
         var count = 1;
 
         $(document).on('click', '#add_row', function() {
@@ -229,8 +229,8 @@ body {
         $(document).on('click', '.remove_row', function() {
             var row_id = $(this).attr("id");
             $('#row_id_' + row_id).remove();
-            count--;
             $('#total_item').val(count);
+            cal_final_total(count);
         });
 
         function cal_final_total(count) {
@@ -277,9 +277,7 @@ body {
             cal_final_total(count);
         });
 
-        $(document).on('click', '.remove_row', function() {
-            cal_final_total(count);
-        });
+
 
 
 
