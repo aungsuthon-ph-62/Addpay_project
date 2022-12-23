@@ -75,24 +75,48 @@ function register()
         $_SESSION['error'] = "กรุณากรอกชื่อจริง";
         header("Location: ../index.php?register");
         exit;
+    } else {
+        if (!preg_match("/^[a-zA-Z ก-์ ะ-ู เ-แ ]*$/", $fname)) {
+            $_SESSION['error'] = "กรุณากรอกด้วยตัวอักษร [ก-ฮ,a-z,A-Z]";
+            header("Location: ../index.php?register");
+            exit;
+        }
     }
 
     if (empty($lname)) {
         $_SESSION['error'] = "กรุณากรอกนามสกุล";
         header("Location: ../index.php?register");
         exit;
+    } else {
+        if (!preg_match("/^[a-zA-Z ก-์ ะ-ู เ-แ ]*$/", $lname)) {
+            $_SESSION['error'] = "กรุณากรอกด้วยตัวอักษร [ก-ฮ,a-z,A-Z]";
+            header("Location: ../index.php?register");
+            exit;
+        }
     }
 
     if (empty($username)) {
         $_SESSION['error'] = "กรุณากรอกชื่อผู้ใช้";
         header("Location: ../index.php?register");
         exit;
+    } else {
+        if (!preg_match("/^[a-zA-Z_]*$/", $username)) {
+            $_SESSION['error'] = "กรุณากรอกด้วยตัวอักษร [a-z,A-Z,_]";
+            header("Location: ../index.php?register");
+            exit;
+        }
     }
 
     if (empty($password)) {
         $_SESSION['error'] = "กรุณากรอกรหัสผ่าน";
         header("Location: ../index.php?register");
         exit;
+    } else {
+        if (!preg_match("/^(?=.*[A-Z])(?=.*[!@#$%^&*()_+-=])[a-zA-Z0-9!@#$%^&*()_+-=]{0,8}$/", $password)) {
+            $_SESSION['error'] = 'รหัสผ่านจำเป็นต้องมี ตัวพิมพ์ใหญ่ไม่น้อยกว่า 1 ตัว, ตัวอักษรพิเศษ 1 ตัว และมีความยาวไม่เกิน 8 ตัวอักษร';
+            header("Location: ../index.php?register");
+            exit;
+        }
     }
 
     if (empty($confirm)) {
@@ -114,8 +138,8 @@ function register()
         header("Location: ../index.php?register");
         exit;
     } else {
-        $query = "INSERT INTO users (prefix, fname, lname, username, password, create_at)
-VALUES ('$tname', '$fname', '$lname', '$username', '$password_hash', '$date')";
+        $query = "INSERT INTO users (prefix, fname, lname, username, password, created_at)
+        VALUES ('$tname', '$fname', '$lname', '$username', '$password_hash', '$date')";
         $result_query =  mysqli_query($conn, $query);
         if ($result_query) {
             $_SESSION['success'] = "สมัครสมาชิกสำเร็จ!";

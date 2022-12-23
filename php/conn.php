@@ -1,12 +1,15 @@
 <?php
-$host = 'addpaycrypto.com';
-$dbname = 'addpay_e_office';
-$username = 'addpay_backoffice';
-$password = 'ae_2022';
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "addpay_e_office";
 
-// Connect to the database
-$conn = new mysqli($host, $username, $password, $dbname);
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-// Set the character set to UTF-8
-mysqli_set_charset($conn, "utf8");
-
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+mysqli_set_charset($conn,"utf8");
+?>
