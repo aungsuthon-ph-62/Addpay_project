@@ -65,18 +65,35 @@ include_once '../../layout/head.php';
                             <div class="col-md-3 ">
                                 <label for="inputTo" class="col-form-label">เรียน (ถึงใคร) </label>
                             </div>
-
                             <div class="col-md-9">
                                 <input type="text" id="inputTo" class="form-control " required>
                             </div>
                         </div>
                         <div class="row g-3 align-items-center mb-3">
                             <div class="col-md-3 ">
-                                <label for="inputDetails" class="col-form-label">รายละเอียดหนังสือ </label>
+                                <label for="inputSend" class="col-form-label">สิ่งที่ส่งมาด้วย </label>
                             </div>
 
                             <div class="col-md-9">
-                            <textarea class="form-control" id="textDetails" rows="5" require></textarea>
+                                <input type="text" id="inputSend" class="form-control " required>
+                            </div>
+                        </div>
+                        <div class="row g-3 align-items-center mb-3">
+                            <div class="col-md-3 ">
+                                <label for="inputDetails1" class="col-form-label">รายละเอียดหนังสือ (ย่อหน้า 1)</label>
+                            </div>
+
+                            <div class="col-md-9">
+                            <textarea class="form-control" id="textDetails1" rows="5" require></textarea>
+                            </div>
+                        </div>
+                        <div class="row g-3 align-items-center mb-3">
+                            <div class="col-md-3 ">
+                                <label for="inputDetails2" class="col-form-label">รายละเอียดหนังสือ (ย่อหน้า 2)</label>
+                            </div>
+
+                            <div class="col-md-9">
+                            <textarea class="form-control" id="textDetails2" rows="5" require></textarea>
                             </div>
                         </div>
 
