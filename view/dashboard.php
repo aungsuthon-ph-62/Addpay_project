@@ -17,7 +17,7 @@ include 'layout/dashboardNav.php';
             <hr>
             
             <?php
-                include 'dashboard/contract.php';
+                include 'dashboard/profile.php';
             ?>
             
         </main>

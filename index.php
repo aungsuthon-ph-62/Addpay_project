@@ -1,5 +1,6 @@
 <?php
-include 'layout/head.php';
+session_start();
+include_once 'layout/head.php';
 ?>
 <style>
     body {
@@ -14,17 +15,19 @@ include 'layout/head.php';
 
 <body>
     <?php if (isset($_GET['login'])) {
-        require 'view/login.php';
+        include_once 'view/login.php';
     } else if (isset($_GET['register'])) {
-        require 'view/register.php';
+        include_once 'view/register.php';
     } else {
-        require 'view/dashboard.php';
-        require 'view/dashboard/profileedit.php';
+        include_once 'view/dashboard.php';
+        include_once 'view/dashboard/profileedit.php';
     }
     ?>
 
 
-
+<?php
+include_once 'view/alert.php';
+?>
 </body>
 
 </html>
