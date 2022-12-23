@@ -14,20 +14,31 @@ include_once 'layout/head.php';
 
 
 <body>
-    <?php if (isset($_GET['login'])) {
-        include_once 'view/login.php';
-    } else if (isset($_GET['register'])) {
-        include_once 'view/register.php';
+    <?php
+    if (isset($_SESSION['id']) || $_SESSION['id']) {
+        $page = isset($_GET['page']) ? $_GET['page'] : '';
+
+        if ($page) {
+            switch ($page) {
+                case "profile":
+                    include_once 'view/dashboard/profile.php';
+                    break;
+                default:
+                    include_once 'view/dashboard.php';
+            }
+        } else {
+            include_once 'view/dashboard.php';
+        }
     } else {
-        include_once 'view/dashboard.php';
-        include_once 'view/dashboard/profileedit.php';
+        header("Location: login?error=กรุณาเข้าสู่ระบบก่อน!");
+        exit;
     }
     ?>
 
 
-<?php
-include_once 'view/alert.php';
-?>
+    <?php
+    include_once 'view/alert.php';
+    ?>
 </body>
 
 </html>

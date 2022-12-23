@@ -1,6 +1,6 @@
 <!-- Dashboard Nav -->
 <?php
-include 'layout/dashboardNav.php';
+include_once 'layout/dashboardNav.php';
 ?>
 <!-- Dashboard Nav -->
 
@@ -8,7 +8,7 @@ include 'layout/dashboardNav.php';
     <div class="row">
         <!-- Sidebar -->
         <?php
-        include 'layout/sidebar.php';
+        include_once 'layout/sidebar.php';
         ?>
         <!-- Sidebar -->
 
@@ -17,7 +17,8 @@ include 'layout/dashboardNav.php';
             <hr>
             
             <?php
-                include 'dashboard/profile.php';
+                include_once 'dashboard/profile.php';
+                include_once 'dashboard/profileedit.php';
             ?>
             
         </main>
