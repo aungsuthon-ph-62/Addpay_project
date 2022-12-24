@@ -26,7 +26,7 @@
                                 <h6 class="mb-0">ชื่อ-นามสกุล</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                ชาคูลล์ซ่า โออิชิ
+                                <?= $user['fname'] ?> <?= $user['lname'] ?>
                             </div>
                         </div>
                         <div class="row">
@@ -34,7 +34,7 @@
                                 <h6 class="mb-0">เพศ</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                ชาย
+                                <?= $user['gender'] ?>
                             </div>
                         </div>
                         <div class="row">
@@ -42,7 +42,7 @@
                                 <h6 class="mb-0">อายุ</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                30 ปี
+                                <?= $user['age'] ?>
                             </div>
                         </div>
                         <hr>
@@ -51,7 +51,7 @@
                                 <h6 class="mb-0">ตำแหน่ง</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                หัวหน้า
+                                <?= $user['position'] ?>
                             </div>
                         </div>
                         <div class="row">
@@ -59,7 +59,7 @@
                                 <h6 class="mb-0">แผนก</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                it
+                                <?= $user['department'] ?>
                             </div>
                         </div>
                         <hr>
@@ -68,7 +68,7 @@
                                 <h6 class="mb-0">อีเมลล์</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                user@gmail.com
+                                <?= $user['email'] ?>
                                 </udiv>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                                 <h6 class="mb-0">เบอร์โทร</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                099123456
+                                <?= $user['phone'] ?>
                             </div>
                         </div>
                         <hr>

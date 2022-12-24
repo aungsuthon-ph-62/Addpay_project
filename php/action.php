@@ -11,6 +11,9 @@ if (isset($_POST['action'])) {
     } elseif ($_POST['action'] == 'logout') {
         logout();
         exit;
+    } elseif ($_POST['action'] == 'editUserPass') {
+        editUserPass();
+        exit;
     }
 }
 
@@ -211,15 +214,18 @@ function login()
             $_SESSION['id'] = $result['id'];
             $_SESSION['success'] = "เข้าสู่ระบบสำเร็จ!";
             header("location: ../index");
+            mysqli_close($conn);
             exit;
         } else {
             $_SESSION['error'] = "รหัสผ่านไม่ถูกต้อง";
             header("location: ../login?$data");
+            mysqli_close($conn);
             exit;
         }
     } else {
         $_SESSION['error'] = "ชื่อผู้ใช้ไม่ถูกต้อง";
         header("location: ../login?$data");
+        mysqli_close($conn);
         exit;
     }
 }
@@ -237,3 +243,62 @@ function logout()
     exit;
 }
 
+function editUserPass()
+{
+    session_start();
+    global $conn;
+    date_default_timezone_set('Asia/Bangkok');
+    $date = date("Y-m-d H:i:s");
+
+    $username = mysqli_real_escape_string($conn, $_POST['inputUsername']);
+    $password = mysqli_real_escape_string($conn, $_POST['inputPassword']);
+    $usernameNew = mysqli_real_escape_string($conn, $_POST['inputUsernameNew']);
+    $passwordNew = mysqli_real_escape_string($conn, $_POST['inputPasswordNew']);
+    $usernameOld = mysqli_real_escape_string($conn, $_POST['username']);
+    $passwordOld = mysqli_real_escape_string($conn, $_POST['password']);
+
+    $id = mysqli_real_escape_string($conn, $_POST['id']);
+
+    if (empty($username)) {
+        $username = $usernameOld;
+    }
+
+    if (empty($usernameNew)) {
+        $usernameNew = $usernameOld;
+    } else {
+        if (!preg_match("/^[a-zA-Z_]*$/", $usernameNew)) {
+            $_SESSION['error'] = "กรุณากรอกด้วยตัวอักษร [a-z,A-Z,_]";
+            header("Location: ../index");
+            exit;
+        }
+    }
+
+    if (empty($password)) {
+        $password = $passwordOld;
+    }
+
+    if (empty($passwordNew)) {
+        $passwordNew = $passwordOld;
+    } else {
+        if (!preg_match("/^(?=.*[A-Z])(?=.*[!@#$%^&*()_+-=])[a-zA-Z0-9!@#$%^&*()_+-=]{0,8}$/", $passwordNew)) {
+            $_SESSION['error'] = 'รหัสผ่านจำเป็นต้องมี ตัวพิมพ์ใหญ่ไม่น้อยกว่า 1 ตัว, ตัวอักษรพิเศษ 1 ตัว และมีความยาวไม่เกิน 8 ตัวอักษร';
+            header("Location: ../index");
+            exit;
+        }
+    }
+
+    $password_hash = password_hash($passwordNew, PASSWORD_DEFAULT);
+    $edit_user = "UPDATE users SET username='$usernameNew', password='$password_hash', updated_at='$date' WHERE id = '$id'";
+    $editQuery = mysqli_query($conn, $edit_user);
+    if ($editQuery) {
+        $_SESSION['success'] = "แก้ไขข้อมูลสำเร็จ!";
+        header("Location: ../index");
+        mysqli_close($conn);
+        exit;
+    } else {
+        $_SESSION['error'] = "เกิดข้อผิดพลาด!";
+        header("Location: ../index");
+        mysqli_close($conn);
+        exit;
+    }
+}
