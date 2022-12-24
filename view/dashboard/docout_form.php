@@ -26,11 +26,11 @@ include_once '../../layout/head.php';
                 <td>
                     <img src="../../image/logo-addpay.png" alt="" width="80%">
                 </td>
-                <td class="right">
+                <th class="right">
                     <label for="">บริษัท แอดเพย์ เซอร์วิสพอยท์ จำกัด
                         ADDPAY SERVICE POINT CO.,LTD.
                         406 หมู่ 18 ตำบลขามใหญ่ อำเภอเมือง จังหวัดอุบลราชธานี</label>
-                </td>
+                </th>
             </tr>
         </table>
         <table>
@@ -63,7 +63,7 @@ include_once '../../layout/head.php';
             </tr>
         </table>
         <!-- input details1 -->
-        
+
         <table>
             <tr>
                 <td>
@@ -94,12 +94,15 @@ include_once '../../layout/head.php';
                 </td>
             </tr>
         </table>
-        <div style="padding-top: 100px;">
-            <label for="">ผู้ประสานงาน<br>
-                โทร. 085-4964855 , 045-317123<br>
-                แฟกซ์ 045-317678
-            </label>
-        </div>
+        <table style="padding-top: 100px;">
+            <tr>
+                <td for="">ผู้ประสานงาน<br>
+                    โทร. 085-4964855 , 045-317123<br>
+                    แฟกซ์ 045-317678
+                </td>
+            </tr>
+
+        </table>
 
     </div>
 </div>
