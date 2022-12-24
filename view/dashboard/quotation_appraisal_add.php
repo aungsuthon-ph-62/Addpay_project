@@ -67,7 +67,7 @@ table tr td:first-child::before {
         </div>
         <div class="row g-3 align-items-center mb-3">
             <div class="col-md-3">
-                <label for="inputname" class="col-form-label">ชื่อลูกค้า :</label>
+                <label for="inputname" class="col-form-label">ชื่อลูกค้า/หน่วยงาน :</label>
             </div>
             <div class="col-md-8">
                 <input type="text" id="inputname" class="form-control " required>
