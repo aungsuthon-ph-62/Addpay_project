@@ -29,13 +29,14 @@ $mpdf = new \Mpdf\Mpdf([
 $a = file_get_contents('./quotation_PDF/quotation_content.php');
 $stylesheet = file_get_contents('./quotation_PDF/quotation_PDF.css');
 $mpdf->WriteHTML($stylesheet, \Mpdf\HTMLParserMode::HEADER_CSS);
-$mpdf->WriteHTML($a,\Mpdf\HTMLParserMode::HTML_BODY);
+$mpdf->WriteHTML($a, \Mpdf\HTMLParserMode::HTML_BODY);
 $mpdf->Output('./quotation_PDF/quotation_appraisal0.pdf'); //link web of file pdf
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -56,13 +57,16 @@ $mpdf->Output('./quotation_PDF/quotation_appraisal0.pdf'); //link web of file pd
 
 
 <body>
-    <div class="container  py-md-5 px-md-4" style="width: 100%;">
+
+    <div class="container py-md-5 px-md-4" style="width: 100%; ">
+        <div class="mx-auto d-flex justify-content-end me-5">
+            <a class="btn btn-danger px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button" href="./quotation_PDF/quotation_appraisal0.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
+        </div>
         <?php
         include("./quotation_PDF/quotation_content.php");
         ?>
     </div>
-    <div class="mx-auto d-flex justify-content-end me-5">
-        <a class="btn btn-danger px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button" href="./quotation_PDF/quotation_appraisal0.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
-    </div>
+
 </body>
+
 </html>
