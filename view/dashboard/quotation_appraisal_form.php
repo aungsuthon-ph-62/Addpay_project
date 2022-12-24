@@ -22,7 +22,7 @@ $mpdf = new \Mpdf\Mpdf([
         ]
     ],
     'default_font' => 'sarabun',
-    'default_font_size' => 18,
+    'default_font_size' => 16,
 ]);
 
 
