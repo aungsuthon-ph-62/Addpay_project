@@ -3,19 +3,19 @@ session_start();
 include("../../layout/head.php");
 require_once("../../php/conn.php");
 
-if(isset($_GET["deletequo"]))
+if(isset($_GET["deletequooutout"]))
   {
-    $id = $_GET["deletequo"];
+    $id = $_GET["deletequooutout"];
     
-    $sql = "DELETE FROM quotation_appraisal WHERE quo_id = '$id'";
+    $sql = "DELETE FROM quoouttation_out WHERE quooutout_id = '$id'";
     $query = $conn->query($sql);
     if($query){
-        $_SESSION['success'] = "ลบใบเสนอราคากลางสำเร็จ!";
-        header("Location: quotation_appraisal_list.php");
+        $_SESSION['success'] = "ลบใบเสนอราคาสำเร็จ!";
+        header("Location: quoouttation_out_list.php");
         exit;
     }
     $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-    header("Location: quotation_appraisal_list.php");
+    header("Location: quoouttation_out_list.php");
     exit;
     
   }
@@ -54,47 +54,45 @@ body {
             <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">ใบเสนอราคากลาง</li>
+                    <li class="breadcrumb-item active" aria-current="page">ใบเสนอราคา</li>
                 </ol>
             </nav>
             <hr>
 
-            <div id="listquotation" class="container pb-md-0 mb-5">
+            <div id="listquoouttationout" class="container pb-md-0 mb-5">
                 <div>
                     <h3>ใบเสนอราคา quotation</h3>
                 </div>
 
                 <div class="mx-auto d-flex justify-content-end">
                     <a class="btn btn-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button"
-                        href="../dashboard/quotation_appraisal_add.php"><i class="fa-solid fa-file-circle-plus"></i>
+                        href="../dashboard/quotation_out_add.php"><i class="fa-solid fa-file-circle-plus"></i>
                         สร้างใบเสนอราคา</a>
                 </div>
 
                 <div class="border border-secondary rounded-3 py-md-4 px-md-4 mt-2 mt-md-4" id="main_row">
                     <div class="table-responsive">
-                        <table class="table" id="quotationTable">
+                        <table class="table" id="quotationoutTable">
                             <thead>
                                 <tr class="align-center" class="rows">
-                                    <th scope="col" style="width:12%">เลขที่ใบ<br>เสนอราคา</th>
-                                    <th scope="col" style="width:10%">วันที่ในใบ<br>เสนอราคา</th>
-                                    <th scope="col" style="width:26%">ชื่อโครงการ</th>
-                                    <th scope="col" style="width:26%">ชื่อลูกค้า<br>หน่วยงาน</th>
-                                    <th scope="col" style="width:13%">จำนวนเงินรวม</th>
+                                    <th scope="col" style="width:20%">เลขที่ใบเสนอราคา</th>
+                                    <th scope="col" style="width:15%">วันที่ใน<br>ใบเสนอราคา</th>
+                                    <th scope="col" style="width:33%">ชื่อลูกค้า</th>
+                                    <th scope="col" style="width:22%">จำนวนเงินรวม</th>
                                     <th scope="col" style="width:10%">ตัวเลือก</th>
                                 </tr>
                             </thead>
                             <?php
                                 
-                                $sql = "SELECT * FROM quotation_appraisal";
+                                $sql = "SELECT * FROM quotation_out";
                                 $query = $conn->query($sql);
                                 while ($rows = $query->fetch_assoc()) {
                                     echo '
                                     <tr>
-                                        <td>'.$rows["quo_no"].'</td>
-                                        <td>'.$rows["quo_date"].'</td>
-                                        <td>'.$rows["quo_namepj"].'</td>
-                                        <td>'.$rows["quo_name"].'</td>
-                                        <td>'.$rows["quo_total"].'</td>
+                                        <td>'.$rows["quoout_no"].'</td>
+                                        <td>'.$rows["quoout_date"].'</td>
+                                        <td>'.$rows["quoout_name"].'</td>
+                                        <td>'.$rows["quoout_total"].'</td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4"
@@ -102,12 +100,12 @@ body {
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li><a class="dropdown-item"
-                                                            href="../dashboard/quotation_appraisal_form.php?pdfquo='.$rows["quo_id"].'">พิมพ์เอกสาร</a>
+                                                            href="../dashboard/quotation_out_form.php?pdfquoout='.$rows["quoout_id"].'">พิมพ์เอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
-                                                            href="../dashboard/quotation_appraisal_edit.php?editquo='.$rows["quo_id"].'">แก้ไข</a>
+                                                            href="../dashboard/quotation_out_edit.php?editquoout='.$rows["quoout_id"].'">แก้ไข</a>
                                                     </li>
-                                                    <li><a class="dropdown-item deletequo" href="#" data-quo-no="'.$rows["quo_no"].'" id="'.$rows["quo_id"].'" >ลบ</a></li>
+                                                    <li><a class="dropdown-item deletequoout" href="#" data-quoout-no="'.$rows["quoout_no"].'" id="'.$rows["quoout_id"].'" >ลบ</a></li>
                                                 </ul>
                                             </div>
                                         </td>
@@ -121,14 +119,14 @@ body {
                 <!-- Data table -->
                 <script type="text/javascript">
                 $(document).ready(function() {
-                    $('#quotationTable').DataTable();
+                    $('#quotationoutTable').DataTable();
 
-                    $(document).on('click', '.deletequo', function() {
+                    $(document).on('click', '.deletequoout', function() {
                         var id = $(this).attr("id");
-                        var show_quo_no = $(this).attr("data-quo-no");
+                        var show_quoout_no = $(this).attr("data-quoout-no");
                         swal.fire({
-                            title: 'ต้องการลบใบเสนอราคากลางนี้ !',
-                            text: "เลขที่ใบเสนอราคากลาง : " + show_quo_no,
+                            title: 'ต้องการลบใบเสนอราคานี้ !',
+                            text: "เลขที่ใบเสนอราคา : " + show_quoout_no,
                             type: 'warning',
                             showCancelButton: true,
                             confirmButtonColor: '#d33',
@@ -137,7 +135,7 @@ body {
                             cancelButtonText: 'no'
                         }).then((result) => {
                             if (result.value) {
-                                window.location.href = "?deletequo=" + id;
+                                window.location.href = "?deletequoout=" + id;
                             }
                         });
                     });
