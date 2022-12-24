@@ -56,6 +56,16 @@ table tr td:first-child::before {
             </div>
         </div>
         <div class="row g-3 align-items-center mb-3">
+            <div class="col-md-3 ">
+                <label for="inputrev" class="col-form-label">โครงการ :</label>
+            </div>
+
+            <div class="col-md-8">
+                <input type="text" id="inputrev" class="form-control "
+                    title="" required>
+            </div>
+        </div>
+        <div class="row g-3 align-items-center mb-3">
             <div class="col-md-3">
                 <label for="inputname" class="col-form-label">ชื่อลูกค้า :</label>
             </div>
@@ -71,16 +81,7 @@ table tr td:first-child::before {
                 <textarea class="form-control" id="inputposition" rows="3" required></textarea>
             </div>
         </div>
-        <div class="row g-3 align-items-center mb-3">
-            <div class="col-md-3 ">
-                <label for="inputrev" class="col-form-label">เลขประจำตัวผู้เสียภาษี :</label>
-            </div>
-
-            <div class="col-md-8">
-                <input type="text" id="inputrev" class="form-control " pattern="[0-9]{13}"
-                    title="กรุณากรอกตัวเลข 0-9 จำนวน 13 หลัก ไม่มี (-)" required>
-            </div>
-        </div>
+       
         <div class="row g-3 align-items-center mb-3">
             <div class="col-md-3 ">
                 <label for="itemtitle" class="col-form-label">รายการใบเสนอราคากลาง :</label>

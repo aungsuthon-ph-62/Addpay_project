@@ -54,9 +54,9 @@ include("../../layout/head.php");
                         <thead>
                             <tr class="align-center" class="rows">
                                 <th scope="col" style="width:12%" class=" text-center">วันที่สร้าง</th>
-                                <th scope="col" style="width:12%" class=" text-center">วันที่<br>ในใบเสนอราคา</th>
-                                <th scope="col" style="width:20%" class=" text-center">เลขที่ใบเสนอราคา</th>
-                                <th scope="col" style="width:31%" class=" text-center">ชื่อลูกค้า</th>
+                                <th scope="col" style="width:15%" class=" text-center">เลขที่ใบเสนอราคา</th>
+                                <th scope="col" style="width:21%" class=" text-center">ชื่อโครงการ</th>
+                                <th scope="col" style="width:27%" class=" text-center">ชื่อลูกค้า/หน่วยงาน</th>
                                 <th scope="col" style="width:15%" class=" text-center">จำนวนเงินรวม</th>
                                 <th scope="col" style="width:10%" class=" text-center">ตัวเลือก</th>
                             </tr>
@@ -64,8 +64,8 @@ include("../../layout/head.php");
                         <tbody class="text-center">
                             <tr>
                                 <td>13/04/2565</td>
-                                <td>13/04/2565</td>
                                 <td>64578</td>
+                                <td>พัฒนาชุมชน 2565</td>
                                 <td>IMCO PACK CORPRATION LIMITED</td>
                                 <td>11,181.50</td>
                                 <td>
@@ -93,9 +93,9 @@ include("../../layout/head.php");
                             </tr>
                             <tr>
                                 <td>13/04/2565</td>
-                                <td>13/04/2565</td>
                                 <td>64598</td>
-                                <td>IMCO  CORPRATION LIMITED</td>
+                                <td>พัฒนาชุมชน 2565</td>
+                                <td>IMCO CORPRATION LIMITED</td>
                                 <td>11,181.50</td>
                                 <td>
                                     <div>
@@ -122,8 +122,8 @@ include("../../layout/head.php");
                             </tr>
                             <tr>
                                 <td>13/04/2565</td>
-                                <td>13/04/2565</td>
                                 <td>64576</td>
+                                <td>พัฒนาชุมชน 2565</td>
                                 <td>IMCO PACK LIMITED</td>
                                 <td>11,181.50</td>
                                 <td>
