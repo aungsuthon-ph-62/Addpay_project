@@ -3,19 +3,19 @@ session_start();
 include("../../layout/head.php");
 require_once("../../php/conn.php");
 
-if(isset($_GET["deletequooutout"]))
+if(isset($_GET["deletequoout"]))
   {
-    $id = $_GET["deletequooutout"];
+    $id = $_GET["deletequoout"];
     
-    $sql = "DELETE FROM quoouttation_out WHERE quooutout_id = '$id'";
+    $sql = "DELETE FROM quotation_out WHERE quoout_id = '$id'";
     $query = $conn->query($sql);
     if($query){
         $_SESSION['success'] = "ลบใบเสนอราคาสำเร็จ!";
-        header("Location: quoouttation_out_list.php");
+        header("Location: quotation_out_list.php");
         exit;
     }
     $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-    header("Location: quoouttation_out_list.php");
+    header("Location: quotation_out_list.php");
     exit;
     
   }
