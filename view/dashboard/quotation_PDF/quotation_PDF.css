@@ -1,0 +1,26 @@
+body{
+    font-family: 'Sarabun', sans-serif;
+}
+
+.text-center {
+    text-align: center
+}
+
+.text-left {
+    justify-items: left;
+}
+
+.text-right {
+    justify-items: right;
+}
+
+.underline {
+    padding: 3px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-bottom: 2px solid;
+}
+.gapline {
+    padding: 0;
+    margin: 20px 0;
+}

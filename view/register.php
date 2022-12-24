@@ -1,5 +1,5 @@
-<section class="py-4 py-md-5 px-2 px-md-5 bg-primary-addpay overflow-hidden">
-  <div class="rounded-5 py-5 px-md-5 mx-md-5 my-5 my-md-0 bg-white">
+<section class="py-4 py-md-5 px-2 px-md-5 bg-primary-addpay overflow-hidden vh-100">
+  <div class="rounded-5 py-5 px-md-5 mx-md-5 my-5 my-md-0 bg-white shadow-lg">
 
     <div class="d-flex flex-wrap align-items-center justify-content-between mb-3 px-3 px-md-5">
       <a href="?register">
@@ -32,7 +32,8 @@
 
 
       <div class="container pb-md-0 mb-5">
-        <form action="" method="post" class="px-md-5">
+        <form action="php/action.php" class="px-md-5" method="post">
+          <input type="hidden" name="action" value="register">
           <select class="form-select mb-4 rounded-pill" id="inputTname" name="inputTname">
             <option selected disabled>--คำนำหน้าชื่อ--</option>
             <option value="นาย">นาย</option>
@@ -56,19 +57,19 @@
           </div>
           <!-- Password input -->
           <div class="form-floating mb-4">
-            <input type="password" class="form-control form-control-lg border border-start-0 border-top-0 border-end-0 rounded-0" id="inputPassword" name="inputPassword" placeholder="กรอกรหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="พาสเวิร์ดต้องมีตัวเลขอย่างน้อยหนึ่งตัว, มีตัวพิมพ์ใหญ่และพิมพ์เล็ก และมีความยาวไม่น้อยกว่า 8 ตัวอักษร !">
+            <input type="password" class="form-control form-control-lg border border-start-0 border-top-0 border-end-0 rounded-0" id="inputPassword" name="inputPassword" placeholder="กรอกรหัสผ่าน">
             <label for="inputPassword" class="form-label">รหัสผ่าน</label>
           </div>
 
           <!-- Checkbox -->
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="inputConfirm">
+            <input class="form-check-input" type="checkbox" id="inputConfirm" name="inputConfirm">
             <label class="form-check-label" for="inputConfirm"> ยืนยันข้อมูล </label>
           </div>
 
           <!-- Submit button -->
           <div class="d-grid gap-2 col-12 mx-auto">
-            <button type="submit" name="submit" class="btn p-3 mt-3 text-white rounded-pill fs-5 fw-bold btn-addpay">สมัครสมาชิก</button>
+            <button type="submit" name="register-button" class="btn p-3 mt-3 text-white rounded-pill fs-5 fw-bold btn-addpay">สมัครสมาชิก</button>
           </div>
         </form>
       </div>
