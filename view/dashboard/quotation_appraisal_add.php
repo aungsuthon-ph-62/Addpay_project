@@ -62,7 +62,7 @@ function create_quotation(){
             }
 
             $_SESSION['success'] = "บันทึกสำเร็จ!";
-            header("Location: quotation_appraisal_add.php");
+            header("Location: quotation_appraisal_list.php");
             exit;
             
         } else {
@@ -102,8 +102,7 @@ table tr td:first-child::before {
 </style>
 
 <body>
-    <?php
-    require("../alert.php");?>
+    <?php require("../alert.php");?>
     <div class="container-fluid">
         <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
             <ol class="breadcrumb">
