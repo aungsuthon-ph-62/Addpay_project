@@ -190,7 +190,7 @@ function login()
     $data = 'username=' . $enc_username . '&password=' . $enc_password;
 
     if (empty($username)) {
-        $_SESSION['error'] = "กรุณากรอกอีเมลล์";
+        $_SESSION['error'] = "กรุณากรอกชื่อผู้ใช้";
         header("Location: ../login?$data");
         exit;
     }
@@ -236,3 +236,4 @@ function logout()
     header('Location: ../login.php?success=ออกจากระบบสำเร็จ!');
     exit;
 }
+

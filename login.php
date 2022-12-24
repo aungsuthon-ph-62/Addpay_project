@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+if (isset($_SESSION['id'])) {
+  header("Location: index");
+}
+
 include_once 'layout/head.php';
 require_once 'php/action.php';
 require_once 'php/key.inc.php';

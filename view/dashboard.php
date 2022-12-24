@@ -1,5 +1,13 @@
 <!-- Dashboard Nav -->
 <?php
+if (isset($_SESSION['id'])) {
+    $id = $_SESSION['id'];
+    require_once "php/conn.php";
+
+    $query = "SELECT * FROM users WHERE id = '$id'";
+    $result = mysqli_query($conn, $query);
+    $user = mysqli_fetch_assoc($result);
+}
 include_once 'layout/dashboardNav.php';
 ?>
 <!-- Dashboard Nav -->
@@ -15,12 +23,12 @@ include_once 'layout/dashboardNav.php';
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <h1 class="h5 pt-5">หน้าหลัก</h1>
             <hr>
-            
+
             <?php
-                include_once 'dashboard/profile.php';
-                include_once 'dashboard/profileedit.php';
+            include_once 'dashboard/profile.php';
+            include_once 'dashboard/profileedit.php';
             ?>
-            
+
         </main>
     </div>
 </div>

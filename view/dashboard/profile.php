@@ -18,7 +18,7 @@
                                 <h6 class="mb-0">คำนำหน้าชื่อ</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                นาย
+                                <?= $user['prefix'] ?>
                             </div>
                         </div>
                         <div class="row">
