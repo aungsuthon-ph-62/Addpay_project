@@ -86,7 +86,7 @@ include_once '../../layout/head.php';
         </table>
         <table style="width: 100%;">
             <tr>
-                <td style="text-align: center;">
+                <td style="text-align: center;padding-top:50px">
                     ขอแสดงความนับถือ <br><br><br><br>
                     ( ดร.ศิริมาเมธ์วดี ศิรธนิตรา )<br>
                     ประธานกรรมการ <br>
