@@ -59,8 +59,9 @@ $mpdf->Output('./quotation_PDF/quotation_appraisal0.pdf'); //link web of file pd
 <body>
 
     <div class="container py-md-5 px-md-4" style="width: 100%; ">
-        <div class="mx-auto d-flex justify-content-end me-5">
-            <a class="btn btn-danger px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button" href="./quotation_PDF/quotation_appraisal0.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
+        <div class="mx-auto d-flex justify-content-end ">
+            <a class="btn btn-outline-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button" href="./quotation_PDF/quotation_appraisal0.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
+            <a class="btn btn-outline-danger px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold ms-3" role="button" href="./quotation_appraisal_list.php"><i class="fa-regular fa-rectangle-xmark"></i> ยกเลิก</a>
         </div>
         <?php
         include("./quotation_PDF/quotation_content.php");

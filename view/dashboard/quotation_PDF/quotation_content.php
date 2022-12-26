@@ -1,4 +1,4 @@
-<div id="quotationForm" class="container pb-md-0 mb-5 mt-5">
+<div id="quotationForm" class="container mt-5" style="width: 842px;">
     <div>
         <table>
             <tr>
