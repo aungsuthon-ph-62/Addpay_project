@@ -4,10 +4,11 @@ include_once '../../layout/head.php';
 
 
 <style>
-   .font{
-    font-size: 1rem;
-   }
-   body {
+    .font {
+        font-size: 1rem;
+    }
+
+    body {
         font-family: "Kanit", sans-serif;
         font-family: "Noto Sans", sans-serif;
         font-family: "Noto Sans Thai", sans-serif;
@@ -16,48 +17,79 @@ include_once '../../layout/head.php';
     }
 </style>
 
-<div class="container">
-    <div class="modal modal-sheet d-block" tabindex="-1">
-        <div class="modal-dialog">
-            <form action="../../php/action.php" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="action" value="addExpenses">
-                <!-- <input type="hidden" name="ExpensesID" value="<?= $rows['id'] ?>">
-                <input type="hidden" name="hdn_file" value="<?= $rows['Expenses_file'] ?>"> -->
-                <div class="modal-content rounded-4 shadow">
-                    <div class="modal-header border-bottom-0">
-                        <h1 class="modal-title fs-5"><i class="fa-solid fa-gear"></i> เพิ่มข้อมูลใบสำคัญจ่าย </h1>
-                        <a href="../dashboard/expenses.php" class="btn-close"></a>
-                    </div>
-                    <div class="modal-body pt-5">
-                        <div class="mb-3">
-                            <label for="addExpenses" class="form-label ">วันที่</label>
-                            <input class="form-control" id="addExpenses" name="addExpenses" type="date">
+<div class="container py-5">
+    <div class="main-body">
+        <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../dashboard.php">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="../dashboard/expenses.php">ใบสำคัญจ่าย</a></li>
+                <li class="breadcrumb-item active" aria-current="page">เพิ่มข้อมูลใบสำคัญจ่าย</li>
+            </ol>
+        </nav>
+        <hr>
+
+        <div id="paperquotation" class="container pb-md-0 mb-5">
+            <div>
+                <h3>เพิ่มข้อมูลใบสำคัญจ่าย</h3>
+            </div>
+            <div class=" px-md-5 py-md-4 justify-content-center">
+                <div class="p-2 py-md-4 px-md-5 border rounded-3">
+                    <!-- modal form -->
+                    <form action="" method="post" class="">
+                        <div class="row g-3 align-items-center mb-3">
+                            <div class="col-md-3">
+                                <label for="inputDate" class="col-form-label">วันที่  </label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="date" id="inputDate" class="form-control " required>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="addExpenses" class="form-label ">รายการ</label>
-                            <input class="form-control" id="addExpenses" name="addExpenses" type="text">
+                        <div class="row g-3 align-items-center mb-3">
+                            <div class="col-md-3">
+                                <label for="inputList" class="col-form-label">รายการ  </label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" id="inputList" class="form-control " required>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="addExpenses" class="form-label ">จำนวนเงิน</label>
-                            <input class="form-control" id="addExpenses" name="addExpenses" type="number">
+                        <div class="row g-3 align-items-center mb-3">
+                            <div class="col-md-3">
+                                <label for="inputAmount" class="col-form-label">จำนวนเงิน </label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="number" id="inputAmount" class="form-control " required>
+                            </div>
                         </div>
-                        <label for="addExpenses" class="form-label ">เลือกประเภท</label>
-                        <select class="form-select mb-4 rounded-pill" id="inputTname" name="inputTname">
-                            <option selected disabled>--ประเภท--</option>
-                            <option value="ประจำ">ประจำ</option>
-                            <option value="ไม่ประจำ">ไม่ประจำ</option>
-                        </select>
-                        <div class="mb-3">
-                            <label for="addExpenses" class="form-label ">เพิ่มไฟล์ที่นี่</label>
-                            <input class="form-control" id="addExpenses" name="addExpenses" type="file">
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-3 ">
+                                <label for="inputType" class="col-form-label">เลือกประเภท </label>
+                            </div>
+                            <div class="col-md-9">
+                                <select class="form-select" id="inputType" name="inputType">
+                                    <option selected disabled>--ประเภท--</option>
+                                    <option value="ประจำ">ประจำ</option>
+                                    <option value="ไม่ประจำ">ไม่ประจำ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row g-3 align-items-center mb-3">
+                            <div class="col-md-3 ">
+                                <label for="inputFile" class="col-form-label">เพิ่มไฟล์ </label>
+                            </div>
+
+                            <div class="col-md-9">
+                                <input type="file" id="inputFile" class="form-control " required>
+                            </div>
                         </div>
 
-                    </div>
-                    <div class="modal-footer flex-column border-top-0 pt-5">
-                        <button type="submit" class="btn btn-lg btn-primary w-100 mx-0 mb-2">บันทึกข้อมูล</button>
-                    </div>
+                        <!-- Submit button -->
+                        <div class="mx-auto d-flex justify-content-end">
+                            <button type="reset" class=" btn btn-outline-danger btn btn-outline-success px-2 mt-2 rounded-3 fw-bold"><i class="fa-solid fa-eraser"></i> ล้างข้อมูล</button>
+                            <button type="submit" class="ms-3  btn btn-outline-success px-2 mt-2 rounded-3  fw-bold">บันทึก <i class="fa-solid fa-angles-right"></i></button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

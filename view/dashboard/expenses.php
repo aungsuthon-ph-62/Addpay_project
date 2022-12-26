@@ -43,7 +43,7 @@ include_once '../../layout/head.php';
                 <h3>เอกสารสำคัญ</h3>
             </div>
             <div class="mx-auto d-flex justify-content-end">
-                <a class="btn btn-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button" href="../dashboard/add_expenses.php"><i class="fa-solid fa-file-circle-plus"></i> เพิ่มข้อมูล</a>
+                <a class="btn btn-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button" href="../dashboard/expenses_add.php"><i class="fa-solid fa-file-circle-plus"></i> เพิ่มข้อมูล</a>
             </div>
 
             <div class="border border-secondary rounded-3 py-md-4 px-md-4 mt-2 mt-md-4" id="main_row">
@@ -74,7 +74,7 @@ include_once '../../layout/head.php';
                                             <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4" data-bs-toggle="dropdown" aria-expanded="false"><b>เลือก</b> </button>
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" href="#">เปิดเอกสาร</a></li>
-                                                <li><a class="dropdown-item" href="#">แก้ไข</a></li>
+                                                <li><a class="dropdown-item" href="./expenses_edit.php">แก้ไข</a></li>
                                                 <li><a class="dropdown-item" href="#">ลบ</a></li>
 
                                             </ul>
