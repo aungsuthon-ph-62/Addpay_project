@@ -66,38 +66,65 @@ function register()
     $confirm = mysqli_real_escape_string($conn, $_POST['inputConfirm']);
 
     if (empty($tname)) {
-        $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-        header("Location: ?register");
+        $_SESSION['error'] = "กรุณาเลือกคำนำหน้าชื่อ";
+        header("Location: ../index.php?register");
         exit;
     }
 
     if (empty($fname)) {
         $_SESSION['error'] = "กรุณากรอกชื่อจริง";
-        header("Location: ?register");
+        header("Location: ../index.php?register");
         exit;
     }
 
     if (empty($lname)) {
         $_SESSION['error'] = "กรุณากรอกนามสกุล";
-        header("Location: ?register");
+        header("Location: ../index.php?register");
         exit;
     }
 
     if (empty($username)) {
         $_SESSION['error'] = "กรุณากรอกชื่อผู้ใช้";
-        header("Location: ?register");
+        header("Location: ../index.php?register");
         exit;
     }
 
     if (empty($password)) {
         $_SESSION['error'] = "กรุณากรอกรหัสผ่าน";
-        header("Location: ?register");
+        header("Location: ../index.php?register");
         exit;
     }
 
     if (empty($confirm)) {
         $_SESSION['error'] = "กรุณาติ๊กที่ช่องยืนยัน";
-        header("Location: ?register");
+        header("Location: ../index.php?register");
         exit;
+    }
+
+    $password_hash = password_hash($password, PASSWORD_DEFAULT);
+
+
+    // check duplicate data
+    $user_check_query = "SELECT * FROM users WHERE fname = '$fname' AND lname = '$lname'";
+    $query = mysqli_query($conn, $user_check_query);
+    $check = mysqli_fetch_assoc($query);
+
+    if ($check) {
+        $_SESSION['error'] = "ชื่อจริงหรือนามสกุลนี้มีในระบบแล้ว!";
+        header("Location: ../index.php?register");
+        exit;
+    } else {
+        $query = "INSERT INTO users (prefix, fname, lname, username, password, create_at)
+VALUES ('$tname', '$fname', '$lname', '$username', '$password_hash', '$date')";
+        $result_query =  mysqli_query($conn, $query);
+        if ($result_query) {
+            $_SESSION['success'] = "สมัครสมาชิกสำเร็จ!";
+            header("Location: ../index.php?login");
+            exit;
+        } else {
+            $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
+            header("Location: ../index.php?register");
+            exit;
+        }
     }
 }

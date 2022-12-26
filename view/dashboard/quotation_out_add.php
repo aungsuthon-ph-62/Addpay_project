@@ -4,44 +4,44 @@ include("../../layout/head.php");
 require_once("../../php/conn.php");
 
 if (isset($_POST['action'])) {
-    if ($_POST['action'] == 'create_quotation') {
-        create_quotation();
+    if ($_POST['action'] == 'create_quoout') {
+        create_quoout();
         exit;
     } 
 }
 
-function create_quotation(){
+function create_quoout(){
     
     date_default_timezone_set('Asia/Bangkok');
     $date = date("Y-m-d H:i:s");
     global $conn;
 
-    $input_quo_no= mysqli_real_escape_string($conn,trim($_POST['input_quo_no']));
-    $input_quo_date= mysqli_real_escape_string($conn,trim($_POST['input_quo_date']));
-    $input_quo_name= mysqli_real_escape_string($conn,trim($_POST['input_quo_name']));
-    $input_quo_address= mysqli_real_escape_string($conn,trim($_POST['input_quo_address']));
-    $input_quo_namepj= mysqli_real_escape_string($conn,trim($_POST['input_quo_namepj']));
-    $input_quo_remark= mysqli_real_escape_string($conn,trim($_POST['input_quo_remark']));
-    $input_quo_sum= mysqli_real_escape_string($conn,trim($_POST['input_quo_sum']));
-    $input_quo_specialdis= mysqli_real_escape_string($conn,trim($_POST['input_quo_specialdis']));
-    $input_quo_afterdis= mysqli_real_escape_string($conn,trim($_POST['input_quo_afterdis']));
-    $input_quo_vat= mysqli_real_escape_string($conn,trim($_POST['input_quo_vat']));
-    $input_quo_total= mysqli_real_escape_string($conn,trim($_POST['input_quo_total']));
-    $input_quo_texttotal= mysqli_real_escape_string($conn,trim($_POST["input_quo_texttotal"]));
-    $input_quo_create= $date;
-    $input_quo_uid = 1;
+    $input_quoout_no= mysqli_real_escape_string($conn,trim($_POST['input_quoout_no']));
+    $input_quoout_date= mysqli_real_escape_string($conn,trim($_POST['input_quoout_date']));
+    $input_quoout_name= mysqli_real_escape_string($conn,trim($_POST['input_quoout_name']));
+    $input_quoout_address= mysqli_real_escape_string($conn,trim($_POST['input_quoout_address']));
+    $input_quoout_numtax= mysqli_real_escape_string($conn,trim($_POST['input_quoout_numtax']));
+    $input_quoout_remark= mysqli_real_escape_string($conn,trim($_POST['input_quoout_remark']));
+    $input_quoout_sum= mysqli_real_escape_string($conn,trim($_POST['input_quoout_sum']));
+    $input_quoout_specialdis= mysqli_real_escape_string($conn,trim($_POST['input_quoout_specialdis']));
+    $input_quoout_afterdis= mysqli_real_escape_string($conn,trim($_POST['input_quoout_afterdis']));
+    $input_quoout_vat= mysqli_real_escape_string($conn,trim($_POST['input_quoout_vat']));
+    $input_quoout_total= mysqli_real_escape_string($conn,trim($_POST['input_quoout_total']));
+    $input_quoout_texttotal= mysqli_real_escape_string($conn,trim($_POST["input_quoout_texttotal"]));
+    $input_quoout_create= $date;
+    $input_quoout_uid = 1;
     
-    $quo_no_check_query = "SELECT * FROM quotation_appraisal WHERE quo_no =  $input_quo_no";
-    $query = mysqli_query($conn, $quo_no_check_query);
+    $quoout_no_check_query = "SELECT * FROM quotation_out WHERE quoout_no =  '$input_quoout_no'";
+    $query = mysqli_query($conn, $quoout_no_check_query);
     $check = mysqli_fetch_assoc($query);
 
     if ($check) {
-        $_SESSION['error'] = "เลขที่ใบเสนอราคากลางนี้มีในระบบแล้ว!";
-        header("Location: quotation_appraisal_add.php");
+        $_SESSION['error'] = "เลขที่ใบเสนอราคานี้มีในระบบแล้ว!";
+        header("Location: quotation_out_add.php");
         exit;
     } else {
-        $query = "INSERT INTO quotation_appraisal (quo_no, quo_date, quo_name, quo_address, quo_namepj, quo_remark, quo_sum, quo_specialdis, quo_afterdis, quo_vat, quo_total, quo_texttotal, quo_create, quo_uid)
-            VALUES ('$input_quo_no', '$input_quo_date', '$input_quo_name', '$input_quo_address', '$input_quo_namepj', '$input_quo_remark', '$input_quo_sum', '$input_quo_specialdis', '$input_quo_afterdis', '$input_quo_vat', '$input_quo_total', '$input_quo_texttotal', '$input_quo_create', '$input_quo_uid')";
+        $query = "INSERT INTO quotation_out (quoout_no, quoout_date, quoout_name, quoout_address, quoout_numtax, quoout_remark, quoout_sum, quoout_specialdis, quoout_afterdis, quoout_vat, quoout_total, quoout_texttotal, quoout_create, quoout_uid)
+            VALUES ('$input_quoout_no', '$input_quoout_date', '$input_quoout_name', '$input_quoout_address', '$input_quoout_numtax', '$input_quoout_remark', '$input_quoout_sum', '$input_quoout_specialdis', '$input_quoout_afterdis', '$input_quoout_vat', '$input_quoout_total', '$input_quoout_texttotal', '$input_quoout_create', '$input_quoout_uid')";
             
         if ($conn->query($query) === TRUE) {
             
@@ -53,22 +53,22 @@ function create_quotation(){
                 $item_amount= mysqli_real_escape_string($conn,trim($_POST['item_amount'][$count]));
                 $item_price= mysqli_real_escape_string($conn,trim($_POST['item_price'][$count]));
                 $total_price= mysqli_real_escape_string($conn,trim($_POST['total_price'][$count]));
-                $input_quode_create= $date;
-                $input_quode_uid = 1;
+                $input_quooutde_create= $date;
+                $input_quooutde_uid = 1;
     
-                $query = "INSERT INTO quotation_appraisal_details (quode_quoid, quode_item, quode_price, quode_amount, quode_result, quode_create, quode_uid)
-                    VALUES ('$last_id', '$item_name', '$item_price', '$item_amount', '$total_price', '$input_quode_create', '$input_quode_uid')";
+                $query = "INSERT INTO quotation_out_details (quooutde_quoid, quooutde_item, quooutde_price, quooutde_amount, quooutde_result, quooutde_create, quooutde_uid)
+                    VALUES ('$last_id', '$item_name', '$item_price', '$item_amount', '$total_price', '$input_quooutde_create', '$input_quooutde_uid')";
                 mysqli_query($conn, $query);
             }
 
-            $_SESSION['success'] = "บันทึกใบเสนอราคากลางสำเร็จ!";
-            header("Location: quotation_appraisal_list.php");
+            $_SESSION['success'] = "บันทึกสำเร็จ!";
+            header("Location: quotation_out_list.php");
             exit;
             
         } else {
             echo "Error: " . $query . "<br>" . $conn->error;
             $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-            header("Location: quotation_appraisal_add.php");
+            header("Location: quotation_out_add.php");
             exit;
             
         } 
@@ -77,7 +77,6 @@ function create_quotation(){
 }
 
 ?>
-
 <style>
 body {
     font-family: "Kanit", sans-serif;
@@ -101,68 +100,6 @@ table tr td:first-child::before {
     margin-right: 0.5em;
 }
 </style>
-<<<<<<< HEAD
-<div class="container-fluid">
-    <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><a
-                    href="../dashboard/quotation_appraisal_list.php">ใบเสนอราคากลาง</a></li>
-            <li class="breadcrumb-item active" aria-current="page">สร้างใบเสนอราคากลาง</li>
-        </ol>
-    </nav>
-    <hr>
-    <div>
-        <h3>ข้อมูลใบเสนอราคา Quotation</h3>
-    </div>
-    <form method="post" id="quotation_form" class="px-md-5 py-md-5">
-        <div class="row g-3 align-items-center mb-3">
-            <div class="col-md-3">
-                <label for="inputNo" class="col-form-label">เลขที่ No.</label>
-            </div>
-            <div class="col-auto">
-                <input type="text" id="inputNo" class="form-control " required>
-            </div>
-        </div>
-        <div class="row g-3 align-items-center mb-3">
-            <div class="col-md-3">
-                <label for="inputNo" class="col-form-label">วันที่ date.</label>
-            </div>
-            <div class="col-auto">
-                <input type="date" id="inputdate" class="form-control " required>
-            </div>
-        </div>
-        <div class="row g-3 align-items-center mb-3">
-            <div class="col-md-3 ">
-                <label for="inputrev" class="col-form-label">โครงการ :</label>
-            </div>
-
-            <div class="col-md-8">
-                <input type="text" id="inputrev" class="form-control "
-                    title="" required>
-            </div>
-        </div>
-        <div class="row g-3 align-items-center mb-3">
-            <div class="col-md-3">
-                <label for="inputname" class="col-form-label">ชื่อลูกค้า/หน่วยงาน :</label>
-            </div>
-            <div class="col-md-8">
-                <input type="text" id="inputname" class="form-control " required>
-            </div>
-        </div>
-        <div class="row g-3 mb-3">
-            <div class="col-md-3 ">
-                <label for="inputposition" class="col-form-label">ที่อยู่ :</label>
-            </div>
-            <div class="col-md-8">
-                <textarea class="form-control" id="inputposition" rows="3" required></textarea>
-            </div>
-        </div>
-       
-        <div class="row g-3 align-items-center mb-3">
-            <div class="col-md-3 ">
-                <label for="itemtitle" class="col-form-label">รายการใบเสนอราคากลาง :</label>
-=======
 
 <body>
     <?php require("../alert.php");?>
@@ -171,65 +108,65 @@ table tr td:first-child::before {
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a
-                        href="../dashboard/quotation_appraisal_list.php">ใบเสนอราคากลาง</a></li>
-                <li class="breadcrumb-item active" aria-current="page">สร้างใบเสนอราคากลาง</li>
+                        href="../dashboard/quotation_out_list.php">ใบเสนอราคา</a></li>
+                <li class="breadcrumb-item active" aria-current="page">สร้างใบเสนอราคา</li>
             </ol>
         </nav>
         <hr>
         <div>
-            <h3>ข้อมูลใบเสนอราคากลาง quotation appraisal</h3>
+            <h3>ข้อมูลใบเสนอราคา quoouttation</h3>
         </div>
-        <form method="post" id="quotation_form" action="quotation_appraisal_add.php" class="px-md-5 py-md-5">
+        <form method="post" id="quoout_form" action="quotation_out_add.php" class="px-md-5 py-md-5">
             <div class="row g-3 align-items-center mb-3">
                 <div class="col-md-3">
-                    <label for="input_quo_no" class="col-form-label">เลขที่ No.</label>
+                    <label for="input_quoout_no" class="col-form-label">เลขที่ No.</label>
                 </div>
                 <div class="col-auto">
-                    <input type="number" id="input_quo_no" name="input_quo_no" class="form-control " required>
+                    <input type="number" id="input_quoout_no" name="input_quoout_no" class="form-control " required>
                 </div>
->>>>>>> Jomtap
             </div>
             <div class="row g-3 align-items-center mb-3">
                 <div class="col-md-3">
-                    <label for="input_quo_date" class="col-form-label">วันที่ date.</label>
+                    <label for="input_quoout_date" class="col-form-label">วันที่ date.</label>
                 </div>
                 <div class="col-auto">
-                    <input type="date" id="input_quo_date" name="input_quo_date" class="form-control " required>
+                    <input type="date" id="input_quoout_date" name="input_quoout_date" class="form-control " required>
                 </div>
             </div>
             <div class="row g-3 align-items-center mb-3">
-                <div class="col-md-3 ">
-                    <label for="input_quo_namepj" class="col-form-label">ชื่อโครงการ :</label>
-                </div>
-
-                <div class="col-md-8">
-                    <input type="text" id="input_quo_namepj" name="input_quo_namepj" class="form-control " required>
-                </div>
-            </div>
-            <div class=" row g-3 align-items-center mb-3">
                 <div class="col-md-3">
-                    <label for="input_quo_name" class="col-form-label">ชื่อลูกค้า/หน่วยงาน :</label>
+                    <label for="input_quoout_name" class="col-form-label">ชื่อลูกค้า :</label>
                 </div>
                 <div class="col-md-8">
-                    <input type="text" id="input_quo_name" name="input_quo_name" class="form-control " required>
+                    <input type="text" id="input_quoout_name" name="input_quoout_name" class="form-control " required>
                 </div>
             </div>
             <div class="row g-3 mb-3">
                 <div class="col-md-3 ">
-                    <label for="input_quo_address" class="col-form-label">ที่อยู่ :</label>
+                    <label for="input_quoout_address" class="col-form-label">ที่อยู่ :</label>
                 </div>
                 <div class="col-md-8">
-                    <textarea class="form-control" id="input_quo_address" name="input_quo_address" rows="3"
+                    <textarea class="form-control" id="input_quoout_address" name="input_quoout_address" rows="3"
                         required></textarea>
                 </div>
             </div>
             <div class="row g-3 align-items-center mb-3">
                 <div class="col-md-3 ">
-                    <label for="itemtitle" class="col-form-label">รายการใบเสนอราคากลาง :</label>
+                    <label for="input_quoout_numtax" class="col-form-label">เลขประจำตัวผู้เสียภาษี :</label>
+                </div>
+
+                <div class="col-md-8">
+                    <input type="number" id="input_quoout_numtax" name="input_quoout_numtax" class="form-control "
+                        pattern="[0-9]{13}" title="กรุณากรอกตัวเลข 0-9 จำนวน 13 หลัก ไม่มี (-)" required>
+                </div>
+            </div>
+            <div class="row g-3 align-items-center mb-3">
+                <div class="col-md-3 ">
+                    <label for="itemtitle" class="col-form-label">รายการใบเสนอราคา :</label>
                 </div>
                 <div class="border border-secondary rounded-3 py-md-4 px-md-4">
                     <div class="table-responsive">
-                        <table id="quotation-item-table" class="table ">
+                        <table id="quoout-item-table" class="table ">
                             <tr>
                                 <th width="7%">ลำดับ <br>Number</th>
                                 <th width="40%">รายการ <br> Description </th>
@@ -266,10 +203,10 @@ table tr td:first-child::before {
                 <div class="col-md-6">
                     <div class="row g-3  mb-3">
                         <div class="col-md-3 ">
-                            <label for="input_quo_remark" class="col-form-label">หมายเหตุ :</label>
+                            <label for="input_quoout_remark" class="col-form-label">หมายเหตุ :</label>
                         </div>
                         <div class="col-md-8">
-                            <textarea class="form-control" id="input_quo_remark" name="input_quo_remark"
+                            <textarea class="form-control" id="input_quoout_remark" name="input_quoout_remark"
                                 rows="3"></textarea>
                         </div>
                     </div>
@@ -277,53 +214,52 @@ table tr td:first-child::before {
                 <div class="col-md-6">
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-md-6">
-                            <label for="input_quo_sum" class="col-form-label">รวมเป็นเงิน(บาท) :</label>
+                            <label for="input_quoout_sum" class="col-form-label">รวมเป็นเงิน(บาท) :</label>
                         </div>
 
                         <div class="col-md-5">
-                            <input type="number" id="input_quo_sum" name="input_quo_sum" class="form-control "
+                            <input type="number" id="input_quoout_sum" name="input_quoout_sum" class="form-control "
                                 placeholder="0.00" readonly>
                         </div>
                     </div>
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-md-6 ">
-                            <label for="input_quo_specialdis" class="col-form-label text-danger">หักส่วนลดพิเศษ(บาท)
+                            <label for="input_quoout_specialdis" class="col-form-label text-danger">หักส่วนลดพิเศษ(บาท)
                                 :</label>
                         </div>
 
                         <div class="col-md-5">
-                            <input type="number" step="any" id="input_quo_specialdis" name="input_quo_specialdis"
+                            <input type="number" step="any" id="input_quoout_specialdis" name="input_quoout_specialdis"
                                 class="form-control " placeholder="0.00" title="กรุณากรอกส่วนลด หากมี">
                         </div>
                     </div>
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-md-6 ">
-                            <label for="input_quo_afterdis" class="col-form-label">ยอดรวมหลังหักส่วนลด(บาท)
-                                :</label>
+                            <label for="input_quoout_afterdis" class="col-form-label">ยอดรวมหลังหักส่วนลด(บาท) :</label>
                         </div>
 
                         <div class="col-md-5">
-                            <input type="number" id="input_quo_afterdis" name="input_quo_afterdis" class="form-control "
-                                placeholder="0.00" readonly>
+                            <input type="number" id="input_quoout_afterdis" name="input_quoout_afterdis"
+                                class="form-control " placeholder="0.00" readonly>
                         </div>
                     </div>
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-md-6 ">
-                            <label for="input_quo_vat" class="col-form-label">ภาษีมูลค่าเพิ่ม 7%(บาท) :</label>
+                            <label for="input_quoout_vat" class="col-form-label">ภาษีมูลค่าเพิ่ม 7%(บาท) :</label>
                         </div>
 
                         <div class="col-md-5">
-                            <input type="number" id="input_quo_vat" name="input_quo_vat" class="form-control "
+                            <input type="number" id="input_quoout_vat" name="input_quoout_vat" class="form-control "
                                 placeholder="0.00" readonly>
                         </div>
                     </div>
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-md-6">
-                            <label for="input_quo_total" class="col-form-label">จํานวนเงินรวมทั้งสิ้น(บาท) :</label>
+                            <label for="input_quoout_total" class="col-form-label">จํานวนเงินรวมทั้งสิ้น(บาท) :</label>
                         </div>
 
                         <div class="col-md-5">
-                            <input type="number" id="input_quo_total" name="input_quo_total" class="form-control "
+                            <input type="number" id="input_quoout_total" name="input_quoout_total" class="form-control "
                                 placeholder="0.00" readonly>
                         </div>
                     </div>
@@ -331,12 +267,11 @@ table tr td:first-child::before {
             </div>
             <div class="row g-3  mb-3">
                 <div class="col-md-3">
-                    <label for="input_quo_texttotal" class="col-form-label">จำนวนเงินตัวอักษร : <br> The Sum Of
-                        Bahts
+                    <label for="input_quoout_texttotal" class="col-form-label">จำนวนเงินตัวอักษร : <br> The Sum Of Bahts
                     </label>
                 </div>
                 <div class="col-md-9">
-                    <textarea class="form-control" id="input_quo_texttotal" name="input_quo_texttotal" rows="3"
+                    <textarea class="form-control" id="input_quoout_texttotal" name="input_quoout_texttotal" rows="3"
                         required></textarea>
                 </div>
             </div>
@@ -345,11 +280,11 @@ table tr td:first-child::before {
                 <button type="reset"
                     class="col-md-3 btn btn-outline-danger btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold"><i
                         class="fa-solid fa-eraser"></i> ล้างข้อมูล</button>
-                <button type="submit" name="create_quotation" id="create_quotation" value="Create"
-                    class="ms-3 col-md-3 btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold">ต่อไป
+                <button type="submit" name="create_quoout" id="create_quoout" value="Create"
+                    class="ms-3 col-md-3 btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold">บันทึก
                     <i class="fa-solid fa-angles-right"></i></button>
                 <input type="hidden" name="total_item" id="total_item" value="1" />
-                <input type="hidden" name="action" value="create_quotation">
+                <input type="hidden" name="action" value="create_quoout">
             </div>
 
         </form>
@@ -384,7 +319,7 @@ table tr td:first-child::before {
                 html_code += '<td><button type="button" name="remove_row" id="' + count +
                     '" class="btn btn-danger btn-xs remove_row">X</button></td>';
                 html_code += '</tr>';
-                $('#quotation-item-table').append(html_code);
+                $('#quoout-item-table').append(html_code);
             });
 
             $(document).on('click', '.remove_row', function() {
@@ -416,18 +351,18 @@ table tr td:first-child::before {
                         }
                     }
                 }
-                $('#input_quo_sum').val(final_total_price.toFixed(2));
+                $('#input_quoout_sum').val(final_total_price.toFixed(2));
                 var discount = 0;
                 var afterdis = 0;
                 var vat7per = 0;
                 var aftervat = 0;
-                discount = $('#input_quo_specialdis').val();
+                discount = $('#input_quoout_specialdis').val();
                 afterdis = final_total_price - discount;
-                $('#input_quo_afterdis').val(afterdis.toFixed(2));
+                $('#input_quoout_afterdis').val(afterdis.toFixed(2));
                 vat7per = (afterdis * 0.07);
-                $('#input_quo_vat').val(vat7per.toFixed(2));
+                $('#input_quoout_vat').val(vat7per.toFixed(2));
                 aftervat = (afterdis + vat7per);
-                $('#input_quo_total').val(aftervat.toFixed(2));
+                $('#input_quoout_total').val(aftervat.toFixed(2));
             }
 
             $(document).on('change', '.item_price', function() {
@@ -438,7 +373,7 @@ table tr td:first-child::before {
                 cal_final_total(count);
             });
 
-            $(document).on('change', '#input_quo_specialdis', function() {
+            $(document).on('change', '#input_quoout_specialdis', function() {
                 cal_final_total(count);
             });
 
