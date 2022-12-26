@@ -101,69 +101,6 @@ table tr td:first-child::before {
     margin-right: 0.5em;
 }
 </style>
-<<<<<<< HEAD
-<div class="container-fluid">
-    <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><a
-                    href="../dashboard/quotation_appraisal_list.php">ใบเสนอราคากลาง</a></li>
-            <li class="breadcrumb-item active" aria-current="page">สร้างใบเสนอราคากลาง</li>
-        </ol>
-    </nav>
-    <hr>
-    <div>
-        <h3>ข้อมูลใบเสนอราคา Quotation</h3>
-    </div>
-    <form method="post" id="quotation_form" class="px-md-5 py-md-5">
-        <div class="row g-3 align-items-center mb-3">
-            <div class="col-md-3">
-                <label for="inputNo" class="col-form-label">เลขที่ No.</label>
-            </div>
-            <div class="col-auto">
-                <input type="text" id="inputNo" class="form-control " required>
-            </div>
-        </div>
-        <div class="row g-3 align-items-center mb-3">
-            <div class="col-md-3">
-                <label for="inputNo" class="col-form-label">วันที่ date.</label>
-            </div>
-            <div class="col-auto">
-                <input type="date" id="inputdate" class="form-control " required>
-            </div>
-        </div>
-        <div class="row g-3 align-items-center mb-3">
-            <div class="col-md-3 ">
-                <label for="inputrev" class="col-form-label">โครงการ :</label>
-            </div>
-
-            <div class="col-md-8">
-                <input type="text" id="inputrev" class="form-control "
-                    title="" required>
-            </div>
-        </div>
-        <div class="row g-3 align-items-center mb-3">
-            <div class="col-md-3">
-                <label for="inputname" class="col-form-label">ชื่อลูกค้า/หน่วยงาน :</label>
-            </div>
-            <div class="col-md-8">
-                <input type="text" id="inputname" class="form-control " required>
-            </div>
-        </div>
-        <div class="row g-3 mb-3">
-            <div class="col-md-3 ">
-                <label for="inputposition" class="col-form-label">ที่อยู่ :</label>
-            </div>
-            <div class="col-md-8">
-                <textarea class="form-control" id="inputposition" rows="3" required></textarea>
-            </div>
-        </div>
-       
-        <div class="row g-3 align-items-center mb-3">
-            <div class="col-md-3 ">
-                <label for="itemtitle" class="col-form-label">รายการใบเสนอราคากลาง :</label>
-=======
-
 <body>
     <?php require("../alert.php");?>
     <div class="container-fluid">
@@ -187,7 +124,7 @@ table tr td:first-child::before {
                 <div class="col-auto">
                     <input type="number" id="input_quo_no" name="input_quo_no" class="form-control " required>
                 </div>
->>>>>>> Jomtap
+
             </div>
             <div class="row g-3 align-items-center mb-3">
                 <div class="col-md-3">
