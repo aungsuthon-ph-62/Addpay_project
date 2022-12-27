@@ -76,7 +76,13 @@ include_once '../../layout/head.php';
                             </div>
 
                             <div class="col-md-9">
-                                <input type="text" id="inputSend" class="form-control " required>
+                                <input type="text" id="inputSend1" class="form-control " required>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" id="inputSend2" class="form-control ">
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" id="inputSend3" class="form-control ">
                             </div>
                         </div>
                         <div class="row g-3 align-items-center mb-3">

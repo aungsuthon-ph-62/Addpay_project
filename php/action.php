@@ -101,3 +101,4 @@ function register()
         exit;
     }
 }
+
