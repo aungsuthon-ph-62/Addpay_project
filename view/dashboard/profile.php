@@ -1,4 +1,4 @@
-<div class="container py-3 py-md-5">
+<div class="container">
     <div class="main-body">
         <div class="row gutters-sm bg-secondary-addpay rounded-5 p-3 p-md-5 shadow-lg">
             <div class="col-md-4 mb-5 mb-md-0">
