@@ -91,7 +91,7 @@ if (isset($_GET["deletequo"])) {
                                         <td class="text-center">' . $rows["quo_date"] . '</td>
                                         <td class="text-start">' . $rows["quo_namepj"] . '</td>
                                         <td class="text-start">' . $rows["quo_name"] . '</td>
-                                        <td class="text-end ">' . $rows["quo_total"] . '</td>
+                                        <td class="text-end ">' . number_format($rows["quo_total"],2) . '</td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4"
