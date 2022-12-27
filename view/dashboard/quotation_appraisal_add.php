@@ -96,7 +96,6 @@ table tr td:first-child::before {
     margin-right: 0.5em;
 }
 </style>
-
 <body>
     <?php require("../alert.php");?>
     <div class="container-fluid">
@@ -120,6 +119,7 @@ table tr td:first-child::before {
                 <div class="col-auto">
                     <input type="number" id="input_quo_no" name="input_quo_no" class="form-control " required>
                 </div>
+
             </div>
             <div class="row g-3 align-items-center mb-3">
                 <div class="col-md-3">

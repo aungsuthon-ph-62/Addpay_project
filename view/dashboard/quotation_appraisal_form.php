@@ -1,118 +1,227 @@
 <?php
+include('../../php/conn.php');
+include('./quotation_PDF/readprice.php');
+$id = $_GET["pdfquo_id"];
+?>
+
+<?php
+include("./quotation_PDF/quotation_head.php");
 
 require_once __DIR__ . '../../../vendor/autoload.php';
 
+$defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
+$fontDirs = $defaultConfig['fontDir'];
 
-$mpdf = new \Mpdf\Mpdf();
-$mpdf->allow_charset_conversion = true;
-$mpdf->charset_in = 'macthai';
 
-ob_start();
+$defaultFontConfig = (new Mpdf\Config\FontVariables())->getDefaults();
+$fontData = $defaultFontConfig['fontdata'];
+
+$mpdf = new \Mpdf\Mpdf([
+    'fontDir' => array_merge($fontDirs, [
+        __DIR__ . '/fonts',
+    ]),
+    'fontdata' => $fontData + [
+        'sarabun' => [
+            'R' => 'THSarabunNew.ttf',
+            'I' => 'THSarabunNew Italic.ttf',
+            'B' =>  'THSarabunNew Bold.ttf',
+        ]
+    ],
+    'default_font' => 'sarabun',
+    'default_font_size' => 16,
+]);
+
+$query = "SELECT * FROM `quotation_appraisal` WHERE quo_id = '$id'"; 
+$result = mysqli_query($conn, $query); 
+while($infoquo = mysqli_fetch_array($result)) {
+$head = '
+<div id="quotationForm" class="container mt-5" style="width: 842px;">
+    <div>
+        <table>
+            <tr>
+                <td style="width:250px">
+                    <div class="logo">
+                        <img src="../image/addpay-form-text.png" class="img-fluid position-relative" width="200" hight="auto" alt="addpay_logo_form">
+                    </div>
+                </td>
+                <td style="width:592px">
+                    <div style="margin-left: 40px;">
+                        <b class="text-left"> บริษัท แอดเพย์ เซอร์วิสพอยท์ จํากัด</b><br>
+                        <p class="text-left">406 หมู่ 18 ตําบลขามใหญ่ อําเภอเมือง จังหวัดอุบลราชธานี โทร. 045-317123</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td class="text-center" style="width:200px;  border: 1px solid; padding: 8px;">
+                    <b>ใบเสนอราคา</b><br>
+                    <b>Quotation</b>
+                </td>
+                <td style="width:422px; text-align: right;"></td>
+                
+                <td style="width:100px;  text-align: right;">
+                    <p class="text-left">เลขที่/No.</p>
+                    <p class="text-left">วันที่/Date. </p>
+                </td>
+                <td style="width:120px; text-align: right;">
+                    <p class="underline"> <span>&nbsp;&nbsp;'.$infoquo['quo_no'].' &nbsp;&nbsp; </span> </p>
+                    <p class=" underline"> <span>&nbsp;'.$infoquo['quo_date'].' &nbsp; </span> </p>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+    <div>
+    <table style="margin-top: 5px;">
+        <tr>
+            <td style="width:150px;">
+                <p class="text-left ">โครงการ</p>
+            </td>
+            <td class="underline" style="width:692px;">
+                <p class="text-left "> <span>&nbsp; '.$infoquo['quo_namepj'].' &nbsp;&nbsp;</span> </p>
+            </td>
+        </tr>
+        <tr>
+            <td style="width:150px;">
+                <p class="text-left ">ลูกค้า /หน่วยงาน </p>
+            </td>
+            <td class="underline" style="width:692px;">
+                <p class="text-left "> <span>&nbsp; '.$infoquo['quo_name'].' &nbsp;&nbsp;</span> </p>
+            </td>
+        </tr>
+        <tr>
+            <td style="width:150px;">
+                <p class="text-left ">ที่อยู่ </p>
+            </td>
+            <td class="underline" style="width:692px;">
+                <p class="text-left"> <span>&nbsp;'.$infoquo['quo_address'].' &nbsp;&nbsp;</span> </p>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<div>
+    <table style="width: 842px; border:1px solid; border-collapse: collapse; padding: 0; margin: 0; margin-top:5px;">
+        <tr style="background-color:LightGray; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
+            <th class="text-center" style="border-left: 1px solid; width: 59px;">ลำดับที่</th>
+            <th class="text-center" style="border-left: 1px solid; width: 497px;">รายการ / Description</th>
+            <th class="text-center" style="border-left: 1px solid; width: 67px;">จำนวน<br>Amount</th>
+            <th class="text-center" style="border-left: 1px solid; width: 109px;">ราคา / หน่วย<br>Unit / Price</th>
+            <th class="text-center" style="border-left: 1px solid; width: 109px;">จำนวนเงิน<br>บาท</th>
+        </tr>
+
+';
+}
+
+
+$sql = "SELECT * FROM `quotation_appraisal_details` WHERE quode_quoid = '$id' ;";
+$result = mysqli_query($connect, $sql);
+$contentitems = "";
+if (mysqli_num_rows($result) > 0) {
+    $i=0;
+    while($infoquoitems = mysqli_fetch_assoc($result)) {
+        $i++;
+        $contentitems .= '  <tr>
+        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">'.$i.'</td>
+        <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:50px;">'.$infoquoitems['quode_item'].'</td>
+        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">'.$infoquoitems['quode_amount'].'</td>
+        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">'.$infoquoitems['quode_price'].'</td>
+        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">'.$infoquoitems['quode_result'].'</td>
+    </tr>';
+      
+    }
+}
+
+
+$sql = "SELECT * FROM `quotation_appraisal` WHERE quo_id = '$id'";
+$result = mysqli_query($connect, $sql);
+$connectsum = "";
+if (mysqli_num_rows($result) > 0) {
+    
+    while($infoquosum = mysqli_fetch_assoc($result)) {
+        $connectsum .= ' 
+        
+        <tr>
+            <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;"></td>
+            <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:50px;"></td>
+            <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;"></td>
+            <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;"></td>
+            <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;"></td>
+        </tr>
+        <tr>
+            <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;"></td>
+            <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:50px;"></td>
+            <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;"></td>
+            <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;"></td>
+            <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;"></td>
+        </tr>
+
+        <tr style="background-color:LightGray; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
+            <td style=" border:1px solid; border-collapse: collapse; padding: 5px; margin: 0;" VALIGN="TOP" ROWSPAN="5" colspan="2">
+            <p>
+                หมายเหตุ <br>
+                ราคาขาย หน่วยเป็นบาท และขอยืนยันราคา 30 วันนับจากวันที่ออกใบเสนอราคา <br>
+                ใบเสนอราคา/ ใบสั่งซื้อนี้ถือเป็นส่วนหนึ่งของสัญญา <br>
+                ขอขอบคุณที่ให้ความไว้วางใจในสินค้าและบริการของบริษัท แอดเพยเ์ซอร์วิสพอยท์ จำกัด <br>
+            </p>
+            </td>
+
+            <td style="text-align: right; border-left: 0px solid;" colspan="2">รวมเงิน</td>
+                <td style="text-align: right; border-left: 1px solid;">14,018.69</td>
+            </tr>
+            <tr style="background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
+                <td style="text-align: right; border-left: 0px solid; color:red;" colspan="2">หัวส่วนลดพิเศษ</td>
+                <td style="text-align: right; border-left: 1px solid;">-</td>
+            </tr>
+            <tr style="background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
+                <td style="text-align: right; border-left: 0px solid;" colspan="2">ยอดรวมหลังหักส่วนลด</td>
+                <td style="text-align: right; border-left: 1px solid;">14,018.69</td>
+            </tr>
+            <tr style="background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
+                <td style="text-align: right; border-left: 0px solid;" colspan="2">ภาษีมูลค่าเพิ่ม 7%</td>
+                <td style="text-align: right; border-left: 1px solid;">981.31</td>
+            </tr>
+            <tr style=" background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
+                <td style="text-align: right; border-left: px solid;" colspan="2">จำนวนเงินรวมทั้งสิน</td>
+                <td style="text-align: right; border-left: 1px solid;">15,000.00</td>
+            </tr>
+
+
+        </table>
+
+    </div>
+       
+';
+      
+    }
+}
+
+
+$a = file_get_contents('./quotation_PDF/quotation_content.php');
+$stylesheet = file_get_contents('./quotation_PDF/quotation_PDF.css');
+$mpdf->WriteHTML($stylesheet, \Mpdf\HTMLParserMode::HEADER_CSS);
+$mpdf->WriteHTML($a, \Mpdf\HTMLParserMode::HTML_BODY);
+$mpdf->Output('./quotation_PDF/quotation_appraisal0.pdf'); //link web of file pdf
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        Addpay-Project
-    </title>
-  
-    <!-- FAVICON -->
-    <link rel="shortcut icon" href="image/addpaylogo.png" type="image/x-icon">
-    <!-- FAVICON -->
-
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Bootstrap -->
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <!-- Font Awesome -->
-
-    <!-- Font Form -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500&display=swap" rel="stylesheet">
-    <!-- Font Form -->
-
-</head>
-<style>
-    body {
-        font-family: 'Sarabun', sans-serif;
-    }
-</style>
 
 <body>
-    <div class="container  py-md-5 px-md-4" style="width: 80%;">
-        <div class="main-body">
-            <div id="quotationForm" class="container pb-md-0 mb-5 mt-5">
-                <div class="row text-center">
-                    <div class="col-md-4 p-md-2">
-                        <div class="text-center">
-                            <img src="../../image/addpay-form-text.png" class="img-fluid position-relative" style="width: 18rem;" alt="addpay_logo_form">
-                        </div>
-                        <div class="text-center p-md-3 px-md-5">
-                            <div class="border border-dark border-3 p-md-3 px-md-4">
-                                <p class="fw-bold mb-md-4">ข้อมูลใบเสนอราคา</p>
-                                <p class="fw-bold">Quotation</p>
-                            </div>
-                        </div>
 
-                    </div>
-                    <div class="col-md-8 p-md-2 pt-md-5">
-                        <div class="text-center mb-md-5">
-                            <p class="fw-bold mb-md-4">บริษัท แอดเพย์ เซอร์วิสพอยท์ จํากัด</p>
-                            <p class="">406 หมู่ 18 ตําบลขามใหญ่ อําเภอเมือง จังหวัดอุบลราชธานี โทร. 045-317123</p>
-                        </div>
-                        <div class="float-end col-md-5">
-                            <div class="text-center">
-                                <div class="row g-3 align-items-center mb-3">
-                                    <div class="col-md-4">
-                                        <label for="noForm" class="col-form-label">เลขที่/No.</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input type="text" id="noForm" class="form-control border border-2 border-dark border-start-0 border-top-0 border-end-0 rounded-0" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-center  ">
-                                <div class="row g-3 align-items-center mb-3">
-                                    <div class="col-md-4">
-                                        <label for="DateForm" class="col-form-label">วันที่/Date.</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input type="text" id="DateForm" class="form-control border border-2 border-dark border-start-0 border-top-0 border-end-0 rounded-0" required>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="container py-md-5 px-md-4" style="width: 100%; ">
+        <p class="text-end text-danger ">** โปรดตรวจสอบความถูกต้องของข้อมูลก่อนกด พิมพ์เอกสาร</p>
+        <div class="mx-auto d-flex justify-content-end ">
+            <a class="btn btn-outline-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold" role="button" href="./quotation_PDF/quotation_appraisal0.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
+            <a class="btn btn-outline-danger px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold ms-3" role="button" href="./quotation_appraisal_list.php"><i class="fa-regular fa-rectangle-xmark"></i> ยกเลิก</a>
         </div>
-
-        
+        <hr>
         <?php
-
-        ob_end_flush();
-
-        $html = ob_get_contents();
-        $mpdf->WriteHTML($html);
-        $mpdf->Output('quotation_appraisal.pdf');
-        
+        include("./quotation_PDF/quotation_content.php");
         ?>
+    </div>
 
-        
-    </div>
-    <div class="mx-auto d-flex justify-content-end me-5">
-        <a class="btn btn-danger px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button" href="./quotation_appraisal.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
-    </div>
 </body>
-
 
 </html>
