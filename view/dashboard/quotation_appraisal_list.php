@@ -99,7 +99,7 @@ if (isset($_GET["deletequo"])) {
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li><a class="dropdown-item"
-                                                            href="../dashboard/quotation_appraisal_form.php?pdfquo=' . $rows["quo_id"] . '">พิมพ์เอกสาร</a>
+                                                            href="../dashboard/quotation_appraisal_form.php?pdfquo_id=' . $rows["quo_id"] . '">พิมพ์เอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
                                                             href="../dashboard/quotation_appraisal_edit.php?editquo=' . $rows["quo_id"] . '">แก้ไข</a>
