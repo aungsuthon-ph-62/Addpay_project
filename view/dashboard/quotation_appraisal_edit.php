@@ -1,75 +1,124 @@
 <?php
+session_start();
+include("../../layout/head.php");
+require_once("../../php/conn.php");
+
+if (isset($_GET['editquo'])) {
+    
+    $id = $_GET['editquo'];
+
+    $sql = "SELECT * FROM quotation_appraisal WHERE quo_id ='$id'";
+    $query = $conn->query($sql);
+    $row = $query->fetch_assoc();
+    
+}
 
 if (isset($_POST['action'])) {
-    if ($_POST['action'] == 'create_quotation') {
-    
-        date_default_timezone_set('Asia/Bangkok');
-        $date = date("Y-m-d H:i:s");
-        global $conn;
-    
+    if ($_POST['action'] == 'edit_quotation') {
+        
+        $id= mysqli_real_escape_string($conn,trim($_POST['quo_id']));
+        $quo_no_check= mysqli_real_escape_string($conn,trim($_POST['quo_no_check']));
         $input_quo_no= mysqli_real_escape_string($conn,trim($_POST['input_quo_no']));
-        $input_quo_date= mysqli_real_escape_string($conn,trim($_POST['input_quo_date']));
-        $input_quo_namepj= mysqli_real_escape_string($conn,trim($_POST['input_quo_namepj']));
-        $input_quo_name= mysqli_real_escape_string($conn,trim($_POST['input_quo_name']));
-        $input_quo_address= mysqli_real_escape_string($conn,trim($_POST['input_quo_address']));
-        $input_quo_remark= mysqli_real_escape_string($conn,trim($_POST['input_quo_remark']));
-        $input_quo_sum= mysqli_real_escape_string($conn,trim($_POST['input_quo_sum']));
-        $input_quo_specialdis= mysqli_real_escape_string($conn,trim($_POST['input_quo_specialdis']));
-        $input_quo_afterdis= mysqli_real_escape_string($conn,trim($_POST['input_quo_afterdis']));
-        $input_quo_vat= mysqli_real_escape_string($conn,trim($_POST['input_quo_vat']));
-        $input_quo_total= mysqli_real_escape_string($conn,trim($_POST['input_quo_total']));
-        $input_quo_texttotal= mysqli_real_escape_string($conn,trim($_POST["input_quo_texttotal"]));
-        $input_quo_create= $date;
-        $input_quo_uid = 1;
         
-        $quo_no_check_query = "SELECT * FROM quotation_appraisal WHERE quo_no =  $input_quo_no";
-        $query = $conn->query($quo_no_check_query);
-        $check = $query->fetch_assoc();
-    
-        if ($check) {
-            $_SESSION['error'] = "เลขที่ใบเสนอราคากลางนี้มีในระบบแล้ว!";
-            header("Location: quotation_appraisal_add.php");
+        
+        if($input_quo_no == $quo_no_check){
+            
+            edit_quo();
             exit;
-        } else {
-            $query = "INSERT INTO quotation_appraisal (quo_no, quo_date, quo_namepj, quo_name, quo_address, quo_remark, quo_sum, quo_specialdis, quo_afterdis, quo_vat, quo_total, quo_texttotal, quo_create, quo_uid)
-                VALUES ('$input_quo_no', '$input_quo_date', '$input_quo_namepj', '$input_quo_name', '$input_quo_address',  '$input_quo_remark', '$input_quo_sum', '$input_quo_specialdis', '$input_quo_afterdis', '$input_quo_vat', '$input_quo_total', '$input_quo_texttotal', '$input_quo_create', '$input_quo_uid')";
-                
-            if ($conn->query($query) === TRUE) {
-                
-                $last_id = $conn->insert_id;
-    
-                for($count=0; $count<$_POST["total_item"]; $count++){
-                
-                    $item_name= mysqli_real_escape_string($conn,trim($_POST['item_name'][$count]));
-                    $item_amount= mysqli_real_escape_string($conn,trim($_POST['item_amount'][$count]));
-                    $item_price= mysqli_real_escape_string($conn,trim($_POST['item_price'][$count]));
-                    $total_price= mysqli_real_escape_string($conn,trim($_POST['total_price'][$count]));
-                    $input_quode_create= $date;
-                    $input_quode_uid = 1;
-        
-                    $query = "INSERT INTO quotation_appraisal_details (quooutde_quooutid, quode_item, quode_amount, quode_price, quode_result, quode_create, quode_uid)
-                        VALUES ('$last_id', '$item_name', '$item_amount', '$item_price', '$total_price', '$input_quode_create', '$input_quode_uid')";
-                    $conn->query($query);
-                }
-    
-                $_SESSION['success'] = "บันทึกใบเสนอราคากลางสำเร็จ!";
-                header("Location: quotation_appraisal_list.php");
+            
+        }else{
+            
+            $quo_no_check = "SELECT * FROM quotation_appraisal WHERE quo_no =  '$input_quo_no'";
+            $query = $conn->query($quo_no_check);
+            $check = $query->fetch_assoc();
+            
+            if ($check) {
+                $_SESSION['error'] = "เลขที่ใบเสนอราคากลางนี้มีในระบบแล้ว!";
+                header('Location: quotation_appraisal_edit.php?editquo='.$id);
                 exit;
                 
-            } else {
-                echo "Error: " . $query . "<br>" . $conn->error;
-                $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-                header("Location: quotation_appraisal_add.php");
+            }else{
+                
+                edit_quo();
                 exit;
                 
-            } 
+            }
         }
-        $conn->close();
     } 
 }
 
+function edit_quo()
+{
+
+    global $conn;
+    date_default_timezone_set('Asia/Bangkok');
+    $date = date("Y-m-d H:i:s");
+    
+    $id= mysqli_real_escape_string($conn,trim($_POST['quo_id']));
+    $quo_date_create= mysqli_real_escape_string($conn,trim($_POST['quo_date_create']));
+    $input_quo_no= mysqli_real_escape_string($conn,trim($_POST['input_quo_no']));
+    $input_quo_date= mysqli_real_escape_string($conn,trim($_POST['input_quo_date']));
+    $input_quo_namepj= mysqli_real_escape_string($conn,trim($_POST['input_quo_namepj']));
+    $input_quo_name= mysqli_real_escape_string($conn,trim($_POST['input_quo_name']));
+    $input_quo_address= mysqli_real_escape_string($conn,trim($_POST['input_quo_address']));
+    $input_quo_remark= mysqli_real_escape_string($conn,trim($_POST['input_quo_remark']));
+    $input_quo_sum= mysqli_real_escape_string($conn,trim($_POST['input_quo_sum']));
+    $input_quo_specialdis= mysqli_real_escape_string($conn,trim($_POST['input_quo_specialdis']));
+    $input_quo_afterdis= mysqli_real_escape_string($conn,trim($_POST['input_quo_afterdis']));
+    $input_quo_vat= mysqli_real_escape_string($conn,trim($_POST['input_quo_vat']));
+    $input_quo_total= mysqli_real_escape_string($conn,trim($_POST['input_quo_total']));
+    $input_quo_texttotal= mysqli_real_escape_string($conn,trim($_POST["input_quo_texttotal"]));
+    $input_quo_update= $date;
+    $input_quo_uid = 1;
+    
+    $query1 = "UPDATE quotation_appraisal SET quo_no='$input_quo_no', quo_date='$input_quo_date', quo_namepj='$input_quo_namepj',
+        quo_name='$input_quo_name', quo_address='$input_quo_address', quo_remark='$input_quo_remark', quo_sum='$input_quo_sum',
+        quo_specialdis='$input_quo_specialdis', quo_afterdis='$input_quo_afterdis', quo_vat='$input_quo_vat', quo_total='$input_quo_total',
+        quo_texttotal='$input_quo_texttotal', quo_update='$input_quo_update', quo_uid='$input_quo_uid' WHERE quo_id='$id'";
+                
+    $query2 = "DELETE FROM quotation_appraisal_details WHERE quode_quoid = '$id'";
+    
+    if ($conn->query($query1) === TRUE && $conn->query($query2) === TRUE) {
+
+        for($count=0; $count<$_POST["total_item"]; $count++){
+        
+            $item_name= mysqli_real_escape_string($conn,trim($_POST['item_name'][$count]));
+            $item_amount= mysqli_real_escape_string($conn,trim($_POST['item_amount'][$count]));
+            $item_price= mysqli_real_escape_string($conn,trim($_POST['item_price'][$count]));
+            $total_price= mysqli_real_escape_string($conn,trim($_POST['total_price'][$count]));
+            $input_quode_update= $date;
+            $input_quode_uid = 1;
+
+            $query = "INSERT INTO quotation_appraisal_details (quode_quoid, quode_item, quode_amount, quode_price,  quode_result, quode_create, quode_update, quode_uid)
+                VALUES ('$id', '$item_name', '$item_amount', '$item_price', '$total_price', '$quo_date_create', '$input_quode_update', '$input_quode_uid')";
+            $conn->query($query);
+        }
+
+        $_SESSION['success'] = "แก้ไขใบเสนอราคากลางสำเร็จ!";
+        header("Location: quotation_appraisal_list.php");
+        exit;
+        
+    } else {
+        
+        echo "Error: " . $query . "<br>" . $conn->error;
+        $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
+        header('Location: quotation_appraisal_edit.php?editquo='.$id);
+        exit;
+        
+    }
+}
+
 ?>
+
 <style>
+body {
+    font-family: "Kanit", sans-serif;
+    font-family: "Noto Sans", sans-serif;
+    font-family: "Noto Sans Thai", sans-serif;
+    font-family: "Poppins", sans-serif;
+    font-family: "Prompt", sans-serif;
+}
+
 table {
     counter-reset: rowNumber;
 }
@@ -86,26 +135,28 @@ table tr td:first-child::before {
 </style>
 
 <body>
+    <?php require("../alert.php");?>
     <div class="container-fluid">
         <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a
                         href="../dashboard/quotation_appraisal_list.php">ใบเสนอราคากลาง</a></li>
-                <li class="breadcrumb-item active" aria-current="page">สร้างใบเสนอราคากลาง</li>
+                <li class="breadcrumb-item active" aria-current="page">แก้ไขใบเสนอราคากลาง</li>
             </ol>
         </nav>
         <hr>
         <div>
-            <h3>ข้อมูลใบเสนอราคากลาง quotation appraisal</h3>
+            <h3>แก้ไขข้อมูลใบเสนอราคากลาง quotation appraisal</h3>
         </div>
-        <form method="post" id="quotation_form" action="quotation_appraisal_add.php" class="px-md-5 py-md-5">
+        <form method="post" id="quotation_form" action="quotation_appraisal_edit.php" class="px-md-5 py-md-5">
             <div class="row g-3 align-items-center mb-3">
                 <div class="col-md-3">
                     <label for="input_quo_no" class="col-form-label">เลขที่ No.</label>
                 </div>
                 <div class="col-auto">
-                    <input type="number" id="input_quo_no" name="input_quo_no" class="form-control " required>
+                    <input type="number" id="input_quo_no" name="input_quo_no" class="form-control " required
+                        value="<?= $row['quo_no'] ?>">
                 </div>
             </div>
             <div class="row g-3 align-items-center mb-3">
@@ -113,7 +164,8 @@ table tr td:first-child::before {
                     <label for="input_quo_date" class="col-form-label">วันที่ date.</label>
                 </div>
                 <div class="col-auto">
-                    <input type="date" id="input_quo_date" name="input_quo_date" class="form-control " required>
+                    <input type="date" id="input_quo_date" name="input_quo_date" class="form-control " required
+                        value="<?= $row['quo_date'] ?>">
                 </div>
             </div>
             <div class="row g-3 align-items-center mb-3">
@@ -122,7 +174,8 @@ table tr td:first-child::before {
                 </div>
 
                 <div class="col-md-8">
-                    <input type="text" id="input_quo_namepj" name="input_quo_namepj" class="form-control " required>
+                    <input type="text" id="input_quo_namepj" name="input_quo_namepj" class="form-control " required
+                        value="<?= $row['quo_namepj'] ?>">
                 </div>
             </div>
             <div class=" row g-3 align-items-center mb-3">
@@ -130,7 +183,8 @@ table tr td:first-child::before {
                     <label for="input_quo_name" class="col-form-label">ชื่อลูกค้า/หน่วยงาน :</label>
                 </div>
                 <div class="col-md-8">
-                    <input type="text" id="input_quo_name" name="input_quo_name" class="form-control " required>
+                    <input type="text" id="input_quo_name" name="input_quo_name" class="form-control " required
+                        value="<?= $row['quo_name'] ?>">
                 </div>
             </div>
             <div class="row g-3 mb-3">
@@ -139,12 +193,12 @@ table tr td:first-child::before {
                 </div>
                 <div class="col-md-8">
                     <textarea class="form-control" id="input_quo_address" name="input_quo_address" rows="3"
-                        required></textarea>
+                        required><?= $row['quo_address']; ?></textarea>
                 </div>
             </div>
             <div class="row g-3 align-items-center mb-3">
                 <div class="col-md-3 ">
-                    <label for="itemtitle" class="col-form-label">รายการใบเสนอราคากลาง :</label>
+                    <label for="itemtitle" class="col-form-label">แก้ไขรายการใบเสนอราคากลาง :</label>
                 </div>
                 <div class="border border-secondary rounded-3 py-md-4 px-md-4">
                     <div class="table-responsive">
@@ -157,26 +211,47 @@ table tr td:first-child::before {
                                 <th width="20%">จำนวนเงิน(บาท)</th>
                                 <th width="5%">ลบ</th>
                             </tr>
+                            <?php
+                            
+                                $sql = "SELECT * FROM quotation_appraisal_details WHERE quode_quoid ='$id'";
+                                $query = $conn->query($sql);
+                                $n = 0;
+                                while ($rows = $query->fetch_assoc()) 
+                                {
+                                $n = $n +1;
+                            ?>
 
-                            <tr id="row_id_1">
+                            <tr id="row_id_<?= $n; ?>">
                                 <td><span id="sr_no"></span></td>
-                                <td><input type="text" name="item_name[]" id="item_name1" class="form-control input-sm"
+                                <td>
+                                    <input type="text" name="item_name[]" id="item_name<?= $n; ?>"
+                                        class="form-control input-sm item_name" value="<?= $rows["quode_item"]; ?>"
                                         required />
                                 </td>
                                 <td>
-                                    <input type="number" name="item_amount[]" id="item_amount1" data-srno="1"
-                                        class="form-control input-sm item_amount" required />
+                                    <input type="number" name="item_amount[]" id="item_amount<?= $n; ?>"
+                                        data-srno="<?= $n; ?>" class="form-control input-sm item_amount"
+                                        value="<?= $rows["quode_amount"]; ?>" required />
                                 </td>
                                 <td>
-                                    <input type="number" name="item_price[]" id="item_price1" data-srno="1"
-                                        class="form-control input-sm number_only item_price" step="any" required />
+                                    <input type="number" name="item_price[]" id="item_price<?= $n; ?>"
+                                        data-srno="<?= $n; ?>" class="form-control input-sm  item_price"
+                                        value="<?= $rows["quode_price"]; ?>" required />
                                 </td>
                                 <td>
-                                    <input type="number" name="total_price[]" id="total_price1" data-srno="1"
-                                        class="form-control input-sm total_price" readonly />
+                                    <input type="number" name="total_price[]" id="total_price<?= $n; ?>"
+                                        data-srno="<?= $n; ?>" class="form-control input-sm total_price"
+                                        value="<?= $rows["quode_result"];?>" readonly />
                                 </td>
-                                <td></td>
+                                <td>
+                                    <button type="button" name="remove_row" id="<?= $n; ?>"
+                                        class="btn btn-danger btn-xs remove_row">X</button>
+                                </td>
                             </tr>
+
+                            <?php
+                                }
+                            ?>
                         </table>
                         <div class="text-center">
                             <button type="button" id="add_row" class="btn btn-success px-4 rounded-pill fs-5 fw-bold "
@@ -193,7 +268,7 @@ table tr td:first-child::before {
                         </div>
                         <div class="col-md-8">
                             <textarea class="form-control" id="input_quo_remark" name="input_quo_remark"
-                                rows="3"></textarea>
+                                rows="3"><?= $row["quo_remark"]; ?></textarea>
                         </div>
                     </div>
                 </div>
@@ -205,7 +280,7 @@ table tr td:first-child::before {
 
                         <div class="col-md-5">
                             <input type="number" id="input_quo_sum" name="input_quo_sum" class="form-control "
-                                placeholder="0.00" readonly>
+                                placeholder="0.00" readonly value="<?= $row['quo_sum'] ?>">
                         </div>
                     </div>
                     <div class="row g-3 align-items-center mb-3">
@@ -216,7 +291,8 @@ table tr td:first-child::before {
 
                         <div class="col-md-5">
                             <input type="number" step="any" id="input_quo_specialdis" name="input_quo_specialdis"
-                                class="form-control " placeholder="0.00" title="กรุณากรอกส่วนลด หากมี">
+                                class="form-control " placeholder="0.00" title="กรุณากรอกส่วนลด หากมี"
+                                value="<?= $row['quo_specialdis'] ?>">
                         </div>
                     </div>
                     <div class="row g-3 align-items-center mb-3">
@@ -227,7 +303,7 @@ table tr td:first-child::before {
 
                         <div class="col-md-5">
                             <input type="number" id="input_quo_afterdis" name="input_quo_afterdis" class="form-control "
-                                placeholder="0.00" readonly>
+                                placeholder="0.00" readonly value="<?= $row['quo_afterdis'] ?>">
                         </div>
                     </div>
                     <div class="row g-3 align-items-center mb-3">
@@ -237,7 +313,7 @@ table tr td:first-child::before {
 
                         <div class="col-md-5">
                             <input type="number" id="input_quo_vat" name="input_quo_vat" class="form-control "
-                                placeholder="0.00" readonly>
+                                placeholder="0.00" readonly value="<?= $row['quo_vat'] ?>">
                         </div>
                     </div>
                     <div class="row g-3 align-items-center mb-3">
@@ -247,7 +323,7 @@ table tr td:first-child::before {
 
                         <div class="col-md-5">
                             <input type="number" id="input_quo_total" name="input_quo_total" class="form-control "
-                                placeholder="0.00" readonly>
+                                placeholder="0.00" readonly value="<?= $row['quo_total'] ?>">
                         </div>
                     </div>
                 </div>
@@ -260,7 +336,7 @@ table tr td:first-child::before {
                 </div>
                 <div class="col-md-9">
                     <textarea class="form-control" id="input_quo_texttotal" name="input_quo_texttotal" rows="3"
-                        required></textarea>
+                        required><?= $row['quo_texttotal']; ?></textarea>
                 </div>
             </div>
 
@@ -268,18 +344,21 @@ table tr td:first-child::before {
                 <button type="reset"
                     class="col-md-3 btn btn-outline-danger btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold"><i
                         class="fa-solid fa-eraser"></i> ล้างข้อมูล</button>
-                <button type="submit" name="action" value="create_quotation"
-                    class="ms-3 col-md-3 btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold">บันทึก
+                <button type="submit" name="action" value="edit_quotation"
+                    class="ms-3 col-md-3 btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold">บันทึกการแก้ไข
                     <i class="fa-solid fa-angles-right"></i></button>
-                <input type="hidden" name="total_item" id="total_item" value="1" />
+                <input type="hidden" name="total_item" id="total_item" value="<?= $n;?>" />
+                <input type="hidden" name="quo_no_check" id="quo_no_check" value="<?= $row['quo_no'];?>" />
+                <input type="hidden" name="quo_id" id="quo_id" value="<?= $row['quo_id'];?>" />
+                <input type="hidden" name="quo_date_create" id="quo_date_create" value="<?= $row['quo_create'];?>" />
             </div>
 
         </form>
         <script>
         $(document).ready(function() {
             var final_total_price = $('#final_total_price').text();
-            var count = 1;
-            var total_item = 1;
+            var count = "<?= $n;?>";
+            var total_item = "<?= $n;?>";
 
             $(document).on('click', '#add_row', function() {
                 count++;
@@ -289,23 +368,21 @@ table tr td:first-child::before {
                 html_code += '<tr id="row_id_' + count + '">';
                 html_code += '<td><span id="sr_no"></span></td>';
 
-                html_code +=
-                    '<td><input type="text" name="item_name[]" id="item_name' + count +
+                html_code += '<td><input type="text" name="item_name[]" id="item_name' + count +
                     '" class="form-control input-sm" required/></td>';
+
                 html_code +=
                     '<td><input type="number" name="item_amount[]" id="item_amount' +
                     count + '" data-srno="' + count +
                     '" class="form-control input-sm number_only item_amount" required/></td>';
-                html_code +=
-                    '<td><input type="number" name="item_price[]" id="item_price' +
+                html_code += '<td><input type="number" name="item_price[]" id="item_price' +
                     count + '" data-srno="' + count +
                     '" class="form-control input-sm number_only item_price" required step="any"/></td>';
                 html_code +=
                     '<td><input type="text" name="total_price[]" id="total_price' +
                     count + '" data-srno="' + count +
                     '" class="form-control input-sm total_price" readonly /></td>';
-                html_code +=
-                    '<td><button type="button" name="remove_row" id="' + count +
+                html_code += '<td><button type="button" name="remove_row" id="' + count +
                     '" class="btn btn-danger btn-xs remove_row">X</button></td>';
                 html_code += '</tr>';
                 $('#quotation-item-table').append(html_code);
@@ -370,3 +447,4 @@ table tr td:first-child::before {
         </script>
     </div>
 </body>
+<?php  $conn->close();?>
