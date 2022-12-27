@@ -63,19 +63,17 @@ function edit_quoout()
     $input_quoout_name= mysqli_real_escape_string($conn,trim($_POST['input_quoout_name']));
     $input_quoout_address= mysqli_real_escape_string($conn,trim($_POST['input_quoout_address']));
     $input_quoout_numtax= mysqli_real_escape_string($conn,trim($_POST['input_quoout_numtax']));
-    $input_quoout_remark= mysqli_real_escape_string($conn,trim($_POST['input_quoout_remark']));
     $input_quoout_sum= mysqli_real_escape_string($conn,trim($_POST['input_quoout_sum']));
     $input_quoout_specialdis= mysqli_real_escape_string($conn,trim($_POST['input_quoout_specialdis']));
     $input_quoout_afterdis= mysqli_real_escape_string($conn,trim($_POST['input_quoout_afterdis']));
     $input_quoout_vat= mysqli_real_escape_string($conn,trim($_POST['input_quoout_vat']));
     $input_quoout_total= mysqli_real_escape_string($conn,trim($_POST['input_quoout_total']));
-    $input_quoout_texttotal= mysqli_real_escape_string($conn,trim($_POST["input_quoout_texttotal"]));
     $uid = 1;
     
     $query1 = "UPDATE quotation_out SET quoout_no='$input_quoout_no', quoout_date='$input_quoout_date',quo_name='$input_quo_name',
-        quoout_address='$input_quoout_address', quoout_numtax='$input_quoout_numtax', quoout_remark='$input_quoout_remark', quoout_sum='$input_quoout_sum',
-        quoout_specialdis='$input_quoout_specialdis', quoout_afterdis='$input_quoout_afterdis', quoout_vat='$input_quoout_vat', quo_total='$input_quoout_total',
-        quoout_texttotal='$input_quoout_texttotal', quoout_update='$date', quoout_uid='$uid' WHERE quoout_id='$id'";
+        quoout_address='$input_quoout_address', quoout_numtax='$input_quoout_numtax', quoout_sum='$input_quoout_sum',
+        quoout_specialdis='$input_quoout_specialdis', quoout_afterdis='$input_quoout_afterdis', quoout_vat='$input_quoout_vat',
+        quo_total='$input_quoout_total',quoout_update='$date', quoout_uid='$uid' WHERE quoout_id='$id'";
                 
     $query2 = "DELETE FROM quotation_out_details WHERE quooutde_quoid = '$id'";
     
@@ -262,17 +260,6 @@ table tr td:first-child::before {
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="row g-3  mb-3">
-                        <div class="col-md-3 ">
-                            <label for="input_quoout_remark" class="col-form-label">หมายเหตุ :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <textarea class="form-control" id="input_quo_remark" name="input_quoout_remark"
-                                rows="3"><?= $row["quoout_remark"]; ?></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-md-6">
                             <label for="input_quoout_sum" class="col-form-label">รวมเป็นเงิน(บาท) :</label>
@@ -327,17 +314,6 @@ table tr td:first-child::before {
                                 placeholder="0.00" readonly value="<?= $row['quoout_total'] ?>">
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row g-3  mb-3">
-                <div class="col-md-3">
-                    <label for="input_quoout_texttotal" class="col-form-label">จำนวนเงินตัวอักษร : <br> The Sum Of
-                        Bahts
-                    </label>
-                </div>
-                <div class="col-md-9">
-                    <textarea class="form-control" id="input_quoout_texttotal" name="input_quoout_texttotal" rows="3"
-                        required><?= $row['quoout_texttotal']; ?></textarea>
                 </div>
             </div>
 

@@ -63,19 +63,16 @@ function edit_quo()
     $input_quo_namepj= mysqli_real_escape_string($conn,trim($_POST['input_quo_namepj']));
     $input_quo_name= mysqli_real_escape_string($conn,trim($_POST['input_quo_name']));
     $input_quo_address= mysqli_real_escape_string($conn,trim($_POST['input_quo_address']));
-    $input_quo_remark= mysqli_real_escape_string($conn,trim($_POST['input_quo_remark']));
     $input_quo_sum= mysqli_real_escape_string($conn,trim($_POST['input_quo_sum']));
     $input_quo_specialdis= mysqli_real_escape_string($conn,trim($_POST['input_quo_specialdis']));
     $input_quo_afterdis= mysqli_real_escape_string($conn,trim($_POST['input_quo_afterdis']));
     $input_quo_vat= mysqli_real_escape_string($conn,trim($_POST['input_quo_vat']));
     $input_quo_total= mysqli_real_escape_string($conn,trim($_POST['input_quo_total']));
-    $input_quo_texttotal= mysqli_real_escape_string($conn,trim($_POST["input_quo_texttotal"]));
     $uid = 1;
     
     $query1 = "UPDATE quotation_appraisal SET quo_no='$input_quo_no', quo_date='$input_quo_date', quo_namepj='$input_quo_namepj',
-        quo_name='$input_quo_name', quo_address='$input_quo_address', quo_remark='$input_quo_remark', quo_sum='$input_quo_sum',
-        quo_specialdis='$input_quo_specialdis', quo_afterdis='$input_quo_afterdis', quo_vat='$input_quo_vat', quo_total='$input_quo_total',
-        quo_texttotal='$input_quo_texttotal', quo_update='$date', quo_uid='$uid' WHERE quo_id='$id'";
+        quo_name='$input_quo_name', quo_address='$input_quo_address', quo_sum='$input_quo_sum',quo_specialdis='$input_quo_specialdis',
+        quo_afterdis='$input_quo_afterdis', quo_vat='$input_quo_vat', quo_total='$input_quo_total',quo_update='$date', quo_uid='$uid' WHERE quo_id='$id'";
                 
     $query2 = "DELETE FROM quotation_appraisal_details WHERE quode_quoid = '$id'";
     
@@ -261,17 +258,6 @@ table tr td:first-child::before {
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="row g-3  mb-3">
-                        <div class="col-md-3 ">
-                            <label for="input_quo_remark" class="col-form-label">หมายเหตุ :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <textarea class="form-control" id="input_quo_remark" name="input_quo_remark"
-                                rows="3"><?= $row["quo_remark"]; ?></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-md-6">
                             <label for="input_quo_sum" class="col-form-label">รวมเป็นเงิน(บาท) :</label>
@@ -325,17 +311,6 @@ table tr td:first-child::before {
                                 placeholder="0.00" readonly value="<?= $row['quo_total'] ?>">
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row g-3  mb-3">
-                <div class="col-md-3">
-                    <label for="input_quo_texttotal" class="col-form-label">จำนวนเงินตัวอักษร : <br> The Sum Of
-                        Bahts
-                    </label>
-                </div>
-                <div class="col-md-9">
-                    <textarea class="form-control" id="input_quo_texttotal" name="input_quo_texttotal" rows="3"
-                        required><?= $row['quo_texttotal']; ?></textarea>
                 </div>
             </div>
 
