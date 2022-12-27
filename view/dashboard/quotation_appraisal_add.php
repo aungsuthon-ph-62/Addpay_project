@@ -72,6 +72,7 @@ if (isset($_POST['action'])) {
 }
 
 ?>
+
 <style>
 body {
     font-family: "Kanit", sans-serif;
