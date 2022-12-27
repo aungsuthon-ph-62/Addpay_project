@@ -90,7 +90,12 @@
 
                                 <button type="button" class="btn p-2 mb-3 mx-md-2 text-white btn-addpay rounded-pill" data-bs-toggle="modal" data-bs-target="#profileedituserModal">
                                     <i class="fa-solid fa-user-pen"></i>
-                                    แก้ไขชื่อผู้ใช้และรหัสผ่าน
+                                    แก้ไขชื่อผู้ใช้
+                                </button>
+
+                                <button type="button" class="btn p-2 mb-3 mx-md-2 text-white btn-addpay rounded-pill" data-bs-toggle="modal" data-bs-target="#profileeditpassModal">
+                                    <i class="fa-solid fa-user-pen"></i>
+                                    แก้ไขรหัสผ่าน
                                 </button>
                             </div>
                         </div>

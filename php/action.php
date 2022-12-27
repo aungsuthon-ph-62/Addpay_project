@@ -11,8 +11,11 @@ if (isset($_POST['action'])) {
     } elseif ($_POST['action'] == 'logout') {
         logout();
         exit;
-    } elseif ($_POST['action'] == 'editUserPass') {
-        editUserPass();
+    } elseif ($_POST['action'] == 'editUsername') {
+        editUsername();
+        exit;
+    } elseif ($_POST['action'] == 'editPassword') {
+        editPassword();
         exit;
     }
 }
@@ -243,7 +246,7 @@ function logout()
     exit;
 }
 
-function editUserPass()
+function editProfile()
 {
     session_start();
     global $conn;
@@ -251,47 +254,184 @@ function editUserPass()
     $date = date("Y-m-d H:i:s");
 
     $username = mysqli_real_escape_string($conn, $_POST['inputUsername']);
-    $password = mysqli_real_escape_string($conn, $_POST['inputPassword']);
-    $usernameNew = mysqli_real_escape_string($conn, $_POST['inputUsernameNew']);
-    $passwordNew = mysqli_real_escape_string($conn, $_POST['inputPasswordNew']);
-    $usernameOld = mysqli_real_escape_string($conn, $_POST['username']);
-    $passwordOld = mysqli_real_escape_string($conn, $_POST['password']);
-
+    $new_username = mysqli_real_escape_string($conn, $_POST['inputNewUsername']);
+    $confirm_username = mysqli_real_escape_string($conn, $_POST['confirmNewUsername']);
+    $stored_username = mysqli_real_escape_string($conn, $_POST['stored_username']);
     $id = mysqli_real_escape_string($conn, $_POST['id']);
 
-    if (empty($username)) {
-        $username = $usernameOld;
-    }
-
-    if (empty($usernameNew)) {
-        $usernameNew = $usernameOld;
+    if (empty($username) || empty($new_username) || empty($confirm_username)) {
+        $_SESSION['error'] = "กรุณากรอกข้อมูลให้ครบถ้วน!";
+        header("Location: ../index");
+        exit;
     } else {
-        if (!preg_match("/^[a-zA-Z_]*$/", $usernameNew)) {
+        if (!preg_match("/^[a-zA-Z_]*$/", $new_username)) {
+            $_SESSION['error'] = "กรุณากรอกด้วยตัวอักษร [a-z,A-Z,_]";
+            header("Location: ../index");
+            exit;
+        }
+
+        if (!preg_match("/^[a-zA-Z_]*$/", $confirm_username)) {
             $_SESSION['error'] = "กรุณากรอกด้วยตัวอักษร [a-z,A-Z,_]";
             header("Location: ../index");
             exit;
         }
     }
 
-    if (empty($password)) {
-        $password = $passwordOld;
+    if ($username != $stored_username) {
+        $_SESSION['error'] = "ชื่อผู้ใช้ไม่ตรงกับข้อมูลในฐานข้อมูล!";
+        header("Location: ../index");
+        exit;
     }
 
-    if (empty($passwordNew)) {
-        $passwordNew = $passwordOld;
+    if ($new_username != $confirm_username) {
+        $_SESSION['error'] = "ชื่อผู้ใช้ไม่ตรงกัน!";
+        header("Location: ../index");
+        exit;
+    }
+
+    $user = "SELECT * FROM users WHERE username = '$confirm_username'";
+    $query = mysqli_query($conn, $user);
+    $result = mysqli_fetch_assoc($query);
+    if ($result) {
+        $_SESSION['error'] = "ชื่อผู้ใช้นี้มีอยู่ในระบบแล้ว!";
+        header("Location: ../index");
+        mysqli_close($conn);
+        exit;
     } else {
-        if (!preg_match("/^(?=.*[A-Z])(?=.*[!@#$%^&*()_+-=])[a-zA-Z0-9!@#$%^&*()_+-=]{0,8}$/", $passwordNew)) {
+        $edit_user = "UPDATE users SET username='$confirm_username', updated_at='$date' WHERE id = '$id'";
+        $editQuery = mysqli_query($conn, $edit_user);
+        if ($editQuery) {
+            $_SESSION['confirm'] = "แก้ไขข้อมูลสำเร็จ! ต้องการเข้าสู่ระบบใหม่อีกครั้งไหม";
+            header("Location: ../index");
+            mysqli_close($conn);
+            exit;
+        } else {
+            $_SESSION['error'] = "เกิดข้อผิดพลาด!";
+            header("Location: ../index");
+            mysqli_close($conn);
+            exit;
+        }
+    }
+}
+
+function editUsername()
+{
+    session_start();
+    global $conn;
+    date_default_timezone_set('Asia/Bangkok');
+    $date = date("Y-m-d H:i:s");
+
+    $username = mysqli_real_escape_string($conn, $_POST['inputUsername']);
+    $new_username = mysqli_real_escape_string($conn, $_POST['inputNewUsername']);
+    $confirm_username = mysqli_real_escape_string($conn, $_POST['confirmNewUsername']);
+    $stored_username = mysqli_real_escape_string($conn, $_POST['stored_username']);
+    $id = mysqli_real_escape_string($conn, $_POST['id']);
+
+    if (empty($username) || empty($new_username) || empty($confirm_username)) {
+        $_SESSION['error'] = "กรุณากรอกข้อมูลให้ครบถ้วน!";
+        header("Location: ../index");
+        exit;
+    } else {
+        if (!preg_match("/^[a-zA-Z_]*$/", $new_username)) {
+            $_SESSION['error'] = "กรุณากรอกด้วยตัวอักษร [a-z,A-Z,_]";
+            header("Location: ../index");
+            exit;
+        }
+
+        if (!preg_match("/^[a-zA-Z_]*$/", $confirm_username)) {
+            $_SESSION['error'] = "กรุณากรอกด้วยตัวอักษร [a-z,A-Z,_]";
+            header("Location: ../index");
+            exit;
+        }
+    }
+
+    if ($username != $stored_username) {
+        $_SESSION['error'] = "ชื่อผู้ใช้ไม่ตรงกับข้อมูลในฐานข้อมูล!";
+        header("Location: ../index");
+        exit;
+    }
+
+    if ($new_username != $confirm_username) {
+        $_SESSION['error'] = "ชื่อผู้ใช้ไม่ตรงกัน!";
+        header("Location: ../index");
+        exit;
+    }
+
+    $user = "SELECT * FROM users WHERE username = '$confirm_username'";
+    $query = mysqli_query($conn, $user);
+    $result = mysqli_fetch_assoc($query);
+    if ($result) {
+        $_SESSION['error'] = "ชื่อผู้ใช้นี้มีอยู่ในระบบแล้ว!";
+        header("Location: ../index");
+        mysqli_close($conn);
+        exit;
+    } else {
+        $edit_user = "UPDATE users SET username='$confirm_username', updated_at='$date' WHERE id = '$id'";
+        $editQuery = mysqli_query($conn, $edit_user);
+        if ($editQuery) {
+            $_SESSION['confirm'] = "แก้ไขข้อมูลสำเร็จ! ต้องการเข้าสู่ระบบใหม่อีกครั้งไหม";
+            header("Location: ../index");
+            mysqli_close($conn);
+            exit;
+        } else {
+            $_SESSION['error'] = "เกิดข้อผิดพลาด!";
+            header("Location: ../index");
+            mysqli_close($conn);
+            exit;
+        }
+    }
+}
+
+function editPassword()
+{
+    session_start();
+    global $conn;
+    date_default_timezone_set('Asia/Bangkok');
+    $date = date("Y-m-d H:i:s");
+
+    $password = mysqli_real_escape_string($conn, $_POST['inputPassword']);
+    $new_password = mysqli_real_escape_string($conn, $_POST['inputNewPassword']);
+    $confirm_password = mysqli_real_escape_string($conn, $_POST['confirmNewPassword']);
+    $stored_password = $_POST['stored_password'];
+    $id = mysqli_real_escape_string($conn, $_POST['id']);
+
+    if (empty($password) || empty($new_password) || empty($confirm_password)) {
+        $_SESSION['error'] = "กรุณากรอกข้อมูลให้ครบถ้วน!";
+        header("Location: ../index");
+        exit;
+    } else {
+        if (!preg_match("/^(?=.*[A-Z])(?=.*[!@#$%^&*()_+-=])[a-zA-Z0-9!@#$%^&*()_+-=]{0,8}$/", $password)) {
+            $_SESSION['error'] = 'รหัสผ่านจำเป็นต้องมี ตัวพิมพ์ใหญ่ไม่น้อยกว่า 1 ตัว, ตัวอักษรพิเศษ 1 ตัว และมีความยาวไม่เกิน 8 ตัวอักษร';
+            header("Location: ../index");
+            exit;
+        }
+
+        if (!preg_match("/^(?=.*[A-Z])(?=.*[!@#$%^&*()_+-=])[a-zA-Z0-9!@#$%^&*()_+-=]{0,8}$/", $password)) {
             $_SESSION['error'] = 'รหัสผ่านจำเป็นต้องมี ตัวพิมพ์ใหญ่ไม่น้อยกว่า 1 ตัว, ตัวอักษรพิเศษ 1 ตัว และมีความยาวไม่เกิน 8 ตัวอักษร';
             header("Location: ../index");
             exit;
         }
     }
 
-    $password_hash = password_hash($passwordNew, PASSWORD_DEFAULT);
-    $edit_user = "UPDATE users SET username='$usernameNew', password='$password_hash', updated_at='$date' WHERE id = '$id'";
+    if (!password_verify($password, $stored_password)) {
+        $_SESSION['error'] = "รหัสผ่านไม่ตรงกับข้อมูลในฐานข้อมูล!";
+        header("Location: ../index");
+        exit;
+    }
+
+    if ($new_password != $confirm_password) {
+        $_SESSION['error'] = "รหัสผ่านไม่ตรงกัน!";
+        header("Location: ../index");
+        exit;
+    }
+
+
+    $password_hash = password_hash($confirm_password, PASSWORD_DEFAULT);
+
+    $edit_user = "UPDATE users SET password='$password_hash', updated_at='$date' WHERE id = '$id'";
     $editQuery = mysqli_query($conn, $edit_user);
     if ($editQuery) {
-        $_SESSION['success'] = "แก้ไขข้อมูลสำเร็จ!";
+        $_SESSION['confirm'] = "แก้ไขข้อมูลสำเร็จ! ต้องการเข้าสู่ระบบใหม่อีกครั้งไหม";
         header("Location: ../index");
         mysqli_close($conn);
         exit;
