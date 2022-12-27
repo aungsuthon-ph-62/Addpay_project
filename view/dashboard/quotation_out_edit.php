@@ -260,6 +260,8 @@ table tr td:first-child::before {
             </div>
             <div class="row">
                 <div class="col-md-6">
+                </div>
+                <div class="col-md-6">
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-md-6">
                             <label for="input_quoout_sum" class="col-form-label">รวมเป็นเงิน(บาท) :</label>
@@ -306,7 +308,8 @@ table tr td:first-child::before {
                     </div>
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-md-6">
-                            <label for="input_quoout_total" class="col-form-label">จํานวนเงินรวมทั้งสิ้น(บาท) :</label>
+                            <label for="input_quoout_total" class="col-form-label">จํานวนเงินรวมทั้งสิ้น(บาท)
+                                :</label>
                         </div>
 
                         <div class="col-md-5">
