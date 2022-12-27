@@ -1,5 +1,5 @@
 <?php
-require_once("php/conn.php");
+
 
 if (isset($_GET["deletequo"])) {
     $id = $_GET["deletequo"];
@@ -50,7 +50,7 @@ if (isset($_GET["deletequo"])) {
     </div>
 
     <div class="mx-auto d-flex justify-content-end">
-        <a class="btn btn-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button" href="view/dashboard/quotation_appraisal_add.php"><i class="fa-solid fa-file-circle-plus"></i>
+        <a class="btn btn-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button" href="?page=quotation_add"><i class="fa-solid fa-file-circle-plus"></i>
             สร้างใบเสนอราคา</a>
     </div>
 

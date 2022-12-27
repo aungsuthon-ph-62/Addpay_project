@@ -41,6 +41,9 @@ include_once 'layout/head.php';
                     if ($page) { ?>
                         <?php
                         switch ($page) {
+                            case "quotation_add":
+                                include_once 'view/dashboard/quotation_appraisal_add.php';
+                                break;
                             case "quotation":
                                 include_once 'view/dashboard/quotation_appraisal_list.php';
                                 break;
