@@ -3,7 +3,7 @@ body{
 }
 
 .text-center {
-    text-align: center
+    text-align: center;
 }
 
 .text-left {
@@ -11,16 +11,16 @@ body{
 }
 
 .text-right {
-    justify-items: right;
+    text-align: right;
 }
 
 .underline {
-    padding: 3px;
-    padding-left: 8px;
-    padding-right: 8px;
     border-bottom: 2px solid;
 }
 .gapline {
     padding: 0;
     margin: 20px 0;
+}
+.bg-gray{
+    background-color:LightGray;
 }

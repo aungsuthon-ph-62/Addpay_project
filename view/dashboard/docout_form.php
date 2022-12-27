@@ -3,6 +3,7 @@ include("./quotation_PDF/quotation_head.php");
 
 require_once __DIR__ . '../../../vendor/autoload.php';
 
+
 $defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
 $fontDirs = $defaultConfig['fontDir'];
 
@@ -26,7 +27,9 @@ $mpdf = new \Mpdf\Mpdf([
 ]);
 
 
+
 $a = file_get_contents('./docout_PDF/docout_content.php');
+
 $stylesheet = file_get_contents('./quotation_PDF/quotation_PDF.css');
 $mpdf->WriteHTML($stylesheet, \Mpdf\HTMLParserMode::HEADER_CSS);
 $mpdf->WriteHTML($a, \Mpdf\HTMLParserMode::HTML_BODY);
@@ -55,7 +58,9 @@ $mpdf->Output('./docout_PDF/docout_PDF.pdf'); //link web of file pdf
 
 </head>
 <style>
-    body {}
+    body {
+        font-family: 'Sarabun', sans-serif;
+    }
 
     .right {
         padding-left: 80px;
@@ -70,9 +75,11 @@ $mpdf->Output('./docout_PDF/docout_PDF.pdf'); //link web of file pdf
 <body>
 
     <div class="container  py-md-5 px-md-4" style="width: 100%;">
+        <p class="text-end text-danger ">** โปรดตรวจสอบความถูกต้องของข้อมูลก่อนกด พิมพ์เอกสาร</p>
         <div class="mx-auto d-flex justify-content-end me-5">
-            <a class="btn btn-danger px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button" href="./docout_PDF/docout_PDF.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
-        </div>
+            <a class="btn btn-outline-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button" href="./docout_PDF/docout_PDF.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
+            <a class="btn btn-outline-danger px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold ms-3" role="button" href="./docout_list.php"><i class="fa-regular fa-rectangle-xmark"></i> ยกเลิก</a>
+        </div><hr>
         <?php
         include("./docout_PDF/docout_content.php");
         ?>
