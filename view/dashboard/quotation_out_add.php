@@ -2,7 +2,7 @@
 session_start();
 include("../../layout/head.php");
 require_once("../../php/conn.php");
-
+// $uid = $_SESSION['id'];
 if (isset($_POST['action'])) {
     if ($_POST['action'] == 'create_quoout') {
     
@@ -22,8 +22,7 @@ if (isset($_POST['action'])) {
         $input_quoout_vat= mysqli_real_escape_string($conn,trim($_POST['input_quoout_vat']));
         $input_quoout_total= mysqli_real_escape_string($conn,trim($_POST['input_quoout_total']));
         $input_quoout_texttotal= mysqli_real_escape_string($conn,trim($_POST["input_quoout_texttotal"]));
-        $input_quoout_create= $date;
-        $input_quoout_uid = 1;
+        $uid = 1;
         
         $quoout_no_check_query = "SELECT * FROM quotation_out WHERE quoout_no =  '$input_quoout_no'";
         $query = $conn->query($quoout_no_check_query);
@@ -35,7 +34,7 @@ if (isset($_POST['action'])) {
             exit;
         } else {
             $query = "INSERT INTO quotation_out (quoout_no, quoout_date, quoout_name, quoout_address, quoout_numtax, quoout_remark, quoout_sum, quoout_specialdis, quoout_afterdis, quoout_vat, quoout_total, quoout_texttotal, quoout_create, quoout_uid)
-                VALUES ('$input_quoout_no', '$input_quoout_date', '$input_quoout_name', '$input_quoout_address', '$input_quoout_numtax', '$input_quoout_remark', '$input_quoout_sum', '$input_quoout_specialdis', '$input_quoout_afterdis', '$input_quoout_vat', '$input_quoout_total', '$input_quoout_texttotal', '$input_quoout_create', '$input_quoout_uid')";
+                VALUES ('$input_quoout_no', '$input_quoout_date', '$input_quoout_name', '$input_quoout_address', '$input_quoout_numtax', '$input_quoout_remark', '$input_quoout_sum', '$input_quoout_specialdis', '$input_quoout_afterdis', '$input_quoout_vat', '$input_quoout_total', '$input_quoout_texttotal', '$date', '$uid')";
                 
             if ($conn->query($query) === TRUE) {
                 
@@ -47,11 +46,9 @@ if (isset($_POST['action'])) {
                     $item_amount= mysqli_real_escape_string($conn,trim($_POST['item_amount'][$count]));
                     $item_price= mysqli_real_escape_string($conn,trim($_POST['item_price'][$count]));
                     $total_price= mysqli_real_escape_string($conn,trim($_POST['total_price'][$count]));
-                    $input_quooutde_create= $date;
-                    $input_quooutde_uid = 1;
         
                     $query = "INSERT INTO quotation_out_details (quooutde_quooutid, quooutde_item, quooutde_amount, quooutde_price,  quooutde_result, quooutde_create, quooutde_uid)
-                        VALUES ('$last_id', '$item_name', '$item_amount', '$item_price',  '$total_price', '$input_quooutde_create', '$input_quooutde_uid')";
+                        VALUES ('$last_id', '$item_name', '$item_amount', '$item_price',  '$total_price', '$date', '$uid')";
                     $conn->query($query);
                 }
     

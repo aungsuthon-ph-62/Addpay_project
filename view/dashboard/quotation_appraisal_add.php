@@ -3,6 +3,8 @@ session_start();
 include("../../layout/head.php");
 require_once("../../php/conn.php");
 
+// $uid = $_SESSION['id'];
+
 if (isset($_POST['action'])) {
     if ($_POST['action'] == 'create_quotation') {
     
@@ -23,7 +25,7 @@ if (isset($_POST['action'])) {
         $input_quo_total= mysqli_real_escape_string($conn,trim($_POST['input_quo_total']));
         $input_quo_texttotal= mysqli_real_escape_string($conn,trim($_POST["input_quo_texttotal"]));
         $input_quo_create= $date;
-        $input_quo_uid = 1;
+        $uid = 1;
         
         $quo_no_check_query = "SELECT * FROM quotation_appraisal WHERE quo_no =  $input_quo_no";
         $query = $conn->query($quo_no_check_query);
@@ -35,7 +37,7 @@ if (isset($_POST['action'])) {
             exit;
         } else {
             $query = "INSERT INTO quotation_appraisal (quo_no, quo_date, quo_namepj, quo_name, quo_address, quo_remark, quo_sum, quo_specialdis, quo_afterdis, quo_vat, quo_total, quo_texttotal, quo_create, quo_uid)
-                VALUES ('$input_quo_no', '$input_quo_date', '$input_quo_namepj', '$input_quo_name', '$input_quo_address',  '$input_quo_remark', '$input_quo_sum', '$input_quo_specialdis', '$input_quo_afterdis', '$input_quo_vat', '$input_quo_total', '$input_quo_texttotal', '$input_quo_create', '$input_quo_uid')";
+                VALUES ('$input_quo_no', '$input_quo_date', '$input_quo_namepj', '$input_quo_name', '$input_quo_address',  '$input_quo_remark', '$input_quo_sum', '$input_quo_specialdis', '$input_quo_afterdis', '$input_quo_vat', '$input_quo_total', '$input_quo_texttotal', '$input_quo_create', '$uid')";
                 
             if ($conn->query($query) === TRUE) {
                 
@@ -47,11 +49,9 @@ if (isset($_POST['action'])) {
                     $item_amount= mysqli_real_escape_string($conn,trim($_POST['item_amount'][$count]));
                     $item_price= mysqli_real_escape_string($conn,trim($_POST['item_price'][$count]));
                     $total_price= mysqli_real_escape_string($conn,trim($_POST['total_price'][$count]));
-                    $input_quode_create= $date;
-                    $input_quode_uid = 1;
         
                     $query = "INSERT INTO quotation_appraisal_details (quooutde_quooutid, quode_item, quode_amount, quode_price, quode_result, quode_create, quode_uid)
-                        VALUES ('$last_id', '$item_name', '$item_amount', '$item_price', '$total_price', '$input_quode_create', '$input_quode_uid')";
+                        VALUES ('$last_id', '$item_name', '$item_amount', '$item_price', '$total_price', '$input_quo_create', '$uid')";
                     $conn->query($query);
                 }
     
