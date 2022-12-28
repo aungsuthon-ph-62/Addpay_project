@@ -49,7 +49,7 @@ if (isset($_POST['action'])) {
                     $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
                     $total_price = mysqli_real_escape_string($conn, trim($_POST['total_price'][$count]));
 
-                    $query = "INSERT INTO quotation_out_details (quooutde_quooutid, quooutde_item, quooutde_amount, quooutde_price,  quooutde_result, quooutde_create, quooutde_uid)
+                    $query = "INSERT INTO quotation_out_details (quooutde_quoid, quooutde_item, quooutde_amount, quooutde_price,  quooutde_result, quooutde_create, quooutde_uid)
                         VALUES ('$last_id', '$item_name', '$item_amount', '$item_price',  '$total_price', '$date', '$uid')";
                     $conn->query($query);
                 }
@@ -113,7 +113,7 @@ if (isset($_POST['action'])) {
                 </div>
                 <div class="col-auto">
                 <input type="text" id="input_quoout_no" name="input_quoout_no" class="form-control " 
-                    pattern="[0-9]" title="กรุณากรอกตัวเลข 0-9 อย่างน้อย 1"required>
+                    pattern="[0-9]{1,}" title="กรุณากรอกตัวเลข 0-9 อย่างน้อย 1"required>
                 </div>
             </div>
             <div class="row g-3 align-items-center mb-3">
@@ -147,7 +147,7 @@ if (isset($_POST['action'])) {
 
                 <div class="col-md-8">
                     <input type="text" id="input_quoout_numtax" name="input_quoout_numtax" class="form-control" 
-                    pattern="[0-9-]" required >
+                pattern="[0-9]{13}">
                 </div>
             </div>
             <div class="row g-3 align-items-center mb-3">
