@@ -78,7 +78,7 @@ body {
                                     <th scope="col" class="text-center" style="width:15%">เลขที่ใบเสนอราคา</th>
                                     <th scope="col" class="text-center" style="width:15%">วันที่ในใบเสนอราคา</th>
                                     <th scope="col" class="text-center" style="width:38%">ชื่อลูกค้า</th>
-                                    <th scope="col" class="text-center" style="width:22%">จำนวนเงินรวม</th>
+                                    <th scope="col" class="text-center" style="width:11%">จำนวนเงินรวม</th>
                                     <th scope="col" class="text-center" style="width:10%">ตัวเลือก</th>
                                 </tr>
                             </thead>
@@ -92,7 +92,7 @@ body {
                                         <td class="text-center">'.$rows["quoout_no"].'</td>
                                         <td class="text-center">'.$rows["quoout_date"].'</td>
                                         <td class="text-start">'.$rows["quoout_name"].'</td>
-                                        <td class="text-end">'.$rows["quoout_total"].'</td>
+                                        <td class="text-end">'. number_format($rows["quoout_total"],2) .'</td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4"
@@ -100,7 +100,7 @@ body {
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li><a class="dropdown-item"
-                                                            href="../dashboard/quotation_out_form.php?pdfquoout='.$rows["quoout_id"].'">พิมพ์เอกสาร</a>
+                                                            href="../dashboard/quotation_out_form.php?pdfquoout_id='.$rows["quoout_id"].'">พิมพ์เอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
                                                             href="../dashboard/quotation_out_edit.php?editquoout='.$rows["quoout_id"].'">แก้ไข</a>

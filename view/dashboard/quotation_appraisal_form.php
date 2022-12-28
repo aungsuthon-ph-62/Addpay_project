@@ -210,7 +210,7 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 $head2 = ' ';
-$sql = "SELECT * FROM `quotation_appraisal` WHERE quo_id = '$id'";
+$sql = "SELECT quo_total FROM `quotation_appraisal` WHERE quo_id = '$id'";
 $result = mysqli_query($conn, $sql);
 $footer = "";
 if (mysqli_num_rows($result) > 0) {
