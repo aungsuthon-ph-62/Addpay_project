@@ -1,11 +1,11 @@
 <?php
 include('../../php/conn.php');
-include('./quotation_PDF/readprice.php');
+include('./PDF_set/readprice.php');
 $id = $_GET["pdfquo_id"];
 ?>
 
 <?php
-include("./quotation_PDF/quotation_head.php");
+include("./PDF_set/PDF_head.php");
 
 require_once __DIR__ . '../../../vendor/autoload.php';
 
@@ -200,11 +200,11 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 
-$a = file_get_contents('./quotation_PDF/quotation_content.php');
-$stylesheet = file_get_contents('./quotation_PDF/quotation_PDF.css');
+$a = file_get_contents('./invoicebill_PDF/invoicebill_content.php');
+$stylesheet = file_get_contents('./PDF_set/PDF.css');
 $mpdf->WriteHTML($stylesheet, \Mpdf\HTMLParserMode::HEADER_CSS);
 $mpdf->WriteHTML($a, \Mpdf\HTMLParserMode::HTML_BODY);
-$mpdf->Output('./quotation_PDF/quotation_appraisal0.pdf'); //link web of file pdf
+$mpdf->Output('./invoicebill_PDF/invoicebill.pdf'); //link web of file pdf
 
 ?>
 
@@ -213,12 +213,12 @@ $mpdf->Output('./quotation_PDF/quotation_appraisal0.pdf'); //link web of file pd
     <div class="container py-md-5 px-md-4" style="width: 100%; ">
         <p class="text-end text-danger ">** โปรดตรวจสอบความถูกต้องของข้อมูลก่อนกด พิมพ์เอกสาร</p>
         <div class="mx-auto d-flex justify-content-end ">
-            <a class="btn btn-outline-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold" role="button" href="./quotation_PDF/quotation_appraisal0.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
-            <a class="btn btn-outline-danger px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold ms-3" role="button" href="./quotation_appraisal_list.php"><i class="fa-regular fa-rectangle-xmark"></i> ยกเลิก</a>
+            <a class="btn btn-outline-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold" role="button" href="./invoicebill_PDF/invoicebill.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
+            <a class="btn btn-outline-danger px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold ms-3" role="button" href="./invoicebill_list.php"><i class="fa-regular fa-rectangle-xmark"></i> ยกเลิก</a>
         </div>
         <hr>
         <?php
-        include("./quotation_PDF/quotation_content.php");
+        include("./invoicebill_PDF/invoicebill_content.php");
         ?>
     </div>
 
