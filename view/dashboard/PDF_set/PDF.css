@@ -17,10 +17,7 @@ body{
 .underline {
     border-bottom: 2px solid;
 }
-.gapline {
-    padding: 0;
-    margin: 20px 0;
-}
+
 .bg-gray{
     background-color:LightGray;
 }

@@ -75,11 +75,11 @@ body {
                         <table class="table" id="quotationoutTable">
                             <thead>
                                 <tr class="align-center" class="rows">
-                                    <th scope="col" style="width:20%">เลขที่ใบเสนอราคา</th>
-                                    <th scope="col" style="width:15%">วันที่ใน<br>ใบเสนอราคา</th>
-                                    <th scope="col" style="width:33%">ชื่อลูกค้า</th>
-                                    <th scope="col" style="width:22%">จำนวนเงินรวม</th>
-                                    <th scope="col" style="width:10%">ตัวเลือก</th>
+                                    <th scope="col" class="text-center" style="width:15%">เลขที่ใบเสนอราคา</th>
+                                    <th scope="col" class="text-center" style="width:15%">วันที่ในใบเสนอราคา</th>
+                                    <th scope="col" class="text-center" style="width:38%">ชื่อลูกค้า</th>
+                                    <th scope="col" class="text-center" style="width:22%">จำนวนเงินรวม</th>
+                                    <th scope="col" class="text-center" style="width:10%">ตัวเลือก</th>
                                 </tr>
                             </thead>
                             <?php
@@ -89,10 +89,10 @@ body {
                                 while ($rows = $query->fetch_assoc()) {
                                     echo '
                                     <tr>
-                                        <td>'.$rows["quoout_no"].'</td>
-                                        <td>'.$rows["quoout_date"].'</td>
-                                        <td>'.$rows["quoout_name"].'</td>
-                                        <td>'.$rows["quoout_total"].'</td>
+                                        <td class="text-center">'.$rows["quoout_no"].'</td>
+                                        <td class="text-center">'.$rows["quoout_date"].'</td>
+                                        <td class="text-start">'.$rows["quoout_name"].'</td>
+                                        <td class="text-end">'.$rows["quoout_total"].'</td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4"

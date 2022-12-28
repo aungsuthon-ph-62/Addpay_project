@@ -180,14 +180,7 @@ include("../../layout/head.php");
 
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="row g-3  mb-3">
-                            <div class="col-md-3 ">
-                                <label for="inputremark" class="col-form-label">หมายเหตุ :</label>
-                            </div>
-                            <div class="col-md-8">
-                                <textarea class="form-control" id="inputremark" rows="3" required></textarea>
-                            </div>
-                        </div>
+                        
                     </div>
                     <div class="col-md-6">
                         <div class="row g-3 align-items-center mb-3">
@@ -237,18 +230,7 @@ include("../../layout/head.php");
                         </div>
                     </div>
                 </div>
-                <div class="row g-3  mb-3">
-                    <div class="col-md-3">
-                        <label for="texttotal" class="col-form-label">จำนวนเงินตัวอักษร : <br> The Sum Of Bahts </label>
-                    </div>
-                    <div class="col-md-9">
-                        <textarea class="form-control" id="texttotal" rows="2" require></textarea>
-                    </div>
-                </div>
-
-
-
-
+                
 
                 <!-- Submit button -->
                 <div class="mx-auto d-flex justify-content-end">
