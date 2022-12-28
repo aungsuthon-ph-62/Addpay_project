@@ -5,43 +5,43 @@ require_once("../../php/conn.php");
 
 // $uid = $_SESSION['id'];
 
-if (isset($_GET['editquo'])) {
+if (isset($_GET['editquoout'])) {
     
-    $id = $_GET['editquo'];
+    $id = $_GET['editquoout'];
 
-    $sql = "SELECT * FROM quotation_appraisal WHERE quo_id ='$id'";
+    $sql = "SELECT * FROM quotation_out WHERE quoout_id ='$id'";
     $query = $conn->query($sql);
     $row = $query->fetch_assoc();
     
 }
 
 if (isset($_POST['action'])) {
-    if ($_POST['action'] == 'edit_quotation') {
+    if ($_POST['action'] == 'edit_quotation_out') {
         
-        $id= mysqli_real_escape_string($conn,trim($_POST['quo_id']));
-        $quo_no_check= mysqli_real_escape_string($conn,trim($_POST['quo_no_check']));
-        $input_quo_no= mysqli_real_escape_string($conn,trim($_POST['input_quo_no']));
+        $id= mysqli_real_escape_string($conn,trim($_POST['quoout_id']));
+        $quoout_no_check= mysqli_real_escape_string($conn,trim($_POST['quoout_no_check']));
+        $input_quoout_no= mysqli_real_escape_string($conn,trim($_POST['input_quoout_no']));
         
         
-        if($input_quo_no == $quo_no_check){
+        if($input_quoout_no == $quoout_no_check){
             
-            edit_quo();
+            edit_quoout();
             exit;
             
         }else{
             
-            $quo_no_check = "SELECT * FROM quotation_appraisal WHERE quo_no =  '$input_quo_no'";
-            $query = $conn->query($quo_no_check);
+            $quoout_no_check = "SELECT * FROM quotation_out WHERE quoout_no =  '$input_quoout_no'";
+            $query = $conn->query($quoout_no_check);
             $check = $query->fetch_assoc();
             
             if ($check) {
                 $_SESSION['error'] = "เลขที่ใบเสนอราคากลางนี้มีในระบบแล้ว!";
-                header('Location: quotation_appraisal_edit.php?editquo='.$id);
+                header('Location: quotation_out_edit.php?editquoout='.$id);
                 exit;
                 
             }else{
                 
-                edit_quo();
+                edit_quoout();
                 exit;
                 
             }
@@ -49,32 +49,33 @@ if (isset($_POST['action'])) {
     } 
 }
 
-function edit_quo()
+function edit_quoout()
 {
 
     global $conn;
     date_default_timezone_set('Asia/Bangkok');
     $date = date("Y-m-d H:i:s");
     
-    $id= mysqli_real_escape_string($conn,trim($_POST['quo_id']));
-    $quo_date_create= mysqli_real_escape_string($conn,trim($_POST['quo_date_create']));
-    $input_quo_no= mysqli_real_escape_string($conn,trim($_POST['input_quo_no']));
-    $input_quo_date= mysqli_real_escape_string($conn,trim($_POST['input_quo_date']));
-    $input_quo_namepj= mysqli_real_escape_string($conn,trim($_POST['input_quo_namepj']));
-    $input_quo_name= mysqli_real_escape_string($conn,trim($_POST['input_quo_name']));
-    $input_quo_address= mysqli_real_escape_string($conn,trim($_POST['input_quo_address']));
-    $input_quo_sum= mysqli_real_escape_string($conn,trim($_POST['input_quo_sum']));
-    $input_quo_specialdis= mysqli_real_escape_string($conn,trim($_POST['input_quo_specialdis']));
-    $input_quo_afterdis= mysqli_real_escape_string($conn,trim($_POST['input_quo_afterdis']));
-    $input_quo_vat= mysqli_real_escape_string($conn,trim($_POST['input_quo_vat']));
-    $input_quo_total= mysqli_real_escape_string($conn,trim($_POST['input_quo_total']));
+    $id= mysqli_real_escape_string($conn,trim($_POST['quoout_id']));
+    $quoout_date_create= mysqli_real_escape_string($conn,trim($_POST['quoout_date_create']));
+    $input_quoout_no= mysqli_real_escape_string($conn,trim($_POST['input_quoout_no']));
+    $input_quoout_date= mysqli_real_escape_string($conn,trim($_POST['input_quoout_date']));
+    $input_quoout_name= mysqli_real_escape_string($conn,trim($_POST['input_quoout_name']));
+    $input_quoout_address= mysqli_real_escape_string($conn,trim($_POST['input_quoout_address']));
+    $input_quoout_numtax= mysqli_real_escape_string($conn,trim($_POST['input_quoout_numtax']));
+    $input_quoout_sum= mysqli_real_escape_string($conn,trim($_POST['input_quoout_sum']));
+    $input_quoout_specialdis= mysqli_real_escape_string($conn,trim($_POST['input_quoout_specialdis']));
+    $input_quoout_afterdis= mysqli_real_escape_string($conn,trim($_POST['input_quoout_afterdis']));
+    $input_quoout_vat= mysqli_real_escape_string($conn,trim($_POST['input_quoout_vat']));
+    $input_quoout_total= mysqli_real_escape_string($conn,trim($_POST['input_quoout_total']));
     $uid = 1;
     
-    $query1 = "UPDATE quotation_appraisal SET quo_no='$input_quo_no', quo_date='$input_quo_date', quo_namepj='$input_quo_namepj',
-        quo_name='$input_quo_name', quo_address='$input_quo_address', quo_sum='$input_quo_sum',quo_specialdis='$input_quo_specialdis',
-        quo_afterdis='$input_quo_afterdis', quo_vat='$input_quo_vat', quo_total='$input_quo_total',quo_update='$date', quo_uid='$uid' WHERE quo_id='$id'";
+    $query1 = "UPDATE quotation_out SET quoout_no='$input_quoout_no', quoout_date='$input_quoout_date',quo_name='$input_quo_name',
+        quoout_address='$input_quoout_address', quoout_numtax='$input_quoout_numtax', quoout_sum='$input_quoout_sum',
+        quoout_specialdis='$input_quoout_specialdis', quoout_afterdis='$input_quoout_afterdis', quoout_vat='$input_quoout_vat',
+        quo_total='$input_quoout_total',quoout_update='$date', quoout_uid='$uid' WHERE quoout_id='$id'";
                 
-    $query2 = "DELETE FROM quotation_appraisal_details WHERE quode_quoid = '$id'";
+    $query2 = "DELETE FROM quotation_out_details WHERE quooutde_quoid = '$id'";
     
     if ($conn->query($query1) === TRUE && $conn->query($query2) === TRUE) {
 
@@ -85,20 +86,20 @@ function edit_quo()
             $item_price= mysqli_real_escape_string($conn,trim($_POST['item_price'][$count]));
             $total_price= mysqli_real_escape_string($conn,trim($_POST['total_price'][$count]));
 
-            $query = "INSERT INTO quotation_appraisal_details (quode_quoid, quode_item, quode_amount, quode_price,  quode_result, quode_create, quode_update, quode_uid)
-                VALUES ('$id', '$item_name', '$item_amount', '$item_price', '$total_price', '$quo_date_create', '$date', '$uid')";
+            $query = "INSERT INTO quotation_out_details (quooutde_quooutid, quooutde_item, quooutde_amount, quooutde_price, quooutde_result, quooutde_create, quooutde_update, quooutde_uid)
+                VALUES ('$id', '$item_name', '$item_amount', '$item_price', '$total_price', '$quoout_date_create', '$date', '$uid')";
             $conn->query($query);
         }
 
-        $_SESSION['success'] = "แก้ไขใบเสนอราคากลางสำเร็จ!";
-        header("Location: quotation_appraisal_list.php");
+        $_SESSION['success'] = "แก้ไขใบเสนอราคาสำเร็จ!";
+        header("Location: quotation_out_list.php");
         exit;
         
     } else {
         
         echo "Error: " . $query . "<br>" . $conn->error;
         $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-        header('Location: quotation_appraisal_edit.php?editquo='.$id);
+        header('Location: quotation_out_edit.php?editquoout='.$id);
         exit;
         
     }
@@ -137,68 +138,69 @@ table tr td:first-child::before {
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a
-                        href="../dashboard/quotation_appraisal_list.php">ใบเสนอราคากลาง</a></li>
-                <li class="breadcrumb-item active" aria-current="page">แก้ไขใบเสนอราคากลาง</li>
+                        href="../dashboard/quotation_out_list.php">ใบเสนอราคา</a></li>
+                <li class="breadcrumb-item active" aria-current="page">แก้ไขใบเสนอราคา</li>
             </ol>
         </nav>
         <hr>
         <div>
-            <h3>แก้ไขข้อมูลใบเสนอราคากลาง quotation appraisal</h3>
+            <h3>แก้ไขข้อมูลใบเสนอราคา quotation appraisal</h3>
         </div>
-        <form method="post" id="quotation_form" action="quotation_appraisal_edit.php" class="px-md-5 py-md-5">
+        <form method="post" id="quoout_form" action="quotation_out_edit.php" class="px-md-5 py-md-5">
             <div class="row g-3 align-items-center mb-3">
                 <div class="col-md-3">
-                    <label for="input_quo_no" class="col-form-label">เลขที่ No.</label>
+                    <label for="input_quoout_no" class="col-form-label">เลขที่ No.</label>
                 </div>
                 <div class="col-auto">
-                    <input type="number" id="input_quo_no" name="input_quo_no" class="form-control " required
-                        value="<?= $row['quo_no'] ?>">
+                    <input type="number" id="input_quoout_no" name="input_quoout_no" class="form-control " required
+                        value="<?= $row['quoout_no'] ?>">
                 </div>
             </div>
             <div class="row g-3 align-items-center mb-3">
                 <div class="col-md-3">
-                    <label for="input_quo_date" class="col-form-label">วันที่ date.</label>
+                    <label for="input_quoout_date" class="col-form-label">วันที่ date.</label>
                 </div>
                 <div class="col-auto">
-                    <input type="date" id="input_quo_date" name="input_quo_date" class="form-control " required
-                        value="<?= $row['quo_date'] ?>">
-                </div>
-            </div>
-            <div class="row g-3 align-items-center mb-3">
-                <div class="col-md-3 ">
-                    <label for="input_quo_namepj" class="col-form-label">ชื่อโครงการ :</label>
-                </div>
-
-                <div class="col-md-8">
-                    <input type="text" id="input_quo_namepj" name="input_quo_namepj" class="form-control " required
-                        value="<?= $row['quo_namepj'] ?>">
+                    <input type="date" id="input_quoout_date" name="input_quoout_date" class="form-control " required
+                        value="<?= $row['quoout_date'] ?>">
                 </div>
             </div>
             <div class=" row g-3 align-items-center mb-3">
                 <div class="col-md-3">
-                    <label for="input_quo_name" class="col-form-label">ชื่อลูกค้า/หน่วยงาน :</label>
+                    <label for="input_quoout_name" class="col-form-label">ชื่อลูกค้า/หน่วยงาน :</label>
                 </div>
                 <div class="col-md-8">
-                    <input type="text" id="input_quo_name" name="input_quo_name" class="form-control " required
-                        value="<?= $row['quo_name'] ?>">
+                    <input type="text" id="input_quoout_name" name="input_quoout_name" class="form-control " required
+                        value="<?= $row['quoout_name'] ?>">
                 </div>
             </div>
             <div class="row g-3 mb-3">
                 <div class="col-md-3 ">
-                    <label for="input_quo_address" class="col-form-label">ที่อยู่ :</label>
+                    <label for="input_quoout_address" class="col-form-label">ที่อยู่ :</label>
                 </div>
                 <div class="col-md-8">
-                    <textarea class="form-control" id="input_quo_address" name="input_quo_address" rows="3"
-                        required><?= $row['quo_address']; ?></textarea>
+                    <textarea class="form-control" id="input_quoout_address" name="input_quo_address" rows="3"
+                        required><?= $row['quoout_address']; ?></textarea>
                 </div>
             </div>
             <div class="row g-3 align-items-center mb-3">
                 <div class="col-md-3 ">
-                    <label for="itemtitle" class="col-form-label">แก้ไขรายการใบเสนอราคากลาง :</label>
+                    <label for="input_quoout_numtax" class="col-form-label">เลขประจำตัวผู้เสียภาษี :</label>
+                </div>
+
+                <div class="col-md-8">
+                    <input type="number" id="input_quoout_numtax" name="input_quoout_numtax" class="form-control "
+                        pattern="[0-9]{13}" title="กรุณากรอกตัวเลข 0-9 จำนวน 13 หลัก ไม่มี (-)" required
+                        value="<?= $row['quoout_numtax'] ?>">
+                </div>
+            </div>
+            <div class="row g-3 align-items-center mb-3">
+                <div class="col-md-3 ">
+                    <label for="itemtitle" class="col-form-label">แก้ไขรายการใบเสนอราคา :</label>
                 </div>
                 <div class="border border-secondary rounded-3 py-md-4 px-md-4">
                     <div class="table-responsive">
-                        <table id="quotation-item-table" class="table ">
+                        <table id="quoout-item-table" class="table ">
                             <tr>
                                 <th width="7%">ลำดับ <br>Number</th>
                                 <th width="40%">รายการ <br> Description </th>
@@ -209,7 +211,7 @@ table tr td:first-child::before {
                             </tr>
                             <?php
                             
-                                $sql = "SELECT * FROM quotation_appraisal_details WHERE quode_quoid ='$id'";
+                                $sql = "SELECT * FROM quotation_out_details WHERE quooutde_quooutid ='$id'";
                                 $query = $conn->query($sql);
                                 $n = 0;
                                 while ($rows = $query->fetch_assoc()) 
@@ -221,23 +223,23 @@ table tr td:first-child::before {
                                 <td><span id="sr_no"></span></td>
                                 <td>
                                     <input type="text" name="item_name[]" id="item_name<?= $n; ?>"
-                                        class="form-control input-sm item_name" value="<?= $rows["quode_item"]; ?>"
+                                        class="form-control input-sm item_name" value="<?= $rows["quooutde_item"]; ?>"
                                         required />
                                 </td>
                                 <td>
                                     <input type="number" name="item_amount[]" id="item_amount<?= $n; ?>"
                                         data-srno="<?= $n; ?>" class="form-control input-sm item_amount"
-                                        value="<?= $rows["quode_amount"]; ?>" required />
+                                        value="<?= $rows["quooutde_amount"]; ?>" required />
                                 </td>
                                 <td>
                                     <input type="number" name="item_price[]" id="item_price<?= $n; ?>"
                                         data-srno="<?= $n; ?>" class="form-control input-sm  item_price"
-                                        value="<?= $rows["quode_price"]; ?>" required />
+                                        value="<?= $rows["quooutde_price"]; ?>" required />
                                 </td>
                                 <td>
                                     <input type="number" name="total_price[]" id="total_price<?= $n; ?>"
                                         data-srno="<?= $n; ?>" class="form-control input-sm total_price"
-                                        value="<?= $rows["quode_result"];?>" readonly />
+                                        value="<?= $rows["quooutde_result"];?>" readonly />
                                 </td>
                                 <td>
                                     <button type="button" name="remove_row" id="<?= $n; ?>"
@@ -262,55 +264,57 @@ table tr td:first-child::before {
                 <div class="col-md-6">
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-md-6">
-                            <label for="input_quo_sum" class="col-form-label">รวมเป็นเงิน(บาท) :</label>
+                            <label for="input_quoout_sum" class="col-form-label">รวมเป็นเงิน(บาท) :</label>
                         </div>
 
                         <div class="col-md-5">
-                            <input type="number" id="input_quo_sum" name="input_quo_sum" class="form-control "
+                            <input type="number" id="input_quoout_sum" name="input_quoout_sum" class="form-control "
                                 placeholder="0.00" readonly value="<?= $row['quo_sum'] ?>">
                         </div>
                     </div>
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-md-6 ">
-                            <label for="input_quo_specialdis" class="col-form-label text-danger">หักส่วนลดพิเศษ(บาท)
+                            <label for="input_quoout_specialdis" class="col-form-label text-danger">หักส่วนลดพิเศษ(บาท)
                                 :</label>
                         </div>
 
                         <div class="col-md-5">
-                            <input type="number" step="any" id="input_quo_specialdis" name="input_quo_specialdis"
+                            <input type="number" step="any" id="input_quoout_specialdis" name="input_quoout_specialdis"
                                 class="form-control " placeholder="0.00" title="กรุณากรอกส่วนลด หากมี"
-                                value="<?= $row['quo_specialdis'] ?>">
+                                value="<?= $row['quoout_specialdis'] ?>">
                         </div>
                     </div>
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-md-6 ">
-                            <label for="input_quo_afterdis" class="col-form-label">ยอดรวมหลังหักส่วนลด(บาท)
+                            <label for="input_quoout_afterdis" class="col-form-label">ยอดรวมหลังหักส่วนลด(บาท)
                                 :</label>
                         </div>
 
                         <div class="col-md-5">
-                            <input type="number" id="input_quo_afterdis" name="input_quo_afterdis" class="form-control "
-                                placeholder="0.00" readonly value="<?= $row['quo_afterdis'] ?>">
+                            <input type="number" id="input_quoout_afterdis" name="input_quoout_afterdis"
+                                class="form-control " placeholder="0.00" readonly
+                                value="<?= $row['quoout_afterdis'] ?>">
                         </div>
                     </div>
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-md-6 ">
-                            <label for="input_quo_vat" class="col-form-label">ภาษีมูลค่าเพิ่ม 7%(บาท) :</label>
+                            <label for="input_quoout_vat" class="col-form-label">ภาษีมูลค่าเพิ่ม 7%(บาท) :</label>
                         </div>
 
                         <div class="col-md-5">
-                            <input type="number" id="input_quo_vat" name="input_quo_vat" class="form-control "
-                                placeholder="0.00" readonly value="<?= $row['quo_vat'] ?>">
+                            <input type="number" id="input_quoout_vat" name="input_quoout_vat" class="form-control "
+                                placeholder="0.00" readonly value="<?= $row['quoout_vat'] ?>">
                         </div>
                     </div>
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-md-6">
-                            <label for="input_quo_total" class="col-form-label">จํานวนเงินรวมทั้งสิ้น(บาท) :</label>
+                            <label for="input_quoout_total" class="col-form-label">จํานวนเงินรวมทั้งสิ้น(บาท)
+                                :</label>
                         </div>
 
                         <div class="col-md-5">
-                            <input type="number" id="input_quo_total" name="input_quo_total" class="form-control "
-                                placeholder="0.00" readonly value="<?= $row['quo_total'] ?>">
+                            <input type="number" id="input_quoout_total" name="input_quoout_total" class="form-control "
+                                placeholder="0.00" readonly value="<?= $row['quoout_total'] ?>">
                         </div>
                     </div>
                 </div>
@@ -320,13 +324,14 @@ table tr td:first-child::before {
                 <button type="reset"
                     class="col-md-3 btn btn-outline-danger btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold"><i
                         class="fa-solid fa-eraser"></i> ล้างข้อมูล</button>
-                <button type="submit" name="action" value="edit_quotation"
+                <button type="submit" name="action" value="edit_quotation_out"
                     class="ms-3 col-md-3 btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold">บันทึกการแก้ไข
                     <i class="fa-solid fa-angles-right"></i></button>
                 <input type="hidden" name="total_item" id="total_item" value="<?= $n;?>" />
-                <input type="hidden" name="quo_no_check" id="quo_no_check" value="<?= $row['quo_no'];?>" />
-                <input type="hidden" name="quo_id" id="quo_id" value="<?= $row['quo_id'];?>" />
-                <input type="hidden" name="quo_date_create" id="quo_date_create" value="<?= $row['quo_create'];?>" />
+                <input type="hidden" name="quoout_no_check" id="quoout_no_check" value="<?= $row['quoout_no'];?>" />
+                <input type="hidden" name="quoout_id" id="quoout_id" value="<?= $row['quoout_id'];?>" />
+                <input type="hidden" name="quoout_date_create" id="quoout_date_create"
+                    value="<?= $row['quoout_create'];?>" />
             </div>
 
         </form>
@@ -361,7 +366,7 @@ table tr td:first-child::before {
                 html_code += '<td><button type="button" name="remove_row" id="' + count +
                     '" class="btn btn-danger btn-xs remove_row">X</button></td>';
                 html_code += '</tr>';
-                $('#quotation-item-table').append(html_code);
+                $('#quoout-item-table').append(html_code);
             });
 
             $(document).on('click', '.remove_row', function() {
@@ -393,18 +398,18 @@ table tr td:first-child::before {
                         }
                     }
                 }
-                $('#input_quo_sum').val(final_total_price.toFixed(2));
+                $('#input_quoout_sum').val(final_total_price.toFixed(2));
                 var discount = 0;
                 var afterdis = 0;
                 var vat7per = 0;
                 var aftervat = 0;
-                discount = $('#input_quo_specialdis').val();
+                discount = $('#input_quoout_specialdis').val();
                 afterdis = final_total_price - discount;
-                $('#input_quo_afterdis').val(afterdis.toFixed(2));
+                $('#input_quoout_afterdis').val(afterdis.toFixed(2));
                 vat7per = (afterdis * 0.07);
-                $('#input_quo_vat').val(vat7per.toFixed(2));
+                $('#input_quoout_vat').val(vat7per.toFixed(2));
                 aftervat = (afterdis + vat7per);
-                $('#input_quo_total').val(aftervat.toFixed(2));
+                $('#input_quoout_total').val(aftervat.toFixed(2));
             }
 
             $(document).on('change', '.item_price', function() {
@@ -415,7 +420,7 @@ table tr td:first-child::before {
                 cal_final_total(count);
             });
 
-            $(document).on('change', '#input_quo_specialdis', function() {
+            $(document).on('change', '#input_quoout_specialdis', function() {
                 cal_final_total(count);
             });
 
