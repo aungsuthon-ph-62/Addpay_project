@@ -39,10 +39,10 @@ include_once '../../layout/head.php';
                     <form action="" method="post" class="">
                         <div class="row g-3 align-items-center mb-3">
                             <div class="col-md-3">
-                                <label for="inputname" class="col-form-label">ชื่อบริษัทต้นทาง  </label>
+                                <label for="inputsrcname" class="col-form-label">ชื่อบริษัทต้นทาง  </label>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" id="inputname" class="form-control " required>
+                                <input type="text" id="inputsrcname" class="form-control " required>
                             </div>
                         </div>
                         <div class="row g-3 align-items-center mb-3">

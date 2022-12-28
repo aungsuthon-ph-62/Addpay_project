@@ -96,6 +96,22 @@ include_once '../../layout/head.php';
                             <textarea class="form-control" id="textDetails2" rows="5" require></textarea>
                             </div>
                         </div>
+                        <div class="row g-3 align-items-center mb-3">
+                            <div class="col-md-3">
+                                <label for="inputSiname" class="col-form-label">ชื่อกำกับลายเซ็น </label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" id="inputSiname" class="form-control " required>
+                            </div>
+                        </div>
+                        <div class="row g-3 align-items-center mb-3">
+                            <div class="col-md-3">
+                                <label for="inputPosition" class="col-form-label">ตำแหน่งกำกับลายเซ็น </label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" id="inputPosition" class="form-control " required>
+                            </div>
+                        </div>
 
                         <!-- Submit button -->
                         <div class="mx-auto d-flex justify-content-end">
