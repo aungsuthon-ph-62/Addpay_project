@@ -1,31 +1,33 @@
 <?php
-include_once '../../layout/head.php';
+session_start();
+include("../../layout/head.php");
+require_once("../../php/conn.php");
 ?>
 
 <style>
-    body {
-        font-family: "Kanit", sans-serif;
-        font-family: "Noto Sans", sans-serif;
-        font-family: "Noto Sans Thai", sans-serif;
-        font-family: "Poppins", sans-serif;
-        font-family: "Prompt", sans-serif;
-    }
+body {
+    font-family: "Kanit", sans-serif;
+    font-family: "Noto Sans", sans-serif;
+    font-family: "Noto Sans Thai", sans-serif;
+    font-family: "Poppins", sans-serif;
+    font-family: "Prompt", sans-serif;
+}
 
-    .btn-group {
-        white-space: nowrap;
-    }
+.btn-group {
+    white-space: nowrap;
+}
 
-    @media (max-width: 767px) {
-        .table-responsive .dropdown-menu {
-            position: static !important;
-        }
+@media (max-width: 767px) {
+    .table-responsive .dropdown-menu {
+        position: static !important;
     }
+}
 
-    @media (min-width: 768px) {
-        .table-responsive {
-            overflow: inherit;
-        }
+@media (min-width: 768px) {
+    .table-responsive {
+        overflow: inherit;
     }
+}
 </style>
 
 <div class="container py-5">
@@ -43,7 +45,8 @@ include_once '../../layout/head.php';
                 <h3>หนังสือเข้า</h3>
             </div>
             <div class="mx-auto d-flex justify-content-end">
-                <a class="btn btn-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button" href="../dashboard/docin_add.php"><i class="fa-solid fa-file-circle-plus"></i> เพิ่มข้อมูล</a>
+                <a class="btn btn-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button"
+                    href="../dashboard/docin_add.php"><i class="fa-solid fa-file-circle-plus"></i> เพิ่มข้อมูล</a>
             </div>
 
             <div class="border border-secondary rounded-3 py-md-4 px-md-4 mt-2 mt-md-4" id="main_row">
@@ -71,7 +74,8 @@ include_once '../../layout/head.php';
                                 <td>
                                     <div>
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4" data-bs-toggle="dropdown" aria-expanded="false"><b>เลือก</b> </button>
+                                            <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4"
+                                                data-bs-toggle="dropdown" aria-expanded="false"><b>เลือก</b> </button>
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" href="#">เปิดเอกสาร</a></li>
                                                 <li><a class="dropdown-item" href="./docin_edit.php">แก้ไข</a></li>
@@ -103,9 +107,9 @@ include_once '../../layout/head.php';
             </div>
             <!-- Data table -->
             <script type="text/javascript">
-                $(document).ready(function() {
-                    $('#quotationTable').DataTable();
-                });
+            $(document).ready(function() {
+                $('#quotationTable').DataTable();
+            });
             </script>
             <!-- Data table -->
 

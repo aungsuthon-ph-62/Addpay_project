@@ -95,8 +95,6 @@ function edit_quo()
         exit;
         
     } else {
-        
-        echo "Error: " . $query . "<br>" . $conn->error;
         $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
         header('Location: quotation_appraisal_edit.php?editquo='.$id);
         exit;
