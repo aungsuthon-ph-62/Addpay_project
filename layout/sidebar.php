@@ -14,55 +14,55 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">
+                <a class="nav-link text-white" href="?page=">
                     <span></span>
                     งานที่จะประมูล
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">
+                <a class="nav-link text-white" href="?page=">
                     <span></span>
                     ดำเนินการทำเล่ม
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">
+                <a class="nav-link text-white" href="?page=">
                     <span data-feather="bar-chart-2"></span>
                     ทำ Power Point
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">
+                <a class="nav-link text-white" href="?page=">
                     <span data-feather="layers"></span>
                     สัญญาแนบเข้า
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">
+                <a class="nav-link text-white" href="?page=">
                     <span data-feather="layers"></span>
                     Project Planning
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">
+                <a class="nav-link text-white" href="?page=doc">
                     <span data-feather="layers"></span>
                     หนังสือ
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">
+                <a class="nav-link text-white" href="?page=">
                     <span data-feather="layers"></span>
                     การเงิน/บัญชี
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">
+                <a class="nav-link text-white" href="?page=">
                     <span data-feather="layers"></span>
                     เอกสารสำคัญ
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">
+                <a class="nav-link text-white" href="?page=">
                     <span data-feather="layers"></span>
                     ใบเสนอราคา
                 </a>

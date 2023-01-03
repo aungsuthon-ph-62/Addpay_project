@@ -10,6 +10,16 @@ include_once 'layout/head.php';
         font-family: "Poppins", sans-serif;
         font-family: "Prompt", sans-serif;
     }
+
+    .btn {
+        transition: all 0.2s ease-in-out;
+    }
+
+    .btn:hover {
+        border-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transform: scale(1.1);
+    }
 </style>
 
 
@@ -47,6 +57,27 @@ include_once 'layout/head.php';
                     if ($page) { ?>
                         <?php
                         switch ($page) {
+                            case "doc_out_edit":
+                                include_once 'view/dashboard/docout_edit.php';
+                                break;
+                            case "doc_out_add":
+                                include_once 'view/dashboard/docout_add.php';
+                                break;
+                            case "doc_out":
+                                include_once 'view/dashboard/docout_list.php';
+                                break;
+                            case "doc_in_edit":
+                                include_once 'view/dashboard/docin_edit.php';
+                                break;
+                            case "doc_in_add":
+                                include_once 'view/dashboard/docin_add.php';
+                                break;
+                            case "doc_in":
+                                include_once 'view/dashboard/docin_list.php';
+                                break;
+                            case "doc":
+                                include_once 'view/dashboard/doc.php';
+                                break;
                             case "quotation_edit":
                                 include_once 'view/dashboard/quotation_appraisal_edit.php';
                                 break;

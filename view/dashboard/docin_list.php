@@ -1,120 +1,91 @@
-<?php
-session_start();
-include("../../layout/head.php");
-require_once("../../php/conn.php");
-?>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index">หน้าหลัก</a></li>
+        <li class="breadcrumb-item"><a href="?page=doc">หนังสือ</a></li>
+        <li class="breadcrumb-item active" aria-current="page">หนังสือเข้า</li>
+    </ol>
+</nav>
+<hr>
 
-<style>
-body {
-    font-family: "Kanit", sans-serif;
-    font-family: "Noto Sans", sans-serif;
-    font-family: "Noto Sans Thai", sans-serif;
-    font-family: "Poppins", sans-serif;
-    font-family: "Prompt", sans-serif;
-}
 
-.btn-group {
-    white-space: nowrap;
-}
+<div class="container bg-secondary-addpay rounded-5">
+    <div class="main-body p-md-5 text-white">
+        <div class="container">
+            <div id="listquotation" class="p-3 p-md-5 text-white">
+                <div class="text-center text-md-start">
+                    <h3>หนังสือเข้า</h3>
+                </div>
 
-@media (max-width: 767px) {
-    .table-responsive .dropdown-menu {
-        position: static !important;
-    }
-}
+                <div class="my-4 my-md-3 text-center text-md-end">
+                    <a class="btn btn-addpay px-md-4 rounded-3 " href="?page=doc_in_add">
+                        <i class="fa-solid fa-file-circle-plus"></i> เพิ่มข้อมูล</a>
+                </div>
 
-@media (min-width: 768px) {
-    .table-responsive {
-        overflow: inherit;
-    }
-}
-</style>
+                <div class="p-3 p-md-5 bg-light rounded-5 shadow-lg" id="main_row">
+                    <div class="table-responsive">
+                        <table class="table" id="quotationTable">
+                            <thead>
+                                <tr class="align-center" class="rows">
+                                    <th class="text-center" style="width:5%" scope="col">ลำดับ</th>
+                                    <th class="text-center" style="width:30%" scope="col">ชื่อบริษัทต้นทาง</th>
+                                    <th class="text-center" style="width:10%" scope="col">วันที่</th>
+                                    <th class="text-center" style="width:20%" scope="col">เรื่อง</th>
+                                    <th class="text-center" style="width:20%" scope="col">เรียน (ถึงใคร)</th>
+                                    <th class="text-center" style="width:20%" scope="col">ไฟล์</th>
+                                    <th class="text-center" style="width:10%" scope="col">ตัวเลือก</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                <tr>
+                                    <td>1</td>
+                                    <td>บริษัท แอดเพย์ เซอร์วิสพอยท์ จำกัด</td>
+                                    <td>16/11/65</td>
+                                    <td>หนังสือเชิญเป็นวิทยากร</td>
+                                    <td>คุณหัตถยา บำรุงสุข</td>
+                                    <td><i class="fa-solid fa-file-pdf"></i> lovetoey.pdf</td>
+                                    <td>
+                                        <div>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4" data-bs-toggle="dropdown" aria-expanded="false"><b>เลือก</b> </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#">เปิดเอกสาร</a></li>
+                                                    <li><a class="dropdown-item" href="?page=doc_in_edit">แก้ไข</a></li>
+                                                    <li><a class="dropdown-item" href="#">ลบ</a></li>
 
-<div class="container py-5">
-    <div class="main-body">
-        <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="../dashboard.php">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="./doc.php">หนังสือ</a></li>
-                <li class="breadcrumb-item active" aria-current="page">หนังสือเข้า</li>
-            </ol>
-        </nav>
-        <hr>
-        <div id="listquotation" class="container pb-md-0 mb-5">
-            <div>
-                <h3>หนังสือเข้า</h3>
-            </div>
-            <div class="mx-auto d-flex justify-content-end">
-                <a class="btn btn-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button"
-                    href="../dashboard/docin_add.php"><i class="fa-solid fa-file-circle-plus"></i> เพิ่มข้อมูล</a>
-            </div>
+                                                </ul>
+                                            </div>
 
-            <div class="border border-secondary rounded-3 py-md-4 px-md-4 mt-2 mt-md-4" id="main_row">
-                <div class="table-responsive">
-                    <table class="table" id="quotationTable">
-                        <thead>
-                            <tr class="align-center" class="rows">
-                                <th class="text-center" style="width:5%" scope="col">ลำดับ</th>
-                                <th class="text-center" style="width:30%" scope="col">ชื่อบริษัทต้นทาง</th>
-                                <th class="text-center" style="width:10%" scope="col">วันที่</th>
-                                <th class="text-center" style="width:20%" scope="col">เรื่อง</th>
-                                <th class="text-center" style="width:20%" scope="col">เรียน (ถึงใคร)</th>
-                                <th class="text-center" style="width:20%" scope="col">ไฟล์</th>
-                                <th class="text-center" style="width:10%" scope="col">ตัวเลือก</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-center">
-                            <tr>
-                                <td>1</td>
-                                <td>บริษัท แอดเพย์ เซอร์วิสพอยท์ จำกัด</td>
-                                <td>16/11/65</td>
-                                <td>หนังสือเชิญเป็นวิทยากร</td>
-                                <td>คุณหัตถยา บำรุงสุข</td>
-                                <td><i class="fa-solid fa-file-pdf"></i> lovetoey.pdf</td>
-                                <td>
-                                    <div>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4"
-                                                data-bs-toggle="dropdown" aria-expanded="false"><b>เลือก</b> </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">เปิดเอกสาร</a></li>
-                                                <li><a class="dropdown-item" href="./docin_edit.php">แก้ไข</a></li>
-                                                <li><a class="dropdown-item" href="#">ลบ</a></li>
-
-                                            </ul>
-                                        </div>
-
-                                        <!-- <a href="../dashboard/edit_archives.php">
+                                            <!-- <a href="../dashboard/edit_archives.php">
                                             <button type="button" class="float-start mr-1 btn btn-warning btn-sm text-white px-3"><i class="fa-solid fa-pen-to-square"></i></button>
                                         </a>
 
                                         <a href="" class="">
                                             <button type="button" class="float-end mr-1 btn btn-danger btn-sm px-3"><i class="fa-solid fa-trash-can"></i></button>
                                         </a> -->
-                                    </div>
+                                        </div>
 
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
 
-                        </tbody>
+                            </tbody>
 
 
-                    </table>
+                        </table>
+                    </div>
+
+
+
                 </div>
-
-
+                <!-- Data table -->
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $('#quotationTable').DataTable();
+                    });
+                </script>
+                <!-- Data table -->
 
             </div>
-            <!-- Data table -->
-            <script type="text/javascript">
-            $(document).ready(function() {
-                $('#quotationTable').DataTable();
-            });
-            </script>
-            <!-- Data table -->
-
         </div>
-
     </div>
 </div>
 
