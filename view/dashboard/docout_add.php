@@ -134,7 +134,7 @@ body {
                                     <label for="input_send" class="col-form-label">สิ่งที่ส่งมาด้วย </label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" id="input_send" name="input_send" class="form-control " required>
+                                    <textarea type="text" id="input_send" name="input_send" class="form-control " required rows="3"></textarea>
                                 </div>
                             </div>
                             <div class="row g-3  mb-3">

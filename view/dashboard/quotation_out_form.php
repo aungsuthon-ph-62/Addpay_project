@@ -85,33 +85,34 @@ while ($infoquo = mysqli_fetch_array($result)) {
     </div>
 
     <div>
-    <table style="margin-top: 5px;">
-        <tr>
-            <td style="width:200px;">
-                <p class="text-left ">ชื่อ ลูกค้า :</p>
-            </td>
-            <td class="underline" style="width:642px;">
-                <p class="text-left "> <span>&nbsp; ' . $infoquo['quoout_name'] . ' &nbsp;&nbsp;</span> </p>
-            </td>
-        </tr>
-        <tr>
-            <td style="width:200px;">
-                <p class="text-left ">ที่อยู่ :</p>
-            </td>
-            <td class="underline" style="width:642px;">
-                <p class="text-left"> <span>&nbsp;' . $infoquo['quoout_address'] . ' &nbsp;&nbsp;</span> </p>
-            </td>
-        </tr>
-        <tr>
-            <td style="width:200px;">
-                <p class="text-left ">เลขประจำตัวผู้เสียภาษี : </p>
-            </td>
-            <td class="underline" style="width:642px;">
-                <p class="text-left "> <span>&nbsp;' . $infoquo['quoout_numtax'] . ' &nbsp;&nbsp;</span> </p>
-            </td>
-        </tr>
-        
-    </table>
+        <table style="margin-top: 5px;">
+            <tr>
+                <td style="width:200px;">
+                    <p class="text-left ">ชื่อ ลูกค้า :</p>
+                </td>
+                <td class="underline" style="width:642px;">
+                    <p class="text-left "> <span>&nbsp; ' . $infoquo['quoout_name'] . ' &nbsp;&nbsp;</span> </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="width:200px;">
+                    <p class="text-left ">ที่อยู่ :</p>
+                </td>
+                <td class="underline" style="width:642px;">
+                    <p class="text-left"> <span>&nbsp;' . $infoquo['quoout_address'] . ' &nbsp;&nbsp;</span> </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="width:200px;">
+                    <p class="text-left ">เลขประจำตัวผู้เสียภาษี : </p>
+                </td>
+                <td class="underline" style="width:642px;">
+                    <p class="text-left "> <span>&nbsp;' . $infoquo['quoout_numtax'] . ' &nbsp;&nbsp;</span> </p>
+                </td>
+            </tr>
+            
+        </table>
+    </div>
 </div>
 
 
@@ -129,7 +130,7 @@ while ($infoquo = mysqli_fetch_array($result)) {
 }
 
 
-$sql = "SELECT * FROM `quotation_out_details` WHERE quooutde_quoid = '$id';";
+$sql = "SELECT * FROM `quotation_out_details` WHERE quooutde_quooutid = '$id';";
 $result = mysqli_query($conn, $sql);
 $contentitems = "";
 if (mysqli_num_rows($result) > 0) {
@@ -271,7 +272,7 @@ $mpdf->Output('./quotation_PDF/quotation_out0.pdf');
         <p class="text-end text-danger ">** โปรดตรวจสอบความถูกต้องของข้อมูลก่อนกด พิมพ์เอกสาร</p>
         <div class="mx-auto d-flex justify-content-end ">
             <a class="btn btn-outline-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold" role="button" href="./quotation_PDF/quotation_out0.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
-            <a class="btn btn-outline-danger px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold ms-3" role="button" href="./quotation_appraisal_list.php"><i class="fa-regular fa-rectangle-xmark"></i> ยกเลิก</a>
+            <a class="btn btn-outline-danger px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold ms-3" role="button" href="./quotation_out_list.php"><i class="fa-regular fa-rectangle-xmark"></i> ยกเลิก</a>
         </div>
         <hr>
         <?php
