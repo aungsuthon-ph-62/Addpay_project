@@ -67,13 +67,14 @@ function edit_quoout()
     $input_quoout_specialdis= mysqli_real_escape_string($conn,trim($_POST['input_quoout_specialdis']));
     $input_quoout_afterdis= mysqli_real_escape_string($conn,trim($_POST['input_quoout_afterdis']));
     $input_quoout_vat= mysqli_real_escape_string($conn,trim($_POST['input_quoout_vat']));
+    $input_quoout_deli= mysqli_real_escape_string($conn,trim($_POST['input_quoout_deli']));
     $input_quoout_total= mysqli_real_escape_string($conn,trim($_POST['input_quoout_total']));
     $uid = 1;
     
-    $query1 = "UPDATE quotation_out SET quoout_no='$input_quoout_no', quoout_date='$input_quoout_date',quoout_name='$input_quo_name',
+    $query1 = "UPDATE quotation_out SET quoout_no='$input_quoout_no', quoout_date='$input_quoout_date',quoout_name='$input_quoout_name',
         quoout_address='$input_quoout_address', quoout_numtax='$input_quoout_numtax', quoout_sum='$input_quoout_sum',
         quoout_specialdis='$input_quoout_specialdis', quoout_afterdis='$input_quoout_afterdis', quoout_vat='$input_quoout_vat',
-        quoout_total='$input_quoout_total',quoout_update='$date', quoout_uid='$uid' WHERE quoout_id='$id'";
+        quoout_deli='$input_quoout_deli', quoout_total='$input_quoout_total',quoout_update='$date', quoout_uid='$uid' WHERE quoout_id='$id'";
                 
     $query2 = "DELETE FROM quotation_out_details WHERE quooutde_quooutid = '$id'";
     
@@ -97,7 +98,6 @@ function edit_quoout()
         
     } else {
         
-        echo "Error: " . $query . "<br>" . $conn->error;
         $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
         header('Location: quotation_out_edit.php?editquoout='.$id);
         exit;
@@ -138,8 +138,8 @@ table tr td:first-child::before {
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a
-                        href="../dashboard/quotation_out_list.php">ใบเสนอราคา</a></li>
-                <li class="breadcrumb-item active" aria-current="page">แก้ไขใบเสนอราคา</li>
+                        href="../dashboard/quotation_out_list.php">ใบเสนอราคาออก</a></li>
+                <li class="breadcrumb-item active" aria-current="page">แก้ไขใบเสนอราคาออก</li>
             </ol>
         </nav>
         <hr>
@@ -190,7 +190,7 @@ table tr td:first-child::before {
 
                 <div class="col-md-8">
                     <input type="number" id="input_quoout_numtax" name="input_quoout_numtax" class="form-control "
-                        pattern="[0-9]{13}" title="กรุณากรอกตัวเลข 0-9 จำนวน 13 หลัก ไม่มี (-)" required
+                        pattern="[0-9]{13}" title="กรุณากรอกตัวเลข 0-9 จำนวน 13 หลัก ไม่มี (-)"
                         value="<?= $row['quoout_numtax'] ?>">
                 </div>
             </div>
@@ -260,6 +260,16 @@ table tr td:first-child::before {
             </div>
             <div class="row">
                 <div class="col-md-6">
+                    <div class="row g-3 align-items-center mb-3">
+                        <div class="col-md-6 ">
+                            <label for="input_quoout_deli" class="col-form-label ">ค่าขนส่ง(บาท)
+                                :</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="number" id="input_quoout_deli" name="input_quoout_deli" class="form-control "
+                                placeholder="0.00" title="กรุณากรอกค่าขนส่ง หากมี" value="<?= $row['quoout_deli'] ?>">
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="row g-3 align-items-center mb-3">
