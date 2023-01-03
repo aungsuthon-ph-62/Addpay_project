@@ -80,7 +80,7 @@ while ($infodoc = mysqli_fetch_array($result)) {
 
             <table>
                 <tr>
-                    <td style="">สิ่งที่ส่งมาด้วย</td>
+                    <td VALIGN="TOP" style="">สิ่งที่ส่งมาด้วย</td>
                     <td style=" padding-left:10px; ">'.$infodoc['docout_send'].'</td>
                 </tr>
                 <tr>
