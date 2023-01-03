@@ -85,33 +85,34 @@ while ($infoquo = mysqli_fetch_array($result)) {
     </div>
 
     <div>
-    <table style="margin-top: 5px;">
-        <tr>
-            <td style="width:200px;">
-                <p class="text-left ">ชื่อ ลูกค้า :</p>
-            </td>
-            <td class="underline" style="width:642px;">
-                <p class="text-left "> <span>&nbsp; ' . $infoquo['quoout_name'] . ' &nbsp;&nbsp;</span> </p>
-            </td>
-        </tr>
-        <tr>
-            <td style="width:200px;">
-                <p class="text-left ">ที่อยู่ :</p>
-            </td>
-            <td class="underline" style="width:642px;">
-                <p class="text-left"> <span>&nbsp;' . $infoquo['quoout_address'] . ' &nbsp;&nbsp;</span> </p>
-            </td>
-        </tr>
-        <tr>
-            <td style="width:200px;">
-                <p class="text-left ">เลขประจำตัวผู้เสียภาษี : </p>
-            </td>
-            <td class="underline" style="width:642px;">
-                <p class="text-left "> <span>&nbsp;' . $infoquo['quoout_numtax'] . ' &nbsp;&nbsp;</span> </p>
-            </td>
-        </tr>
-        
-    </table>
+        <table style="margin-top: 5px;">
+            <tr>
+                <td style="width:200px;">
+                    <p class="text-left ">ชื่อ ลูกค้า :</p>
+                </td>
+                <td class="underline" style="width:642px;">
+                    <p class="text-left "> <span>&nbsp; ' . $infoquo['quoout_name'] . ' &nbsp;&nbsp;</span> </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="width:200px;">
+                    <p class="text-left ">ที่อยู่ :</p>
+                </td>
+                <td class="underline" style="width:642px;">
+                    <p class="text-left"> <span>&nbsp;' . $infoquo['quoout_address'] . ' &nbsp;&nbsp;</span> </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="width:200px;">
+                    <p class="text-left ">เลขประจำตัวผู้เสียภาษี : </p>
+                </td>
+                <td class="underline" style="width:642px;">
+                    <p class="text-left "> <span>&nbsp;' . $infoquo['quoout_numtax'] . ' &nbsp;&nbsp;</span> </p>
+                </td>
+            </tr>
+            
+        </table>
+    </div>
 </div>
 
 
@@ -136,7 +137,7 @@ if (mysqli_num_rows($result) > 0) {
     $i = 0;
     while ($infoquoitems = mysqli_fetch_assoc($result)) {
         $i++;
-        $contentitems .= '  <tr>
+        $contentitems .= '<tr>
         <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $i . '</td>
         <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:50px;">' . $infoquoitems['quooutde_item'] . '</td>
         <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $infoquoitems['quooutde_amount'] . '</td>

@@ -1,5 +1,5 @@
 <?php
-include("./quotation_PDF/quotation_head.php");
+include("./PDF_set/PDF_head.php");
 
 require_once __DIR__ . '../../../vendor/autoload.php';
 
@@ -28,11 +28,10 @@ $mpdf = new \Mpdf\Mpdf([
 
 
 
-$a = file_get_contents('./docout_PDF/docout_content.php');
-
-$stylesheet = file_get_contents('./quotation_PDF/quotation_PDF.css');
+$stylesheet = file_get_contents('./PDF_set/PDF.css');
 $mpdf->WriteHTML($stylesheet, \Mpdf\HTMLParserMode::HEADER_CSS);
-$mpdf->WriteHTML($a, \Mpdf\HTMLParserMode::HTML_BODY);
+
+
 $mpdf->Output('./docout_PDF/docout_PDF.pdf'); //link web of file pdf
 
 ?>

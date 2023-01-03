@@ -4,45 +4,40 @@ include("../../layout/head.php");
 require_once("../../php/conn.php");
 
 if (isset($_POST['action'])) {
-    if ($_POST['action'] == 'create_quotation') {
-        create_quotation();
+    if ($_POST['action'] == 'create_invoicebill') {
+        create_invoicebill();
         exit;
     }
 }
 
-function create_quotation()
+function create_invoicebill()
 {
 
     date_default_timezone_set('Asia/Bangkok');
     $date = date("Y-m-d H:i:s");
     global $conn;
 
-    $input_quo_no = mysqli_real_escape_string($conn, trim($_POST['input_quo_no']));
-    $input_quo_date = mysqli_real_escape_string($conn, trim($_POST['input_quo_date']));
-    $input_quo_name = mysqli_real_escape_string($conn, trim($_POST['input_quo_name']));
-    $input_quo_address = mysqli_real_escape_string($conn, trim($_POST['input_quo_address']));
-    $input_quo_namepj = mysqli_real_escape_string($conn, trim($_POST['input_quo_namepj']));
-    $input_quo_remark = mysqli_real_escape_string($conn, trim($_POST['input_quo_remark']));
-    $input_quo_sum = mysqli_real_escape_string($conn, trim($_POST['input_quo_sum']));
-    $input_quo_specialdis = mysqli_real_escape_string($conn, trim($_POST['input_quo_specialdis']));
-    $input_quo_afterdis = mysqli_real_escape_string($conn, trim($_POST['input_quo_afterdis']));
-    $input_quo_vat = mysqli_real_escape_string($conn, trim($_POST['input_quo_vat']));
-    $input_quo_total = mysqli_real_escape_string($conn, trim($_POST['input_quo_total']));
-    $input_quo_texttotal = mysqli_real_escape_string($conn, trim($_POST["input_quo_texttotal"]));
-    $input_quo_create = $date;
-    $input_quo_uid = 1;
+    $input_invbill_no = mysqli_real_escape_string($conn, trim($_POST['input_invbill_no']));
+    $input_invbill_date = mysqli_real_escape_string($conn, trim($_POST['input_invbill_date']));
+    $input_invbill_name = mysqli_real_escape_string($conn, trim($_POST['input_invbill_name']));
+    $input_invbill_address = mysqli_real_escape_string($conn, trim($_POST['input_invbill_address']));
+    $input_invbill_cusid = mysqli_real_escape_string($conn, trim($_POST['input_invbill_cusid']));
+    $input_invbill_sum = mysqli_real_escape_string($conn, trim($_POST['input_invbill_sum']));
+    $input_invbill_total = mysqli_real_escape_string($conn, trim($_POST['input_invbill_total']));
+    $input_invbill_remark = mysqli_real_escape_string($conn, trim($_POST['input_invbill_remark']));
+    $input_invbill_uid = 1;
 
-    $quo_no_check_query = "SELECT * FROM quotation_appraisal WHERE quo_no =  $input_quo_no";
-    $query = mysqli_query($conn, $quo_no_check_query);
+    $invbill_no_check_query = "SELECT * FROM invoicebill_appraisal WHERE invbill_no =  $input_invbill_no";
+    $query = mysqli_query($conn, $invbill_no_check_query);
     $check = mysqli_fetch_assoc($query);
 
     if ($check) {
         $_SESSION['error'] = "เลขที่ใบเสนอราคากลางนี้มีในระบบแล้ว!";
-        header("Location: quotation_appraisal_add.php");
+        header("Location: invoicebill_add.php");
         exit;
     } else {
-        $query = "INSERT INTO quotation_appraisal (quo_no, quo_date, quo_name, quo_address, quo_namepj, quo_remark, quo_sum, quo_specialdis, quo_afterdis, quo_vat, quo_total, quo_texttotal, quo_create, quo_uid)
-            VALUES ('$input_quo_no', '$input_quo_date', '$input_quo_name', '$input_quo_address', '$input_quo_namepj', '$input_quo_remark', '$input_quo_sum', '$input_quo_specialdis', '$input_quo_afterdis', '$input_quo_vat', '$input_quo_total', '$input_quo_texttotal', '$input_quo_create', '$input_quo_uid')";
+        $query = "INSERT INTO invoicebill_appraisal (invbill_no, invbill_date, invbill_name, invbill_address, invbill_cusid, invbill_sum, invbill_total, invbill_remark, invbill_create, invbill_uid)
+            VALUES ('$input_invbill_no', '$input_invbill_date', '$input_invbill_name', '$input_invbill_address', '$input_invbill_cusid', '$input_invbill_sum', '$input_invbill_total', '$input_invbill_remark', '$date', '$input_invbill_uid')";
 
         if ($conn->query($query) === TRUE) {
 
@@ -54,21 +49,21 @@ function create_quotation()
                 $item_amount = mysqli_real_escape_string($conn, trim($_POST['item_amount'][$count]));
                 $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
                 $total_price = mysqli_real_escape_string($conn, trim($_POST['total_price'][$count]));
-                $input_quode_create = $date;
-                $input_quode_uid = 1;
+                $input_invbillde_create = $date;
+                $input_invbillde_uid = 1;
 
-                $query = "INSERT INTO quotation_appraisal_details (quode_quoid, quode_item, quode_price, quode_amount, quode_result, quode_create, quode_uid)
-                    VALUES ('$last_id', '$item_name', '$item_price', '$item_amount', '$total_price', '$input_quode_create', '$input_quode_uid')";
+                $query = "INSERT INTO invoicebill_details (invbilld_invbillid, invbilld_item, invbilld_price, invbilld_amount, invbilld_result, invbilld_create, invbilld_uid)
+                    VALUES ('$last_id', '$item_name', '$item_price', '$item_amount', '$total_price', '$input_invbillde_create', '$input_invbillde_uid')";
                 mysqli_query($conn, $query);
             }
 
             $_SESSION['success'] = "บันทึกใบเสนอราคากลางสำเร็จ!";
-            header("Location: quotation_appraisal_list.php");
+            header("Location: invoicebill_list.php");
             exit;
         } else {
             echo "Error: " . $query . "<br>" . $conn->error;
             $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-            header("Location: quotation_appraisal_add.php");
+            header("Location: invoicebill_add.php");
             exit;
         }
     }
@@ -107,7 +102,7 @@ function create_quotation()
         <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="../dashboard/quotation_appraisal_list.php">ใบแจ้งหนี้/ใบวางบิล</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="../dashboard/invoicebill_list.php">ใบแจ้งหนี้/ใบวางบิล</a></li>
                 <li class="breadcrumb-item active" aria-current="page">สร้างใบแจ้งหนี้/ใบวางบิล</li>
             </ol>
         </nav>
@@ -118,43 +113,43 @@ function create_quotation()
         <form method="post" id="invoicebill_form" action="invoicebill_add.php" class="px-md-5 py-md-5">
             <div class="row g-3 align-items-center mb-3">
                 <div class="col-md-3">
-                    <label for="input_inv_no" class="col-form-label">เลขที่ No.</label>
+                    <label for="input_invbill_no" class="col-form-label">เลขที่ No.</label>
                 </div>
                 <div class="col-auto">
-                    <input type="number" id="input_inv_no" name="input_inv_no" class="form-control " required>
+                    <input type="number" id="input_invbill_no" name="input_invbill_no" class="form-control " required>
                 </div>
             </div>
             <div class="row g-3 align-items-center mb-3">
                 <div class="col-md-3">
-                    <label for="input_inv_date" class="col-form-label">วันที่ date.</label>
+                    <label for="input_invbill_date" class="col-form-label">วันที่ date.</label>
                 </div>
                 <div class="col-auto">
-                    <input type="date" id="input_inv_date" name="input_inv_date" class="form-control " required>
+                    <input type="date" id="input_invbill_date" name="input_invbill_date" class="form-control " required>
                 </div>
             </div>
             <div class="row g-3 align-items-center mb-3">
                 <div class="col-md-3 ">
-                    <label for="input_inv_namecus" class="col-form-label">ชื่อลูกค้า :</label>
+                    <label for="input_invbill_name" class="col-form-label">ชื่อลูกค้า :</label>
                 </div>
 
                 <div class="col-md-8">
-                    <input type="text" id="input_inv_namecus" name="input_inv_namecus" class="form-control " required>
+                    <input type="text" id="input_invbill_name" name="input_invbill_name" class="form-control " required>
                 </div>
             </div>
             <div class=" row g-3 align-items-center mb-3">
                 <div class="col-md-3">
-                    <label for="input_inv_address" class="col-form-label">ที่อยู่ :</label>
+                    <label for="input_invbill_address" class="col-form-label">ที่อยู่ :</label>
                 </div>
                 <div class="col-md-8">
-                    <textarea class="form-control" id="input_inv_address" name="input_inv_address" rows="3" required></textarea>
+                    <textarea class="form-control" id="input_invbill_address" name="input_invbill_address" rows="3" required></textarea>
                 </div>
             </div>
             <div class="row g-3 mb-3">
                 <div class="col-md-3 ">
-                    <label for="input_inv_cusid" class="col-form-label">เลขประจำตัวผู้เสียภาษี :</label>
+                    <label for="input_invbill_cusid" class="col-form-label">เลขประจำตัวผู้เสียภาษี :</label>
                 </div>
                 <div class="col-md-8">
-                    <input type="text" id="input_inv_cusid" name="input_inv_cusid" class="form-control " required>
+                    <input type="text" id="input_invbill_cusid" name="input_invbill_cusid" class="form-control " required>
 
                 </div>
             </div>
@@ -173,79 +168,67 @@ function create_quotation()
                                 <th width="10%">จำนวนก่อนภาษีมูลค่าเพิ่ม<br>Amount</th>
                                 <th width="10%">ภาษีมูลค่าเพิ่ม<br>Vat</th>
                                 <th width="10%">จำนวนเงินรวม <br> Total Amount</th>
-                                <!-- <th width="10%">หมายเหตุ<br>Remark</th> -->
                                 <th width="5%">ลบ</th>
                             </tr>
 
                             <tr id="row_id_1">
                                 <td><span id="sr_no"></span></td>
                                 <td><input type="text" name="item_order[]" id="item_order1" class="form-control input-sm" required /></td>
-                                <td><input type="date" name="item_inv_date[]" id="item_inv_date1" data-srno="1" class="form-control input-sm item_inv_date" required /></td>
-                                <td><input type="date" name="item_due_date[]" id="item_due_date1" data-srno="1" class="form-control input-sm number_only item_due_date" step="any" required /></td>
-                                <td><input type="number" name="item_amount[]" id="item_amount1" data-srno="1" class="form-control input-sm item_amount" require /></td>
-                                <td><input type="number" name="item_vat[]" id="item_vat1" class="form-control input-sm item_vat" required /></td>
-                                <td><input type="number" name="item_total_amount[]" id="item_total_amount1" data-srno="1" class="form-control input-sm item_total_amount" required /></td>
-                                <!-- <td><input type="text" name="item_remark[]" id="item_remark1" data-srno="1" class="form-control input-sm number_only item_remark" step="any" required /></td> -->
-                                <td></td>
+                                <td><input type="date" name="item_inv_date[]" id="item_inv_date1" data-srno="1" class="form-control input-sm item_inv_date" /></td>
+                                <td><input type="date" name="item_due_date[]" id="item_due_date1" data-srno="1" class="form-control input-sm number_only item_due_date" step="any" /></td>
+                                <td><input type="number" name="item_amount[]" id="item_amount1" data-srno="1" class="form-control input-sm item_amount" required /></td>
+                                <td><input type="number" name="item_vat[]" id="item_vat1" class="form-control input-sm item_vat" required readonly/></td>
+                                <td><input type="number" name="item_total_amount[]" id="item_total_amount1" data-srno="1" class="form-control input-sm item_total_amount" required  readonly/></td>
                             </tr>
                         </table>
                         <div class="text-center">
-                            <button type="button" id="add_row" class="btn btn-success px-4 rounded-pill fs-5 fw-bold " ><i class="fa fa-plus-circle text-white"></i> เพิ่มรายการ</button>
+                            <button type="button" id="add_row" class="btn btn-success px-4 rounded-pill fs-5 fw-bold "><i class="fa fa-plus-circle text-white"></i> เพิ่มรายการ</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
-            <div class="col-md-6">
+                <div class="col-md-6">
                     <div class="row g-3  mb-3">
                         <div class="col-md-3 ">
-                            <label for="input_quo_remark" class="col-form-label">หมายเหตุ :</label>
+                            <label for="input_invbill_remark" class="col-form-label">หมายเหตุ :</label>
                         </div>
                         <div class="col-md-8">
-                            <textarea class="form-control" id="input_quo_remark" name="input_quo_remark"
-                                rows="3"></textarea>
+                            <textarea class="form-control" id="input_invbill_remark" name="input_invbill_remark" rows="3"></textarea>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="row g-3 align-items-center mb-3">
-                        <div class="col-md-6">
-                            <label for="input_quo_sum" class="col-form-label">รวม </label>
+                        <div class="col-md-6 ">
+                            <label for="input_invbill_afterdis" class="col-form-label">ยอดรวมทั้งสิ้น (บาท):</label>
                         </div>
                         <div class="col-md-5">
-                            <input type="number" id="input_quo_sum" name="input_quo_sum" class="form-control " placeholder="0.00" readonly>
+                            <input type="number" id="input_invbill_afterdis" name="input_invbill_afterdis" class="form-control " placeholder="0.00" readonly>
+                        </div>
+                    </div>
+                    <div class="row g-3 align-items-center mb-3">
+                        <div class="col-md-6">
+                            <label for="input_invbill_sum" class="col-form-label">จำนวนเอกสารรวม </label>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="number" id="input_invbill_sum" name="input_invbill_sum" class="form-control ">
                         </div>
                         <div class="col-md-1 text-end">
-                            <label for="input_quo_sum" class="col-form-label">ฉบับ</label>
+                            <label for="input_invbill_sum" class="col-form-label">ฉบับ</label>
                         </div>
                     </div>
 
-                    <div class="row g-3 align-items-center mb-3">
-                        <div class="col-md-6 ">
-                            <label for="input_quo_afterdis" class="col-form-label">ยอดรวมทั้งสิ้น (บาท):</label>
-                        </div>
-                        <div class="col-md-5">
-                            <input type="number" id="input_quo_afterdis" name="input_quo_afterdis" class="form-control " placeholder="0.00" readonly>
-                        </div>
-                    </div>
+
 
                 </div>
             </div>
-            <!-- <div class="row g-3  mb-3">
-                <div class="col-md-3">
-                    <label for="input_quo_texttotal" class="col-form-label">จำนวนเงินตัวอักษร :</label>
-                </div>
-                <div class="col-md-9">
-                    <textarea class="form-control" id="input_quo_texttotal" name="input_quo_texttotal" rows="3" required></textarea>
-                </div>
-            </div> -->
-
             <div class="mx-auto d-flex justify-content-end">
                 <button type="reset" class="col-md-3 btn btn-outline-danger btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold"><i class="fa-solid fa-eraser"></i> ล้างข้อมูล</button>
-                <button type="submit" name="create_quotation" id="create_quotation" value="Create" class="ms-3 col-md-3 btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold">ต่อไป
+                <button type="submit" name="create_invoicebill" id="create_invoicebill" value="Create" class="ms-3 col-md-3 btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold">ต่อไป
                     <i class="fa-solid fa-angles-right"></i></button>
                 <input type="hidden" name="total_item" id="total_item" value="1" />
-                <input type="hidden" name="action" value="create_quotation">
+                <input type="hidden" name="action" value="create_invoicebill">
             </div>
 
         </form>
@@ -323,18 +306,18 @@ function create_quotation()
                             }
                         }
                     }
-                    $('#input_quo_sum').val(final_total_price.toFixed(2));
+                    $('#input_invbill_sum').val(final_total_price.toFixed(2));
                     var discount = 0;
                     var afterdis = 0;
                     var vat7per = 0;
                     var aftervat = 0;
-                    discount = $('#input_quo_specialdis').val();
+                    discount = $('#input_invbill_specialdis').val();
                     afterdis = final_total_price - discount;
-                    $('#input_quo_afterdis').val(afterdis.toFixed(2));
+                    $('#input_invbill_afterdis').val(afterdis.toFixed(2));
                     vat7per = (afterdis * 0.07);
-                    $('#input_quo_vat').val(vat7per.toFixed(2));
+                    $('#input_invbill_vat').val(vat7per.toFixed(2));
                     aftervat = (afterdis + vat7per);
-                    $('#input_quo_total').val(aftervat.toFixed(2));
+                    $('#input_invbill_total').val(aftervat.toFixed(2));
                 }
 
                 $(document).on('change', '.item_price', function() {
@@ -345,7 +328,7 @@ function create_quotation()
                     cal_final_total(count);
                 });
 
-                $(document).on('change', '#input_quo_specialdis', function() {
+                $(document).on('change', '#input_invbill_specialdis', function() {
                     cal_final_total(count);
                 });
 
