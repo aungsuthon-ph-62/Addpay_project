@@ -121,9 +121,7 @@ if (isset($_POST['action'])) {
                     <label for="input_quoin_address" class="col-form-label">อัพโหลดไฟล์ :</label>
                 </div>
                 <div class="col-md-8">
-                    <input type="file" class="custom-file-input" id="customFile">
-                    <label class="custom-file-label" for="customFile">Choose file</label>
-
+                    <input class="form-control" type="file" id="formFile">
                 </div>
             </div>
             <div class="row g-3 align-items-center mb-3">
