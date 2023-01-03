@@ -2,9 +2,7 @@
 include('./PDF_set/PDF_conn.php');
 include('./PDF_set/readprice.php');
 $id = $_GET["pdfquo_id"];
-?>
 
-<?php
 include("./PDF_set/PDF_head.php");
 
 require_once __DIR__ . '../../../vendor/autoload.php';
@@ -24,7 +22,7 @@ $mpdf = new \Mpdf\Mpdf([
         'sarabun' => [
             'R' => 'THSarabunNew.ttf',
             'I' => 'THSarabunNew Italic.ttf',
-            'B' =>  'THSarabunNew Bold.ttf',
+            'B' => 'THSarabunNew Bold.ttf',
         ]
     ],
     'default_font' => 'sarabun',
@@ -40,9 +38,9 @@ $mpdf = new \Mpdf\Mpdf([
 
 
 $sql = "SELECT * FROM `quotation_appraisal` WHERE quo_id = '$id'";
-$result = mysqli_query($conn, $sql);
-while ($infoquo = mysqli_fetch_array($result)) {
-    $head = '
+$query = $conn->query($sql);
+$infoquo = $query->fetch_assoc();
+$head = '
 <div id="quotationForm" class="container mt-5" style="width: 842px;">
     <div>
         <table>
@@ -122,20 +120,17 @@ while ($infoquo = mysqli_fetch_array($result)) {
             <th class="text-center" style="border-left: 1px solid; width: 67px;">จำนวน<br>Amount</th>
             <th class="text-center" style="border-left: 1px solid; width: 109px;">ราคา / หน่วย<br>Unit / Price</th>
             <th class="text-center" style="border-left: 1px solid; width: 109px;">จำนวนเงิน<br>บาท</th>
-        </tr>
-
-';
-}
+        </tr>';
 
 
-$sql = "SELECT * FROM `quotation_appraisal_details` WHERE quode_quoid = '$id';";
+$sql = "SELECT * FROM `quotation_appraisal_details` WHERE quode_quoid = '$id'";
 $result = mysqli_query($conn, $sql);
 $contentitems = "";
 if (mysqli_num_rows($result) > 0) {
     $i = 0;
     while ($infoquoitems = mysqli_fetch_assoc($result)) {
         $i++;
-        $contentitems .= '  <tr>
+        $contentitems .= '<tr>
         <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $i . '</td>
         <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:50px;">' . $infoquoitems['quode_item'] . '</td>
         <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $infoquoitems['quode_amount'] . '</td>
@@ -143,7 +138,17 @@ if (mysqli_num_rows($result) > 0) {
         <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' . number_format($infoquoitems['quode_result'],2) . '</td>
     </tr>';
     }
+    
+    $i=$i+1;
+    $contentitems .= '<tr>
+        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $i . '</td>
+        <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:50px;">ค่าขนส่ง</td>
+        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;"></td>
+        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;"></td>
+        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' . $infoquo['quo_deli'] . '</td>
+    </tr>';
 }
+
 
 $head1 = ' ';
 $sql = "SELECT * FROM `quotation_appraisal` WHERE quo_id = '$id'";
@@ -203,9 +208,7 @@ if (mysqli_num_rows($result) > 0) {
         </tr>
     </table>
 
-</div>
-       
-';
+</div>';
     }
 }
 
@@ -269,8 +272,10 @@ $mpdf->Output('./quotation_PDF/quotation_appraisal0.pdf');
     <div class="container py-md-5 px-md-4" style="width: 100%; ">
         <p class="text-end text-danger ">** โปรดตรวจสอบความถูกต้องของข้อมูลก่อนกด พิมพ์เอกสาร</p>
         <div class="mx-auto d-flex justify-content-end ">
-            <a class="btn btn-outline-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold" role="button" href="./quotation_PDF/quotation_appraisal0.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
-            <a class="btn btn-outline-danger px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold ms-3" role="button" href="./quotation_appraisal_list.php"><i class="fa-regular fa-rectangle-xmark"></i> ยกเลิก</a>
+            <a class="btn btn-outline-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold" role="button"
+                href="./quotation_PDF/quotation_appraisal0.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
+            <a class="btn btn-outline-danger px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold ms-3" role="button"
+                href="./quotation_appraisal_list.php"><i class="fa-regular fa-rectangle-xmark"></i> ยกเลิก</a>
         </div>
         <hr>
         <?php

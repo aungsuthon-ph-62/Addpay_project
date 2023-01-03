@@ -3,9 +3,10 @@ include('./PDF_set/PDF_conn.php');
 $id = $_GET["pdfquoout_id"];
 
 $sql = "SELECT * FROM `quotation_out` WHERE quoout_id = '$id'";
-$result = mysqli_query($conn, $sql);
-while ($infoquo = mysqli_fetch_array($result)) {
-    echo '
+$query = $conn->query($sql);
+$infoquo = $query->fetch_assoc();
+
+echo '
 
 <div id="quotationForm" class="container mt-5" style="width: 842px;">
     <div>
@@ -91,44 +92,47 @@ while ($infoquo = mysqli_fetch_array($result)) {
                 <th class="text-center" style="border-left: 1px solid; width: 67px;">จำนวน<br>Amount</th>
                 <th class="text-center" style="border-left: 1px solid; width: 109px;">ราคา / หน่วย<br>Unit / Price</th>
                 <th class="text-center" style="border-left: 1px solid; width: 109px;">จำนวนเงิน<br>บาท</th>
-            </tr>
+            </tr>';
 
 
-        ';
-}
-?>
+// <!--  -->
+// <!--php  ดึงข้อมูลรายการ-->
+// <!--  -->
 
-<!--  -->
-<!--php  ดึงข้อมูลรายการ-->
-<!--  -->
-<?php
 $sql = "SELECT * FROM `quotation_out_details` WHERE quooutde_quooutid = '$id';";
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
     $i = 0;
     while ($infoquoitems = mysqli_fetch_assoc($result)) {
         $i++;
-        echo '  <tr>
-        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $i . '</td>
-        <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:50px;">' . $infoquoitems['quooutde_item'] . '</td>
-        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $infoquoitems['quooutde_amount'] . '</td>
-        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' . number_format($infoquoitems['quooutde_price'],2) . '</td>
-        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' . number_format($infoquoitems['quooutde_result'],2) . '</td>
-    </tr>';
+        echo ' <tr>
+            <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $i . '</td>
+            <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:50px;">' . $infoquoitems['quooutde_item'] .
+                '</td>
+            <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' .
+                $infoquoitems['quooutde_amount'] . '</td>
+            <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' .
+                number_format($infoquoitems['quooutde_price'],2) . '</td>
+            <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' .
+                number_format($infoquoitems['quooutde_result'],2) . '</td>
+        </tr>';
     }
+    $i=$i+1;
+    echo '<tr>
+        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $i . '</td>
+        <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:50px;">ค่าขนส่ง</td>
+        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;"></td>
+        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;"></td>
+        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' . $infoquo['quoout_deli'] . '</td>
+    </tr>';
 }
 
-?>
-
-
-
-<!-- blank area -->
-<?php
+// <!-- blank area -->
 
 $sql = "SELECT * FROM `quotation_out` WHERE quoout_id = '$id'";
 $result = mysqli_query($conn, $sql);
 while ($infoquosum = mysqli_fetch_array($result)) {
-    echo '
+echo '
 
 <tr>
     <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;"></td>
@@ -148,7 +152,8 @@ while ($infoquosum = mysqli_fetch_array($result)) {
 
 
 <tr style="background-color:LightGray; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
-    <td style=" border:1px solid; border-collapse: collapse; padding: 5px; margin: 0;" VALIGN="TOP" ROWSPAN="5" colspan="2">
+    <td style=" border:1px solid; border-collapse: collapse; padding: 5px; margin: 0;" VALIGN="TOP" ROWSPAN="5"
+        colspan="2">
         <p>
             หมายเหตุ <br>
             ราคาขาย หน่วยเป็นบาท และขอยืนยันราคา 30 วันนับจากวันที่ออกใบเสนอราคา <br>
@@ -165,68 +170,68 @@ while ($infoquosum = mysqli_fetch_array($result)) {
 
 
     <td style="text-align: right; border-left: 0px solid;" colspan="2">รวมเงิน</td>
-                <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quoout_sum'],2) . '</td>
-            </tr>
-            <tr style="background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
-                <td style="text-align: right; border-left: 0px solid; color:red;" colspan="2">หัวส่วนลดพิเศษ</td>
-                <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quoout_specialdis'],2) . '</td>
-            </tr>
-            <tr style="background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
-                <td style="text-align: right; border-left: 0px solid;" colspan="2">ยอดรวมหลังหักส่วนลด</td>
-                <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quoout_afterdis'],2) . '</td>
-            </tr>
-            <tr style="background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
-                <td style="text-align: right; border-left: 0px solid;" colspan="2">ภาษีมูลค่าเพิ่ม 7%</td>
-                <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quoout_vat'],2) . '</td>
-            </tr>
-            <tr style=" background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
-                <td style="text-align: right; border-left: px solid;" colspan="2">จำนวนเงินรวมทั้งสิน</td>
-                <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quoout_total'],2) . '</td>
-            </tr>
+    <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quoout_sum'],2) . '</td>
+</tr>
+<tr
+    style="background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
+    <td style="text-align: right; border-left: 0px solid; color:red;" colspan="2">หัวส่วนลดพิเศษ</td>
+    <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quoout_specialdis'],2) . '
+    </td>
+</tr>
+<tr
+    style="background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
+    <td style="text-align: right; border-left: 0px solid;" colspan="2">ยอดรวมหลังหักส่วนลด</td>
+    <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quoout_afterdis'],2) . '</td>
+</tr>
+<tr
+    style="background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
+    <td style="text-align: right; border-left: 0px solid;" colspan="2">ภาษีมูลค่าเพิ่ม 7%</td>
+    <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quoout_vat'],2) . '</td>
+</tr>
+<tr
+    style=" background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
+    <td style="text-align: right; border-left: px solid;" colspan="2">จำนวนเงินรวมทั้งสิน</td>
+    <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quoout_total'],2) . '</td>
+</tr>
 
 
 </table>
 
-</div>
-';
+</div>';
 }
-?>
 
-<?php
 $sql = "SELECT quoout_total FROM `quotation_out` WHERE quoout_id = '$id'";
 $result = mysqli_query($conn, $sql);
 while ($infoquosum = mysqli_fetch_array($result)) {
     echo '
-<div>
-    <table style="text-align: left; width:842px; border:1px solid; border-collapse: collapse; padding: 0; margin-top: 10px;">
-        <tr style="border-bottom: 1px solid;">
-            <td VALIGN="TOP" style="text-align: left;  width: 20%; padding:5px 10px;">จำนวนเงินตัวอักษร <br> The Sum Of Bahts </td>
-            <td VALIGN="TOP" style="text-align: left;  width: 80%; padding:5px 10px;"> ' . Convert($infoquosum['quoout_total']) . ' </td>
-        </tr>
-    </table>
-    <!-- footer -->
-    <table style="width: 842px; border:1px solid; border-collapse: collapse; padding: 0; margin-top: 10px; ">
-        <tr>
-            <td VALIGN="TOP" style="text-align: center; width: 50%; border:1px solid; border-collapse: collapse; padding: 10px; margin: 0; height: 100px;">
-                <p> ยินดีรับข้อเสนอของ บริษัท แอดเพย์ เซอร์วิสพอยท์ จำกัด </p>
-                <br><br><br><br><br>
-                <p> ผู้อนุมัติสั่งซื้อ / Customer Signature </p>
-                <p> วันที่&nbsp;................................................................................</p>
-            </td>
-            <td VALIGN="TOP" style="text-align: center; width: 50%; border:1px solid; border-collapse: collapse; padding: 10px; margin: 0; height: 100px;">
-                <p>ขอแสงความนับถือ</p>
-                <br><br><br><br><br>
-                <p>ผู้มีอำนาจลงนาม / Authorlzed Siganture</p>
+    <div>
+        <table style="text-align: left; width:842px; border:1px solid; border-collapse: collapse; padding: 0; margin-top: 10px;">
+            <tr style="border-bottom: 1px solid;">
+                <td VALIGN="TOP" style="text-align: left;  width: 20%; padding:5px 10px;">จำนวนเงินตัวอักษร <br> The Sum Of Bahts </td>
+                <td VALIGN="TOP" style="text-align: left;  width: 80%; padding:5px 10px;"> ' . Convert($infoquosum['quoout_total']) . ' </td>
+            </tr>
+        </table>
+        <!-- footer -->
+        <table style="width: 842px; border:1px solid; border-collapse: collapse; padding: 0; margin-top: 10px; ">
+            <tr>
+                <td VALIGN="TOP" style="text-align: center; width: 50%; border:1px solid; border-collapse: collapse; padding: 10px; margin: 0; height: 100px;">
+                    <p> ยินดีรับข้อเสนอของ บริษัท แอดเพย์ เซอร์วิสพอยท์ จำกัด </p>
+                    <br><br><br><br><br>
+                    <p> ผู้อนุมัติสั่งซื้อ / Customer Signature </p>
+                    <p> วันที่&nbsp;................................................................................</p>
+                </td>
+                <td VALIGN="TOP" style="text-align: center; width: 50%; border:1px solid; border-collapse: collapse; padding: 10px; margin: 0; height: 100px;">
+                    <p>ขอแสงความนับถือ</p>
+                    <br><br><br><br><br>
+                    <p>ผู้มีอำนาจลงนาม / Authorlzed Siganture</p>
 
-                <!-- วันที่ในใบเสนอราคา -->
-                <p>วันที่ 11 มกราคม 2564</p>
-            </td>
+                    <!-- วันที่ในใบเสนอราคา -->
+                    <p>วันที่ 11 มกราคม 2564</p>
+                </td>
 
-    </table>
-</div>
+        </table>
+    </div>
 
-</div>
-
-';
+</div>';
 }
 ?>
