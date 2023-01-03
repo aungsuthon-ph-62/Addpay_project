@@ -14,14 +14,9 @@ if (isset($_POST['action'])) {
         $input_quoin_no = mysqli_real_escape_string($conn, trim($_POST['input_quoin_no']));
         $input_quoin_date = mysqli_real_escape_string($conn, trim($_POST['input_quoin_date']));
         $input_quoin_name = mysqli_real_escape_string($conn, trim($_POST['input_quoin_name']));
-        $input_quoin_address = mysqli_real_escape_string($conn, trim($_POST['input_quoin_address']));
-        $input_quoin_numtax = mysqli_real_escape_string($conn, trim($_POST['input_quoin_numtax']));
-        $input_quoin_sum = mysqli_real_escape_string($conn, trim($_POST['input_quoin_sum']));
-        $input_quoin_specialdis = mysqli_real_escape_string($conn, trim($_POST['input_quoin_specialdis']));
-        $input_quoin_afterdis = mysqli_real_escape_string($conn, trim($_POST['input_quoin_afterdis']));
-        $input_quoin_vat = mysqli_real_escape_string($conn, trim($_POST['input_quoin_vat']));
-        $input_quoin_deli = mysqli_real_escape_string($conn, trim($_POST['input_quoin_deli']));
-        $input_quoin_total = mysqli_real_escape_string($conn, trim($_POST['input_quoin_total']));
+        $input_quoin_file = mysqli_real_escape_string($conn, trim($_POST['input_quoin_file']));
+        $input_quoin_status = mysqli_real_escape_string($conn, trim($_POST['input_quoin_status']));
+        $input_quoin_remark = mysqli_real_escape_string($conn, trim($_POST['input_quoin_remark']));
         $uid = 1;
 
         $quoin_no_check_query = "SELECT * FROM quotation_in WHERE quoin_no =  '$input_quoin_no'";
@@ -33,8 +28,8 @@ if (isset($_POST['action'])) {
             header("Location: quotation_in_add.php");
             exit;
         } else {
-            $query = "INSERT INTO quotation_in (quoin_no, quoin_date, quoin_name, quoin_address, quoin_numtax, quoin_sum, quoin_specialdis, quoin_afterdis, quoin_vat, quoin_deli, quoin_total, quoin_create, quoin_uid)
-                VALUES ('$input_quoin_no', '$input_quoin_date', '$input_quoin_name', '$input_quoin_address', '$input_quoin_numtax', '$input_quoin_sum', '$input_quoin_specialdis', '$input_quoin_afterdis', '$input_quoin_vat', '$input_quoin_deli', '$input_quoin_total', '$date', '$uid')";
+            $query = "INSERT INTO quotation_in (quoin_no, quoin_date, quoin_name, quoin_file, quoin_status, quoin_remark, quoin_create, quoin_uid)
+                VALUES ('$input_quoin_no', '$input_quoin_date', '$input_quoin_name', '$input_quoin_file', '$input_quoin_status', '$input_quoin_remark', '$date', '$uid')";
 
             if ($conn->query($query) === TRUE) {
                 $_SESSION['success'] = "บันทึกสำเร็จ!";
@@ -118,39 +113,40 @@ if (isset($_POST['action'])) {
 
             <div class="row g-3 mb-3">
                 <div class="col-md-3 ">
-                    <label for="input_quoin_address" class="col-form-label">อัพโหลดไฟล์ :</label>
+                    <label for="input_quoin_file" class="col-form-label">อัพโหลดไฟล์ :</label>
                 </div>
                 <div class="col-md-8">
-                    <input class="form-control" type="file" id="formFile">
+                    <input class="form-control" type="file" id="input_quoin_file" name="input_quoin_file" required>
                 </div>
             </div>
             <div class="row g-3 align-items-center mb-3">
                 <div class="col-md-3 ">
-                    <label for="input_quoin_numtax" class="col-form-label">สถานะ :</label>
+                    <label for="input_quoin_status" class="col-form-label">สถานะ :</label>
                 </div>
 
                 <div class="col-md-8">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                        <label class="form-check-label" for="inlineRadio1">1</label>
+                        <input class="form-check-input" type="radio" name="input_quoin_status" id="input_quoin_status0" value="อนุมัติ" required>
+                        <label class="form-check-label" for="input_quoin_status0">อนุมัติ</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                        <label class="form-check-label" for="inlineRadio2">2</label>
+                        <input class="form-check-input" type="radio" name="input_quoin_status" id="input_quoin_status1" value="รออนุมัติ" required>
+                        <label class="form-check-label" for="input_quoin_status1">รออนุมัติ</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                        <label class="form-check-label" for="inlineRadio2">2</label>
+                        <input class="form-check-input" type="radio" name="input_quoin_status" id="input_quoin_status2" value="ไม่อนุมัติ" required>
+                        <label class="form-check-label" for="input_quoin_status2">ไม่อนุมัติ</label>
                     </div>
                 </div>
             </div>
 
 
+
             <div class="mx-auto d-flex justify-content-end">
-                <button type="reset" class="col-md-3 btn btn-inline-danger btn btn-inline-success p-2 mt-2 rounded-pill fs-5 fw-bold"><i class="fa-solid fa-eraser"></i> ล้างข้อมูล</button>
-                <button type="submit" name="action" value="create_quoin" class="ms-3 col-md-3 btn btn-inline-success p-2 mt-2 rounded-pill fs-5 fw-bold">บันทึก
+                <button type="reset" class="col-md-3 btn btn-outline-danger btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold"><i class="fa-solid fa-eraser"></i> ล้างข้อมูล</button>
+                <button type="submit" name="action" value="create_quotation" class="ms-3 col-md-3 btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold">บันทึก
                     <i class="fa-solid fa-angles-right"></i></button>
-                <input type="hidden" name="total_item" id="total_item" value="1" />
+
             </div>
 
         </form>
