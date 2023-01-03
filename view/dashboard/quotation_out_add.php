@@ -99,8 +99,8 @@ table tr td:first-child::before {
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a
-                        href="../dashboard/quotation_out_list.php">ใบเสนอราคา</a></li>
-                <li class="breadcrumb-item active" aria-current="page">สร้างใบเสนอราคา</li>
+                        href="../dashboard/quotation_out_list.php">ใบเสนอราคาออก</a></li>
+                <li class="breadcrumb-item active" aria-current="page">สร้างใบเสนอราคาออก</li>
             </ol>
         </nav>
         <hr>
