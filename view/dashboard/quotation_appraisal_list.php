@@ -1,6 +1,5 @@
 <?php
 
-
 if (isset($_GET["deletequo"])) {
     $id = $_GET["deletequo"];
 
@@ -98,9 +97,37 @@ if (isset($_GET["deletequo"])) {
                                         </td>
                                     </tr>
                                     ';
-                    }
-                    ?>
-                </table>
+                            }
+                            ?>
+                        </table>
+                    </div>
+                </div>
+                <!-- Data table -->
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $('#quotationTable').DataTable();
+
+                        $(document).on('click', '.deletequo', function() {
+                            var id = $(this).attr("id");
+                            var show_quo_no = $(this).attr("data-quo-no");
+                            swal.fire({
+                                title: 'ต้องการลบใบเสนอราคากลางนี้ !',
+                                text: "เลขที่ใบเสนอราคากลาง : " + show_quo_no,
+                                type: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#d33',
+                                cancelButtonColor: '#3085d6',
+                                confirmButtonText: 'yes!',
+                                cancelButtonText: 'no'
+                            }).then((result) => {
+                                if (result.value) {
+                                    window.location.href = "?deletequo=" + id;
+                                }
+                            });
+                        });
+                    });
+                </script>
+                <!-- Data table -->
             </div>
         </div>
         <!-- Data table -->

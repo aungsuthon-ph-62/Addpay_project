@@ -1,27 +1,26 @@
 <?php
 
+// $uid = $_SESSION['id'];
+
 if (isset($_POST['action'])) {
     if ($_POST['action'] == 'create_quotation') {
 
         date_default_timezone_set('Asia/Bangkok');
         $date = date("Y-m-d H:i:s");
         global $conn;
-
-        $input_quo_no = mysqli_real_escape_string($conn, trim($_POST['input_quo_no']));
-        $input_quo_date = mysqli_real_escape_string($conn, trim($_POST['input_quo_date']));
-        $input_quo_namepj = mysqli_real_escape_string($conn, trim($_POST['input_quo_namepj']));
-        $input_quo_name = mysqli_real_escape_string($conn, trim($_POST['input_quo_name']));
-        $input_quo_address = mysqli_real_escape_string($conn, trim($_POST['input_quo_address']));
-        $input_quo_remark = mysqli_real_escape_string($conn, trim($_POST['input_quo_remark']));
-        $input_quo_sum = mysqli_real_escape_string($conn, trim($_POST['input_quo_sum']));
-        $input_quo_specialdis = mysqli_real_escape_string($conn, trim($_POST['input_quo_specialdis']));
-        $input_quo_afterdis = mysqli_real_escape_string($conn, trim($_POST['input_quo_afterdis']));
-        $input_quo_vat = mysqli_real_escape_string($conn, trim($_POST['input_quo_vat']));
-        $input_quo_total = mysqli_real_escape_string($conn, trim($_POST['input_quo_total']));
-        $input_quo_texttotal = mysqli_real_escape_string($conn, trim($_POST["input_quo_texttotal"]));
-        $input_quo_create = $date;
-        $input_quo_uid = 1;
-
+    
+        $input_quo_no= mysqli_real_escape_string($conn,trim($_POST['input_quo_no']));
+        $input_quo_date= mysqli_real_escape_string($conn,trim($_POST['input_quo_date']));
+        $input_quo_namepj= mysqli_real_escape_string($conn,trim($_POST['input_quo_namepj']));
+        $input_quo_name= mysqli_real_escape_string($conn,trim($_POST['input_quo_name']));
+        $input_quo_address= mysqli_real_escape_string($conn,trim($_POST['input_quo_address']));
+        $input_quo_sum= mysqli_real_escape_string($conn,trim($_POST['input_quo_sum']));
+        $input_quo_specialdis= mysqli_real_escape_string($conn,trim($_POST['input_quo_specialdis']));
+        $input_quo_afterdis= mysqli_real_escape_string($conn,trim($_POST['input_quo_afterdis']));
+        $input_quo_vat= mysqli_real_escape_string($conn,trim($_POST['input_quo_vat']));
+        $input_quo_total= mysqli_real_escape_string($conn,trim($_POST['input_quo_total']));
+        $uid = 1;
+        
         $quo_no_check_query = "SELECT * FROM quotation_appraisal WHERE quo_no =  $input_quo_no";
         $query = $conn->query($quo_no_check_query);
         $check = $query->fetch_assoc();
@@ -31,24 +30,22 @@ if (isset($_POST['action'])) {
             header("Location: quotation_appraisal_add.php");
             exit;
         } else {
-            $query = "INSERT INTO quotation_appraisal (quo_no, quo_date, quo_namepj, quo_name, quo_address, quo_remark, quo_sum, quo_specialdis, quo_afterdis, quo_vat, quo_total, quo_texttotal, quo_create, quo_uid)
-                VALUES ('$input_quo_no', '$input_quo_date', '$input_quo_namepj', '$input_quo_name', '$input_quo_address',  '$input_quo_remark', '$input_quo_sum', '$input_quo_specialdis', '$input_quo_afterdis', '$input_quo_vat', '$input_quo_total', '$input_quo_texttotal', '$input_quo_create', '$input_quo_uid')";
-
+            $query = "INSERT INTO quotation_appraisal (quo_no, quo_date, quo_namepj, quo_name, quo_address, quo_sum, quo_specialdis, quo_afterdis, quo_vat, quo_total, quo_create, quo_uid)
+                VALUES ('$input_quo_no', '$input_quo_date', '$input_quo_namepj', '$input_quo_name', '$input_quo_address', '$input_quo_sum', '$input_quo_specialdis', '$input_quo_afterdis', '$input_quo_vat', '$input_quo_total', '$date', '$uid')";
+                
             if ($conn->query($query) === TRUE) {
 
                 $last_id = $conn->insert_id;
-
-                for ($count = 0; $count < $_POST["total_item"]; $count++) {
-
-                    $item_name = mysqli_real_escape_string($conn, trim($_POST['item_name'][$count]));
-                    $item_amount = mysqli_real_escape_string($conn, trim($_POST['item_amount'][$count]));
-                    $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
-                    $total_price = mysqli_real_escape_string($conn, trim($_POST['total_price'][$count]));
-                    $input_quode_create = $date;
-                    $input_quode_uid = 1;
-
-                    $query = "INSERT INTO quotation_appraisal_details (quooutde_quooutid, quode_item, quode_amount, quode_price, quode_result, quode_create, quode_uid)
-                        VALUES ('$last_id', '$item_name', '$item_amount', '$item_price', '$total_price', '$input_quode_create', '$input_quode_uid')";
+    
+                for($count=0; $count<$_POST["total_item"]; $count++){
+                
+                    $item_name= mysqli_real_escape_string($conn,trim($_POST['item_name'][$count]));
+                    $item_amount= mysqli_real_escape_string($conn,trim($_POST['item_amount'][$count]));
+                    $item_price= mysqli_real_escape_string($conn,trim($_POST['item_price'][$count]));
+                    $total_price= mysqli_real_escape_string($conn,trim($_POST['total_price'][$count]));
+        
+                    $query = "INSERT INTO quotation_appraisal_details (quode_quoid, quode_item, quode_amount, quode_price, quode_result, quode_create, quode_uid)
+                        VALUES ('$last_id', '$item_name', '$item_amount', '$item_price', '$total_price', '$date', '$uid')";
                     $conn->query($query);
                 }
 
@@ -56,7 +53,6 @@ if (isset($_POST['action'])) {
                 header("Location: quotation_appraisal_list.php");
                 exit;
             } else {
-                echo "Error: " . $query . "<br>" . $conn->error;
                 $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
                 header("Location: quotation_appraisal_add.php");
                 exit;
@@ -67,6 +63,7 @@ if (isset($_POST['action'])) {
 }
 
 ?>
+
 <style>
     table {
         counter-reset: rowNumber;
@@ -105,8 +102,10 @@ if (isset($_POST['action'])) {
                     <label for="input_quo_no" class="col-form-label">เลขที่ No.</label>
                 </div>
                 <div class="col-auto">
-                    <input type="number" id="input_quo_no" name="input_quo_no" class="form-control " required>
+                    <input type="text" id="input_quo_no" name="input_quo_no" class="form-control " 
+                    pattern="[0-9]{1,}" title="กรุณากรอกตัวเลข 0-9 อย่างน้อย 1 ตัว"required>
                 </div>
+
             </div>
             <div class="row g-3 align-items-center mb-3">
                 <div class="col-md-3">
@@ -181,14 +180,6 @@ if (isset($_POST['action'])) {
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="row g-3  mb-3">
-                        <div class="col-md-3 ">
-                            <label for="input_quo_remark" class="col-form-label">หมายเหตุ :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <textarea class="form-control" id="input_quo_remark" name="input_quo_remark" rows="3"></textarea>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="row g-3 align-items-center mb-3">
@@ -238,16 +229,6 @@ if (isset($_POST['action'])) {
                             <input type="number" id="input_quo_total" name="input_quo_total" class="form-control " placeholder="0.00" readonly>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row g-3  mb-3">
-                <div class="col-md-3">
-                    <label for="input_quo_texttotal" class="col-form-label">จำนวนเงินตัวอักษร : <br> The Sum Of
-                        Bahts
-                    </label>
-                </div>
-                <div class="col-md-9">
-                    <textarea class="form-control" id="input_quo_texttotal" name="input_quo_texttotal" rows="3" required></textarea>
                 </div>
             </div>
 
