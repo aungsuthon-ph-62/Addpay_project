@@ -70,7 +70,7 @@ function edit_quoout()
     $input_quoout_total= mysqli_real_escape_string($conn,trim($_POST['input_quoout_total']));
     $uid = 1;
     
-    $query1 = "UPDATE quotation_out SET quoout_no='$input_quoout_no', quoout_date='$input_quoout_date',quoout_name='$input_quo_name',
+    $query1 = "UPDATE quotation_out SET quoout_no='$input_quoout_no', quoout_date='$input_quoout_date',quoout_name='$input_quoout_name',
         quoout_address='$input_quoout_address', quoout_numtax='$input_quoout_numtax', quoout_sum='$input_quoout_sum',
         quoout_specialdis='$input_quoout_specialdis', quoout_afterdis='$input_quoout_afterdis', quoout_vat='$input_quoout_vat',
         quoout_total='$input_quoout_total',quoout_update='$date', quoout_uid='$uid' WHERE quoout_id='$id'";
@@ -97,7 +97,6 @@ function edit_quoout()
         
     } else {
         
-        echo "Error: " . $query . "<br>" . $conn->error;
         $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
         header('Location: quotation_out_edit.php?editquoout='.$id);
         exit;
