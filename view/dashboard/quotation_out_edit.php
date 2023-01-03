@@ -70,12 +70,12 @@ function edit_quoout()
     $input_quoout_total= mysqli_real_escape_string($conn,trim($_POST['input_quoout_total']));
     $uid = 1;
     
-    $query1 = "UPDATE quotation_out SET quoout_no='$input_quoout_no', quoout_date='$input_quoout_date',quo_name='$input_quoout_name',
+    $query1 = "UPDATE quotation_out SET quoout_no='$input_quoout_no', quoout_date='$input_quoout_date',quoout_name='$input_quo_name',
         quoout_address='$input_quoout_address', quoout_numtax='$input_quoout_numtax', quoout_sum='$input_quoout_sum',
         quoout_specialdis='$input_quoout_specialdis', quoout_afterdis='$input_quoout_afterdis', quoout_vat='$input_quoout_vat',
-        quo_total='$input_quoout_total',quoout_update='$date', quoout_uid='$uid' WHERE quoout_id='$id'";
+        quoout_total='$input_quoout_total',quoout_update='$date', quoout_uid='$uid' WHERE quoout_id='$id'";
                 
-    $query2 = "DELETE FROM quotation_out_details WHERE quooutde_quoid = '$id'";
+    $query2 = "DELETE FROM quotation_out_details WHERE quooutde_quooutid = '$id'";
     
     if ($conn->query($query1) === TRUE && $conn->query($query2) === TRUE) {
 
@@ -97,6 +97,7 @@ function edit_quoout()
         
     } else {
         
+        echo "Error: " . $query . "<br>" . $conn->error;
         $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
         header('Location: quotation_out_edit.php?editquoout='.$id);
         exit;
@@ -178,7 +179,7 @@ table tr td:first-child::before {
                     <label for="input_quoout_address" class="col-form-label">ที่อยู่ :</label>
                 </div>
                 <div class="col-md-8">
-                    <textarea class="form-control" id="input_quoout_address" name="input_quo_address" rows="3"
+                    <textarea class="form-control" id="input_quoout_address" name="input_quoout_address" rows="3"
                         required><?= $row['quoout_address']; ?></textarea>
                 </div>
             </div>
@@ -268,7 +269,7 @@ table tr td:first-child::before {
 
                         <div class="col-md-5">
                             <input type="number" id="input_quoout_sum" name="input_quoout_sum" class="form-control "
-                                placeholder="0.00" readonly value="<?= $row['quo_sum'] ?>">
+                                placeholder="0.00" readonly value="<?= $row['quoout_sum'] ?>">
                         </div>
                     </div>
                     <div class="row g-3 align-items-center mb-3">

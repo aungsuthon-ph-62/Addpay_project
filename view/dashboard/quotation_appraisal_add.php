@@ -22,7 +22,6 @@ if (isset($_POST['action'])) {
         $input_quo_afterdis= mysqli_real_escape_string($conn,trim($_POST['input_quo_afterdis']));
         $input_quo_vat= mysqli_real_escape_string($conn,trim($_POST['input_quo_vat']));
         $input_quo_total= mysqli_real_escape_string($conn,trim($_POST['input_quo_total']));
-
         $uid = 1;
         
         $quo_no_check_query = "SELECT * FROM quotation_appraisal WHERE quo_no =  $input_quo_no";
@@ -35,7 +34,7 @@ if (isset($_POST['action'])) {
             exit;
         } else {
             $query = "INSERT INTO quotation_appraisal (quo_no, quo_date, quo_namepj, quo_name, quo_address, quo_sum, quo_specialdis, quo_afterdis, quo_vat, quo_total, quo_create, quo_uid)
-                VALUES ('$input_quo_no', '$input_quo_date', '$input_quo_namepj', '$input_quo_name', '$input_quo_address', '$input_quo_sum', '$input_quo_specialdis', '$input_quo_afterdis', '$input_quo_vat', '$input_quo_total', '$input_quo_create', '$uid')";
+                VALUES ('$input_quo_no', '$input_quo_date', '$input_quo_namepj', '$input_quo_name', '$input_quo_address', '$input_quo_sum', '$input_quo_specialdis', '$input_quo_afterdis', '$input_quo_vat', '$input_quo_total', '$date', '$uid')";
                 
             if ($conn->query($query) === TRUE) {
                 
@@ -58,7 +57,6 @@ if (isset($_POST['action'])) {
                 exit;
                 
             } else {
-                echo "Error: " . $query . "<br>" . $conn->error;
                 $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
                 header("Location: quotation_appraisal_add.php");
                 exit;
