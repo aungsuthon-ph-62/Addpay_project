@@ -32,7 +32,7 @@ if (isset($_POST['action'])) {
             header("Location: quotation_out_add.php");
             exit;
         } else {
-            $query = "INSERT INTO quotation_out (quoout_no, quoout_date, quoout_name, quoout_address, quoout_numtax, quoout_sum, quoout_specialdis, quoout_afterdis, quoout_vat, quoout_deli, quoout_total, quoout_texttotal, quoout_create, quoout_uid)
+            $query = "INSERT INTO quotation_out (quoout_no, quoout_date, quoout_name, quoout_address, quoout_numtax, quoout_sum, quoout_specialdis, quoout_afterdis, quoout_vat, quoout_deli, quoout_total, quoout_create, quoout_uid)
                 VALUES ('$input_quoout_no', '$input_quoout_date', '$input_quoout_name', '$input_quoout_address', '$input_quoout_numtax', '$input_quoout_sum', '$input_quoout_specialdis', '$input_quoout_afterdis', '$input_quoout_vat', '$input_quoout_deli', '$input_quoout_total', '$date', '$uid')";
                 
             if ($conn->query($query) === TRUE) {
@@ -148,7 +148,7 @@ table tr td:first-child::before {
 
                 <div class="col-md-8">
                     <input type="number" id="input_quoout_numtax" name="input_quoout_numtax" class="form-control "
-                        pattern="[0-9]{13}" title="กรุณากรอกตัวเลข 0-9 จำนวน 13 หลัก ไม่มี (-)" required>
+                        pattern="[0-9]{13}" title="กรุณากรอกตัวเลข 0-9 จำนวน 13 หลัก ไม่มี (-)">
                 </div>
             </div>
             <div class="row g-3 align-items-center mb-3">

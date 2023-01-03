@@ -191,7 +191,7 @@ table tr td:first-child::before {
 
                 <div class="col-md-8">
                     <input type="number" id="input_quoout_numtax" name="input_quoout_numtax" class="form-control "
-                        pattern="[0-9]{13}" title="กรุณากรอกตัวเลข 0-9 จำนวน 13 หลัก ไม่มี (-)" required
+                        pattern="[0-9]{13}" title="กรุณากรอกตัวเลข 0-9 จำนวน 13 หลัก ไม่มี (-)"
                         value="<?= $row['quoout_numtax'] ?>">
                 </div>
             </div>
