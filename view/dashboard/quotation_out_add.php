@@ -19,6 +19,7 @@ if (isset($_POST['action'])) {
         $input_quoout_specialdis= mysqli_real_escape_string($conn,trim($_POST['input_quoout_specialdis']));
         $input_quoout_afterdis= mysqli_real_escape_string($conn,trim($_POST['input_quoout_afterdis']));
         $input_quoout_vat= mysqli_real_escape_string($conn,trim($_POST['input_quoout_vat']));
+        $input_quoout_deli= mysqli_real_escape_string($conn,trim($_POST['input_quoout_deli']));
         $input_quoout_total= mysqli_real_escape_string($conn,trim($_POST['input_quoout_total']));
         $uid = 1;
         
@@ -31,8 +32,8 @@ if (isset($_POST['action'])) {
             header("Location: quotation_out_add.php");
             exit;
         } else {
-            $query = "INSERT INTO quotation_out (quoout_no, quoout_date, quoout_name, quoout_address, quoout_numtax, quoout_sum, quoout_specialdis, quoout_afterdis, quoout_vat, quoout_total, quoout_texttotal, quoout_create, quoout_uid)
-                VALUES ('$input_quoout_no', '$input_quoout_date', '$input_quoout_name', '$input_quoout_address', '$input_quoout_numtax', '$input_quoout_sum', '$input_quoout_specialdis', '$input_quoout_afterdis', '$input_quoout_vat', '$input_quoout_total', '$date', '$uid')";
+            $query = "INSERT INTO quotation_out (quoout_no, quoout_date, quoout_name, quoout_address, quoout_numtax, quoout_sum, quoout_specialdis, quoout_afterdis, quoout_vat, quoout_deli, quoout_total, quoout_texttotal, quoout_create, quoout_uid)
+                VALUES ('$input_quoout_no', '$input_quoout_date', '$input_quoout_name', '$input_quoout_address', '$input_quoout_numtax', '$input_quoout_sum', '$input_quoout_specialdis', '$input_quoout_afterdis', '$input_quoout_vat', '$input_quoout_deli', '$input_quoout_total', '$date', '$uid')";
                 
             if ($conn->query($query) === TRUE) {
                 
@@ -195,6 +196,16 @@ table tr td:first-child::before {
             </div>
             <div class="row">
                 <div class="col-md-6">
+                    <div class="row g-3 align-items-center mb-3">
+                        <div class="col-md-6 ">
+                            <label for="input_quoout_deli" class="col-form-label ">ค่าขนส่ง(บาท)
+                                :</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="number" id="input_quoout_deli" name="input_quoout_deli" class="form-control "
+                                placeholder="0.00" title="กรุณากรอกค่าขนส่ง หากมี" value="<?= $row['quoout_deli'] ?>">
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="row g-3 align-items-center mb-3">
@@ -316,10 +327,8 @@ table tr td:first-child::before {
                     if (quantity > 0) {
                         price = $('#item_price' + j).val();
                         if (price > 0) {
-                            total_price = parseFloat(quantity) * parseFloat(price);
-                            $('#total_price' + j).val(
-                                total_price
-                                .toFixed(2));
+                            total_price = (parseFloat(quantity) * parseFloat(price));
+                            $('#total_price' + j).val(total_price.toFixed(2));
 
                             final_total_price = (final_total_price + total_price);
 
@@ -330,14 +339,21 @@ table tr td:first-child::before {
                 var discount = 0;
                 var afterdis = 0;
                 var vat7per = 0;
-                var aftervat = 0;
+                var aftervd = 0;
+                var afterdeli = 0;
+                var deli = 0;
                 discount = $('#input_quoout_specialdis').val();
-                afterdis = final_total_price - discount;
+                deli = $('#input_quoout_deli').val();
+                afterdis = (final_total_price - discount);
                 $('#input_quoout_afterdis').val(afterdis.toFixed(2));
                 vat7per = (afterdis * 0.07);
                 $('#input_quoout_vat').val(vat7per.toFixed(2));
-                aftervat = (afterdis + vat7per);
-                $('#input_quoout_total').val(aftervat.toFixed(2));
+                aftervd = (afterdis + vat7per);
+                if (deli > 0) {
+                    aftervd = (aftervd + parseFloat(deli));
+                }
+
+                $('#input_quoout_total').val(aftervd.toFixed(2));
             }
 
             $(document).on('change', '.item_price', function() {
@@ -349,6 +365,10 @@ table tr td:first-child::before {
             });
 
             $(document).on('change', '#input_quoout_specialdis', function() {
+                cal_final_total(count);
+            });
+
+            $(document).on('change', '#input_quoout_deli', function() {
                 cal_final_total(count);
             });
 
