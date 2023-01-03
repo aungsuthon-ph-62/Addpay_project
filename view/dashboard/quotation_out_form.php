@@ -1,7 +1,7 @@
 <?php
 include('./PDF_set/PDF_conn.php');
 include('./PDF_set/readprice.php');
-$id = $_GET["pdfquo_id"];
+$id = $_GET["pdfquoout_id"];
 ?>
 
 <?php
@@ -39,7 +39,7 @@ $mpdf = new \Mpdf\Mpdf([
 // $mpdf->Output('./quotation_PDF/quotation_appraisal0.pdf'); //link web of file pdf
 
 
-$sql = "SELECT * FROM `quotation_appraisal` WHERE quo_id = '$id'";
+$sql = "SELECT * FROM `quotation_out` WHERE quoout_id = '$id'";
 $result = mysqli_query($conn, $sql);
 while ($infoquo = mysqli_fetch_array($result)) {
     $head = '
@@ -70,14 +70,14 @@ while ($infoquo = mysqli_fetch_array($result)) {
                 <td  style="text-align: right; width: 500px; border-collapse: collapse; padding: 0; margin: 0;">เลขที่/No.</td>
                 
                 <td class="underline" style="text-align: center; width: 142px;">
-                    <p class="text-left"> <span>&nbsp;' . $infoquo['quo_no']  . ' &nbsp;&nbsp;</span> </p>
+                    <p class="text-left"> <span>&nbsp;' . $infoquo['quoout_no']  . ' &nbsp;&nbsp;</span> </p>
                 </td>
 
             </tr>
             <tr >
                 <td style="text-align: right; border-collapse: collapse; padding: 0; margin: 0;">วันที่/Date.</td>
                 <td class="underline" style="text-align: center;">
-                    <p class="text-left"> <span>&nbsp;' . $infoquo['quo_date']  . ' &nbsp;&nbsp;</span> </p>
+                    <p class="text-left"> <span>&nbsp;' . $infoquo['quoout_date']  . ' &nbsp;&nbsp;</span> </p>
                 </td>
                 
             </tr>
@@ -85,32 +85,34 @@ while ($infoquo = mysqli_fetch_array($result)) {
     </div>
 
     <div>
-    <table style="margin-top: 5px;">
-        <tr>
-            <td style="width:150px;">
-                <p class="text-left ">โครงการ</p>
-            </td>
-            <td class="underline" style="width:692px;">
-                <p class="text-left "> <span>&nbsp; ' . $infoquo['quo_namepj'] . ' &nbsp;&nbsp;</span> </p>
-            </td>
-        </tr>
-        <tr>
-            <td style="width:150px;">
-                <p class="text-left ">ลูกค้า /หน่วยงาน </p>
-            </td>
-            <td class="underline" style="width:692px;">
-                <p class="text-left "> <span>&nbsp;' . $infoquo['quo_name'] . ' &nbsp;&nbsp;</span> </p>
-            </td>
-        </tr>
-        <tr>
-            <td style="width:150px;">
-                <p class="text-left ">ที่อยู่ </p>
-            </td>
-            <td class="underline" style="width:692px;">
-                <p class="text-left"> <span>&nbsp;' . $infoquo['quo_address'] . ' &nbsp;&nbsp;</span> </p>
-            </td>
-        </tr>
-    </table>
+        <table style="margin-top: 5px;">
+            <tr>
+                <td style="width:200px;">
+                    <p class="text-left ">ชื่อ ลูกค้า :</p>
+                </td>
+                <td class="underline" style="width:642px;">
+                    <p class="text-left "> <span>&nbsp; ' . $infoquo['quoout_name'] . ' &nbsp;&nbsp;</span> </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="width:200px;">
+                    <p class="text-left ">ที่อยู่ :</p>
+                </td>
+                <td class="underline" style="width:642px;">
+                    <p class="text-left"> <span>&nbsp;' . $infoquo['quoout_address'] . ' &nbsp;&nbsp;</span> </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="width:200px;">
+                    <p class="text-left ">เลขประจำตัวผู้เสียภาษี : </p>
+                </td>
+                <td class="underline" style="width:642px;">
+                    <p class="text-left "> <span>&nbsp;' . $infoquo['quoout_numtax'] . ' &nbsp;&nbsp;</span> </p>
+                </td>
+            </tr>
+            
+        </table>
+    </div>
 </div>
 
 
@@ -128,25 +130,25 @@ while ($infoquo = mysqli_fetch_array($result)) {
 }
 
 
-$sql = "SELECT * FROM `quotation_appraisal_details` WHERE quode_quoid = '$id';";
+$sql = "SELECT * FROM `quotation_out_details` WHERE quooutde_quooutid = '$id';";
 $result = mysqli_query($conn, $sql);
 $contentitems = "";
 if (mysqli_num_rows($result) > 0) {
     $i = 0;
     while ($infoquoitems = mysqli_fetch_assoc($result)) {
         $i++;
-        $contentitems .= '  <tr>
+        $contentitems .= '<tr>
         <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $i . '</td>
-        <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:50px;">' . $infoquoitems['quode_item'] . '</td>
-        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $infoquoitems['quode_amount'] . '</td>
-        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' . number_format($infoquoitems['quode_price'],2) . '</td>
-        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' . number_format($infoquoitems['quode_result'],2) . '</td>
+        <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:50px;">' . $infoquoitems['quooutde_item'] . '</td>
+        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $infoquoitems['quooutde_amount'] . '</td>
+        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' . number_format($infoquoitems['quooutde_price'],2) . '</td>
+        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' . number_format($infoquoitems['quooutde_result'],2) . '</td>
     </tr>';
     }
 }
 
 $head1 = ' ';
-$sql = "SELECT * FROM `quotation_appraisal` WHERE quo_id = '$id'";
+$sql = "SELECT * FROM `quotation_out` WHERE quoout_id = '$id'";
 $result = mysqli_query($conn, $sql);
 $contentsum = "";
 if (mysqli_num_rows($result) > 0) {
@@ -180,24 +182,24 @@ if (mysqli_num_rows($result) > 0) {
             </td>
 
             <td style="text-align: right; border-left: 0px solid;" colspan="2">รวมเงิน</td>
-            <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quo_sum'],2) . '</td>
+            <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quoout_sum'],2) . '</td>
         </tr>
 
             <tr style="background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
-                <td style="text-align: right; border-left: 0px solid; color:red;" colspan="2">หัวส่วนลดพิเศษ</td>
-                <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quo_specialdis'],2) . '</td>
+                <td style="text-align: right; border-left: 0px solid; color:red;" colspan="2">หักส่วนลดพิเศษ</td>
+                <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quoout_specialdis'],2) . '</td>
             </tr>
             <tr style="background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
                 <td style="text-align: right; border-left: 0px solid;" colspan="2">ยอดรวมหลังหักส่วนลด</td>
-                <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quo_afterdis'],2) . '</td>
+                <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quoout_afterdis'],2) . '</td>
             </tr>
             <tr style="background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
                 <td style="text-align: right; border-left: 0px solid;" colspan="2">ภาษีมูลค่าเพิ่ม 7%</td>
-                <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quo_vat'],2) . '</td>
+                <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quoout_vat'],2) . '</td>
             </tr>
             <tr style=" background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
                 <td style="text-align: right; border-left: px solid;" colspan="2">จำนวนเงินรวมทั้งสิน</td>
-                <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quo_total'],2) . '</td>
+                <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quoout_total'],2) . '</td>
             </tr>
 
         </tr>
@@ -210,7 +212,7 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 $head2 = ' ';
-$sql = "SELECT quo_total FROM `quotation_appraisal` WHERE quo_id = '$id'";
+$sql = "SELECT quoout_total FROM `quotation_out` WHERE quoout_id = '$id'";
 $result = mysqli_query($conn, $sql);
 $footer = "";
 if (mysqli_num_rows($result) > 0) {
@@ -220,7 +222,7 @@ if (mysqli_num_rows($result) > 0) {
         <table style="text-align: left; width:842px; border:1px solid; border-collapse: collapse; padding: 0; margin-top: 10px;">
             <tr style="border-bottom: 1px solid;">
                 <td VALIGN="TOP" style="text-align: left;  width: 20%; padding:5px 10px;">จำนวนเงินตัวอักษร <br> The Sum Of Bahts </td>
-                <td VALIGN="TOP" style="text-align: left;  width: 80%; padding:5px 10px;">' . Convert($infoquotext['quo_total']) . '</td>
+                <td VALIGN="TOP" style="text-align: left;  width: 80%; padding:5px 10px;">' . Convert($infoquotext['quoout_total']) . '</td>
             </tr>
         </table>
         <!-- footer -->
@@ -258,7 +260,7 @@ $mpdf->WriteHTML($head2);
 
 mysqli_close($conn);
 
-$mpdf->Output('./quotation_PDF/quotation_appraisal0.pdf');
+$mpdf->Output('./quotation_out_PDF/quotation_out0.pdf');
 
 
 
@@ -269,12 +271,12 @@ $mpdf->Output('./quotation_PDF/quotation_appraisal0.pdf');
     <div class="container py-md-5 px-md-4" style="width: 100%; ">
         <p class="text-end text-danger ">** โปรดตรวจสอบความถูกต้องของข้อมูลก่อนกด พิมพ์เอกสาร</p>
         <div class="mx-auto d-flex justify-content-end ">
-            <a class="btn btn-outline-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold" role="button" href="./quotation_PDF/quotation_appraisal0.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
-            <a class="btn btn-outline-danger px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold ms-3" role="button" href="./quotation_appraisal_list.php"><i class="fa-regular fa-rectangle-xmark"></i> ยกเลิก</a>
+            <a class="btn btn-outline-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold" role="button" href="./quotation_out_PDF/quotation_out0.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
+            <a class="btn btn-outline-danger px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold ms-3" role="button" href="./quotation_out_list.php"><i class="fa-regular fa-rectangle-xmark"></i> ยกเลิก</a>
         </div>
         <hr>
         <?php
-        include("./quotation_PDF/quotation_content.php");
+        include("./quotation_out_PDF/quotation_out_content.php");
         ?>
     </div>
 

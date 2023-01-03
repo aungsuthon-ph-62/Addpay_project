@@ -3,18 +3,18 @@ session_start();
 include("../../layout/head.php");
 require_once("../../php/conn.php");
 
-if (isset($_GET["deletequo"])) {
-    $id = $_GET["deletequo"];
+if (isset($_GET["deleteinvbill"])) {
+    $id = $_GET["deleteinvbill"];
 
-    $sql = "DELETE FROM quotation_appraisal WHERE quo_id = '$id'";
+    $sql = "DELETE FROM invoicebill WHERE invbill_id = '$id'";
     $query = $conn->query($sql);
     if ($query) {
-        $_SESSION['success'] = "ลบใบเสนอราคากลางสำเร็จ!";
-        header("Location: quotation_appraisal_list.php");
+        $_SESSION['success'] = "ลบใบแจ้งหนี้/ใบวางบิลสำเร็จ!";
+        header("Location: invoicebill_list.php");
         exit;
     }
     $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-    header("Location: quotation_appraisal_list.php");
+    header("Location: invoicebill_list.php");
     exit;
 }
 
@@ -52,46 +52,44 @@ if (isset($_GET["deletequo"])) {
             <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">ใบเสนอราคากลาง</li>
+                    <li class="breadcrumb-item active" aria-current="page">ใบแจ้งหนี้/ใบวางบิล</li>
                 </ol>
             </nav>
             <hr>
 
-            <div id="listquotation" class="container pb-md-0 mb-5">
+            <div id="listinvbill" class="container pb-md-0 mb-5">
                 <div>
-                    <h3>ใบเสนอราคา quotation</h3>
+                    <h3>ใบแจ้งหนี้/ใบวางบิล</h3>
                 </div>
 
                 <div class="mx-auto d-flex justify-content-end">
-                    <a class="btn btn-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button" href="../dashboard/quotation_appraisal_add.php"><i class="fa-solid fa-file-circle-plus"></i>
-                        สร้างใบเสนอราคา</a>
+                    <a class="btn btn-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button" href="../dashboard/invoicebill_add.php"><i class="fa-solid fa-file-circle-plus"></i>
+                        สร้างใบแจ้งหนี้/ใบวางบิล</a>
                 </div>
 
                 <div class="border border-secondary rounded-3 py-md-4 px-md-4 mt-2 mt-md-4" id="main_row">
                     <div class="table-responsive">
-                        <table class="table" id="quotationTable">
+                        <table class="table" id="invbillTable">
                             <thead>
                                 <tr class="rows align-center">
                                     <th scope="col" class="text-center" style="width:10%;">เลขที่</th>
-                                    <th scope="col" class="text-center" style="width:14%;">วันที่ในใบเสนอราคา</th>
-                                    <th scope="col" class="text-center" style="width:26%;">ชื่อโครงการ</th>
-                                    <th scope="col" class="text-center" style="width:26%;">ชื่อลูกค้า/หน่วยงาน</th>
+                                    <th scope="col" class="text-center" style="width:14%;">วันที่ในใบวางบิล</th>
+                                    <th scope="col" class="text-center" style="width:26%;">ชื่อลูกค้า</th>
                                     <th scope="col" class="text-center" style="width:11%;">จำนวนเงินรวม</th>
                                     <th scope="col" class="text-center" style="width:10%;">ตัวเลือก</th>
                                 </tr>
                             </thead>
                             <?php
 
-                            $sql = "SELECT * FROM quotation_appraisal";
+                            $sql = "SELECT * FROM invoicebill";
                             $query = $conn->query($sql);
                             while ($rows = $query->fetch_assoc()) {
                                 echo '
                                     <tr>
-                                        <td class="text-center">' . $rows["quo_no"] . '</td>
-                                        <td class="text-center">' . $rows["quo_date"] . '</td>
-                                        <td class="text-start">' . $rows["quo_namepj"] . '</td>
-                                        <td class="text-start">' . $rows["quo_name"] . '</td>
-                                        <td class="text-end ">' . number_format($rows["quo_total"],2) . '</td>
+                                        <td class="text-center">' . $rows["invbill_no"] . '</td>
+                                        <td class="text-center">' . $rows["invbill_date"] . '</td>
+                                        <td class="text-start">' . $rows["invbill_name"] . '</td>
+                                        <td class="text-start">' . $rows["invbill_total"] . '</td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4"
@@ -99,12 +97,12 @@ if (isset($_GET["deletequo"])) {
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li><a class="dropdown-item"
-                                                            href="../dashboard/quotation_appraisal_form.php?pdfquo_id=' . $rows["quo_id"] . '">พิมพ์เอกสาร</a>
+                                                            href="../dashboard/invoicebill_form.php?pdfinvbill_id=' . $rows["invbill_id"] . '">พิมพ์เอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
-                                                            href="../dashboard/quotation_appraisal_edit.php?editquo=' . $rows["quo_id"] . '">แก้ไข</a>
+                                                            href="../dashboard/invoicebill_edit.php?editinvbill=' . $rows["invbill_id"] . '">แก้ไข</a>
                                                     </li>
-                                                    <li><a class="dropdown-item deletequo" href="#" data-quo-no="' . $rows["quo_no"] . '" id="' . $rows["quo_id"] . '" >ลบ</a></li>
+                                                    <li><a class="dropdown-item deleteinvbill" href="#" data-invbill-no="' . $rows["invbill_no"] . '" id="' . $rows["invbill_id"] . '" >ลบ</a></li>
                                                 </ul>
                                             </div>
                                         </td>
@@ -118,14 +116,14 @@ if (isset($_GET["deletequo"])) {
                 <!-- Data table -->
                 <script type="text/javascript">
                     $(document).ready(function() {
-                        $('#quotationTable').DataTable();
+                        $('#invbillTable').DataTable();
 
-                        $(document).on('click', '.deletequo', function() {
+                        $(document).on('click', '.deleteinvbill', function() {
                             var id = $(this).attr("id");
-                            var show_quo_no = $(this).attr("data-quo-no");
+                            var show_invbill_no = $(this).attr("data-invbill-no");
                             swal.fire({
                                 title: 'ต้องการลบใบเสนอราคากลางนี้ !',
-                                text: "เลขที่ใบเสนอราคากลาง : " + show_quo_no,
+                                text: "เลขที่ใบเสนอราคากลาง : " + show_invbill_no,
                                 type: 'warning',
                                 showCancelButton: true,
                                 confirmButtonColor: '#d33',
@@ -134,7 +132,7 @@ if (isset($_GET["deletequo"])) {
                                 cancelButtonText: 'no'
                             }).then((result) => {
                                 if (result.value) {
-                                    window.location.href = "?deletequo=" + id;
+                                    window.location.href = "?deleteinvbill=" + id;
                                 }
                             });
                         });

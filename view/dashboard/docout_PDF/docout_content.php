@@ -44,6 +44,14 @@
                 <td>สิ่งที่ส่งมาด้วย</td>
                 <td style=" padding-left:10px">1. กำหนดการ 1 ฉบับ</td>
             </tr>
+            <tr>
+                <td></td>
+                <td style=" padding-left:10px"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style=" padding-left:10px"></td>
+            </tr>
         </table>
 
 
@@ -77,7 +85,7 @@
                 </td>
             </tr>
         </table>
-        <div style="padding-top: 50px;">
+        <div style="padding-top: 40px;">
             <label for="">ผู้ประสานงาน<br>
                 โทร. 085-4964855 , 045-317123<br>
                 แฟกซ์ 045-317678

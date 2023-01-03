@@ -1,8 +1,8 @@
 <?php
 include('./PDF_set/PDF_conn.php');
-$id = $_GET["pdfquo_id"];
+$id = $_GET["pdfquoout_id"];
 
-$sql = "SELECT * FROM quotation_appraisal WHERE quo_id = '$id'";
+$sql = "SELECT * FROM `quotation_out` WHERE quoout_id = '$id'";
 $result = mysqli_query($conn, $sql);
 while ($infoquo = mysqli_fetch_array($result)) {
     echo '
@@ -34,14 +34,14 @@ while ($infoquo = mysqli_fetch_array($result)) {
                 <td  style="text-align: right; width: 500px; border-collapse: collapse; padding: 0; margin: 0;">เลขที่/No.</td>
                 
                 <td class="underline" style="text-align: center; width: 142px;">
-                    <p class="text-left"> <span>&nbsp;' . $infoquo['quo_no']  . ' &nbsp;&nbsp;</span> </p>
+                    <p class="text-left"> <span>&nbsp;' .$infoquo['quoout_no']   . ' &nbsp;&nbsp;</span> </p>
                 </td>
 
             </tr>
             <tr>
                 <td style="text-align: right; border-collapse: collapse; padding: 0; margin: 0;">วันที่/Date.</td>
                 <td class="underline" style="text-align: center;">
-                    <p class="text-left"> <span>&nbsp;' . $infoquo['quo_date']  . ' &nbsp;&nbsp;</span> </p>
+                    <p class="text-left"> <span>&nbsp;' . $infoquo['quoout_date']  . ' &nbsp;&nbsp;</span> </p>
                 </td>
                 
             </tr>
@@ -55,29 +55,30 @@ while ($infoquo = mysqli_fetch_array($result)) {
     <div>
         <table style="margin-top: 5px;">
             <tr>
-                <td style="width:150px;">
-                    <p class="text-left ">โครงการ</p>
+                <td style="width:200px;">
+                    <p class="text-left ">ชื่อ ลูกค้า :</p>
                 </td>
-                <td class="underline" style="width:692px;">
-                    <p class="text-left "> <span>&nbsp; ' . $infoquo['quo_namepj'] . ' &nbsp;&nbsp;</span> </p>
-                </td>
-            </tr>
-            <tr>
-                <td style="width:150px;">
-                    <p class="text-left ">ลูกค้า /หน่วยงาน </p>
-                </td>
-                <td class="underline" style="width:692px;">
-                    <p class="text-left "> <span>&nbsp; ' . $infoquo['quo_name'] . ' &nbsp;&nbsp;</span> </p>
+                <td class="underline" style="width:642px;">
+                    <p class="text-left "> <span>&nbsp; ' . $infoquo['quoout_name'] . ' &nbsp;&nbsp;</span> </p>
                 </td>
             </tr>
             <tr>
-                <td style="width:150px;">
-                    <p class="text-left ">ที่อยู่ </p>
+                <td style="width:200px;">
+                    <p class="text-left ">ที่อยู่ :</p>
                 </td>
-                <td class="underline" style="width:692px;">
-                    <p class="text-left"> <span>&nbsp;' . $infoquo['quo_address'] . ' &nbsp;&nbsp;</span> </p>
+                <td class="underline" style="width:642px;">
+                    <p class="text-left"> <span>&nbsp;' . $infoquo['quoout_address'] . ' &nbsp;&nbsp;</span> </p>
                 </td>
             </tr>
+            <tr>
+                <td style="width:200px;">
+                    <p class="text-left ">เลขประจำตัวผู้เสียภาษี : </p>
+                </td>
+                <td class="underline" style="width:642px;">
+                    <p class="text-left "> <span>&nbsp;' . $infoquo['quoout_numtax'] . ' &nbsp;&nbsp;</span> </p>
+                </td>
+            </tr>
+        
         </table>
     </div>
 
@@ -101,8 +102,7 @@ while ($infoquo = mysqli_fetch_array($result)) {
 <!--php  ดึงข้อมูลรายการ-->
 <!--  -->
 <?php
-
-$sql = "SELECT * FROM `quotation_appraisal_details` WHERE quode_quoid = '$id' ;";
+$sql = "SELECT * FROM `quotation_out_details` WHERE quooutde_quooutid = '$id';";
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
     $i = 0;
@@ -110,10 +110,10 @@ if (mysqli_num_rows($result) > 0) {
         $i++;
         echo '  <tr>
         <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $i . '</td>
-        <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:50px;">' . $infoquoitems['quode_item'] . '</td>
-        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $infoquoitems['quode_amount'] . '</td>
-        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' . number_format($infoquoitems['quode_price'],2) . '</td>
-        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' . number_format($infoquoitems['quode_result'],2) . '</td>
+        <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:50px;">' . $infoquoitems['quooutde_item'] . '</td>
+        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $infoquoitems['quooutde_amount'] . '</td>
+        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' . number_format($infoquoitems['quooutde_price'],2) . '</td>
+        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' . number_format($infoquoitems['quooutde_result'],2) . '</td>
     </tr>';
     }
 }
@@ -121,10 +121,11 @@ if (mysqli_num_rows($result) > 0) {
 ?>
 
 
+
 <!-- blank area -->
 <?php
 
-$sql = "SELECT * FROM quotation_appraisal WHERE quo_id = '$id'";
+$sql = "SELECT * FROM `quotation_out` WHERE quoout_id = '$id'";
 $result = mysqli_query($conn, $sql);
 while ($infoquosum = mysqli_fetch_array($result)) {
     echo '
@@ -164,23 +165,23 @@ while ($infoquosum = mysqli_fetch_array($result)) {
 
 
     <td style="text-align: right; border-left: 0px solid;" colspan="2">รวมเงิน</td>
-                <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quo_sum'],2) . '</td>
+                <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quoout_sum'],2) . '</td>
             </tr>
             <tr style="background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
                 <td style="text-align: right; border-left: 0px solid; color:red;" colspan="2">หัวส่วนลดพิเศษ</td>
-                <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quo_specialdis'],2) . '</td>
+                <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quoout_specialdis'],2) . '</td>
             </tr>
             <tr style="background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
                 <td style="text-align: right; border-left: 0px solid;" colspan="2">ยอดรวมหลังหักส่วนลด</td>
-                <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quo_afterdis'],2) . '</td>
+                <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quoout_afterdis'],2) . '</td>
             </tr>
             <tr style="background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
                 <td style="text-align: right; border-left: 0px solid;" colspan="2">ภาษีมูลค่าเพิ่ม 7%</td>
-                <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quo_vat'],2) . '</td>
+                <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quoout_vat'],2) . '</td>
             </tr>
             <tr style=" background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
                 <td style="text-align: right; border-left: px solid;" colspan="2">จำนวนเงินรวมทั้งสิน</td>
-                <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quo_total'],2) . '</td>
+                <td style="text-align: right; border-left: 1px solid;">' . number_format($infoquosum['quoout_total'],2) . '</td>
             </tr>
 
 
@@ -192,7 +193,7 @@ while ($infoquosum = mysqli_fetch_array($result)) {
 ?>
 
 <?php
-$sql = "SELECT quo_total FROM quotation_appraisal WHERE quo_id = '$id'";
+$sql = "SELECT quoout_total FROM `quotation_out` WHERE quoout_id = '$id'";
 $result = mysqli_query($conn, $sql);
 while ($infoquosum = mysqli_fetch_array($result)) {
     echo '
@@ -200,7 +201,7 @@ while ($infoquosum = mysqli_fetch_array($result)) {
     <table style="text-align: left; width:842px; border:1px solid; border-collapse: collapse; padding: 0; margin-top: 10px;">
         <tr style="border-bottom: 1px solid;">
             <td VALIGN="TOP" style="text-align: left;  width: 20%; padding:5px 10px;">จำนวนเงินตัวอักษร <br> The Sum Of Bahts </td>
-            <td VALIGN="TOP" style="text-align: left;  width: 80%; padding:5px 10px;"> ' . Convert($infoquosum['quo_total']) . ' </td>
+            <td VALIGN="TOP" style="text-align: left;  width: 80%; padding:5px 10px;"> ' . Convert($infoquosum['quoout_total']) . ' </td>
         </tr>
     </table>
     <!-- footer -->

@@ -128,3 +128,4 @@ VALUES ('$tname', '$fname', '$lname', '$username', '$password_hash', '$date')";
         }
     }
 }
+
