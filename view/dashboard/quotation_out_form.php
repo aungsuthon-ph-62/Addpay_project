@@ -137,7 +137,7 @@ if (mysqli_num_rows($result) > 0) {
     $i = 0;
     while ($infoquoitems = mysqli_fetch_assoc($result)) {
         $i++;
-        $contentitems .= '  <tr>
+        $contentitems .= '<tr>
         <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $i . '</td>
         <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:50px;">' . $infoquoitems['quooutde_item'] . '</td>
         <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $infoquoitems['quooutde_amount'] . '</td>
@@ -260,7 +260,7 @@ $mpdf->WriteHTML($head2);
 
 mysqli_close($conn);
 
-$mpdf->Output('./quotation_PDF/quotation_out0.pdf');
+$mpdf->Output('./quotation_out_PDF/quotation_out0.pdf');
 
 
 
@@ -271,12 +271,12 @@ $mpdf->Output('./quotation_PDF/quotation_out0.pdf');
     <div class="container py-md-5 px-md-4" style="width: 100%; ">
         <p class="text-end text-danger ">** โปรดตรวจสอบความถูกต้องของข้อมูลก่อนกด พิมพ์เอกสาร</p>
         <div class="mx-auto d-flex justify-content-end ">
-            <a class="btn btn-outline-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold" role="button" href="./quotation_PDF/quotation_out0.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
+            <a class="btn btn-outline-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold" role="button" href="./quotation_out_PDF/quotation_out0.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
             <a class="btn btn-outline-danger px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold ms-3" role="button" href="./quotation_out_list.php"><i class="fa-regular fa-rectangle-xmark"></i> ยกเลิก</a>
         </div>
         <hr>
         <?php
-        include("./quoout_PDF/quoout_content.php");
+        include("./quotation_out_PDF/quotation_out_content.php");
         ?>
     </div>
 

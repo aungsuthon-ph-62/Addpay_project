@@ -102,7 +102,6 @@ while ($infoquo = mysqli_fetch_array($result)) {
 <!--php  ดึงข้อมูลรายการ-->
 <!--  -->
 <?php
-
 $sql = "SELECT * FROM `quotation_out_details` WHERE quooutde_quooutid = '$id';";
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
@@ -111,15 +110,16 @@ if (mysqli_num_rows($result) > 0) {
         $i++;
         echo '  <tr>
         <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $i . '</td>
-        <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:50px;">' . $infoquoitems['quoutde_item'] . '</td>
-        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $infoquoitems['quoutde_amount'] . '</td>
-        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' . number_format($infoquoitems['quoutde_price'],2) . '</td>
-        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' . number_format($infoquoitems['quoutde_result'],2) . '</td>
+        <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:50px;">' . $infoquoitems['quooutde_item'] . '</td>
+        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $infoquoitems['quooutde_amount'] . '</td>
+        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' . number_format($infoquoitems['quooutde_price'],2) . '</td>
+        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' . number_format($infoquoitems['quooutde_result'],2) . '</td>
     </tr>';
     }
 }
 
 ?>
+
 
 
 <!-- blank area -->
@@ -193,7 +193,7 @@ while ($infoquosum = mysqli_fetch_array($result)) {
 ?>
 
 <?php
-$sql = "SELECT quo_total FROM quotation_appraisal WHERE quo_id = '$id'";
+$sql = "SELECT quoout_total FROM `quotation_out` WHERE quoout_id = '$id'";
 $result = mysqli_query($conn, $sql);
 while ($infoquosum = mysqli_fetch_array($result)) {
     echo '
@@ -201,7 +201,7 @@ while ($infoquosum = mysqli_fetch_array($result)) {
     <table style="text-align: left; width:842px; border:1px solid; border-collapse: collapse; padding: 0; margin-top: 10px;">
         <tr style="border-bottom: 1px solid;">
             <td VALIGN="TOP" style="text-align: left;  width: 20%; padding:5px 10px;">จำนวนเงินตัวอักษร <br> The Sum Of Bahts </td>
-            <td VALIGN="TOP" style="text-align: left;  width: 80%; padding:5px 10px;"> ' . Convert($infoquosum['quo_total']) . ' </td>
+            <td VALIGN="TOP" style="text-align: left;  width: 80%; padding:5px 10px;"> ' . Convert($infoquosum['quoout_total']) . ' </td>
         </tr>
     </table>
     <!-- footer -->
