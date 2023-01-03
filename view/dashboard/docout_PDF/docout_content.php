@@ -49,7 +49,7 @@ while ($infodoc = mysqli_fetch_array($result)) {
 
             <table>
                 <tr>
-                    <td style="padding-top: 15px;">สิ่งที่ส่งมาด้วย</td>
+                    <td VALIGN="TOP" style="padding-top: 15px;">สิ่งที่ส่งมาด้วย</td>
                     <td style="padding-top: 15px; padding-left:10px; ">'.$infodoc['docout_send'].'</td>
                 </tr>
                 <tr>
