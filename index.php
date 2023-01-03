@@ -23,6 +23,12 @@ include_once 'layout/head.php';
         $sql = "SELECT * FROM users WHERE id = '$user_id'";
         $query = mysqli_query($conn, $sql);
         $user = mysqli_fetch_assoc($query);
+
+        if (!$user) {
+            require_once 'php/logout.php';
+            mysqli_close($conn);
+            exit;
+        }
         ?>
 
         <!-- Dashboard Nav -->

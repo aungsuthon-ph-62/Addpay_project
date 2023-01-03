@@ -17,6 +17,12 @@ if (isset($_POST['action'])) {
     } elseif ($_POST['action'] == 'editPassword') {
         editPassword();
         exit;
+    } elseif ($_POST['action'] == 'editProfile') {
+        editProfile();
+        exit;
+    } elseif ($_POST['action'] == 'editProfilePicture') {
+        editProfilePicture();
+        exit;
     }
 }
 
@@ -56,6 +62,15 @@ function decode($message, $encryption_key)
     // return $plaintext;
     $decrypted_text = openssl_decrypt($message, "AES-128-ECB", $encryption_key);
     echo $decrypted_text;
+}
+
+// Validate Email
+function validateEmail($email)
+{
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return false;
+    }
+    return true;
 }
 
 function register()
@@ -152,6 +167,17 @@ function register()
 
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
+    // check duplicate data
+    $username_check_query = "SELECT * FROM users WHERE fname = '$username'";
+    $query_username = mysqli_query($conn, $username_check_query);
+    $check_username = mysqli_fetch_assoc($query_username);
+
+    if ($check_username > 0) {
+        $_SESSION['error'] = "ชื่อผูใช้นี้มีในระบบแล้ว!";
+        header("Location: ../register?$data");
+        mysqli_close($conn);
+        exit;
+    }
 
     // check duplicate data
     $user_check_query = "SELECT * FROM users WHERE fname = '$fname' AND lname = '$lname'";
@@ -253,64 +279,138 @@ function editProfile()
     date_default_timezone_set('Asia/Bangkok');
     $date = date("Y-m-d H:i:s");
 
-    $username = mysqli_real_escape_string($conn, $_POST['inputUsername']);
-    $new_username = mysqli_real_escape_string($conn, $_POST['inputNewUsername']);
-    $confirm_username = mysqli_real_escape_string($conn, $_POST['confirmNewUsername']);
-    $stored_username = mysqli_real_escape_string($conn, $_POST['stored_username']);
+    $tname = mysqli_real_escape_string($conn, $_POST['inputTname']);
+    $fname = mysqli_real_escape_string($conn, $_POST['inputFname']);
+    $lname = mysqli_real_escape_string($conn, $_POST['inputLname']);
+    $age = mysqli_real_escape_string($conn, $_POST['inputAge']);
+    $gender = mysqli_real_escape_string($conn, $_POST['inputGender']);
+    $phone = mysqli_real_escape_string($conn, $_POST['inputPhone']);
+    $email = mysqli_real_escape_string($conn, $_POST['inputEmail']);
+    $position = mysqli_real_escape_string($conn, $_POST['inputPosition']);
+    $department = mysqli_real_escape_string($conn, $_POST['inputDepartment']);
     $id = mysqli_real_escape_string($conn, $_POST['id']);
 
-    if (empty($username) || empty($new_username) || empty($confirm_username)) {
-        $_SESSION['error'] = "กรุณากรอกข้อมูลให้ครบถ้วน!";
+    if (empty($tname)) {
+        $_SESSION['error'] = "กรุณาเลือกคำนำหน้าชื่อ";
+        header("Location: ../index");
+        exit;
+    }
+
+    if (empty($fname)) {
+        $_SESSION['error'] = "กรุณากรอกชื่อจริง";
         header("Location: ../index");
         exit;
     } else {
-        if (!preg_match("/^[a-zA-Z_]*$/", $new_username)) {
-            $_SESSION['error'] = "กรุณากรอกด้วยตัวอักษร [a-z,A-Z,_]";
-            header("Location: ../index");
-            exit;
-        }
-
-        if (!preg_match("/^[a-zA-Z_]*$/", $confirm_username)) {
-            $_SESSION['error'] = "กรุณากรอกด้วยตัวอักษร [a-z,A-Z,_]";
+        if (!preg_match("/^[a-zA-Z ก-์ ะ-ู เ-แ ]*$/", $fname)) {
+            $_SESSION['error'] = "กรุณากรอกด้วยตัวอักษร [ก-ฮ,a-z,A-Z]";
             header("Location: ../index");
             exit;
         }
     }
 
-    if ($username != $stored_username) {
-        $_SESSION['error'] = "ชื่อผู้ใช้ไม่ตรงกับข้อมูลในฐานข้อมูล!";
+    if (empty($lname)) {
+        $_SESSION['error'] = "กรุณากรอกนามสกุล";
         header("Location: ../index");
+        exit;
+    } else {
+        if (!preg_match("/^[a-zA-Z ก-์ ะ-ู เ-แ ]*$/", $lname)) {
+            $_SESSION['error'] = "กรุณากรอกด้วยตัวอักษร [ก-ฮ,a-z,A-Z]";
+            header("Location: ../index");
+            exit;
+        }
+    }
+
+    if (empty($age)) {
+        $_SESSION['error'] = "กรุณากรอกอายุ";
+        header("Location: ../index");
+        exit;
+    } else {
+        if (!preg_match("/^[0-9]*$/", $age)) {
+            $_SESSION['error'] = "กรุณากรอกอายุด้วยตัวเลข";
+            header("Location: ../index");
+            exit;
+        }
+    }
+
+    if (empty($gender)) {
+        $_SESSION['error'] = "กรุณาระบุเพศ";
+        header("Location: ../index?$gender");
         exit;
     }
 
-    if ($new_username != $confirm_username) {
-        $_SESSION['error'] = "ชื่อผู้ใช้ไม่ตรงกัน!";
+    if (empty($phone)) {
+        $_SESSION['error'] = "กรุณากรอกเบอร์โทรศัพท์";
         header("Location: ../index");
+        exit;
+    } else {
+        if (!preg_match("/^[0-9]*$/", $phone)) {
+            $_SESSION['error'] = "กรุณากรอกเบอร์โทรศัพท์ด้วยตัวเลข 10 ตัว";
+            header("Location: ../index");
+            exit;
+        }
+    }
+
+    if (empty($email)) {
+        $_SESSION['error'] = "กรุณากรอกอีเมลล์";
+        header("Location: ../index");
+        exit;
+    } else {
+        if (!validateEmail($email)) {
+            $_SESSION['error'] = "กรุณากรอกอีเมล์ให้ถูกต้อง";
+            header("Location: ../index");
+            exit;
+        }
+    }
+
+    if (empty($position)) {
+        $_SESSION['error'] = "กรุณากรอกตำแหน่ง";
+        header("Location: ../index");
+        exit;
+    } else {
+        if (!preg_match("/^[a-zA-Z ก-์ ะ-ู เ-แ ]*$/", $position)) {
+            $_SESSION['error'] = "กรุณากรอกด้วยตัวอักษร [ก-ฮ,a-z,A-Z]";
+            header("Location: ../index");
+            exit;
+        }
+    }
+
+    if (empty($department)) {
+        $_SESSION['error'] = "กรุณากรอกตำแหน่ง";
+        header("Location: ../index");
+        exit;
+    } else {
+        if (!preg_match("/^[a-zA-Z ก-์ ะ-ู เ-แ ]*$/", $department)) {
+            $_SESSION['error'] = "กรุณากรอกด้วยตัวอักษร [ก-ฮ,a-z,A-Z]";
+            header("Location: ../index");
+            exit;
+        }
+    }
+
+    // check duplicate data
+    $user_check_query = "SELECT * FROM users WHERE fname = '$fname' AND lname = '$lname' AND id != '$id'";
+    $query = mysqli_query($conn, $user_check_query);
+    $check = mysqli_fetch_assoc($query);
+
+    if ($check) {
+        $_SESSION['error'] = "ชื่อจริงหรือนามสกุลนี้มีในระบบแล้ว!";
+        header("Location: ../index");
+        mysqli_close($conn);
         exit;
     }
 
-    $user = "SELECT * FROM users WHERE username = '$confirm_username'";
-    $query = mysqli_query($conn, $user);
-    $result = mysqli_fetch_assoc($query);
-    if ($result) {
-        $_SESSION['error'] = "ชื่อผู้ใช้นี้มีอยู่ในระบบแล้ว!";
+    $query = "UPDATE users SET prefix='$tname', fname='$fname', lname='$lname', age='$age', gender='$gender', email='$email', phone='$phone', position='$position', department='$department', updated_at='$date' WHERE id = '$id'";
+    $result_query =  mysqli_query($conn, $query);
+    if ($result_query) {
+        $_SESSION['success'] = "แก้ไขข้อมูลสำเร็จ!";
         header("Location: ../index");
         mysqli_close($conn);
         exit;
     } else {
-        $edit_user = "UPDATE users SET username='$confirm_username', updated_at='$date' WHERE id = '$id'";
-        $editQuery = mysqli_query($conn, $edit_user);
-        if ($editQuery) {
-            $_SESSION['confirm'] = "แก้ไขข้อมูลสำเร็จ! ต้องการเข้าสู่ระบบใหม่อีกครั้งไหม";
-            header("Location: ../index");
-            mysqli_close($conn);
-            exit;
-        } else {
-            $_SESSION['error'] = "เกิดข้อผิดพลาด!";
-            header("Location: ../index");
-            mysqli_close($conn);
-            exit;
-        }
+        $error = mysqli_error($conn);
+        $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
+        header("Location: ../index?$error");
+        mysqli_close($conn);
+        exit;
     }
 }
 
@@ -439,6 +539,63 @@ function editPassword()
         $_SESSION['error'] = "เกิดข้อผิดพลาด!";
         header("Location: ../index");
         mysqli_close($conn);
+        exit;
+    }
+}
+
+function editProfilePicture()
+{
+    session_start();
+    global $conn;
+    date_default_timezone_set('Asia/Bangkok');
+    $date = date("Y-m-d H:i:s");
+
+    $id = mysqli_real_escape_string($conn, $_POST['id']);
+
+    $imageName = $_FILES["image"]["name"];
+    $tmpName = $_FILES["image"]["tmp_name"];
+
+    $oldPictureName = mysqli_real_escape_string($conn, $_POST['oldPictureName']);
+    if ($oldPictureName != '') {
+        // Delete the old picture
+        unlink('../image/profile/' . $oldPictureName);
+    }
+
+    if ($tmpName) {
+        // Image extension valid
+        $validImgExt = ['jpg', 'jpeg', 'png'];
+        $imgExt = explode('.', $imageName);
+
+        $name = $imgExt[0];
+        $imgExt = strtolower(end($imgExt));
+
+        if (!in_array($imgExt, $validImgExt)) {
+            $_SESSION['error'] = "นามสกุลของไฟล์ไม่ถูกต้อง!";
+            header("Location: ../index");
+            exit;
+        } else {
+            $newImgName = $name . "-" . uniqid(); // Gen new img name
+            $newImgName .= "." . $imgExt;
+
+            move_uploaded_file($tmpName, '../image/profile/' . $newImgName);
+        }
+
+        $edit_img = "UPDATE users SET img='$newImgName', updated_at='$date' WHERE id = '$id'";
+        $editQuery = mysqli_query($conn, $edit_img);
+        if ($editQuery) {
+            $_SESSION['success'] = "แก้ไขข้อมูลสำเร็จ!";
+            header("Location: ../index");
+            mysqli_close($conn);
+            exit;
+        } else {
+            $_SESSION['error'] = "เกิดข้อผิดพลาด!";
+            header("Location: ../index");
+            mysqli_close($conn);
+            exit;
+        }
+    } else {
+        $_SESSION['error'] = "กรุณาเลือกรูปภาพ";
+        header("Location: ../index");
         exit;
     }
 }

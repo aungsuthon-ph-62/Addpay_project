@@ -4,7 +4,11 @@
             <div class="col-md-4 mb-5 mb-md-0">
                 <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
-                        <img src="image/profile/cat.png" alt="profile" class="img-thumbnail rounded-circle bg-primary-addpay p-2 border-0 shadow" style="width: 300px;">
+                        <?php if($user['img']) { ?>
+                            <img src="image/profile/<?= $user['img'] ?>" alt="profile" class="img-thumbnail rounded-circle bg-primary-addpay p-2 border-0 shadow" style="width: 300px;">
+                        <?php }else { ?>
+                            <img src="image/profile/cat.png" alt="profile" class="img-thumbnail rounded-circle bg-primary-addpay p-2 border-0 shadow" style="width: 300px;">
+                        <?php } ?>
                         <button type="button" class="btn p-2 mt-3 text-white rounded-pill btn-addpay" data-bs-toggle="modal" data-bs-target="#profileeditimgModal"><i class="fa-solid fa-pen-to-square"></i> แก้ไขรูปภาพส่วนตัว</button>
                     </div>
                 </div>

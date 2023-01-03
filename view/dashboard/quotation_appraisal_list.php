@@ -44,35 +44,36 @@ if (isset($_GET["deletequo"])) {
 </nav>
 <hr>
 
-<div id="listquotation" class="container pb-md-0 mb-5">
-    <div>
-        <h3>ใบเสนอราคา quotation</h3>
-    </div>
+<div id="listquotation" class="container bg-secondary-addpay rounded-5">
+    <section class="p-3 p-md-5 text-white">
+        <div class="text-center text-md-start">
+            <h3>ใบเสนอราคา quotation</h3>
+        </div>
 
-    <div class="mx-auto d-flex justify-content-end">
-        <a class="btn btn-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button" href="?page=quotation_add"><i class="fa-solid fa-file-circle-plus"></i>
-            สร้างใบเสนอราคา</a>
-    </div>
+        <div class="my-4 my-md-3 text-center text-md-end">
+            <a class="btn btn-addpay px-md-4 rounded-3 fs-5 fw-bold text-white" href="?page=quotation_add">
+                <i class="fa-solid fa-file-circle-plus"></i> สร้างใบเสนอราคา</a>
+        </div>
 
-    <div class="border border-secondary rounded-3 py-md-4 px-md-4 mt-2 mt-md-4" id="main_row">
-        <div class="table-responsive">
-            <table class="table" id="quotationTable">
-                <thead>
-                    <tr class="align-center" class="rows">
-                        <th scope="col" style="width:12%">เลขที่ใบ<br>เสนอราคา</th>
-                        <th scope="col" style="width:10%">วันที่ในใบ<br>เสนอราคา</th>
-                        <th scope="col" style="width:26%">ชื่อโครงการ</th>
-                        <th scope="col" style="width:26%">ชื่อลูกค้า<br>หน่วยงาน</th>
-                        <th scope="col" style="width:13%">จำนวนเงินรวม</th>
-                        <th scope="col" style="width:10%">ตัวเลือก</th>
-                    </tr>
-                </thead>
-                <?php
+        <div class="py-5 px-md-5 bg-light rounded-5" id="main_row">
+            <div class="table-responsive">
+                <table class="table" id="quotationTable">
+                    <thead>
+                        <tr class="align-center" class="rows">
+                            <th scope="col" style="width:12%">เลขที่ใบ<br>เสนอราคา</th>
+                            <th scope="col" style="width:10%">วันที่ในใบ<br>เสนอราคา</th>
+                            <th scope="col" style="width:26%">ชื่อโครงการ</th>
+                            <th scope="col" style="width:26%">ชื่อลูกค้า<br>หน่วยงาน</th>
+                            <th scope="col" style="width:13%">จำนวนเงินรวม</th>
+                            <th scope="col" style="width:10%">ตัวเลือก</th>
+                        </tr>
+                    </thead>
+                    <?php
 
-                $sql = "SELECT * FROM quotation_appraisal";
-                $query = $conn->query($sql);
-                while ($rows = $query->fetch_assoc()) {
-                    echo '
+                    $sql = "SELECT * FROM quotation_appraisal";
+                    $query = $conn->query($sql);
+                    while ($rows = $query->fetch_assoc()) {
+                        echo '
                                     <tr>
                                         <td>' . $rows["quo_no"] . '</td>
                                         <td>' . $rows["quo_date"] . '</td>
@@ -97,35 +98,36 @@ if (isset($_GET["deletequo"])) {
                                         </td>
                                     </tr>
                                     ';
-                }
-                ?>
-            </table>
-        </div>
-    </div>
-    <!-- Data table -->
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#quotationTable').DataTable();
-
-            $(document).on('click', '.deletequo', function() {
-                var id = $(this).attr("id");
-                var show_quo_no = $(this).attr("data-quo-no");
-                swal.fire({
-                    title: 'ต้องการลบใบเสนอราคากลางนี้ !',
-                    text: "เลขที่ใบเสนอราคากลาง : " + show_quo_no,
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'yes!',
-                    cancelButtonText: 'no'
-                }).then((result) => {
-                    if (result.value) {
-                        window.location.href = "?deletequo=" + id;
                     }
+                    ?>
+                </table>
+            </div>
+        </div>
+        <!-- Data table -->
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#quotationTable').DataTable();
+
+                $(document).on('click', '.deletequo', function() {
+                    var id = $(this).attr("id");
+                    var show_quo_no = $(this).attr("data-quo-no");
+                    swal.fire({
+                        title: 'ต้องการลบใบเสนอราคากลางนี้ !',
+                        text: "เลขที่ใบเสนอราคากลาง : " + show_quo_no,
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'yes!',
+                        cancelButtonText: 'no'
+                    }).then((result) => {
+                        if (result.value) {
+                            window.location.href = "?deletequo=" + id;
+                        }
+                    });
                 });
             });
-        });
-    </script>
-    <!-- Data table -->
+        </script>
+        <!-- Data table -->
+    </section>
 </div>

@@ -2,13 +2,13 @@
     <div class="position-sticky pt-5 sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link text-white" aria-current="page" href="#">
+                <a class="nav-link text-white" aria-current="page" href="index">
                     <span><i class="fa-solid fa-house"></i></span>
                     หน้าหลัก
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">
+                <a class="nav-link text-white" href="?page=quotation">
                     <span></span>
                     ใบเสนอราคากลาง
                 </a>
