@@ -54,7 +54,7 @@ body {
             <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">ใบเสนอราคา</li>
+                    <li class="breadcrumb-item active" aria-current="page">ใบเสนอราคาออก</li>
                 </ol>
             </nav>
             <hr>
