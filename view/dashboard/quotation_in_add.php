@@ -13,7 +13,7 @@ if (isset($_POST['action'])) {
 
         $input_quoin_no = mysqli_real_escape_string($conn, trim($_POST['input_quoin_no']));
         $input_quoin_date = mysqli_real_escape_string($conn, trim($_POST['input_quoin_date']));
-        $input_quoin_name = mysqli_real_escape_string($conn, trim($_POST['input_quoin_name']));
+        $input_quoin_company = mysqli_real_escape_string($conn, trim($_POST['input_quoin_company']));
         $input_quoin_file = mysqli_real_escape_string($conn, trim($_POST['input_quoin_file']));
         $input_quoin_status = mysqli_real_escape_string($conn, trim($_POST['input_quoin_status']));
         $input_quoin_remark = mysqli_real_escape_string($conn, trim($_POST['input_quoin_remark']));
@@ -28,8 +28,8 @@ if (isset($_POST['action'])) {
             header("Location: quotation_in_add.php");
             exit;
         } else {
-            $query = "INSERT INTO quotation_in (quoin_no, quoin_date, quoin_name, quoin_file, quoin_status, quoin_remark, quoin_create, quoin_uid)
-                VALUES ('$input_quoin_no', '$input_quoin_date', '$input_quoin_name', '$input_quoin_file', '$input_quoin_status', '$input_quoin_remark', '$date', '$uid')";
+            $query = "INSERT INTO quotation_in (quoin_no, quoin_date, quoin_company, quoin_file, quoin_status, quoin_remark, quoin_create, quoin_uid)
+                VALUES ('$input_quoin_no', '$input_quoin_date', '$input_quoin_company', '$input_quoin_file', '$input_quoin_status', '$input_quoin_remark', '$date', '$uid')";
 
             if ($conn->query($query) === TRUE) {
                 $_SESSION['success'] = "บันทึกสำเร็จ!";
@@ -85,7 +85,7 @@ if (isset($_POST['action'])) {
         <div>
             <h3>ข้อมูลใบเสนอราคา quotation</h3>
         </div>
-        <form method="post" id="quoin_form" action="quotation_in_add.php" class="px-md-5 py-md-5">
+        <form method="post" id="quoin_form" action="quotation_in_add.php" class="px-md-5 py-md-5" >
             <div class="row g-3 align-items-center mb-3">
                 <div class="col-md-3">
                     <label for="input_quoin_no" class="col-form-label">เลขที่ในใบเสนอราคา No.</label>
@@ -104,10 +104,10 @@ if (isset($_POST['action'])) {
             </div>
             <div class="row g-3 align-items-center mb-3">
                 <div class="col-md-3">
-                    <label for="input_quoin_name" class="col-form-label">ชื่อบริษัทที่ออกใบเสนอราคา :</label>
+                    <label for="input_quoin_company" class="col-form-label">ชื่อบริษัทที่ออกใบเสนอราคา :</label>
                 </div>
                 <div class="col-md-8">
-                    <input type="text" id="input_quoin_name" name="input_quoin_name" class="form-control " required>
+                    <input type="text" id="input_quoin_company" name="input_quoin_company" class="form-control " required>
                 </div>
             </div>
 
@@ -137,6 +137,14 @@ if (isset($_POST['action'])) {
                         <input class="form-check-input" type="radio" name="input_quoin_status" id="input_quoin_status2" value="ไม่อนุมัติ" required>
                         <label class="form-check-label" for="input_quoin_status2">ไม่อนุมัติ</label>
                     </div>
+                </div>
+            </div>
+            <div class="row g-3 align-items-center mb-3">
+                <div class="col-md-3">
+                    <label for="input_quoin_remark" class="col-form-label">หมายเหตุ :</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" id="input_quoin_remark" name="input_quoin_remark" class="form-control " >
                 </div>
             </div>
 
