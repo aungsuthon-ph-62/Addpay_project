@@ -109,6 +109,9 @@ body {
                                                     data-bs-toggle="dropdown" aria-expanded="false"><b>เลือก</b>
                                                 </button>
                                                 <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" target="_blank"
+                                                            href="../../uploadfile/docinfile/'.$rows["docin_file"].'">เปิดเอกสาร</a>
+                                                    </li>
                                                     <li><a class="dropdown-item"
                                                             href="../dashboard/docin_edit.php?editdocin='.$rows["docin_id"].'">แก้ไข</a>
                                                     </li>
