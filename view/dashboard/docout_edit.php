@@ -102,7 +102,6 @@ body {
 .ck-send .ck-editor__editable_inline {
     min-height: 100px;
 }
-
 .ck-details .ck-editor__editable_inline {
     min-height: 250px;
 }
@@ -165,15 +164,18 @@ body {
                                         value="<?= $row['docout_to'] ?>">
                                 </div>
                             </div>
+                           
+
                             <div class="row g-3  mb-3 ">
                                 <div class="col-md-3">
                                     <label for="input_send" class="col-form-label">สิ่งที่ส่งมาด้วย </label>
                                 </div>
                                 <div class="ck-send col-md-9 ">
-                                    <textarea id="input_send" name="input_send" class="form-control"
-                                        placeholder="พิมพ์เนื้อหา..."><?= $row['docout_dend'] ?></textarea>
+                                    <textarea id="input_send" name="input_send" class="form-control" 
+                                         placeholder="พิมพ์เนื้อหา..."><?= $row['docout_send'] ?></textarea>
                                 </div>
                             </div>
+
                             <div class="row g-3  mb-3">
                                 <div class="col-md-3">
                                     <label for="input_content" class="col-form-label">เนื้อหาข้อความ </label>

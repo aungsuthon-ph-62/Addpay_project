@@ -38,15 +38,15 @@ if (isset($_POST['action'])) {
             if ($conn->query($query) === TRUE) {
                 
                 $last_id = $conn->insert_id;
-    
-                for($count=0; $count<$_POST["total_item"]; $count++){
-                
-                    $item_name= mysqli_real_escape_string($conn,trim($_POST['item_name'][$count]));
-                    $item_amount= mysqli_real_escape_string($conn,trim($_POST['item_amount'][$count]));
-                    $item_price= mysqli_real_escape_string($conn,trim($_POST['item_price'][$count]));
-                    $total_price= mysqli_real_escape_string($conn,trim($_POST['total_price'][$count]));
-        
-                    $query = "INSERT INTO quotation_out_details (quooutde_quooutid, quooutde_item, quooutde_amount, quooutde_price,  quooutde_result, quooutde_create, quooutde_uid)
+
+                for ($count = 0; $count < $_POST["total_item"]; $count++) {
+
+                    $item_name = mysqli_real_escape_string($conn, trim($_POST['item_name'][$count]));
+                    $item_amount = mysqli_real_escape_string($conn, trim($_POST['item_amount'][$count]));
+                    $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
+                    $total_price = mysqli_real_escape_string($conn, trim($_POST['total_price'][$count]));
+
+                    $query = "INSERT INTO quotation_out_details (quooutde_quooutid, quooutde_item, quooutde_amount, quooutde_price, quooutde_result, quooutde_create, quooutde_uid)
                         VALUES ('$last_id', '$item_name', '$item_amount', '$item_price',  '$total_price', '$date', '$uid')";
                     $conn->query($query);
                 }
@@ -99,8 +99,8 @@ table tr td:first-child::before {
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a
-                        href="../dashboard/quotation_out_list.php">ใบเสนอราคา</a></li>
-                <li class="breadcrumb-item active" aria-current="page">สร้างใบเสนอราคา</li>
+                        href="../dashboard/quotation_out_list.php">ใบเสนอราคาออก</a></li>
+                <li class="breadcrumb-item active" aria-current="page">สร้างใบเสนอราคาออก</li>
             </ol>
         </nav>
         <hr>

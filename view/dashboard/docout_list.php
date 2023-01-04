@@ -11,7 +11,7 @@ if(isset($_GET["deletedocout"]))
     $query = $conn->query($sql);
     
     if($query){
-        $_SESSION['success'] = "ลบใบเสนอราคากลางสำเร็จ!";
+        $_SESSION['success'] = "ลบหนังสือออกสำเร็จ!";
         header("Location: docout_list.php");
         exit;
     }
