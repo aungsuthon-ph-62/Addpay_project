@@ -101,7 +101,7 @@ if (isset($_GET["deletequo"])) {
                                                             href="../../uploadfile/quotationinfile/' . $rows["quoin_file"] . '">เปิดเอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
-                                                            href="../dashboard/quotation_in_edit.php?editquo=' . $rows["quoin_id"] . '">แก้ไข</a>
+                                                            href="../dashboard/quotation_in_edit.php?editquoin=' . $rows["quoin_id"] . '">แก้ไข</a>
                                                     </li>
                                                     <li><a class="dropdown-item deletequo" href="#" data-quo-no="' . $rows["quoin_no"] . '" id="' . $rows["quoin_id"] . '" >ลบ</a></li>
                                                 </ul>
