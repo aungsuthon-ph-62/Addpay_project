@@ -71,7 +71,7 @@ function edit_docout(){
     
     if ($conn->query($query) === TRUE) {
 
-        $_SESSION['success'] = "บันทึกหนังสือออกสำเร็จ!";
+        $_SESSION['success'] = "แก้ไขหนังสือออกสำเร็จ!";
         header("Location: docout_list.php");
         exit;
         
@@ -180,7 +180,7 @@ body {
                                 <div class="col-md-3">
                                     <label for="input_content" class="col-form-label">เนื้อหาข้อความ </label>
                                 </div>
-                                <div class=" col-md-9">
+                                <div class="ck-details col-md-9">
                                     <textarea id="input_content" name="input_content" class="form-control" cols="40"
                                         rows="10" placeholder="พิมพ์เนื้อหา..."><?= $row['docout_details'] ?></textarea>
                                 </div>
