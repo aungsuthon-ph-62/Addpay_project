@@ -70,7 +70,11 @@ body {
     font-family: "Prompt", sans-serif;
 }
 
-.ck-editor__editable_inline {
+.ck-send .ck-editor__editable_inline {
+    min-height: 100px;
+}
+
+.ck-details .ck-editor__editable_inline {
     min-height: 250px;
 }
 </style>
@@ -129,12 +133,13 @@ body {
                                     <input type="text" id="input_to" name="input_to" class="form-control " required>
                                 </div>
                             </div>
-                            <div class="row g-3 align-items-center mb-3">
-                                <div class="col-md-3 ">
+                            <div class="row g-3  mb-3 ">
+                                <div class="col-md-3">
                                     <label for="input_send" class="col-form-label">สิ่งที่ส่งมาด้วย </label>
                                 </div>
-                                <div class="col-md-6">
-                                    <textarea type="text" id="input_send" name="input_send" class="form-control " required rows="3"></textarea>
+                                <div class="ck-send col-md-9 ">
+                                    <textarea id="input_send" name="input_send" class="form-control"
+                                        placeholder="พิมพ์เนื้อหา..."></textarea>
                                 </div>
                             </div>
                             <div class="row g-3  mb-3">
@@ -179,6 +184,14 @@ body {
         <script>
         ClassicEditor
             .create(document.querySelector('#input_content'))
+
+            .catch(error => {
+                console.error(error);
+            });
+        </script>
+        <script>
+        ClassicEditor
+            .create(document.querySelector('#input_send'))
 
             .catch(error => {
                 console.error(error);
