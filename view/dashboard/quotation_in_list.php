@@ -98,7 +98,7 @@ if (isset($_GET["deletequo"])) {
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li><a class="dropdown-item"
-                                                            href="../dashboard/quotation_in_form.php?pdfquo_id=' . $rows["quoin_remark"] . '"เปิดเอกสาร</a>
+                                                            href="../../uploadfile/quotationinfile/' . $rows["quoin_file"] . '">เปิดเอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
                                                             href="../dashboard/quotation_in_edit.php?editquo=' . $rows["quoin_id"] . '">แก้ไข</a>
