@@ -134,7 +134,7 @@ body {
                                 </div>
                             </div>
                             <div class="row g-3  mb-3 ">
-                                <div class="col-md-3">
+                                <div class="ck-send col-md-3">
                                     <label for="input_send" class="col-form-label">สิ่งที่ส่งมาด้วย </label>
                                 </div>
                                 <div class="ck-send col-md-9 ">
@@ -146,7 +146,7 @@ body {
                                 <div class="col-md-3">
                                     <label for="input_content" class="col-form-label">เนื้อหาข้อความ </label>
                                 </div>
-                                <div class=" col-md-9">
+                                <div class="ck-details col-md-9">
                                     <textarea id="input_content" name="input_content" class="form-control" cols="40"
                                         rows="10" placeholder="พิมพ์เนื้อหา..."></textarea>
                                 </div>
