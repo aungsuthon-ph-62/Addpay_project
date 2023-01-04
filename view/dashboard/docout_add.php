@@ -69,13 +69,14 @@ body {
     font-family: "Poppins", sans-serif;
     font-family: "Prompt", sans-serif;
 }
+
 .ck-send .ck-editor__editable_inline {
     min-height: 100px;
 }
+
 .ck-details .ck-editor__editable_inline {
     min-height: 250px;
 }
-
 </style>
 
 <body>
@@ -132,32 +133,22 @@ body {
                                     <input type="text" id="input_to" name="input_to" class="form-control " required>
                                 </div>
                             </div>
-                            <!-- <div class="row g-3 align-items-center mb-3">
-                                <div class="col-md-3 ">
-                                    <label for="input_send" class="col-form-label">สิ่งที่ส่งมาด้วย </label>
-                                </div>
-                                <div class="col-md-6">
-                                    <textarea id="input_send" name="input_send" class="form-control " required cols="40" rows="3"></textarea>
-                                </div>
-                            </div> -->
-
                             <div class="row g-3  mb-3 ">
-                                <div class="col-md-3">
+                                <div class="ck-send col-md-3">
                                     <label for="input_send" class="col-form-label">สิ่งที่ส่งมาด้วย </label>
                                 </div>
                                 <div class="ck-send col-md-9 ">
-                                    <textarea id="input_send" name="input_send" class="form-control" 
-                                         placeholder="พิมพ์เนื้อหา..."></textarea>
+                                    <textarea id="input_send" name="input_send" class="form-control"
+                                        placeholder="พิมพ์เนื้อหา..."></textarea>
                                 </div>
                             </div>
-
                             <div class="row g-3  mb-3">
                                 <div class="col-md-3">
                                     <label for="input_content" class="col-form-label">เนื้อหาข้อความ </label>
                                 </div>
                                 <div class="ck-details col-md-9">
-                                    <textarea id="input_content" name="input_content" class="form-control" 
-                                         placeholder="พิมพ์เนื้อหา..."></textarea>
+                                    <textarea id="input_content" name="input_content" class="form-control" cols="40"
+                                        rows="10" placeholder="พิมพ์เนื้อหา..."></textarea>
                                 </div>
                             </div>
                             <div class="row g-3 align-items-center mt-3">

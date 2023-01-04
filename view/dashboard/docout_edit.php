@@ -71,7 +71,7 @@ function edit_docout(){
     
     if ($conn->query($query) === TRUE) {
 
-        $_SESSION['success'] = "บันทึกหนังสือออกสำเร็จ!";
+        $_SESSION['success'] = "แก้ไขหนังสือออกสำเร็จ!";
         header("Location: docout_list.php");
         exit;
         
@@ -102,6 +102,7 @@ body {
 .ck-send .ck-editor__editable_inline {
     min-height: 100px;
 }
+
 .ck-details .ck-editor__editable_inline {
     min-height: 250px;
 }
@@ -164,23 +165,20 @@ body {
                                         value="<?= $row['docout_to'] ?>">
                                 </div>
                             </div>
-                           
-
                             <div class="row g-3  mb-3 ">
                                 <div class="col-md-3">
                                     <label for="input_send" class="col-form-label">สิ่งที่ส่งมาด้วย </label>
                                 </div>
                                 <div class="ck-send col-md-9 ">
-                                    <textarea id="input_send" name="input_send" class="form-control" 
-                                         placeholder="พิมพ์เนื้อหา..."><?= $row['docout_send'] ?></textarea>
+                                    <textarea id="input_send" name="input_send" class="form-control"
+                                        placeholder="พิมพ์เนื้อหา..."><?= $row['docout_dend'] ?></textarea>
                                 </div>
                             </div>
-
                             <div class="row g-3  mb-3">
                                 <div class="col-md-3">
                                     <label for="input_content" class="col-form-label">เนื้อหาข้อความ </label>
                                 </div>
-                                <div class=" col-md-9">
+                                <div class="ck-details col-md-9">
                                     <textarea id="input_content" name="input_content" class="form-control" cols="40"
                                         rows="10" placeholder="พิมพ์เนื้อหา..."><?= $row['docout_details'] ?></textarea>
                                 </div>
