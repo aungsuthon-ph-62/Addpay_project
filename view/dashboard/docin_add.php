@@ -44,7 +44,7 @@ if(isset($_POST['action'])){
                     
                     if (move_uploaded_file($_FILES["input_file"]["tmp_name"], $targetFilePath)) {
 
-                        $query = "INSERT INTO docin (docin_no, docin_srcname, docin_date, docin_title, docin_to, docin_file, docin_create, docin_uid)
+                        $query = "INSERT INTO docin (docin_no, docin_date, docin_srcname, docin_title, docin_to, docin_file, docin_create, docin_uid)
                         VALUES ('$input_no', '$input_date', '$input_srcname', '$input_title', '$input_to', '$fileName', '$date', '$uid')";
 
                         if ($conn->query($query)) {

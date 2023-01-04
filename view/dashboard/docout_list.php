@@ -128,8 +128,8 @@ body {
                     var id = $(this).attr("id");
                     var show_docout_no = $(this).attr("data-docout-no");
                     swal.fire({
-                        title: 'ต้องการลบหนังสืออกกนี้ !',
-                        text: "เลขที่หนังสืออก : " + show_docout_no,
+                        title: 'ต้องการลบหนังสือออกนี้ !',
+                        text: "เลขที่หนังสือออก : " + show_docout_no,
                         type: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#d33',

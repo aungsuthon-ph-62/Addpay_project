@@ -2,6 +2,33 @@
 session_start();
 include("../../layout/head.php");
 require_once("../../php/conn.php");
+
+if(isset($_GET["deletedocin"]))
+  {
+    $id = $_GET["deletedocin"];
+    
+    $sql = "SELECT docin_file FROM docin WHERE docin_id = '$id'";
+    $query = $conn->query($sql);
+    $row = $query->fetch_assoc();
+    $oldfile = $row['docin_file'];
+    
+    $sql = "DELETE FROM docin WHERE docin_id = '$id'";
+    $query = $conn->query($sql);
+    
+    if($query && unlink("../../uploadfile/docinfile/$oldfile")){
+            
+        $_SESSION['success'] = "ลบหนังสือเข้าสำเร็จ!";
+        header("Location: docin_list.php");
+        exit; 
+        
+    }
+    
+    $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
+    header("Location: docin_list.php");
+    exit;
+    
+  }
+
 ?>
 
 <style>
@@ -53,65 +80,72 @@ body {
 
                 <div class="border border-secondary rounded-3 py-md-4 px-md-4 mt-2 mt-md-4" id="main_row">
                     <div class="table-responsive">
-                        <table class="table" id="quotationTable">
+                        <table class="table" id="docinTable">
                             <thead>
                                 <tr class="align-center" class="rows">
-                                    <th class="text-center" style="width:5%" scope="col">ลำดับ</th>
-                                    <th class="text-center" style="width:30%" scope="col">ชื่อบริษัทต้นทาง</th>
-                                    <th class="text-center" style="width:10%" scope="col">วันที่</th>
-                                    <th class="text-center" style="width:20%" scope="col">เรื่อง</th>
-                                    <th class="text-center" style="width:20%" scope="col">เรียน (ถึงใคร)</th>
-                                    <th class="text-center" style="width:20%" scope="col">ไฟล์</th>
-                                    <th class="text-center" style="width:10%" scope="col">ตัวเลือก</th>
+                                    <th style="width:10%" scope="col">เลขที่</th>
+                                    <th style="width:10%" scope="col">วันที่</th>
+                                    <th style="width:30%" scope="col">ชื่อบริษัทต้นทาง</th>
+                                    <th style="width:20%" scope="col">เรื่อง</th>
+                                    <th style="width:20%" scope="col">ไฟล์</th>
+                                    <th style="width:10%" scope="col">ตัวเลือก</th>
                                 </tr>
                             </thead>
-                            <tbody class="text-center">
-                                <tr>
-                                    <td>1</td>
-                                    <td>บริษัท แอดเพย์ เซอร์วิสพอยท์ จำกัด</td>
-                                    <td>16/11/65</td>
-                                    <td>หนังสือเชิญเป็นวิทยากร</td>
-                                    <td>คุณหัตถยา บำรุงสุข</td>
-                                    <td><i class="fa-solid fa-file-pdf"></i> lovetoey.pdf</td>
-                                    <td>
-                                        <div>
+                            <?php
+                                
+                                $sql = "SELECT * FROM docin";
+                                $query = $conn->query($sql);
+                                while ($rows = $query->fetch_assoc()) {
+                                    echo '
+                                    <tr>
+                                        <td>'.$rows["docin_no"].'</td>
+                                        <td>'.$rows["docin_date"].'</td>
+                                        <td>'.$rows["docin_srcname"].'</td>
+                                        <td>'.$rows["docin_title"].'</td>
+                                        <td>'.$rows["docin_file"].'</td>
+                                        <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4"
                                                     data-bs-toggle="dropdown" aria-expanded="false"><b>เลือก</b>
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#">เปิดเอกสาร</a></li>
-                                                    <li><a class="dropdown-item" href="./docin_edit.php">แก้ไข</a></li>
-                                                    <li><a class="dropdown-item" href="#">ลบ</a></li>
-
+                                                    <li><a class="dropdown-item"
+                                                            href="../dashboard/docin_edit.php?editdocin='.$rows["docin_id"].'">แก้ไข</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item deletedocin" href="#" data-docin-no="'.$rows["docin_no"].'" id="'.$rows["docin_id"].'" >ลบ</a></li>
                                                 </ul>
                                             </div>
-
-                                            <!-- <a href="../dashboard/edit_archives.php">
-                                            <button type="button" class="float-start mr-1 btn btn-warning btn-sm text-white px-3"><i class="fa-solid fa-pen-to-square"></i></button>
-                                        </a>
-
-                                        <a href="" class="">
-                                            <button type="button" class="float-end mr-1 btn btn-danger btn-sm px-3"><i class="fa-solid fa-trash-can"></i></button>
-                                        </a> -->
-                                        </div>
-
-                                    </td>
-                                </tr>
-
-                            </tbody>
-
-
+                                        </td>
+                                    </tr>
+                                    ';
+                                }
+                            ?>
                         </table>
                     </div>
-
-
-
                 </div>
                 <!-- Data table -->
                 <script type="text/javascript">
                 $(document).ready(function() {
-                    $('#quotationTable').DataTable();
+                    $('#docinTable').DataTable();
+                });
+
+                $(document).on('click', '.deletedocin', function() {
+                    var id = $(this).attr("id");
+                    var show_docin_no = $(this).attr("data-docin-no");
+                    swal.fire({
+                        title: 'ต้องการลบหนังสือเข้านี้ !',
+                        text: "เลขที่หนังสือเข้า : " + show_docin_no,
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'yes!',
+                        cancelButtonText: 'no'
+                    }).then((result) => {
+                        if (result.value) {
+                            window.location.href = "?deletedocin=" + id;
+                        }
+                    });
                 });
                 </script>
                 <!-- Data table -->
@@ -121,3 +155,4 @@ body {
         </div>
     </div>
 </body>
+<?php $conn->close(); ?>

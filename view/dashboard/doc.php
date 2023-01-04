@@ -30,7 +30,7 @@ body {
                             <img src="../../image/doc-in.png" alt="" width="50%">
                         </div>
                         <div class="card-text">
-                            <a class="text-decoration-none" href="../../view/dashboard/docin_add.php">หนังสือเข้า</a>
+                            <a class="text-decoration-none" href="../../view/dashboard/docin_list.php">หนังสือเข้า</a>
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@ body {
                             <img src="../../image/doc-out.png" alt="" width="50%">
                         </div>
                         <div class="card-text">
-                            <a class="text-decoration-none" href="../../view/dashboard/docout_add.php">หนังสือออก</a>
+                            <a class="text-decoration-none" href="../../view/dashboard/docout_list.php">หนังสือออก</a>
                         </div>
                     </div>
                 </div>
