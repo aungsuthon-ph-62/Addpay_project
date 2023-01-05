@@ -51,9 +51,13 @@ if (isset($_POST['action'])) {
 ?>
 
 <style>
-    .ck-editor__editable_inline {
-        min-height: 250px;
-    }
+.ck-send .ck-editor__editable_inline {
+    min-height: 100px;
+}
+
+.ck-content .ck-editor__editable_inline {
+    min-height: 250px;
+}
 </style>
 
 <nav aria-label="breadcrumb">
@@ -113,16 +117,18 @@ if (isset($_POST['action'])) {
                         <div class="col-md-3 ">
                             <label for="input_send" class="col-form-label">สิ่งที่ส่งมาด้วย </label>
                         </div>
-                        <div class="col-md-6">
-                            <textarea type="text" id="input_send" name="input_send" class="form-control " required rows="3"></textarea>
-                        </div>  
+                        <div class="ck-send col-md-6">
+                            <textarea type="text" id="input_send" name="input_send" class="form-control " required
+                                rows="3"></textarea>
+                        </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
                         <div class="col-md-3">
                             <label for="input_content" class="col-form-label">เนื้อหาข้อความ </label>
                         </div>
-                        <div class=" col-md-9">
-                            <textarea id="input_content" name="input_content" class="form-control" cols="40" rows="10" placeholder="พิมพ์เนื้อหา..."></textarea>
+                        <div class="ck-content col-md-9">
+                            <textarea id="input_content" name="input_content" class="form-control" cols="40" rows="10"
+                                placeholder="พิมพ์เนื้อหา..."></textarea>
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
@@ -144,8 +150,10 @@ if (isset($_POST['action'])) {
                     <div class="row mt-5">
                         <div class="col-md-12">
                             <div class="d-flex justify-content-end">
-                                <button type="reset" class="btn bg-secondary-addpay text-white me-3"><i class="fa-solid fa-arrow-rotate-left"></i> ล้างข้อมูล</button>
-                                <button type="submit" class="btn btn-addpay text-white">บันทึก <i class="fa-solid fa-cloud-arrow-up"></i></button>
+                                <button type="reset" class="btn bg-secondary-addpay text-white me-3"><i
+                                        class="fa-solid fa-arrow-rotate-left"></i> ล้างข้อมูล</button>
+                                <button type="submit" class="btn btn-addpay text-white" name="action"
+                                    value="create_docout">บันทึก <i class="fa-solid fa-cloud-arrow-up"></i></button>
                             </div>
                         </div>
                     </div>
@@ -156,10 +164,18 @@ if (isset($_POST['action'])) {
 </div>
 
 <script>
-    ClassicEditor
-        .create(document.querySelector('#input_content'))
+ClassicEditor
+    .create(document.querySelector('#input_content'))
 
-        .catch(error => {
-            console.error(error);
-        });
+    .catch(error => {
+        console.error(error);
+    });
+</script>
+<script>
+ClassicEditor
+    .create(document.querySelector('#input_send'))
+
+    .catch(error => {
+        console.error(error);
+    });
 </script>

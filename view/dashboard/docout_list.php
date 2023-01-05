@@ -90,28 +90,28 @@ if (isset($_GET["deletedocout"])) {
                 </div>
                 <!-- Data table -->
                 <script type="text/javascript">
-                    $(document).ready(function() {
-                        $('#docoutTable').DataTable();
-                    });
+                $(document).ready(function() {
+                    $('#docoutTable').DataTable();
+                });
 
-                    $(document).on('click', '.deletedocout', function() {
-                        var id = $(this).attr("id");
-                        var show_docout_no = $(this).attr("data-docout-no");
-                        swal.fire({
-                            title: 'ต้องการลบหนังสืออกกนี้ !',
-                            text: "เลขที่หนังสืออก : " + show_docout_no,
-                            type: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#d33',
-                            cancelButtonColor: '#3085d6',
-                            confirmButtonText: 'yes!',
-                            cancelButtonText: 'no'
-                        }).then((result) => {
-                            if (result.value) {
-                                window.location.href = "?deletedocout=" + id;
-                            }
-                        });
+                $(document).on('click', '.deletedocout', function() {
+                    var id = $(this).attr("id");
+                    var show_docout_no = $(this).attr("data-docout-no");
+                    swal.fire({
+                        title: 'ต้องการลบหนังสืออกกนี้ !',
+                        text: "เลขที่หนังสืออก : " + show_docout_no,
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'yes!',
+                        cancelButtonText: 'no'
+                    }).then((result) => {
+                        if (result.value) {
+                            window.location.href = "?deletedocout=" + id;
+                        }
                     });
+                });
                 </script>
                 <!-- Data table -->
             </div>

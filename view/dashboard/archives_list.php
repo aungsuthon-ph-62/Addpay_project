@@ -15,8 +15,9 @@ if(isset($_GET["deletearchives"]))
     $sql = "DELETE FROM archives WHERE archives_id = '$id'";
     $query = $conn->query($sql);
     
-    if($query && unlink("../../uploadfile/archivesfile/$oldfile")){
+    if($query){
             
+        unlink("../../uploadfile/archivesfile/$oldfile");
         $_SESSION['success'] = "ลบหนังสือสำคัญสำเร็จ!";
         header("Location: archives_list.php");
         exit; 

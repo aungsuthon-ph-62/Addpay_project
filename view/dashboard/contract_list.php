@@ -16,10 +16,11 @@ if(isset($_GET["deletecontract"]))
     $sql = "DELETE FROM contract WHERE contract_id = '$id'";
     $query = $conn->query($sql);
     
-    if($query && unlink("../../uploadfile/contractfile/$oldfile1") 
-    && unlink("../../uploadfile/contractfile/$oldfile2")){
+    if($query){
             
-        $_SESSION['success'] = "ลบเพิ่มเอกสารสัญญาสำเร็จ!";
+        unlink("../../uploadfile/contractfile/$oldfile1"); 
+        unlink("../../uploadfile/contractfile/$oldfile2");
+        $_SESSION['success'] = "ลบเอกสารสัญญาสำเร็จ!";
         header("Location: contract_list.php");
         exit; 
         
@@ -72,7 +73,7 @@ body {
             <hr>
             <div class="container pb-md-0 mb-5">
                 <div>
-                    <h3>หนังสือเข้า</h3>
+                    <h3>เอกสารสัญญา</h3>
                 </div>
                 <div class="mx-auto d-flex justify-content-end">
                     <a class="btn btn-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button"
@@ -81,7 +82,7 @@ body {
 
                 <div class="border border-secondary rounded-3 py-md-4 px-md-4 mt-2 mt-md-4" id="main_row">
                     <div class="table-responsive">
-                        <table class="table" id="docinTable">
+                        <table class="table" id="contractTable">
                             <thead>
                                 <tr class="align-center" class="rows">
                                     <th style="width:10%" scope="col">วันที่ส่ง LG</th>
@@ -94,16 +95,16 @@ body {
                             </thead>
                             <?php
                                 
-                                $sql = "SELECT * FROM docin";
+                                $sql = "SELECT * FROM contract";
                                 $query = $conn->query($sql);
                                 while ($rows = $query->fetch_assoc()) {
                                     echo '
                                     <tr>
-                                        <td>'.$rows["docin_no"].'</td>
-                                        <td>'.$rows["docin_date"].'</td>
-                                        <td>'.$rows["docin_srcname"].'</td>
-                                        <td>'.$rows["docin_title"].'</td>
-                                        <td>'.$rows["docin_file"].'</td>
+                                        <td>'.$rows["contract_lgdeld"].'</td>
+                                        <td>'.$rows["contract_lgexpd"].'</td>
+                                        <td>'.$rows["contract_comp"].'</td>
+                                        <td>'.$rows["contract_title"].'</td>
+                                        <td>'.$rows["contract_ann"].'</td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4"
@@ -111,12 +112,15 @@ body {
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li><a class="dropdown-item" target="_blank"
-                                                            href="../../uploadfile/docinfile/'.$rows["docin_file"].'">เปิดเอกสาร</a>
+                                                            href="../../uploadfile/contractfile/'.$rows["contract_file"].'">เปิดเอกสาร</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item" target="_blank"
+                                                            href="../../uploadfile/contractfile/'.$rows["contract_filesigner"].'">เปิดเอกสารผู้เซ็นสัญญา</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
-                                                            href="../dashboard/docin_edit.php?editdocin='.$rows["docin_id"].'">แก้ไข</a>
+                                                            href="../dashboard/contract_edit.php?editcontract='.$rows["contract_id"].'">แก้ไข</a>
                                                     </li>
-                                                    <li><a class="dropdown-item deletedocin" href="#" data-docin-no="'.$rows["docin_no"].'" id="'.$rows["docin_id"].'" >ลบ</a></li>
+                                                    <li><a class="dropdown-item deletecontract" href="#" data-contract-title="'.$rows["contract_title"].'" id="'.$rows["contract_id"].'" >ลบ</a></li>
                                                 </ul>
                                             </div>
                                         </td>
@@ -130,15 +134,15 @@ body {
                 <!-- Data table -->
                 <script type="text/javascript">
                 $(document).ready(function() {
-                    $('#docinTable').DataTable();
+                    $('#contractTable').DataTable();
                 });
 
-                $(document).on('click', '.deletedocin', function() {
+                $(document).on('click', '.deletecontract', function() {
                     var id = $(this).attr("id");
-                    var show_docin_no = $(this).attr("data-docin-no");
+                    var show_contract_title = $(this).attr("data-contract-title");
                     swal.fire({
-                        title: 'ต้องการลบหนังสือเข้านี้ !',
-                        text: "เลขที่หนังสือเข้า : " + show_docin_no,
+                        title: 'ต้องการลบเอกสารสัญญานี้ !',
+                        text: "ชื่อสัญญา : " + show_contract_title,
                         type: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#d33',
@@ -147,7 +151,7 @@ body {
                         cancelButtonText: 'no'
                     }).then((result) => {
                         if (result.value) {
-                            window.location.href = "?deletedocin=" + id;
+                            window.location.href = "?deletecontract=" + id;
                         }
                     });
                 });
@@ -159,85 +163,3 @@ body {
     </div>
 </body>
 <?php $conn->close(); ?>
-
-
-
-
-
-
-
-
-
-<div class="row gutters-md">
-    <div class="col-md-12">
-        <div class="card mb-3">
-            <div class="card-body">
-                <div class="d-flex justify-content-end me-2 mb-2">
-                    <button type="button" class="btn p-1  text-white" data-bs-toggle="modal"
-                        data-bs-target="#contractaddModal" style="background-color:#FE9100 ;"><i
-                            class="fa-solid fa-file-circle-plus">&nbsp;เพิ่มเอกสาร</i></button>
-                </div>
-                <div class=" row">
-                    <div class="col-lg-12">
-                        <div class="main-box clearfix">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th class="hidden"><span>id</span></th>
-                                            <th><span>วันที่ส่ง LG</span></th>
-                                            <th><span>วันหมดอายุ LG</span></th>
-                                            <th><span>ชื่อสัญญา</span></th>
-                                            <th><span>ชื่อบริษัท</span></th>
-                                            <th><span>ไฟล์สัญญา</span></th>
-                                            <th><span>ไฟล์เอกสารผู้เซ็นสัญญา</span></th>
-                                            <th><span>วันประกาศผล</span></th>
-                                            <th>&nbsp;</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="hidden">12</td>
-                                            <td><?=date("Y-m-d");?></td>
-                                            <td><?=date("Y-m-d");?></td>
-                                            <td>สัญญาเมื่อสายัน</td>
-                                            <td>แอดเพย์ เซอวิสพอยท์</td>
-                                            <td><a href="#">test.pdf</a></td>
-                                            <td><a href="#">test2.pdf</a></td>
-                                            <td><?=date("Y-m-d");?></td>
-                                            <td style="width: 10%;">
-                                                <a class="table-link contracteditModal">
-                                                    <span class="fa-stack">
-                                                        <i class="fa fa-square fa-stack-2x"></i>
-                                                        <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                                    </span>
-                                                </a>
-                                                <a class="table-link danger contractdeleteModal">
-                                                    <span class="fa-stack">
-                                                        <i class="fa fa-square fa-stack-2x"></i>
-                                                        <i class="fa fa-trash fa-stack-1x fa-inverse"></i>
-                                                    </span>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <ul class="pagination pull-right">
-                                <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
-                                <li>&nbsp;</li>
-                                <li><a href="#">1</a></li>
-                                <li>&nbsp;</li>
-                                <li><a href="#">2</a></li>
-                                <li>&nbsp;</li>
-                                <li><a href="#">3</a></li>
-                                <li>&nbsp;</li>
-                                <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>

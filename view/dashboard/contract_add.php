@@ -52,6 +52,8 @@ if(isset($_POST['action'])){
                         
                     } else {
                         
+                        unlink("../../uploadfile/contractfile/$fileName1");
+                        unlink("../../uploadfile/contractfile/$fileName2");
                         $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
                         header("Location: contract_add.php");
                         exit;

@@ -11,8 +11,8 @@ session_start();
 include("../../layout/head.php");
 require_once("../../php/conn.php");
 
-if(isset($_GET["deletedocin"]))
-  {
+if(isset($_GET["deletedocin"])){
+    
     $id = $_GET["deletedocin"];
     
     $sql = "SELECT docin_file FROM docin WHERE docin_id = '$id'";
@@ -23,8 +23,9 @@ if(isset($_GET["deletedocin"]))
     $sql = "DELETE FROM docin WHERE docin_id = '$id'";
     $query = $conn->query($sql);
     
-    if($query && unlink("../../uploadfile/docinfile/$oldfile")){
+    if($query){
             
+        unlink("../../uploadfile/docinfile/$oldfile");
         $_SESSION['success'] = "ลบหนังสือเข้าสำเร็จ!";
         header("Location: docin_list.php");
         exit; 

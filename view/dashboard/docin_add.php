@@ -64,6 +64,7 @@ if(isset($_POST['action'])){
                             
                         } else {
                             
+                            unlink("../../uploadfile/docinfile/$fileName");
                             $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
                             header("Location: docin_add.php");
                             exit;
