@@ -12,7 +12,7 @@ if (isset($_GET['editdocout'])) {
 
     if (!$row) {
         $_SESSION['error'] = "ไม่พบหน้าดังกล่าว!";
-        echo "<script> window.location.href='?page=doc_out';</script>";
+        echo "<script> window.location.href='?page=doc_out'". encode($id, secret_key()) .";</script>";
         exit;
     }
 }
@@ -36,7 +36,7 @@ if (isset($_POST['action'])) {
 
             if ($check) {
                 $_SESSION['error'] = "เลขที่นี้มีในระบบแล้ว!";
-                header('Location: docout_edit.php?editdocout=' . $id);
+                echo "<script> window.location.href='?page=doc_out_edit&editdocout='$id;</script>";
                 exit;
             } else {
 
@@ -72,12 +72,12 @@ function edit_docout()
     if ($conn->query($query) === TRUE) {
 
         $_SESSION['success'] = "แก้ไขหนังสือออกสำเร็จ!";
-        header("Location: docout_list.php");
+        echo "<script> window.location.href='?page=doc_out_edit&editdocout='$id;</script>";
         exit;
     } else {
 
         $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-        header('Location: docout_edit.php?editdocout=' . $id);
+        echo "<script> window.location.href='?page=doc_out_edit&editdocout='$id;</script>";
         exit;
     }
 }
@@ -107,7 +107,7 @@ function edit_docout()
                 <div class="text-center text-md-start text-dark my-3">
                     <h3>แก้ไขข้อมูลหนังสือออก</h3>
                 </div>
-                <form action="docout_edit.php" method="post" name="docout_edit" id="docout_edit" class="p-md-5">
+                <form action="?page=doc_out_edit" method="post" name="docout_edit" id="docout_edit" class="p-md-5">
                     <div class="row align-items-center text-dark px-md-5 mb-3">
                         <div class="col-md-3">
                             <label for="input_no" class="col-form-label">เลขที่</label>
