@@ -49,7 +49,7 @@ include_once '../../layout/head.php';
                             <img src="../../image/expenses.png" alt="" width="50%">
                         </div>
                         <div class="card-text">
-                            <a class="text-decoration-none" href="../../view/dashboard/expenses.php">ข้อมูลใบสำคัญจ่าย</a>
+                            <a class="text-decoration-none" href="../../view/dashboard/expenses_list.php">ข้อมูลใบสำคัญจ่าย</a>
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@ include_once '../../layout/head.php';
                             <img src="../../image/invoice.png" alt="" width="50%">
                         </div>
                         <div class="card-text">
-                            <a class="text-decoration-none" href="../../view/dashboard/expenses.php">ข้อมูลใบแจ้งหนี้</a>
+                            <a class="text-decoration-none" href="../../view/dashboard/expenses_list.php">ข้อมูลใบแจ้งหนี้</a>
                         </div>
                     </div>
                 </div>
