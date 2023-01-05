@@ -1,5 +1,6 @@
 <?php
 // $uid = $_SESSION['id'];
+require_once("php/conn.php");
 
 if (isset($_POST['action'])) {
     if ($_POST['action'] == 'create_docout') {
@@ -25,7 +26,7 @@ if (isset($_POST['action'])) {
         if ($check) {
 
             $_SESSION['error'] = "เลขที่นี้มีในระบบแล้ว!";
-            header("Location: docout_add.php");
+            echo "<script> window.location.href='?page=doc_out_add'</script>";
             exit;
         } else {
 
@@ -35,12 +36,12 @@ if (isset($_POST['action'])) {
             if ($conn->query($query) === TRUE) {
 
                 $_SESSION['success'] = "บันทึกหนังสือออกสำเร็จ!";
-                header("Location: docout_list.php");
+                echo "<script> window.location.href='?page=doc_out'</script>";
                 exit;
             } else {
 
                 $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-                header("Location: docout_add.php");
+                echo "<script> window.location.href='?page=doc_out_add'</script>";
                 exit;
             }
         }
@@ -72,6 +73,22 @@ if (isset($_POST['action'])) {
 
 
 <div class="container bg-secondary-addpay rounded-5">
+    <script>
+    ClassicEditor
+        .create(document.querySelector('#input_send'))
+
+        .catch(error => {
+            console.error(error);
+        });
+    </script>
+    <script>
+    ClassicEditor
+        .create(document.querySelector('#input_content'))
+
+        .catch(error => {
+            console.error(error);
+        });
+    </script>
     <div class="main-body p-md-5 text-white">
         <div id="docout_add" class="container p-3 p-md-5">
 
@@ -79,7 +96,7 @@ if (isset($_POST['action'])) {
                 <div class="text-center text-md-start text-dark my-3">
                     <h3>เพิ่มข้อมูลหนังสือออก</h3>
                 </div>
-                <form action="docout_add.php" method="post" name="docout_add" id="docout_add" class="p-md-5">
+                <form action="?page=doc_out_add" method="post" name="docout_add" id="docout_add" class="p-md-5">
                     <div class="row align-items-center text-dark px-md-5 mb-3">
                         <div class="col-md-3">
                             <label for="input_no" class="col-form-label">เลขที่</label>
@@ -162,20 +179,3 @@ if (isset($_POST['action'])) {
         </div>
     </div>
 </div>
-
-<script>
-ClassicEditor
-    .create(document.querySelector('#input_content'))
-
-    .catch(error => {
-        console.error(error);
-    });
-</script>
-<script>
-ClassicEditor
-    .create(document.querySelector('#input_send'))
-
-    .catch(error => {
-        console.error(error);
-    });
-</script>

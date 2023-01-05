@@ -21,9 +21,12 @@ if (isset($_POST['action'])) {
     if ($_POST['action'] == 'edit_docout') {
 
         $id = mysqli_real_escape_string($conn, trim($_POST['docout_id']));
+        $enid=encode($id, secret_key());
+        
         $no_check = mysqli_real_escape_string($conn, trim($_POST['no_check']));
         $input_no = mysqli_real_escape_string($conn, trim($_POST['input_no']));
 
+        
         if ($input_no == $no_check) {
 
             edit_docout();
@@ -36,7 +39,7 @@ if (isset($_POST['action'])) {
 
             if ($check) {
                 $_SESSION['error'] = "เลขที่นี้มีในระบบแล้ว!";
-                echo "<script> window.location.href='?page=doc_out_edit&editdocout='". encode($id, secret_key()). ";</script>";
+                echo "<script> window.location.href='?page=doc_out_edit&editdocout=.$enid.'</script>";
                 exit;
             } else {
 
@@ -55,6 +58,7 @@ function edit_docout()
     global $conn;
 
     $id = mysqli_real_escape_string($conn, trim($_POST['docout_id']));
+    $enid=encode($id, secret_key());
     $input_no = mysqli_real_escape_string($conn, trim($_POST['input_no']));
     $input_date = mysqli_real_escape_string($conn, trim($_POST['input_date']));
     $input_title = mysqli_real_escape_string($conn, trim($_POST['input_title']));
@@ -78,7 +82,7 @@ function edit_docout()
     } else {
 
         $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-        echo "<script> window.location.href='?page=doc_out_edit&editdocout='". encode($id, secret_key()). ";</script>";
+        echo "<script> window.location.href='?page=doc_out_edit&editdocout=.$enid.'</script>";
         exit;
     }
 }
