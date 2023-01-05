@@ -6,6 +6,38 @@
     </ol>
 </nav>
 <hr>
+<?php
+session_start();
+include("../../layout/head.php");
+require_once("../../php/conn.php");
+
+if(isset($_GET["deletedocin"]))
+  {
+    $id = $_GET["deletedocin"];
+    
+    $sql = "SELECT docin_file FROM docin WHERE docin_id = '$id'";
+    $query = $conn->query($sql);
+    $row = $query->fetch_assoc();
+    $oldfile = $row['docin_file'];
+    
+    $sql = "DELETE FROM docin WHERE docin_id = '$id'";
+    $query = $conn->query($sql);
+    
+    if($query && unlink("../../uploadfile/docinfile/$oldfile")){
+            
+        $_SESSION['success'] = "ลบหนังสือเข้าสำเร็จ!";
+        header("Location: docin_list.php");
+        exit; 
+        
+    }
+    
+    $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
+    header("Location: docin_list.php");
+    exit;
+    
+  }
+
+?>
 
 
 <div class="container bg-secondary-addpay rounded-5">
@@ -126,13 +158,35 @@
                         </div>
                     </div>
                 </div>
-                <div class="px-3">
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-dark bg-secondary-addpay border-0" data-bs-dismiss="modal">ยกเลิก</button>
-                        <button class="btn btn-dark btn-addpay border-0" type="submit" name="submit">บันทึก</button>
-                    </div>
-                </div>
-            </form>
+                <!-- Data table -->
+                <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#docinTable').DataTable();
+                });
+
+                $(document).on('click', '.deletedocin', function() {
+                    var id = $(this).attr("id");
+                    var show_docin_no = $(this).attr("data-docin-no");
+                    swal.fire({
+                        title: 'ต้องการลบหนังสือเข้านี้ !',
+                        text: "เลขที่หนังสือเข้า : " + show_docin_no,
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'yes!',
+                        cancelButtonText: 'no'
+                    }).then((result) => {
+                        if (result.value) {
+                            window.location.href = "?deletedocin=" + id;
+                        }
+                    });
+                });
+                </script>
+                <!-- Data table -->
+
+            </div>
         </div>
     </div>
-</div> -->
+</body>
+<?php $conn->close(); ?>

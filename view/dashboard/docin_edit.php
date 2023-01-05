@@ -7,6 +7,146 @@
     </ol>
 </nav>
 <hr>
+<?php
+session_start();
+include("../../layout/head.php");
+require_once("../../php/conn.php");
+
+if (isset($_GET['editdocin'])) {
+    
+    $id = $_GET['editdocin'];
+
+    $sql = "SELECT * FROM docin WHERE docin_id ='$id'";
+    $query = $conn->query($sql);
+    $row = $query->fetch_assoc();
+    
+}
+
+if(isset($_POST['action'])){
+    if ($_POST['action'] == 'edit_docin') {
+
+        $id= mysqli_real_escape_string($conn,trim($_POST['docin_id']));
+        $no_check= mysqli_real_escape_string($conn,trim($_POST['no_check']));
+        $input_no= mysqli_real_escape_string($conn,trim($_POST['input_no']));
+        
+        if($input_no == $no_check){
+            
+            edit_docin();
+            exit;
+            
+        }else{
+            
+            $no_check_query = "SELECT * FROM docin WHERE docin_no = '$input_no'";
+            $query = $conn->query($no_check_query);
+            $check = $query->fetch_assoc();
+            
+            if ($check) {
+                $_SESSION['error'] = "เลขที่นี้มีในระบบแล้ว!";
+                header('Location: docin_edit.php?editdocin='.$id);
+                exit;
+                
+            }else{
+                
+                edit_docin();
+                exit;
+                
+            }
+        }
+    }
+}
+
+
+
+function edit_docin(){
+    
+    date_default_timezone_set('Asia/Bangkok');
+    $date = date("Y-m-d H:i:s");
+    $namedate = date('YmdHis');
+    global $conn;
+
+    $id= mysqli_real_escape_string($conn,trim($_POST['docin_id']));
+    $input_no= mysqli_real_escape_string($conn,trim($_POST['input_no']));
+    $input_date= mysqli_real_escape_string($conn,trim($_POST['input_date']));
+    $input_srcname= mysqli_real_escape_string($conn,trim($_POST['input_srcname']));
+    $input_title= mysqli_real_escape_string($conn,trim($_POST['input_title']));
+    $input_to= mysqli_real_escape_string($conn,trim($_POST['input_to']));
+    $uid = 1;
+    
+    if (!empty($_FILES["input_file"]["name"])) {
+            
+        $targetDir = "../../uploadfile/docinfile/";
+        // $fileName = basename($_FILES["input_file"]["name"]);
+        $temp = explode(".", $_FILES["input_file"]["name"]);
+        $fileName = 'docin-'.$namedate. '.' . end($temp);
+        $targetFilePath = $targetDir . $fileName;
+        $fileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
+        $allowTypes = array('jpg', 'png', 'jpeg', 'pdf', 'word', 'txt', 'doc', 'docx', 'ppt', 'pptx','PDF');
+    
+        if (in_array($fileType, $allowTypes)) {
+
+            $sql = "SELECT docin_file FROM docin WHERE docin_id = '$id'";
+            $query = $conn->query($sql);
+            $row = $query->fetch_assoc();
+            $oldfile = $row['docin_file'];
+            
+            if (move_uploaded_file($_FILES["input_file"]["tmp_name"], $targetFilePath)) {
+
+                unlink("../../uploadfile/docinfile/$oldfile");
+                
+                $query = "UPDATE docin SET docin_no='$input_no', docin_date='$input_date', docin_srcname='$input_srcname', docin_title='$input_title',
+                docin_to='$input_to', docin_file='$fileName', docin_update='$date', docin_uid='$uid' WHERE docin_id ='$id'";
+
+                if ($conn->query($query)) {
+                    
+                    $_SESSION['success'] = "แก้ไขหนังสือเข้าสำเร็จ!";
+                    header("Location: docin_list.php");
+                    exit;
+                    
+                } else {
+                    
+                    $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
+                    header('Location: docin_edit.php?editdocin='.$id);
+                    exit;
+                    
+                }
+            } else {
+                
+                $_SESSION['error'] = "เกิดข้อผิดพลาด! อัพโหลดไฟล์ไม่สำเร็จ!";
+                header('Location: docin_edit.php?editdocin='.$id);
+                exit;
+                
+            }
+            
+        } else {
+            
+            $_SESSION['error'] = "เกิดข้อผิดพลาด! ไม่รองรับนามสกุลไฟล์ชนิดนี้!";
+            header('Location: docin_edit.php?editdocin='.$id);
+            exit;
+            
+        }
+    }else{
+
+        $query = "UPDATE docin SET docin_no='$input_no', docin_date='$input_date', docin_srcname='$input_srcname', docin_title='$input_title',
+                docin_to='$input_to', docin_update='$date', docin_uid='$uid' WHERE docin_id ='$id'";
+
+        if ($conn->query($query)) {
+            
+            $_SESSION['success'] = "แก้ไขหนังสือเข้าสำเร็จ!";
+            header("Location: docin_list.php");
+            exit;
+            
+        } else {
+            
+            $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
+            header('Location: docin_edit.php?editdocin='.$id);
+            exit;
+            
+        }
+        
+    } 
+}
+
+?>
 
 <div class="container bg-secondary-addpay rounded-5">
     <div class="main-body p-md-5 text-white">
