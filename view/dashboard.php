@@ -1,25 +1,17 @@
-<!-- Dashboard Nav -->
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">หน้าหลัก</li>
+    </ol>
+</nav>
+<hr>
 <?php
-include 'layout/dashboardNav.php';
-?>
-<!-- Dashboard Nav -->
-
-<div class="container-fluid">
-    <div class="row">
-        <!-- Sidebar -->
-        <?php
-        include 'layout/sidebar.php';
-        ?>
-        <!-- Sidebar -->
-
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <h1 class="h5 pt-5">หน้าหลัก</h1>
-            <hr>
-            
-            <?php
-                include 'dashboard/profile.php';
-            ?>
-            
-        </main>
+if (!$user['gender'] || !$user['age'] || !$user['email'] || !$user['position'] || !$user['department'] || !$user['phone']) { ?>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong><i class="fa-solid fa-triangle-exclamation"></i> แจ้งเตือน !</strong> กรุณาเพิ่มหรือแก้ไขข้อมูลส่วนตัวของท่านด้วย.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-</div>
+<?php } ?>
+<?php
+include_once 'dashboard/profile.php';
+include_once 'dashboard/profileedit.php';
+?>

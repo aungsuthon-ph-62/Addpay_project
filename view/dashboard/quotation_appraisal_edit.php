@@ -106,14 +106,6 @@ function edit_quo()
 ?>
 
 <style>
-body {
-    font-family: "Kanit", sans-serif;
-    font-family: "Noto Sans", sans-serif;
-    font-family: "Noto Sans Thai", sans-serif;
-    font-family: "Poppins", sans-serif;
-    font-family: "Prompt", sans-serif;
-}
-
 table {
     counter-reset: rowNumber;
 }
@@ -130,7 +122,6 @@ table tr td:first-child::before {
 </style>
 
 <body>
-    <?php require("../alert.php");?>
     <div class="container-fluid">
         <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
             <ol class="breadcrumb">

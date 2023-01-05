@@ -1,3 +1,12 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index">หน้าหลัก</a></li>
+        <li class="breadcrumb-item"><a href="?page=doc">หนังสือ</a></li>
+        <li class="breadcrumb-item"><a href="?page=doc_in">หนังสือเข้า</a></li>
+        <li class="breadcrumb-item active" aria-current="page">แก้ไขข้อมูลหนังสือเข้า</li>
+    </ol>
+</nav>
+<hr>
 <?php
 session_start();
 include("../../layout/head.php");
@@ -137,115 +146,68 @@ function edit_docin(){
 
 ?>
 
+<div class="container bg-secondary-addpay rounded-5">
+    <div class="main-body p-md-5 text-white">
+        <div id="paperquotation" class="container p-3 p-md-5">
 
-<style>
-.font {
-    font-size: 1rem;
-}
-
-body {
-    font-family: "Kanit", sans-serif;
-    font-family: "Noto Sans", sans-serif;
-    font-family: "Noto Sans Thai", sans-serif;
-    font-family: "Poppins", sans-serif;
-    font-family: "Prompt", sans-serif;
-}
-</style>
-
-<body>
-    <?php require("../alert.php");?>
-    <div class="container py-5">
-        <div class="main-body">
-            <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../dashboard.php">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="../dashboard/doc.php">หนังสือ</a></li>
-                    <li class="breadcrumb-item"><a href="../dashboard/docin_list.php">หนังสือเข้า</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">เพิ่มข้อมูลหนังสือเข้า</li>
-                </ol>
-            </nav>
-            <hr>
-
-            <div id="paperquotation" class="container pb-md-0 mb-5">
-                <div>
-                    <h3>เพิ่มข้อมูลหนังสือเข้า</h3>
+            <div class="p-4 p-md-5 bg-white rounded-5 shadow-lg">
+                <div class="text-center text-md-start text-dark my-3">
+                    <h3>แก้ไขข้อมูลหนังสือเข้า #</h3>
                 </div>
-                <div class=" px-md-5 py-md-4 justify-content-center">
-                    <div class="p-2 py-md-4 px-md-5 border rounded-3">
-                        <!-- modal form -->
-                        <form action="docin_edit.php" method="post" class="" enctype="multipart/form-data">
-                            <div class="row g-3 align-items-center mb-3">
-                                <div class="col-md-3">
-                                    <label for="input_no" class="col-form-label">เลขที่ในใบเสนอราคา</label>
-                                </div>
-                                <div class="col-md-9">
-                                    <input type="text" id="input_no" name="input_no" class="form-control " required
-                                        value="<?= $row['docin_no'] ?>">
-                                </div>
-                            </div>
-                            <div class="row g-3 align-items-center mb-3">
-                                <div class="col-md-3">
-                                    <label for="input_date" class="col-form-label">วันที่ในใบเสนอราคา</label>
-                                </div>
-                                <div class="col-md-9">
-                                    <input type="date" id="input_date" name="input_date" class="form-control " required
-                                        value="<?= $row['docin_date'] ?>">
-                                </div>
-                            </div>
-                            <div class="row g-3 align-items-center mb-3">
-                                <div class="col-md-3">
-                                    <label for="input_srcname" class="col-form-label">ชื่อบริษัทต้นทาง </label>
-                                </div>
-                                <div class="col-md-9">
-                                    <input type="text" id="input_srcname" name="input_srcname" class="form-control "
-                                        required value="<?= $row['docin_srcname'] ?>">
-                                </div>
-                            </div>
-                            <div class="row g-3 align-items-center mb-3">
-                                <div class="col-md-3">
-                                    <label for="input_title" name="input_date" class="col-form-label">ชื่อเรื่อง
-                                    </label>
-                                </div>
-                                <div class="col-md-9">
-                                    <input type="text" id="input_title" name="input_title" class=" form-control "
-                                        required value="<?= $row['docin_title'] ?>">
-                                </div>
-                            </div>
-                            <div class=" row g-3 align-items-center mb-3">
-                                <div class="col-md-3 ">
-                                    <label for="input_to" class="col-form-label">เรียน (ถึงใคร) </label>
-                                </div>
-
-                                <div class="col-md-9">
-                                    <input type="text" id="input_to" name="input_to" class="form-control " required
-                                        value="<?= $row['docin_to'] ?>">
-                                </div>
-                            </div>
-                            <div class="row g-3 align-items-center mb-3">
-                                <div class="col-md-3 ">
-                                    <label for="input_file" class="col-form-label">เพิ่มไฟล์ </label>
-                                </div>
-
-                                <div class="col-md-9">
-                                    <input type="file" id="input_file" name="input_file" class="form-control ">
-                                </div>
-                            </div>
-                            <!-- Submit button -->
-                            <div class="mx-auto d-flex justify-content-end">
-                                <button type="reset"
-                                    class=" btn btn-outline-danger btn btn-outline-success px-2 mt-2 rounded-3 fw-bold"><i
-                                        class="fa-solid fa-eraser"></i> ล้างข้อมูล</button>
-                                <button type="submit" name="action" value="edit_docin"
-                                    class="ms-3  btn btn-outline-success px-2 mt-2 rounded-3  fw-bold">บันทึก
-                                    <i class="fa-solid fa-angles-right"></i></button>
-                                <input type="hidden" name="no_check" id="no_check" value="<?= $row['docin_no'];?>" />
-                                <input type="hidden" name="docin_id" id="docin_id" value="<?= $row['docin_id'];?>" />
-                            </div>
-                        </form>
+                <form action="" method="post" class="p-md-5">
+                    <div class="row align-items-center text-dark px-md-5 mb-3">
+                        <div class="col-md-3">
+                            <h6 for="inputsrcname" class="col-form-label">ชื่อบริษัทต้นทาง </h6>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" id="inputsrcname" class="form-control " required>
+                        </div>
                     </div>
-                </div>
+                    <div class="row align-items-center text-dark px-md-5 mb-3">
+                        <div class="col-md-3">
+                            <h6 for="inputDate" class="col-form-label">วันที่ </h6>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="date" id="inputDate" class="form-control " required>
+                        </div>
+                    </div>
+                    <div class="row align-items-center text-dark px-md-5 mb-3">
+                        <div class="col-md-3">
+                            <h6 for="inputTitle" class="col-form-label">ชื่อเรื่อง </h6>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" id="inputTitle" class="form-control " required>
+                        </div>
+                    </div>
+                    <div class="row align-items-center text-dark px-md-5 mb-3">
+                        <div class="col-md-3 ">
+                            <h6 for="inputTo" class="col-form-label">เรียน (ถึงใคร) </h6>
+                        </div>
+
+                        <div class="col-md-9">
+                            <input type="text" id="inputTo" class="form-control " required>
+                        </div>
+                    </div>
+                    <div class="row align-items-center text-dark px-md-5 mb-3">
+                        <div class="col-md-3 ">
+                            <h6 for="inputFile" class="col-form-label">เพิ่มไฟล์ </h6>
+                        </div>
+
+                        <div class="col-md-9">
+                            <input type="file" id="inputFile" class="form-control " required>
+                        </div>
+                    </div>
+
+                    <!-- Submit button -->
+                    <div class="row mt-5">
+                        <div class="col-md-12">
+                            <div class="d-flex justify-content-end">
+                                <button type="reset" class="btn bg-secondary-addpay text-white me-3"><i class="fa-solid fa-arrow-rotate-left"></i> ล้างข้อมูล</button>
+                                <button type="submit" class="btn btn-addpay text-white">บันทึก <i class="fa-solid fa-cloud-arrow-up"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</body>
-<?php  $conn->close();?>
