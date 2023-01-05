@@ -83,7 +83,7 @@ function edit_quoin()
                 
                 if (move_uploaded_file($_FILES["input_quoin_file"]["tmp_name"], $targetFilePath)) {
                     
-                    $query = "UPDATE quotation_in SET quoin_file='$fileName'";
+                    $query = "UPDATE quotation_in SET quoin_file='$fileName' WHERE quoin_id ='$id'";
     
                     if ($conn->query($query)) {
     

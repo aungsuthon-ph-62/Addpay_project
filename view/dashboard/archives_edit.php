@@ -24,77 +24,70 @@ if(isset($_POST['action'])){
         $id= mysqli_real_escape_string($conn,trim($_POST['archives_id']));
         $input_title= mysqli_real_escape_string($conn,trim($_POST['input_title']));
         $uid = 1;
-        
-        if (!empty($_FILES["input_file"]["name"])) {
-        
-            $targetDir = "../../uploadfile/archivesfile/";
-            // $fileName = basename($_FILES["input_file"]["name"]);
-            $temp = explode(".", $_FILES["input_file"]["name"]);
-            $fileName = 'archives-'.$namedate. '.' . end($temp);
-            $targetFilePath = $targetDir . $fileName;
-            $fileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
-            $allowTypes = array('jpg', 'png', 'jpeg', 'pdf', 'word', 'txt', 'doc', 'docx', 'ppt', 'pptx','PDF');
-        
-            if (in_array($fileType, $allowTypes)) {
 
-                $sql = "SELECT archives_file FROM archives WHERE archives_id = '$id'";
-                $query = $conn->query($sql);
-                $row = $query->fetch_assoc();
-                $oldfile = $row['archives_file'];
-                
-                if (move_uploaded_file($_FILES["input_file"]["tmp_name"], $targetFilePath)) {
-
-                    $query = "UPDATE archives SET archives_title='$input_title', archives_file='$fileName', archives_update='$date', archives_uid='$uid' WHERE archives_id ='$id'";
-
-                    if ($conn->query($query)) {
-                        
-                        unlink("../../uploadfile/archivesfile/$oldfile");
-                        $_SESSION['success'] = "บันทึกหนังสือสำคัญสำเร็จ!";
-                        header("Location: archives_list.php");
-                        exit;
-                        
+        $query = "UPDATE archives SET archives_title='$input_title', archives_update='$date', archives_uid='$uid' WHERE archives_id ='$id'";
+    
+        if ($conn->query($query)) {
+            
+            if (!empty($_FILES["input_file"]["name"])) {
+        
+                $targetDir = "../../uploadfile/archivesfile/";
+                $temp = explode(".", $_FILES["input_file"]["name"]);
+                $fileName = 'archives-'.$namedate. '.' . end($temp);
+                $targetFilePath = $targetDir . $fileName;
+                $fileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
+                $allowTypes = array('jpg', 'png', 'jpeg', 'pdf', 'word', 'txt', 'doc', 'docx', 'ppt', 'pptx','PDF');
+            
+                if (in_array($fileType, $allowTypes)) {
+    
+                    $sql = "SELECT archives_file FROM archives WHERE archives_id = '$id'";
+                    $query = $conn->query($sql);
+                    $row = $query->fetch_assoc();
+                    $oldfile = $row['archives_file'];
+                    
+                    if (move_uploaded_file($_FILES["input_file"]["tmp_name"], $targetFilePath)) {
+    
+                        $query = "UPDATE archives SET archives_file='$fileName' WHERE archives_id ='$id'";
+    
+                        if ($conn->query($query)) {
+                            
+                            unlink("../../uploadfile/archivesfile/$oldfile");
+                            $_SESSION['success'] = "บันทึกหนังสือสำคัญสำเร็จ!";
+                            header("Location: archives_list.php");
+                            exit;
+                            
+                        } else {
+                            
+                            unlink("../../uploadfile/archivesfile/$fileName");
+                            $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
+                            header("Location: archives_add.php");
+                            exit;
+                            
+                        }
                     } else {
                         
-                        unlink("../../uploadfile/archivesfile/$fileName");
-                        $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
+                        $_SESSION['error'] = "เกิดข้อผิดพลาด! อัพโหลดไฟล์ไม่สำเร็จ!";
                         header("Location: archives_add.php");
                         exit;
                         
                     }
+                    
                 } else {
                     
-                    $_SESSION['error'] = "เกิดข้อผิดพลาด! อัพโหลดไฟล์ไม่สำเร็จ!";
+                    $_SESSION['error'] = "เกิดข้อผิดพลาด! ไม่รองรับนามสกุลไฟล์ชนิดนี้!";
                     header("Location: archives_add.php");
                     exit;
                     
                 }
-                
-            } else {
-                
-                $_SESSION['error'] = "เกิดข้อผิดพลาด! ไม่รองรับนามสกุลไฟล์ชนิดนี้!";
-                header("Location: archives_add.php");
-                exit;
-                
-            }
-        }else{
-
-            $query = "UPDATE archives SET archives_title='$input_title', archives_update='$date', archives_uid='$uid' WHERE archives_id ='$id'";
-    
-            if ($conn->query($query)) {
-                
-                $_SESSION['success'] = "แก้ไขหนังสือสำคัญสำเร็จ!";
-                header("Location: archives_list.php");
-                exit;
-                
-            } else {
-                
-                $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-                header('Location: archives_edit.php?editarchives='.$id);
-                exit;
-                
             }
             
-        } 
+        } else {
+            
+            $_SESSION['success'] = "บันทึกหนังสือสำคัญสำเร็จ!";
+            header("Location: archives_list.php");
+            exit;
+            
+        }   
     }
 }
 

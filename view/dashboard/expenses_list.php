@@ -14,9 +14,10 @@ if (isset($_GET["deleteexpenses"])) {
     $sql = "DELETE FROM expenses WHERE expenses_id = '$id'";
     $query = $conn->query($sql);
 
-    if ($query && unlink("../../uploadfile/expensesfile/$oldfile")) {
+    if ($query) {
 
-        $_SESSION['success'] = "ลบหนังสือเข้าสำเร็จ!";
+        unlink("../../uploadfile/expensesfile/$oldfile");
+        $_SESSION['success'] = "ลบใบสำคัญจ่ายสำเร็จ!";
         header("Location: expenses_list.php");
         exit;
     }
@@ -29,76 +30,79 @@ if (isset($_GET["deleteexpenses"])) {
 ?>
 
 <style>
-    body {
-        font-family: "Kanit", sans-serif;
-        font-family: "Noto Sans", sans-serif;
-        font-family: "Noto Sans Thai", sans-serif;
-        font-family: "Poppins", sans-serif;
-        font-family: "Prompt", sans-serif;
-    }
+body {
+    font-family: "Kanit", sans-serif;
+    font-family: "Noto Sans", sans-serif;
+    font-family: "Noto Sans Thai", sans-serif;
+    font-family: "Poppins", sans-serif;
+    font-family: "Prompt", sans-serif;
+}
 
-    .btn-group {
-        white-space: nowrap;
-    }
+.btn-group {
+    white-space: nowrap;
+}
 
-    @media (max-width: 767px) {
-        .table-responsive .dropdown-menu {
-            position: static !important;
-        }
+@media (max-width: 767px) {
+    .table-responsive .dropdown-menu {
+        position: static !important;
     }
+}
 
-    @media (min-width: 768px) {
-        .table-responsive {
-            overflow: inherit;
-        }
+@media (min-width: 768px) {
+    .table-responsive {
+        overflow: inherit;
     }
+}
 </style>
 
-<div class="container py-5">
-    <div class="main-body">
-        <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="../dashboard.php">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="../dashboard/account.php">การเงิน บัญชี</a></li>
-                <li class="breadcrumb-item active" aria-current="page">ใบสำคัญจ่าย</li>
-            </ol>
-        </nav>
-        <hr>
-        <div id="listquotation" class="container pb-md-0 mb-5">
-            <div>
-                <h3>ใบสำคัญจ่าย</h3>
-            </div>
-            <div class="mx-auto d-flex justify-content-end">
-                <a class="btn btn-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button" href="../dashboard/expenses_add.php"><i class="fa-solid fa-file-circle-plus"></i> เพิ่มข้อมูล</a>
-            </div>
+<body>
+    <?php require("../alert.php"); ?>
+    <div class="container py-5">
+        <div class="main-body">
+            <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../dashboard.php">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="../dashboard/account.php">การเงิน บัญชี</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">ใบสำคัญจ่าย</li>
+                </ol>
+            </nav>
+            <hr>
+            <div id="listquotation" class="container pb-md-0 mb-5">
+                <div>
+                    <h3>ใบสำคัญจ่าย</h3>
+                </div>
+                <div class="mx-auto d-flex justify-content-end">
+                    <a class="btn btn-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button"
+                        href="../dashboard/expenses_add.php"><i class="fa-solid fa-file-circle-plus"></i>
+                        เพิ่มข้อมูล</a>
+                </div>
 
-            <div class="border border-secondary rounded-3 py-md-4 px-md-4 mt-2 mt-md-4" id="main_row">
-                <div class="table-responsive">
-                    <table class="table" id="quotationTable">
-                        <thead>
-                            <tr class="align-center" class="rows">
-                                <th class="text-center" style="width:10%" scope="col">เลขที่</th>
-                                <th class="text-center" style="width:10%" scope="col">วันที่จ่าย</th>
-                                <th class="text-center" style="width:25%" scope="col">รายการ</th>
-                                <th class="text-center" style="width:10%" scope="col">จำนวนเงิน</th>
-                                <th class="text-center" style="width:10%" scope="col">ประเภท</th>
+                <div class="border border-secondary rounded-3 py-md-4 px-md-4 mt-2 mt-md-4" id="main_row">
+                    <div class="table-responsive">
+                        <table class="table" id="quotationTable">
+                            <thead>
+                                <tr class="align-center" class="rows">
+                                    <th style="width:15%" scope="col">เลขที่</th>
+                                    <th style="width:15%" scope="col">วันที่จ่าย</th>
+                                    <th style="width:30%" scope="col">รายการ</th>
+                                    <th style="width:20%" scope="col">จำนวนเงิน</th>
+                                    <th style="width:10%" scope="col">ประเภท</th>
+                                    <th style="width:10%" scope="col">ตัวเลือก</th>
+                                </tr>
+                            </thead>
 
-                                <th class="text-center" style="width:10%" scope="col">ตัวเลือก</th>
-                            </tr>
-                        </thead>
+                            <?php
 
-                        <?php
-
-                        $sql = "SELECT * FROM expenses";
-                        $query = $conn->query($sql);
-                        while ($rows = $query->fetch_assoc()) {
-                            echo '
+                            $sql = "SELECT * FROM expenses";
+                            $query = $conn->query($sql);
+                            while ($rows = $query->fetch_assoc()) {
+                                echo '
                                     <tr>
-                                        <td class="text-center">' . $rows["expenses_id"] . '</td>
-                                        <td class="text-center">' . $rows["expenses_date"] . '</td>
-                                        <td >' . $rows["expenses_list"] . '</td>
-                                        <td class="text-center">' . $rows["expenses_price"] . '</td>
-                                        <td class="text-center">' . $rows["expenses_type"] . '</td>
+                                        <td>' . $rows["expenses_id"] . '</td>
+                                        <td>' . $rows["expenses_date"] . '</td>
+                                        <td>' . $rows["expenses_list"] . '</td>
+                                        <td>' . $rows["expenses_price"] . '</td>
+                                        <td>' . $rows["expenses_type"] . '</td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4"
@@ -117,15 +121,15 @@ if (isset($_GET["deleteexpenses"])) {
                                         </td>
                                     </tr>
                                ';
-                        }
-                        ?>
+                            }
+                            ?>
 
-                    </table>
+                        </table>
+                    </div>
+
                 </div>
-
-            </div>
-            <!-- Data table -->
-            <script type="text/javascript">
+                <!-- Data table -->
+                <script type="text/javascript">
                 $(document).ready(function() {
                     $('#quotationTable').DataTable();
                 });
@@ -148,10 +152,12 @@ if (isset($_GET["deleteexpenses"])) {
                         }
                     });
                 });
-            </script>
-            <!-- Data table -->
+                </script>
+                <!-- Data table -->
+
+            </div>
 
         </div>
-
     </div>
-</div>
+</body>
+<?php $conn->close(); ?>

@@ -86,7 +86,7 @@ function edit_docin(){
                 
                 if (move_uploaded_file($_FILES["input_file"]["tmp_name"], $targetFilePath)) {
     
-                    $query = "UPDATE docin SET docin_file='$fileName'";
+                    $query = "UPDATE docin SET docin_file='$fileName' WHERE docin_id = '$id'";
     
                     if ($conn->query($query)) {
                         

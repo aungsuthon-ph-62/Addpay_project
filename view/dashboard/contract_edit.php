@@ -271,7 +271,7 @@ function filecase1(){
         if (move_uploaded_file($_FILES["input_file"]["tmp_name"], $targetFilePath1) 
         && move_uploaded_file($_FILES["input_filesigner"]["tmp_name"], $targetFilePath2)) {
 
-            $query = "UPDATE contract SET contract_file='$fileName1', contract_filesigner='$fileName2'";
+            $query = "UPDATE contract SET contract_file='$fileName1', contract_filesigner='$fileName2' WHERE contract_id ='$id'";
 
             if ($conn->query($query)) {
                 
@@ -333,7 +333,7 @@ function filecase2(){
 
         if(move_uploaded_file($_FILES["input_file"]["tmp_name"], $targetFilePath)){
 
-            $query = "UPDATE contract SET contract_file='$fileName'";
+            $query = "UPDATE contract SET contract_file='$fileName' WHERE contract_id ='$id'";
             
             if ($conn->query($query)) {
                 
@@ -393,7 +393,7 @@ function filecase3(){
 
         if(move_uploaded_file($_FILES["input_filesigner"]["tmp_name"], $targetFilePath)){
 
-            $query = "UPDATE contract SET contract_filesigner='$fileName'";
+            $query = "UPDATE contract SET contract_filesigner='$fileName' WHERE contract_id ='$id'";
             
             if ($conn->query($query)) {
                 
