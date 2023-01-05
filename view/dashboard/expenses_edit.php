@@ -36,9 +36,21 @@ include_once '../../layout/head.php';
                 <div class="p-2 py-md-4 px-md-5 border rounded-3">
                     <!-- modal form -->
                     <form action="" method="post" class="">
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-3 ">
+                                <label for="inputType" class="col-form-label">เลือกประเภท </label>
+                            </div>
+                            <div class="col-md-9">
+                                <select class="form-select" id="inputType" name="inputType">
+                                    <option selected disabled>--ประเภท--</option>
+                                    <option value="ประจำ">ประจำ</option>
+                                    <option value="ไม่ประจำ">ไม่ประจำ</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="row g-3 align-items-center mb-3">
                             <div class="col-md-3">
-                                <label for="inputDate" class="col-form-label">วันที่  </label>
+                                <label for="inputDate" class="col-form-label">วันที่จ่าย </label>
                             </div>
                             <div class="col-md-9">
                                 <input type="date" id="inputDate" class="form-control " required>
@@ -46,7 +58,7 @@ include_once '../../layout/head.php';
                         </div>
                         <div class="row g-3 align-items-center mb-3">
                             <div class="col-md-3">
-                                <label for="inputList" class="col-form-label">รายการ  </label>
+                                <label for="inputList" class="col-form-label">รายการ </label>
                             </div>
                             <div class="col-md-9">
                                 <input type="text" id="inputList" class="form-control " required>
@@ -58,18 +70,6 @@ include_once '../../layout/head.php';
                             </div>
                             <div class="col-md-9">
                                 <input type="number" id="inputAmount" class="form-control " required>
-                            </div>
-                        </div>
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-3 ">
-                                <label for="inputType" class="col-form-label">เลือกประเภท </label>
-                            </div>
-                            <div class="col-md-9">
-                                <select class="form-select" id="inputType" name="inputType">
-                                    <option selected disabled>--ประเภท--</option>
-                                    <option value="ประจำ">ประจำ</option>
-                                    <option value="ไม่ประจำ">ไม่ประจำ</option>
-                                </select>
                             </div>
                         </div>
                         <div class="row g-3 align-items-center mb-3">
