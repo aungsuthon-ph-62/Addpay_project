@@ -7,12 +7,12 @@ if (isset($_GET["deletedocout"])) {
 
     if ($query) {
         $_SESSION['success'] = "ลบใบเสนอราคากลางสำเร็จ!";
-        header("Location: docout_list.php");
+        echo "<script> window.location.href='?page=doc_out'</script>";
         exit;
     }
 
     $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-    header("Location: docout_list.php");
+    echo "<script> window.location.href='?page=doc_out'</script>";
     exit;
 }
 
@@ -108,7 +108,7 @@ if (isset($_GET["deletedocout"])) {
                         cancelButtonText: 'no'
                     }).then((result) => {
                         if (result.value) {
-                            window.location.href = "?deletedocout=" + id;
+                            window.location.href = "?page=doc_out&deletedocout=" + id;
                         }
                     });
                 });

@@ -72,22 +72,6 @@ if (isset($_POST['action'])) {
 
 
 <div class="container bg-secondary-addpay rounded-5">
-    <script>
-    ClassicEditor
-        .create(document.querySelector('#input_send'))
-
-        .catch(error => {
-            console.error(error);
-        });
-    </script>
-    <script>
-    ClassicEditor
-        .create(document.querySelector('#input_content'))
-
-        .catch(error => {
-            console.error(error);
-        });
-    </script>
     <div class="main-body p-md-5 text-white">
         <div id="docout_add" class="container p-3 p-md-5">
 
@@ -168,13 +152,38 @@ if (isset($_POST['action'])) {
                             <div class="d-flex justify-content-end">
                                 <button type="reset" class="btn bg-secondary-addpay text-white me-3"><i
                                         class="fa-solid fa-arrow-rotate-left"></i> ล้างข้อมูล</button>
-                                <button type="submit" class="btn btn-addpay text-white" name="action"
+                                <button type="submit" class="btn btn-addpay text-white create_docout" name="action"
                                     value="create_docout">บันทึก <i class="fa-solid fa-cloud-arrow-up"></i></button>
                             </div>
                         </div>
                     </div>
+                    <script>
+                    ClassicEditor
+                        .create(document.querySelector('#input_send'))
+
+                        .catch(error => {
+                            console.error(error);
+                        });
+                    </script>
+                    <script>
+                    ClassicEditor
+                        .create(document.querySelector('#input_content'))
+
+                        .catch(error => {
+                            console.error(error);
+                        });
+                    </script>
                 </form>
             </div>
         </div>
     </div>
 </div>
+<script>
+$(document).ready(function() {
+    $(document).on('click', '.create_docout', function() {
+        document.docout_add.submit();
+
+    });
+
+});
+</script>
