@@ -1,11 +1,11 @@
 <?php
-include('./PDF_set/PDF_conn.php');
-include('./PDF_set/thaidate.php');
+include_once './PDF_set/PDF_conn.php';
+include_once './PDF_set/thaidate.php';
 $id = $_GET["pdfdocout"];
 ?>
 
 <?php
-include("./PDF_set/PDF_head.php");
+include_once ("./PDF_set/PDF_head.php");
 
 require_once __DIR__ . '../../../vendor/autoload.php';
 
@@ -144,7 +144,7 @@ $mpdf->Output('./docout_PDF/docout_PDF.pdf'); //link web of file pdf
             <a class="btn btn-outline-danger px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold ms-3" role="button" href="./docout_list.php"><i class="fa-regular fa-rectangle-xmark"></i> ยกเลิก</a>
         </div><hr>
         <?php
-        include("./docout_PDF/docout_content.php");
+        include_once "./docout_PDF/docout_content.php";
         ?>
     </div>
 

@@ -20,6 +20,22 @@ include_once 'layout/head.php';
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         transform: scale(1.1);
     }
+
+    .btn-group {
+        white-space: nowrap;
+    }
+
+    @media (max-width: 767px) {
+        .table-responsive .dropdown-menu {
+            position: static !important;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .table-responsive {
+            overflow: inherit;
+        }
+    }
 </style>
 
 

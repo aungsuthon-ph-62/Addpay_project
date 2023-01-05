@@ -61,7 +61,7 @@ function decode($message, $encryption_key)
     // );
     // return $plaintext;
     $decrypted_text = openssl_decrypt($message, "AES-128-ECB", $encryption_key);
-    echo $decrypted_text;
+    return $decrypted_text;
 }
 
 // Validate Email

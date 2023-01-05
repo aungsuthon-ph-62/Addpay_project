@@ -115,7 +115,7 @@ if (isset($_POST['action'])) {
                         </div>
                         <div class="col-md-6">
                             <textarea type="text" id="input_send" name="input_send" class="form-control " required rows="3"></textarea>
-                        </div>
+                        </div>  
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
                         <div class="col-md-3">

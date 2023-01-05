@@ -214,7 +214,7 @@
     </div>
 </div>
 
-<!-- Edit User profile -->
+<!-- Edit Profile Picture -->
 <div class="modal fade" id="profileeditimgModal" tabindex="-1" aria-labelledby="profileeditimgModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">

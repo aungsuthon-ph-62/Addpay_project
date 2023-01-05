@@ -53,7 +53,8 @@ if (isset($_GET["deletedocout"])) {
                                 </tr>
                             </thead>
                             <?php
-
+                            require_once "php/action.php";
+                            require_once "php/key.inc.php";
                             $sql = "SELECT * FROM docout";
                             $query = $conn->query($sql);
                             while ($rows = $query->fetch_assoc()) {
@@ -70,10 +71,10 @@ if (isset($_GET["deletedocout"])) {
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li><a class="dropdown-item"
-                                                            href="../dashboard/docout_form.php?pdfdocout=' . $rows["docout_id"] . '">พิมพ์เอกสาร</a>
+                                                            href="view/dashboard/docout_form.php?pdfdocout=' . $rows["docout_id"] . '" target="_blank">พิมพ์เอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
-                                                            href="../dashboard/docout_edit.php?editdocout=' . $rows["docout_id"] . '">แก้ไข</a>
+                                                            href="?page=doc_out_edit&editdocout=' . encode($rows["docout_id"], secret_key()) . '">แก้ไข</a>
                                                     </li>
                                                     <li><a class="dropdown-item deletedocout" href="#" data-docout-no="' . $rows["docout_no"] . '" id="' . $rows["docout_id"] . '" >ลบ</a></li>
                                                 </ul>
@@ -82,10 +83,10 @@ if (isset($_GET["deletedocout"])) {
                                     </tr>
                                     ';
                             }
+
                             ?>
                         </table>
                     </div>
-
                 </div>
                 <!-- Data table -->
                 <script type="text/javascript">
@@ -117,5 +118,3 @@ if (isset($_GET["deletedocout"])) {
         </div>
     </div>
 </div>
-
-<?php $conn->close(); ?>
