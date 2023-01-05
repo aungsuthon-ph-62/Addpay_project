@@ -67,7 +67,7 @@ function edit_docout()
     $input_content = mysqli_real_escape_string($conn, trim($_POST['input_content']));
     $input_name = mysqli_real_escape_string($conn, trim($_POST['input_name']));
     $input_position = mysqli_real_escape_string($conn, trim($_POST['input_position']));
-    $uid = 1;
+    $uid = $_SESSION['id'];
 
     $query = "UPDATE docout SET docout_no='$input_no', docout_date='$input_date', docout_title='$input_title', docout_to='$input_to',
         docout_send='$input_send', docout_details='$input_content', docout_signame='$input_name', docout_position='$input_position',

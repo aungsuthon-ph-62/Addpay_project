@@ -1,5 +1,4 @@
 <?php
-// $uid = $_SESSION['id'];
 require_once("php/conn.php");
 
 if (isset($_POST['action'])) {
@@ -17,7 +16,8 @@ if (isset($_POST['action'])) {
         $input_content = mysqli_real_escape_string($conn, trim($_POST['input_content']));
         $input_name = mysqli_real_escape_string($conn, trim($_POST['input_name']));
         $input_position = mysqli_real_escape_string($conn, trim($_POST['input_position']));
-        $uid = 1;
+        $uid = $_SESSION['id'];
+        
 
         $no_check_query = "SELECT * FROM docout WHERE docout_no = '$input_no'";
         $query = $conn->query($no_check_query);
