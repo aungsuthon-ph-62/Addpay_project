@@ -105,7 +105,7 @@ function edit_docout()
         <div id="docout_add" class="container p-3 p-md-5">
             <div class="p-4 p-md-5 bg-white rounded-5 shadow-lg">
                 <div class="text-center text-md-start text-dark my-3">
-                    <h3>แก้ไขข้อมูลหนังสือออก #<?= $row['docout_no'] ?></h3>
+                    <h3>แก้ไขข้อมูลหนังสือออก</h3>
                 </div>
                 <form action="docout_edit.php" method="post" name="docout_edit" id="docout_edit" class="p-md-5">
                     <div class="row align-items-center text-dark px-md-5 mb-3">
