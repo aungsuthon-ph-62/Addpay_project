@@ -41,6 +41,7 @@ if(isset($_POST['action'])){
                         
                     } else {
                         
+                        unlink("../../uploadfile/archivesfile/$fileName");
                         $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
                         header("Location: archives_add.php");
                         exit;

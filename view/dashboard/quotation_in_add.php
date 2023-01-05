@@ -33,7 +33,7 @@ if (isset($_POST['action'])) {
             if (!empty($_FILES["input_quoin_file"]["name"])) {
 
                 $targetDir = "../../uploadfile/quotationinfile/";
-                // $fileName = basename($_FILES["input_quoin_file"]["name"]);
+                
                 $temp = explode(".", $_FILES["input_quoin_file"]["name"]);
                 $fileName = 'quotationin-'. $namedate . '.' . end($temp);
                 $targetFilePath = $targetDir . $fileName;
@@ -52,8 +52,10 @@ if (isset($_POST['action'])) {
                             $_SESSION['success'] = "บันทึกหนังสือเข้าสำเร็จ!";
                             header("Location: quotation_in_list.php");
                             exit;
+                            
                         } else {
 
+                            unlink("../../uploadfile/quotationinfile/$fileName");
                             $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
                             header("Location: quotation_in_add.php");
                             exit;
@@ -77,27 +79,27 @@ if (isset($_POST['action'])) {
 
 ?>
 <style>
-    body {
-        font-family: "Kanit", sans-serif;
-        font-family: "Noto Sans", sans-serif;
-        font-family: "Noto Sans Thai", sans-serif;
-        font-family: "Poppins", sans-serif;
-        font-family: "Prompt", sans-serif;
-    }
+body {
+    font-family: "Kanit", sans-serif;
+    font-family: "Noto Sans", sans-serif;
+    font-family: "Noto Sans Thai", sans-serif;
+    font-family: "Poppins", sans-serif;
+    font-family: "Prompt", sans-serif;
+}
 
-    table {
-        counter-reset: rowNumber;
-    }
+table {
+    counter-reset: rowNumber;
+}
 
-    table tr:not(:first-child) {
-        counter-increment: rowNumber;
-    }
+table tr:not(:first-child) {
+    counter-increment: rowNumber;
+}
 
-    table tr td:first-child::before {
-        content: counter(rowNumber);
-        min-width: 1em;
-        margin-right: 0.5em;
-    }
+table tr td:first-child::before {
+    content: counter(rowNumber);
+    min-width: 1em;
+    margin-right: 0.5em;
+}
 </style>
 
 <body>
@@ -106,7 +108,8 @@ if (isset($_POST['action'])) {
         <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="../dashboard/quotation_in_list.php">ใบเสนอราคาเข้า</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a
+                        href="../dashboard/quotation_in_list.php">ใบเสนอราคาเข้า</a></li>
                 <li class="breadcrumb-item active" aria-current="page">สร้างใบเสนอราคาเข้า</li>
             </ol>
         </nav>
@@ -114,7 +117,7 @@ if (isset($_POST['action'])) {
         <div>
             <h3>ข้อมูลใบเสนอราคา quotation</h3>
         </div>
-        <form method="post" action="quotation_in_add.php"  enctype="multipart/form-data" class="px-md-5 py-md-5">
+        <form method="post" action="quotation_in_add.php" enctype="multipart/form-data" class="px-md-5 py-md-5">
             <div class="row g-3 align-items-center mb-3">
                 <div class="col-md-3">
                     <label for="input_quoin_no" class="col-form-label">เลขที่ในใบเสนอราคา No.</label>
@@ -136,7 +139,8 @@ if (isset($_POST['action'])) {
                     <label for="input_quoin_company" class="col-form-label">ชื่อบริษัทที่ออกใบเสนอราคา :</label>
                 </div>
                 <div class="col-md-8">
-                    <input type="text" id="input_quoin_company" name="input_quoin_company" class="form-control " required>
+                    <input type="text" id="input_quoin_company" name="input_quoin_company" class="form-control "
+                        required>
                 </div>
             </div>
 
@@ -155,15 +159,18 @@ if (isset($_POST['action'])) {
 
                 <div class="col-md-8">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="input_quoin_status" id="input_quoin_status0" value="อนุมัติ" required>
+                        <input class="form-check-input" type="radio" name="input_quoin_status" id="input_quoin_status0"
+                            value="อนุมัติ" required>
                         <label class="form-check-label" for="input_quoin_status0">อนุมัติ</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="input_quoin_status" id="input_quoin_status1" value="รออนุมัติ" required>
+                        <input class="form-check-input" type="radio" name="input_quoin_status" id="input_quoin_status1"
+                            value="รออนุมัติ" required>
                         <label class="form-check-label" for="input_quoin_status1">รออนุมัติ</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="input_quoin_status" id="input_quoin_status2" value="ไม่อนุมัติ" required>
+                        <input class="form-check-input" type="radio" name="input_quoin_status" id="input_quoin_status2"
+                            value="ไม่อนุมัติ" required>
                         <label class="form-check-label" for="input_quoin_status2">ไม่อนุมัติ</label>
                     </div>
                 </div>
@@ -180,8 +187,11 @@ if (isset($_POST['action'])) {
 
 
             <div class="mx-auto d-flex justify-content-end">
-                <button type="reset" class="col-md-3 btn btn-outline-danger btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold"><i class="fa-solid fa-eraser"></i> ล้างข้อมูล</button>
-                <button type="submit" name="action" value="create_quoin" class="ms-3 col-md-3 btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold">บันทึก
+                <button type="reset"
+                    class="col-md-3 btn btn-outline-danger btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold"><i
+                        class="fa-solid fa-eraser"></i> ล้างข้อมูล</button>
+                <button type="submit" name="action" value="create_quoin"
+                    class="ms-3 col-md-3 btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold">บันทึก
                     <i class="fa-solid fa-angles-right"></i></button>
 
             </div>

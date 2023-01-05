@@ -4,15 +4,25 @@ include("../../layout/head.php");
 require_once("../../php/conn.php");
 
 if (isset($_GET["deletequo"])) {
+    
     $id = $_GET["deletequo"];
+
+    $sql = "SELECT quoin_file FROM quotation_in WHERE quoin_id = '$id'";
+    $query = $conn->query($sql);
+    $row = $query->fetch_assoc();
+    $oldfile = $row['quoin_file'];
 
     $sql = "DELETE FROM quotation_in WHERE quoin_id = '$id'";
     $query = $conn->query($sql);
+
     if ($query) {
+        
+        unlink("../../uploadfile/quotationinfile/$oldfile");
         $_SESSION['success'] = "ลบใบเสนอราคาสำเร็จ!";
         header("Location: quotation_in_list.php");
         exit;
     }
+    
     $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
     header("Location: quotation_in_list.php");
     exit;

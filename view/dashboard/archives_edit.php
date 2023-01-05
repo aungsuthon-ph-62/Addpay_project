@@ -44,18 +44,18 @@ if(isset($_POST['action'])){
                 
                 if (move_uploaded_file($_FILES["input_file"]["tmp_name"], $targetFilePath)) {
 
-                    unlink("../../uploadfile/archivesfile/$oldfile");
-
                     $query = "UPDATE archives SET archives_title='$input_title', archives_file='$fileName', archives_update='$date', archives_uid='$uid' WHERE archives_id ='$id'";
 
                     if ($conn->query($query)) {
                         
+                        unlink("../../uploadfile/archivesfile/$oldfile");
                         $_SESSION['success'] = "บันทึกหนังสือสำคัญสำเร็จ!";
                         header("Location: archives_list.php");
                         exit;
                         
                     } else {
                         
+                        unlink("../../uploadfile/archivesfile/$fileName");
                         $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
                         header("Location: archives_add.php");
                         exit;

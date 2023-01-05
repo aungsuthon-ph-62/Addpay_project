@@ -62,79 +62,77 @@ function edit_docin(){
     $input_title= mysqli_real_escape_string($conn,trim($_POST['input_title']));
     $input_to= mysqli_real_escape_string($conn,trim($_POST['input_to']));
     $uid = 1;
-    
-    if (!empty($_FILES["input_file"]["name"])) {
-            
-        $targetDir = "../../uploadfile/docinfile/";
-        // $fileName = basename($_FILES["input_file"]["name"]);
-        $temp = explode(".", $_FILES["input_file"]["name"]);
-        $fileName = 'docin-'.$namedate. '.' . end($temp);
-        $targetFilePath = $targetDir . $fileName;
-        $fileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
-        $allowTypes = array('jpg', 'png', 'jpeg', 'pdf', 'word', 'txt', 'doc', 'docx', 'ppt', 'pptx','PDF');
-    
-        if (in_array($fileType, $allowTypes)) {
 
-            $sql = "SELECT docin_file FROM docin WHERE docin_id = '$id'";
-            $query = $conn->query($sql);
-            $row = $query->fetch_assoc();
-            $oldfile = $row['docin_file'];
-            
-            if (move_uploaded_file($_FILES["input_file"]["tmp_name"], $targetFilePath)) {
+    $query = "UPDATE docin SET docin_no='$input_no', docin_date='$input_date', docin_srcname='$input_srcname', docin_title='$input_title',
+                docin_to='$input_to', docin_update='$date', docin_uid='$uid' WHERE docin_id ='$id'";
 
-                unlink("../../uploadfile/docinfile/$oldfile");
+    if ($conn->query($query)) {
+        
+        if (!empty($_FILES["input_file"]["name"])) {
+            
+            $targetDir = "../../uploadfile/docinfile/";
+            $temp = explode(".", $_FILES["input_file"]["name"]);
+            $fileName = 'docin-'.$namedate. '.' . end($temp);
+            $targetFilePath = $targetDir . $fileName;
+            $fileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
+            $allowTypes = array('jpg', 'png', 'jpeg', 'pdf', 'word', 'txt', 'doc', 'docx', 'ppt', 'pptx','PDF');
+            
+            if (in_array($fileType, $allowTypes)) {
+
+                $sql = "SELECT docin_file FROM docin WHERE docin_id = '$id'";
+                $query = $conn->query($sql);
+                $row = $query->fetch_assoc();
+                $oldfile = $row['docin_file'];
                 
-                $query = "UPDATE docin SET docin_no='$input_no', docin_date='$input_date', docin_srcname='$input_srcname', docin_title='$input_title',
-                docin_to='$input_to', docin_file='$fileName', docin_update='$date', docin_uid='$uid' WHERE docin_id ='$id'";
-
-                if ($conn->query($query)) {
-                    
-                    $_SESSION['success'] = "แก้ไขหนังสือเข้าสำเร็จ!";
-                    header("Location: docin_list.php");
-                    exit;
-                    
+                if (move_uploaded_file($_FILES["input_file"]["tmp_name"], $targetFilePath)) {
+    
+                    $query = "UPDATE docin SET docin_file='$fileName'";
+    
+                    if ($conn->query($query)) {
+                        
+                        unlink("../../uploadfile/docinfile/$oldfile");
+                        $_SESSION['success'] = "แก้ไขหนังสือเข้าสำเร็จ!";
+                        header("Location: docin_list.php");
+                        exit;
+                        
+                    } else {
+                        
+                        unlink("../../uploadfile/docinfile/$fileName");
+                        $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
+                        header('Location: docin_edit.php?editdocin='.$id);
+                        exit;
+                        
+                    }
                 } else {
                     
-                    $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
+                    $_SESSION['error'] = "เกิดข้อผิดพลาด! อัพโหลดไฟล์ไม่สำเร็จ!";
                     header('Location: docin_edit.php?editdocin='.$id);
                     exit;
                     
                 }
+                
             } else {
                 
-                $_SESSION['error'] = "เกิดข้อผิดพลาด! อัพโหลดไฟล์ไม่สำเร็จ!";
+                $_SESSION['error'] = "เกิดข้อผิดพลาด! ไม่รองรับนามสกุลไฟล์ชนิดนี้!";
                 header('Location: docin_edit.php?editdocin='.$id);
                 exit;
                 
             }
             
-        } else {
-            
-            $_SESSION['error'] = "เกิดข้อผิดพลาด! ไม่รองรับนามสกุลไฟล์ชนิดนี้!";
-            header('Location: docin_edit.php?editdocin='.$id);
-            exit;
-            
-        }
-    }else{
-
-        $query = "UPDATE docin SET docin_no='$input_no', docin_date='$input_date', docin_srcname='$input_srcname', docin_title='$input_title',
-                docin_to='$input_to', docin_update='$date', docin_uid='$uid' WHERE docin_id ='$id'";
-
-        if ($conn->query($query)) {
+        }else{
             
             $_SESSION['success'] = "แก้ไขหนังสือเข้าสำเร็จ!";
             header("Location: docin_list.php");
             exit;
-            
-        } else {
-            
-            $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-            header('Location: docin_edit.php?editdocin='.$id);
-            exit;
-            
         }
         
-    } 
+    } else {
+        
+        $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
+        header('Location: docin_edit.php?editdocin='.$id);
+        exit;
+        
+    }
 }
 
 ?>
