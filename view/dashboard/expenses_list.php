@@ -1,5 +1,31 @@
 <?php
-include_once '../../layout/head.php';
+session_start();
+include("../../layout/head.php");
+require_once("../../php/conn.php");
+
+if (isset($_GET["deleteexpenses"])) {
+    $id = $_GET["deleteexpenses"];
+
+    $sql = "SELECT expenses_file FROM expenses WHERE expenses_id = '$id'";
+    $query = $conn->query($sql);
+    $row = $query->fetch_assoc();
+    $oldfile = $row['expenses_file'];
+
+    $sql = "DELETE FROM expenses WHERE expenses_id = '$id'";
+    $query = $conn->query($sql);
+
+    if ($query && unlink("../../uploadfile/expensesfile/$oldfile")) {
+
+        $_SESSION['success'] = "ลบหนังสือเข้าสำเร็จ!";
+        header("Location: expenses_list.php");
+        exit;
+    }
+
+    $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
+    header("Location: expenses_list.php");
+    exit;
+}
+
 ?>
 
 <style>
@@ -51,37 +77,49 @@ include_once '../../layout/head.php';
                     <table class="table" id="quotationTable">
                         <thead>
                             <tr class="align-center" class="rows">
-                                <th class="text-center" style="width:5%" scope="col">ลำดับ</th>
+                                <th class="text-center" style="width:10%" scope="col">เลขที่</th>
                                 <th class="text-center" style="width:10%" scope="col">วันที่จ่าย</th>
                                 <th class="text-center" style="width:25%" scope="col">รายการ</th>
                                 <th class="text-center" style="width:10%" scope="col">จำนวนเงิน</th>
-                                <th class="text-center" style="width:20%" scope="col">ประเภท</th>
-                                
+                                <th class="text-center" style="width:10%" scope="col">ประเภท</th>
+
                                 <th class="text-center" style="width:10%" scope="col">ตัวเลือก</th>
                             </tr>
                         </thead>
-                        <tbody class="text-center">
-                            <tr>
-                                <td>1</td>
-                                <td>16/11/65</td>
-                                <td>ค่าไฟ</td>
-                                <td>3,560.75</td>
-                                <td>ประจำ</td>
-                                <td>
-                                    <div>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4" data-bs-toggle="dropdown" aria-expanded="false"><b>เลือก</b> </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">เปิดเอกสาร</a></li>
-                                                <li><a class="dropdown-item" href="./expenses_edit.php">แก้ไข</a></li>
-                                                <li><a class="dropdown-item" href="#">ลบ</a></li>
 
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
+                        <?php
+
+                        $sql = "SELECT * FROM expenses";
+                        $query = $conn->query($sql);
+                        while ($rows = $query->fetch_assoc()) {
+                            echo '
+                                    <tr>
+                                        <td class="text-center">' . $rows["expenses_id"] . '</td>
+                                        <td class="text-center">' . $rows["expenses_date"] . '</td>
+                                        <td >' . $rows["expenses_list"] . '</td>
+                                        <td class="text-center">' . $rows["expenses_price"] . '</td>
+                                        <td class="text-center">' . $rows["expenses_type"] . '</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4"
+                                                    data-bs-toggle="dropdown" aria-expanded="false"><b>เลือก</b>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" target="_blank"
+                                                            href="../../uploadfile/expensesfile/' . $rows["expenses_file"] . '">เปิดเอกสาร</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item"
+                                                            href="../dashboard/expenses_edit.php?editexpenses=' . $rows["expenses_id"] . '">แก้ไข</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item deleteexpenses" data-expenses-list="'.$rows["expenses_list"].'" id="' . $rows["expenses_id"] . '" >ลบ</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                               ';
+                        }
+                        ?>
+
                     </table>
                 </div>
 
@@ -91,6 +129,25 @@ include_once '../../layout/head.php';
                 $(document).ready(function() {
                     $('#quotationTable').DataTable();
                 });
+
+                $(document).on('click', '.deleteexpenses', function() {
+                    var id = $(this).attr("id");
+                    var show_expenses_list = $(this).attr("data-expenses-list");
+                    swal.fire({
+                        title: 'ต้องการลบรายการนี้ !',
+                        text: "รายการ : " + show_expenses_list,
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'yes!',
+                        cancelButtonText: 'no'
+                    }).then((result) => {
+                        if (result.value) {
+                            window.location.href = "?deleteexpenses=" + id;
+                        }
+                    });
+                });
             </script>
             <!-- Data table -->
 
@@ -98,4 +155,3 @@ include_once '../../layout/head.php';
 
     </div>
 </div>
-
