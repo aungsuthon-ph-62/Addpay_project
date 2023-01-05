@@ -69,7 +69,7 @@ body {
                 </ol>
             </nav>
             <hr>
-            <div id="listquotation" class="container pb-md-0 mb-5">
+            <div class="container pb-md-0 mb-5">
                 <div>
                     <h3>หนังสือเข้า</h3>
                 </div>
@@ -154,7 +154,6 @@ body {
                 <!-- Data table -->
 
             </div>
-
         </div>
     </div>
 </body>

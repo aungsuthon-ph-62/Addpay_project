@@ -112,7 +112,7 @@ body {
             </nav>
             <hr>
 
-            <div id="paperquotation" class="container pb-md-0 mb-5">
+            <div class="container pb-md-0 mb-5">
                 <div>
                     <h3>เพิ่มข้อมูลหนังสือเข้า</h3>
                 </div>
