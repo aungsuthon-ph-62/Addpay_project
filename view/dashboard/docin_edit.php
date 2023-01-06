@@ -3,28 +3,25 @@
 if (isset($_GET['editdocin'])) {
     
     $get_decode = $_GET['editdocin'];
-    echo "<script> console.log('{$get_decode}');</script>";
     $id = decode($get_decode, secret_key());
-
-    echo "<script> console.log('{$id}');</script>";
 
     $sql = "SELECT * FROM docin WHERE docin_id ='$id'";
     $query = $conn->query($sql);
     $row = $query->fetch_assoc();
 
-    // if (!$row) {
-    //     $_SESSION['error'] = "ไม่พบหน้าดังกล่าว!";
-    //     echo "<script> window.location.href='?page=doc_in';</script>";
-    //     exit;
-    // }
+    if (!$row) {
+        $_SESSION['error'] = "ไม่พบหน้าดังกล่าว!";
+        echo "<script> window.history.back()</script>";
+        exit;
+    }
     
 }
 
 if(isset($_POST['action'])){
     if ($_POST['action'] == 'edit_docin') {
 
-        $id= mysqli_real_escape_string($conn,trim($_POST['docin_id']));
-        $enid=encode($id, secret_key());
+        // $id= mysqli_real_escape_string($conn,trim($_POST['docin_id']));
+        // $enid=encode($id, secret_key());
         $no_check= mysqli_real_escape_string($conn,trim($_POST['no_check']));
         $input_no= mysqli_real_escape_string($conn,trim($_POST['input_no']));
         
@@ -41,7 +38,7 @@ if(isset($_POST['action'])){
             
             if ($check) {
                 $_SESSION['error'] = "เลขที่นี้มีในระบบแล้ว!";
-                echo "<script> window.location.href='?page=doc_in_edit&editdocin=.$enid.'</script>";
+                echo "<script> window.history.back()</script>";
                 exit;
                 
             }else{
@@ -64,7 +61,7 @@ function edit_docin(){
     global $conn;
 
     $id= mysqli_real_escape_string($conn,trim($_POST['docin_id']));
-    $enid=encode($id, secret_key());
+    // $enid=encode($id, secret_key());
     $input_no= mysqli_real_escape_string($conn,trim($_POST['input_no']));
     $input_date= mysqli_real_escape_string($conn,trim($_POST['input_date']));
     $input_srcname= mysqli_real_escape_string($conn,trim($_POST['input_srcname']));
@@ -108,14 +105,14 @@ function edit_docin(){
                         
                         unlink("../../uploadfile/docinfile/$fileName");
                         $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-                        echo "<script> window.location.href='?page=doc_in_edit&editdocin=.$enid.'</script>";
+                        echo "<script> window.history.back()</script>";
                         exit;
                         
                     }
                 } else {
                     
                     $_SESSION['error'] = "เกิดข้อผิดพลาด! อัพโหลดไฟล์ไม่สำเร็จ!";
-                    echo "<script> window.location.href='?page=doc_in_edit&editdocin=.$enid.'</script>";
+                    echo "<script> window.history.back()</script>";
                     exit;
                     
                 }
@@ -123,7 +120,7 @@ function edit_docin(){
             } else {
                 
                 $_SESSION['error'] = "เกิดข้อผิดพลาด! ไม่รองรับนามสกุลไฟล์ชนิดนี้!";
-                echo "<script> window.location.href='?page=doc_in_edit&editdocin=.$enid.'</script>";
+                echo "<script> window.history.back()</script>";
                 exit;
                 
             }
@@ -138,7 +135,7 @@ function edit_docin(){
     } else {
         
         $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-        echo "<script> window.location.href='?page=doc_in_edit&editdocin=.$enid.'</script>";
+        echo "<script> window.history.back()</script>";
         exit;
         
     }
@@ -216,7 +213,7 @@ function edit_docin(){
                         </div>
 
                         <div class="col-md-9">
-                            <input type="file" id="input_file" name="input_file" class="form-control " required>
+                            <input type="file" id="input_file" name="input_file" class="form-control ">
                         </div>
                     </div>
                     <!-- Submit button -->
