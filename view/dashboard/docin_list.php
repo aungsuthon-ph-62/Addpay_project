@@ -1,15 +1,4 @@
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index">หน้าหลัก</a></li>
-        <li class="breadcrumb-item"><a href="?page=doc">หนังสือ</a></li>
-        <li class="breadcrumb-item active" aria-current="page">หนังสือเข้า</li>
-    </ol>
-</nav>
-<hr>
 <?php
-session_start();
-include("../../layout/head.php");
-require_once("../../php/conn.php");
 
 if(isset($_GET["deletedocin"])){
     
@@ -25,21 +14,29 @@ if(isset($_GET["deletedocin"])){
     
     if($query){
             
-        unlink("../../uploadfile/docinfile/$oldfile");
+        unlink("uploadfile/docinfile/$oldfile");
         $_SESSION['success'] = "ลบหนังสือเข้าสำเร็จ!";
-        header("Location: docin_list.php");
+        echo "<script> window.location.href='?page=doc_in';</script>";
         exit; 
         
     }
     
     $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-    header("Location: docin_list.php");
+    echo "<script> window.location.href='?page=doc_in';</script>";
     exit;
     
   }
 
 ?>
 
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index">หน้าหลัก</a></li>
+        <li class="breadcrumb-item"><a href="?page=doc">หนังสือ</a></li>
+        <li class="breadcrumb-item active" aria-current="page">หนังสือเข้า</li>
+    </ol>
+</nav>
+<hr>
 
 <div class="container bg-secondary-addpay rounded-5">
     <div class="main-body p-md-5 text-white">
@@ -59,105 +56,48 @@ if(isset($_GET["deletedocin"])){
                         <table class="table" id="quotationTable">
                             <thead>
                                 <tr class="align-center" class="rows">
-                                    <th class="text-center" style="width:5%" scope="col">ลำดับ</th>
-                                    <th class="text-center" style="width:30%" scope="col">ชื่อบริษัทต้นทาง</th>
-                                    <th class="text-center" style="width:10%" scope="col">วันที่</th>
-                                    <th class="text-center" style="width:20%" scope="col">เรื่อง</th>
-                                    <th class="text-center" style="width:20%" scope="col">เรียน (ถึงใคร)</th>
-                                    <th class="text-center" style="width:20%" scope="col">ไฟล์</th>
-                                    <th class="text-center" style="width:10%" scope="col">ตัวเลือก</th>
+                                    <th style="width:25%" scope="col">เลขที่</th>
+                                    <th style="width:15%" scope="col">วันที่</th>
+                                    <th style="width:30%" scope="col">ชื่อบริษัทต้นทาง</th>
+                                    <th style="width:30%" scope="col">เรื่อง</th>
+                                    <th style="width:10%" scope="col">ตัวเลือก</th>
                                 </tr>
                             </thead>
-                            <tbody class="text-center">
-                                <tr>
-                                    <td>1</td>
-                                    <td>บริษัท แอดเพย์ เซอร์วิสพอยท์ จำกัด</td>
-                                    <td>16/11/65</td>
-                                    <td>หนังสือเชิญเป็นวิทยากร</td>
-                                    <td>คุณหัตถยา บำรุงสุข</td>
-                                    <td><i class="fa-solid fa-file-pdf"></i> lovetoey.pdf</td>
-                                    <td>
-                                        <div>
+                            <?php
+                            $sql = "SELECT * FROM docin";
+                            $query = $conn->query($sql);
+                            while ($rows = $query->fetch_assoc()) {
+                                echo '
+                                    <tr>
+                                        <td>'.$rows["docin_no"].'</td>
+                                        <td>'.$rows["docin_date"].'</td>
+                                        <td>'.$rows["docin_srcname"].'</td>
+                                        <td>'.$rows["docin_title"].'</td>
+                                        <td>
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4" data-bs-toggle="dropdown" aria-expanded="false"><b>เลือก</b> </button>
+                                                <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4"
+                                                    data-bs-toggle="dropdown" aria-expanded="false"><b>เลือก</b>
+                                                </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#">เปิดเอกสาร</a></li>
-                                                    <li><a class="dropdown-item" href="?page=doc_in_edit">แก้ไข</a></li>
-                                                    <li><a class="dropdown-item" href="#">ลบ</a></li>
-
+                                                    <li><a class="dropdown-item" target="_blank"
+                                                            href="uploadfile/docinfile/'.$rows["docin_file"].'">เปิดเอกสาร</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item"
+                                                            href="?page=doc_in_edit&editdocin=' . encode($rows["docin_id"], secret_key()) . '">แก้ไข</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item deletedocin" href="#" data-docin-no="'.$rows["docin_no"].'" id="'.$rows["docin_id"].'" >ลบ</a></li>
                                                 </ul>
                                             </div>
-
-                                            <!-- <a href="../dashboard/edit_archives.php">
-                                            <button type="button" class="float-start mr-1 btn btn-warning btn-sm text-white px-3"><i class="fa-solid fa-pen-to-square"></i></button>
-                                        </a>
-
-                                        <a href="" class="">
-                                            <button type="button" class="float-end mr-1 btn btn-danger btn-sm px-3"><i class="fa-solid fa-trash-can"></i></button>
-                                        </a> -->
-                                        </div>
-
-                                    </td>
-                                </tr>
-
-                            </tbody>
-
-
+                                        </td>
+                                    </tr>
+                                    ';
+                                }
+                            ?>
                         </table>
                     </div>
 
 
 
-                </div>
-                <!-- Data table -->
-                <script type="text/javascript">
-                    $(document).ready(function() {
-                        $('#quotationTable').DataTable();
-                    });
-                </script>
-                <!-- Data table -->
-
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-<!-- add expenses -->
-<!-- <div class="modal fade" id="addExpensesModal" tabindex="-1" aria-labelledby="addExpensesModal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addExpensesModal">เพิ่มข้อมูลใบสำคัญจ่าย</h5>
-            </div>
-            <form method="post" action="">
-                <div class="modal-body">
-                    <input type="hidden" name="" value="">
-                    <div class="p-3 p-md-5">
-                        <div class="form-floating mb-4">
-                            <input type="text" class="form-control form-control-lg border border-start-0 border-top-0 border-end-0 rounded-0" id=" inputDate" name="inputDate" placeholder="กรอกชื่อ">
-                            <label for="inputDate" class="form-label">วันที่</label>
-                        </div>
-                        <div class="form-floating mb-4">
-                            <input type="text" class="form-control form-control-lg border border-start-0 border-top-0 border-end-0 rounded-0" id=" inputList" name="inputList" placeholder="กรอกชื่อ">
-                            <label for="inputList" class="form-label">รายการ</label>
-                        </div>
-                        <div class="form-floating mb-4">
-                            <input type="text" class="form-control form-control-lg border border-start-0 border-top-0 border-end-0 rounded-0" id=" inputPrice" name="inputPrice" placeholder="กรอกนามสกุล">
-                            <label for="inputPrice" class="form-label">จำนวนเงิน</label>
-                        </div>
-                        <select class="form-select mb-4 rounded-pill" id="inputType" name="inputType">
-                            <option selected disabled>--ประเภท--</option>
-                            <option value="ประจำ">ประจำ</option>
-                            <option value="ไม่ประจำ">ไม่ประจำ</option>
-                        </select>
-                        
-                        <div class="form-floating mb-4">
-                            <input type="file" class="form-control form-control-lg border border-start-0 border-top-0 border-end-0 rounded-0" id=" inputPrice" name="inputPrice" placeholder="กรอกนามสกุล">
-                            
-                        </div>
-                    </div>
                 </div>
                 <!-- Data table -->
                 <script type="text/javascript">
@@ -179,7 +119,7 @@ if(isset($_GET["deletedocin"])){
                         cancelButtonText: 'no'
                     }).then((result) => {
                         if (result.value) {
-                            window.location.href = "?deletedocin=" + id;
+                            window.location.href = "?page=doc_in&deletedocin=" + id;
                         }
                     });
                 });
@@ -189,5 +129,5 @@ if(isset($_GET["deletedocin"])){
             </div>
         </div>
     </div>
-</body>
+</div>
 <?php $conn->close(); ?>

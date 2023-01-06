@@ -1,8 +1,7 @@
 <?php
-require_once "php/action.php";
-require_once "php/key.inc.php";
 
 if (isset($_GET['editdocout'])) {
+    
     $get_decode = $_GET['editdocout'];
     $id = decode($get_decode, secret_key());
 

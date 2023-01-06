@@ -53,8 +53,6 @@ if (isset($_GET["deletedocout"])) {
                                 </tr>
                             </thead>
                             <?php
-                            require_once "php/action.php";
-                            require_once "php/key.inc.php";
                             $sql = "SELECT * FROM docout";
                             $query = $conn->query($sql);
                             while ($rows = $query->fetch_assoc()) {
@@ -118,3 +116,4 @@ if (isset($_GET["deletedocout"])) {
         </div>
     </div>
 </div>
+<?php $conn->close(); ?>
