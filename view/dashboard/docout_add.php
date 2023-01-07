@@ -1,5 +1,4 @@
 <?php
-
 if (isset($_POST['action'])) {
     if ($_POST['action'] == 'create_docout') {
 
@@ -19,6 +18,9 @@ if (isset($_POST['action'])) {
 
         if (empty($input_send)||empty($input_content)) {
             $_SESSION['error'] = "กรุณากรอกข้อมูลสิ่งที่ส่งมาด้วยและเนื้อหา";
+            // echo "<script> window.history.replaceState({}, 'title 1', '?page=doc_out_add&yess=1');</script>";
+            $_SESSION['input_send']= $input_send;
+            $_SESSION['input_content']=$input_content;
             echo "<script> window.history.back()</script>";
             exit;
         }
@@ -41,6 +43,8 @@ if (isset($_POST['action'])) {
             if ($conn->query($query) === TRUE) {
 
                 $_SESSION['success'] = "บันทึกหนังสือออกสำเร็จ!";
+                unset($_SESSION['input_send']) ;
+                unset($_SESSION['input_content']);
                 echo "<script> window.location.href='?page=doc_out'</script>";
                 exit;
             } else {
@@ -124,8 +128,8 @@ if (isset($_POST['action'])) {
                             <label for="input_send" class="col-form-label">สิ่งที่ส่งมาด้วย </label>
                         </div>
                         <div class="ck-send col-md-6">
-                            <textarea type="text" id="input_send" name="input_send" class="form-control "
-                                rows="3"></textarea>
+                            <textarea type="text" id="input_send" name="input_send" class="form-control "><?php 
+                            if(isset($_SESSION['input_send'])){echo $_SESSION['input_send'];}?></textarea>
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
@@ -133,8 +137,9 @@ if (isset($_POST['action'])) {
                             <label for="input_content" class="col-form-label">เนื้อหาข้อความ </label>
                         </div>
                         <div class="ck-content col-md-9">
-                            <textarea id="input_content" name="input_content" class="form-control" cols="40" rows="10"
-                                placeholder="พิมพ์เนื้อหา..."></textarea>
+                            <textarea id="input_content" name="input_content" class="form-control"
+                                placeholder="พิมพ์เนื้อหา..."><?php 
+                            if(isset($_SESSION['input_content'])){echo $_SESSION['input_content'];}?></textarea>
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
