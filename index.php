@@ -93,9 +93,6 @@ body {
                             case "doc_in":
                                 include_once 'view/dashboard/docin_list.php';
                                 break;
-                            case "doc":
-                                include_once 'view/dashboard/doc.php';
-                                break;
                             case "quotation_edit":
                                 include_once 'view/dashboard/quotation_appraisal_edit.php';
                                 break;
