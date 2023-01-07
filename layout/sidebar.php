@@ -67,6 +67,12 @@
                     ใบเสนอราคา
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="?page=invoicebill">
+                    <span data-feather="layers"></span>
+                    ใบวางบิล
+                </a>
+            </li>
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">

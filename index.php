@@ -105,6 +105,15 @@ body {
                             case "quotation":
                                 include_once 'view/dashboard/quotation_appraisal_list.php';
                                 break;
+                            case "invoicebill":
+                                include_once 'view/dashboard/invoicebill_list.php';
+                                break;
+                            case "invoicebill_add":
+                                include_once 'view/dashboard/invoicebill_add.php';
+                                break;
+                            case "invoicebill_edit":
+                                include_once 'view/dashboard/invoicebill_edit.php';
+                                break;
                             default:
                                 include_once 'view/dashboard.php';
                         }

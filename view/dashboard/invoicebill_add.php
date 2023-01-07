@@ -1,73 +1,67 @@
 <?php
-session_start();
-include("../../layout/head.php");
-require_once("../../php/conn.php");
 
 if (isset($_POST['action'])) {
     if ($_POST['action'] == 'create_invoicebill') {
-        create_invoicebill();
-        exit;
-    }
-}
 
-function create_invoicebill()
-{
+        date_default_timezone_set('Asia/Bangkok');
+        $date = date("Y-m-d H:i:s");
+        global $conn;
 
-    date_default_timezone_set('Asia/Bangkok');
-    $date = date("Y-m-d H:i:s");
-    global $conn;
+        $input_invbill_no = mysqli_real_escape_string($conn, trim($_POST['input_invbill_no']));
+        $input_invbill_date = mysqli_real_escape_string($conn, trim($_POST['input_invbill_date']));
+        $input_invbill_name = mysqli_real_escape_string($conn, trim($_POST['input_invbill_name']));
+        $input_invbill_address = mysqli_real_escape_string($conn, trim($_POST['input_invbill_address']));
+        $input_invbill_cusid = mysqli_real_escape_string($conn, trim($_POST['input_invbill_cusid']));
+        
+        $input_quo_deli = mysqli_real_escape_string($conn, trim($_POST['input_quo_deli']));
+        
+        $input_invbill_sum = mysqli_real_escape_string($conn, trim($_POST['input_invbill_sum']));
+        $input_invbill_total = mysqli_real_escape_string($conn, trim($_POST['input_invbill_total']));
+        $input_invbill_remark = mysqli_real_escape_string($conn, trim($_POST['input_invbill_remark']));
+        $uid = $_SESSION['id'];
 
-    $input_invbill_no = mysqli_real_escape_string($conn, trim($_POST['input_invbill_no']));
-    $input_invbill_date = mysqli_real_escape_string($conn, trim($_POST['input_invbill_date']));
-    $input_invbill_name = mysqli_real_escape_string($conn, trim($_POST['input_invbill_name']));
-    $input_invbill_address = mysqli_real_escape_string($conn, trim($_POST['input_invbill_address']));
-    $input_invbill_cusid = mysqli_real_escape_string($conn, trim($_POST['input_invbill_cusid']));
-    $input_invbill_sum = mysqli_real_escape_string($conn, trim($_POST['input_invbill_sum']));
-    $input_invbill_total = mysqli_real_escape_string($conn, trim($_POST['input_invbill_total']));
-    $input_invbill_remark = mysqli_real_escape_string($conn, trim($_POST['input_invbill_remark']));
-    $input_invbill_uid = 1;
+        $invbill_no_check_query = "SELECT * FROM invoicebill WHERE invbill_no =  '$input_invbill_no'";
+        $query = mysqli_query($conn, $invbill_no_check_query);
+        $check = mysqli_fetch_assoc($query);
 
-    $invbill_no_check_query = "SELECT * FROM invoicebill_appraisal WHERE invbill_no =  $input_invbill_no";
-    $query = mysqli_query($conn, $invbill_no_check_query);
-    $check = mysqli_fetch_assoc($query);
-
-    if ($check) {
-        $_SESSION['error'] = "เลขที่ใบเสนอราคากลางนี้มีในระบบแล้ว!";
-        header("Location: invoicebill_add.php");
-        exit;
-    } else {
-        $query = "INSERT INTO invoicebill_appraisal (invbill_no, invbill_date, invbill_name, invbill_address, invbill_cusid, invbill_sum, invbill_total, invbill_remark, invbill_create, invbill_uid)
-            VALUES ('$input_invbill_no', '$input_invbill_date', '$input_invbill_name', '$input_invbill_address', '$input_invbill_cusid', '$input_invbill_sum', '$input_invbill_total', '$input_invbill_remark', '$date', '$input_invbill_uid')";
-
-        if ($conn->query($query) === TRUE) {
-
-            $last_id = $conn->insert_id;
-
-            for ($count = 0; $count < $_POST["total_item"]; $count++) {
-
-                $item_name = mysqli_real_escape_string($conn, trim($_POST['item_name'][$count]));
-                $item_amount = mysqli_real_escape_string($conn, trim($_POST['item_amount'][$count]));
-                $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
-                $total_price = mysqli_real_escape_string($conn, trim($_POST['total_price'][$count]));
-                $input_invbillde_create = $date;
-                $input_invbillde_uid = 1;
-
-                $query = "INSERT INTO invoicebill_details (invbilld_invbillid, invbilld_item, invbilld_price, invbilld_amount, invbilld_result, invbilld_create, invbilld_uid)
-                    VALUES ('$last_id', '$item_name', '$item_price', '$item_amount', '$total_price', '$input_invbillde_create', '$input_invbillde_uid')";
-                mysqli_query($conn, $query);
-            }
-
-            $_SESSION['success'] = "บันทึกใบเสนอราคากลางสำเร็จ!";
-            header("Location: invoicebill_list.php");
+        if ($check) {
+            $_SESSION['error'] = "เลขที่ใบวางบิลนี้มีในระบบแล้ว!";
+            header("<script> window.history.back()</script>");
             exit;
         } else {
-            echo "Error: " . $query . "<br>" . $conn->error;
-            $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-            header("Location: invoicebill_add.php");
-            exit;
+            $query = "INSERT INTO invoicebill(invbill_no, invbill_date, invbill_name, invbill_address, invbill_cusid, invbill_sum, invbill_total, invbill_remark, invbill_create, invbill_uid)
+            VALUES ('$input_invbill_no', '$input_invbill_date', '$input_invbill_name', '$input_invbill_address', '$input_invbill_cusid', '$input_invbill_sum', '$input_invbill_total', '$input_invbill_remark', '$date', '$uid')";
+
+            if ($conn->query($query) === TRUE) {
+
+                $last_id = $conn->insert_id;
+
+                for ($count = 0; $count < $_POST["total_item"]; $count++) {
+
+                    $item_name = mysqli_real_escape_string($conn, trim($_POST['item_name'][$count]));
+                    $item_amount = mysqli_real_escape_string($conn, trim($_POST['item_amount'][$count]));
+                    $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
+                    $total_price = mysqli_real_escape_string($conn, trim($_POST['total_price'][$count]));
+                    $input_invbillde_create = $date;
+                    $input_invbillde_uid = 1;
+
+                    $query = "INSERT INTO invoicebill_details (invbilld_invbillid, invbilld_item, invbilld_price, invbilld_amount, invbilld_result, invbilld_create, invbilld_uid)
+                    VALUES ('$last_id', '$item_name', '$item_price', '$item_amount', '$total_price', '$input_invbillde_create', '$input_invbillde_uid')";
+                    mysqli_query($conn, $query);
+                }
+
+                $_SESSION['success'] = "บันทึกใบวางบิลสำเร็จ!";
+                header("Location: invoicebill_list.php");
+                exit;
+            } else {
+                echo "Error: " . $query . "<br>" . $conn->error;
+                $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
+                header("<script> window.history.back()</script>");
+                exit;
+            }
         }
+        $conn->close();
     }
-    $conn->close();
 }
 
 ?>
@@ -97,7 +91,7 @@ function create_invoicebill()
 </style>
 
 <body>
-    <?php require("../alert.php"); ?>
+
     <div class="container-fluid">
         <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
             <ol class="breadcrumb">
@@ -177,8 +171,8 @@ function create_invoicebill()
                                 <td><input type="date" name="item_inv_date[]" id="item_inv_date1" data-srno="1" class="form-control input-sm item_inv_date" /></td>
                                 <td><input type="date" name="item_due_date[]" id="item_due_date1" data-srno="1" class="form-control input-sm number_only item_due_date" step="any" /></td>
                                 <td><input type="number" name="item_amount[]" id="item_amount1" data-srno="1" class="form-control input-sm item_amount" required /></td>
-                                <td><input type="number" name="item_vat[]" id="item_vat1" class="form-control input-sm item_vat" required readonly/></td>
-                                <td><input type="number" name="item_total_amount[]" id="item_total_amount1" data-srno="1" class="form-control input-sm item_total_amount" required  readonly/></td>
+                                <td><input type="number" name="item_vat[]" id="item_vat1" class="form-control input-sm item_vat" required readonly /></td>
+                                <td><input type="number" name="item_total_amount[]" id="item_total_amount1" data-srno="1" class="form-control input-sm item_total_amount" required readonly /></td>
                             </tr>
                         </table>
                         <div class="text-center">
