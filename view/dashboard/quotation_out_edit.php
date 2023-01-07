@@ -337,7 +337,7 @@ table tr td:first-child::before {
                 <button type="submit" name="action" value="edit_quotation_out"
                     class="ms-3 col-md-3 btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold">บันทึกการแก้ไข
                     <i class="fa-solid fa-angles-right"></i></button>
-                <input type="hidden" name="total_item" id="total_item" value="<?= $n;?>" />
+                <input type="hidden" name="total_item" id="total_item" value=" " />
                 <input type="hidden" name="quoout_no_check" id="quoout_no_check" value="<?= $row['quoout_no'];?>" />
                 <input type="hidden" name="quoout_id" id="quoout_id" value="<?= $row['quoout_id'];?>" />
                 <input type="hidden" name="quoout_date_create" id="quoout_date_create"

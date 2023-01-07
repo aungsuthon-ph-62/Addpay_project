@@ -32,7 +32,7 @@ function create_invoicebill()
     $check = mysqli_fetch_assoc($query);
 
     if ($check) {
-        $_SESSION['error'] = "เลขที่ใบเสนอราคากลางนี้มีในระบบแล้ว!";
+        $_SESSION['error'] = "เลขที่ใบแจ้งหนี้/ใบวางบิลนี้มีในระบบแล้ว!";
         header("Location: invoicebill_add.php");
         exit;
     } else {
@@ -57,7 +57,7 @@ function create_invoicebill()
                 mysqli_query($conn, $query);
             }
 
-            $_SESSION['success'] = "บันทึกใบเสนอราคากลางสำเร็จ!";
+            $_SESSION['success'] = "บันทึกใบแจ้งหนี้/ใบวางบิลสำเร็จ!";
             header("Location: invoicebill_list.php");
             exit;
         } else {
