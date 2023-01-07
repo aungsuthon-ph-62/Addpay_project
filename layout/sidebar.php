@@ -43,11 +43,17 @@
                     Project Planning
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="?page=doc">
-                    <span data-feather="layers"></span>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     หนังสือ
                 </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <h6 class="dropdown-header">เมนูหนังสือ : เข้า/ออก</h6>
+                    </li>
+                    <li><a class="dropdown-item" href="?page=doc_in">หนังสือ-เข้า</a></li>
+                    <li><a class="dropdown-item" href="?page=doc_out">หนังสือ-ออก</a></li>
+                </ul>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white" href="?page=">
@@ -65,6 +71,12 @@
                 <a class="nav-link text-white" href="?page=">
                     <span data-feather="layers"></span>
                     ใบเสนอราคา
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="?page=invoicebill">
+                    <span data-feather="layers"></span>
+                    ใบวางบิล
                 </a>
             </li>
         </ul>

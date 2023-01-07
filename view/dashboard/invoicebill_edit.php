@@ -1,8 +1,4 @@
 <?php
-session_start();
-include("../../layout/head.php");
-require_once("../../php/conn.php");
-
 if (isset($_POST['action'])) {
     if ($_POST['action'] == 'create_quotation') {
         create_quotation();
@@ -102,7 +98,7 @@ function create_quotation()
 </style>
 
 <body>
-    <?php require("../alert.php"); ?>
+
     <div class="container-fluid">
         <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
             <ol class="breadcrumb">

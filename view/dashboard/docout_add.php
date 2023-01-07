@@ -16,7 +16,7 @@ if (isset($_POST['action'])) {
         $input_position = mysqli_real_escape_string($conn, trim($_POST['input_position']));
         $uid = $_SESSION['id'];
 
-        if (empty($input_send)||empty($input_content)) {
+        if (empty($input_send) || empty($input_content)) {
             $_SESSION['error'] = "กรุณากรอกข้อมูลสิ่งที่ส่งมาด้วยและเนื้อหา";
             // echo "<script> window.history.replaceState({}, 'title 1', '?page=doc_out_add&yess=1');</script>";
             $_SESSION['input_send']= $input_send;
@@ -24,7 +24,7 @@ if (isset($_POST['action'])) {
             echo "<script> window.history.back()</script>";
             exit;
         }
-        
+
 
         $no_check_query = "SELECT * FROM docout WHERE docout_no = '$input_no'";
         $query = $conn->query($no_check_query);
@@ -61,19 +61,18 @@ if (isset($_POST['action'])) {
 ?>
 
 <style>
-.ck-send .ck-editor__editable_inline {
-    min-height: 100px;
-}
+    .ck-send .ck-editor__editable_inline {
+        min-height: 100px;
+    }
 
-.ck-content .ck-editor__editable_inline {
-    min-height: 250px;
-}
+    .ck-content .ck-editor__editable_inline {
+        min-height: 250px;
+    }
 </style>
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index">หน้าหลัก</a></li>
-        <li class="breadcrumb-item"><a href="?page=doc">หนังสือ</a></li>
         <li class="breadcrumb-item"><a href="?page=doc_out">หนังสือออก</a></li>
         <li class="breadcrumb-item active" aria-current="page">เพิ่มข้อมูลหนังสือออก</li>
     </ol>
@@ -82,7 +81,7 @@ if (isset($_POST['action'])) {
 
 
 <div class="container bg-secondary-addpay rounded-5">
-    <div class="main-body p-md-5 text-white">
+    <div class="main-body py-md-5 px-md-1 text-white">
         <div id="docout_add" class="container p-3 p-md-5">
 
             <div class="p-4 p-md-5 bg-white rounded-5 shadow-lg">
@@ -161,28 +160,26 @@ if (isset($_POST['action'])) {
                     <div class="row mt-5">
                         <div class="col-md-12">
                             <div class="d-flex justify-content-end">
-                                <button type="reset" class="btn bg-secondary-addpay text-white me-3"><i
-                                        class="fa-solid fa-arrow-rotate-left"></i> ล้างข้อมูล</button>
-                                <button type="submit" class="btn btn-addpay text-white create_docout" name="action"
-                                    value="create_docout">บันทึก <i class="fa-solid fa-cloud-arrow-up"></i></button>
+                                <button type="reset" class="btn bg-secondary-addpay text-white me-3"><i class="fa-solid fa-arrow-rotate-left"></i> ล้างข้อมูล</button>
+                                <button type="submit" class="btn btn-addpay text-white create_docout" name="action" value="create_docout">บันทึก <i class="fa-solid fa-cloud-arrow-up"></i></button>
                             </div>
                         </div>
                     </div>
                     <script>
-                    ClassicEditor
-                        .create(document.querySelector('#input_send'))
+                        ClassicEditor
+                            .create(document.querySelector('#input_send'))
 
-                        .catch(error => {
-                            console.error(error);
-                        });
+                            .catch(error => {
+                                console.error(error);
+                            });
                     </script>
                     <script>
-                    ClassicEditor
-                        .create(document.querySelector('#input_content'))
+                        ClassicEditor
+                            .create(document.querySelector('#input_content'))
 
-                        .catch(error => {
-                            console.error(error);
-                        });
+                            .catch(error => {
+                                console.error(error);
+                            });
                     </script>
                 </form>
             </div>

@@ -32,16 +32,15 @@ if(isset($_GET["deletedocin"])){
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index">หน้าหลัก</a></li>
-        <li class="breadcrumb-item"><a href="?page=doc">หนังสือ</a></li>
         <li class="breadcrumb-item active" aria-current="page">หนังสือเข้า</li>
     </ol>
 </nav>
 <hr>
 
 <div class="container bg-secondary-addpay rounded-5">
-    <div class="main-body p-md-5 text-white">
+    <div class="main-body py-md-5 px-md-1 text-white">
         <div class="container">
-            <div id="listquotation" class="p-3 p-md-5 text-white">
+            <div id="listquotation" class="py-4 p-md-5 text-white">
                 <div class="text-center text-md-start">
                     <h3>หนังสือเข้า</h3>
                 </div>

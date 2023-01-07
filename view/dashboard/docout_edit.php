@@ -105,7 +105,6 @@ function edit_docout()
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index">หน้าหลัก</a></li>
-        <li class="breadcrumb-item"><a href="?page=doc">หนังสือ</a></li>
         <li class="breadcrumb-item"><a href="?page=doc_out">หนังสือออก</a></li>
         <li class="breadcrumb-item active" aria-current="page">แก้ไขข้อมูลหนังสือออก</li>
     </ol>
@@ -113,7 +112,7 @@ function edit_docout()
 <hr>
 
 <div class="container bg-secondary-addpay rounded-5">
-    <div class="main-body p-md-5 text-white">
+    <div class="main-body py-md-5 px-md-1 text-white">
         <div id="docout_add" class="container p-3 p-md-5">
             <div class="p-4 p-md-5 bg-white rounded-5 shadow-lg">
                 <div class="text-center text-md-start text-dark my-3">

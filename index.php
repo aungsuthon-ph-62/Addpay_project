@@ -93,9 +93,6 @@ body {
                             case "doc_in":
                                 include_once 'view/dashboard/docin_list.php';
                                 break;
-                            case "doc":
-                                include_once 'view/dashboard/doc.php';
-                                break;
                             case "quotation_edit":
                                 include_once 'view/dashboard/quotation_appraisal_edit.php';
                                 break;
@@ -104,6 +101,15 @@ body {
                                 break;
                             case "quotation":
                                 include_once 'view/dashboard/quotation_appraisal_list.php';
+                                break;
+                            case "invoicebill":
+                                include_once 'view/dashboard/invoicebill_list.php';
+                                break;
+                            case "invoicebill_add":
+                                include_once 'view/dashboard/invoicebill_add.php';
+                                break;
+                            case "invoicebill_edit":
+                                include_once 'view/dashboard/invoicebill_edit.php';
                                 break;
                             default:
                                 include_once 'view/dashboard.php';

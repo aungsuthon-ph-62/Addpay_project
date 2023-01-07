@@ -1,6 +1,6 @@
 <?php
-include('../../php/conn.php');
-include('./PDF_set/readprice.php');
+include_once './PDF_set/PDF_conn.php';
+include_once('./PDF_set/readprice.php');
 $id = $_GET["pdfquo_id"];
 ?>
 
