@@ -93,13 +93,13 @@ body {
                             case "doc_in":
                                 include_once 'view/dashboard/docin_list.php';
                                 break;
-                            case "quotation_edit":
+                            case "quo_edit":
                                 include_once 'view/dashboard/quotation_appraisal_edit.php';
                                 break;
-                            case "quotation_add":
+                            case "quo_add":
                                 include_once 'view/dashboard/quotation_appraisal_add.php';
                                 break;
-                            case "quotation":
+                            case "quo":
                                 include_once 'view/dashboard/quotation_appraisal_list.php';
                                 break;
                             case "invoicebill":
