@@ -12,9 +12,9 @@ if (isset($_POST['action'])) {
         $input_invbill_name = mysqli_real_escape_string($conn, trim($_POST['input_invbill_name']));
         $input_invbill_address = mysqli_real_escape_string($conn, trim($_POST['input_invbill_address']));
         $input_invbill_cusid = mysqli_real_escape_string($conn, trim($_POST['input_invbill_cusid']));
-        
-        $input_quo_deli = mysqli_real_escape_string($conn, trim($_POST['input_quo_deli']));
-        
+
+        $input_invbill_deli = mysqli_real_escape_string($conn, trim($_POST['input_inv_deli']));
+
         $input_invbill_sum = mysqli_real_escape_string($conn, trim($_POST['input_invbill_sum']));
         $input_invbill_total = mysqli_real_escape_string($conn, trim($_POST['input_invbill_total']));
         $input_invbill_remark = mysqli_real_escape_string($conn, trim($_POST['input_invbill_remark']));
@@ -40,7 +40,6 @@ if (isset($_POST['action'])) {
 
                     $item_name = mysqli_real_escape_string($conn, trim($_POST['item_name'][$count]));
                     $item_amount = mysqli_real_escape_string($conn, trim($_POST['item_amount'][$count]));
-                    $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
                     $total_price = mysqli_real_escape_string($conn, trim($_POST['total_price'][$count]));
                     $input_invbillde_create = $date;
                     $input_invbillde_uid = 1;
@@ -51,7 +50,7 @@ if (isset($_POST['action'])) {
                 }
 
                 $_SESSION['success'] = "บันทึกใบวางบิลสำเร็จ!";
-                header("Location: invoicebill_list.php");
+                header("<script> window.location.href='?page=invoicebill'</script>");
                 exit;
             } else {
                 echo "Error: " . $query . "<br>" . $conn->error;
@@ -110,7 +109,7 @@ if (isset($_POST['action'])) {
                     <label for="input_invbill_no" class="col-form-label">เลขที่ No.</label>
                 </div>
                 <div class="col-auto">
-                    <input type="number" id="input_invbill_no" name="input_invbill_no" class="form-control " required>
+                    <input type="text" id="input_invbill_no" name="input_invbill_no" class="form-control " required>
                 </div>
             </div>
             <div class="row g-3 align-items-center mb-3">
@@ -153,7 +152,7 @@ if (isset($_POST['action'])) {
                 </div>
                 <div class="border border-secondary rounded-3 py-md-4 px-md-4">
                     <div class="table-responsive text-center">
-                        <table id="invtation-item-table" class="table ">
+                        <table id="invoice-item-table" class="table ">
                             <tr>
                                 <th width="7%">ลำดับที่ <br>Item</th>
                                 <th width="20%">รายการ <br> Order </th>
@@ -167,12 +166,12 @@ if (isset($_POST['action'])) {
 
                             <tr id="row_id_1">
                                 <td><span id="sr_no"></span></td>
-                                <td><input type="text" name="item_order[]" id="item_order1" class="form-control input-sm" required /></td>
+                                <td><input type="text" name="item_name[]" id="item_name1" class="form-control input-sm" required /></td>
                                 <td><input type="date" name="item_inv_date[]" id="item_inv_date1" data-srno="1" class="form-control input-sm item_inv_date" /></td>
-                                <td><input type="date" name="item_due_date[]" id="item_due_date1" data-srno="1" class="form-control input-sm number_only item_due_date" step="any" /></td>
-                                <td><input type="number" name="item_amount[]" id="item_amount1" data-srno="1" class="form-control input-sm item_amount" required /></td>
+                                <td><input type="date" name="item_due_date[]" id="item_due_date1" data-srno="1" class="form-control input-sm item_due_date" /></td>
+                                <td><input type="number" name="item_price[]" id="item_price1" data-srno="1" class="form-control input-sm item_price" step="any" required /></td>
                                 <td><input type="number" name="item_vat[]" id="item_vat1" class="form-control input-sm item_vat" required readonly /></td>
-                                <td><input type="number" name="item_total_amount[]" id="item_total_amount1" data-srno="1" class="form-control input-sm item_total_amount" required readonly /></td>
+                                <td><input type="number" name="item_total[]" id="item_total1" data-srno="1" class="form-control input-sm item_total" required readonly /></td>
                             </tr>
                         </table>
                         <div class="text-center">
@@ -188,41 +187,49 @@ if (isset($_POST['action'])) {
                             <label for="input_invbill_remark" class="col-form-label">หมายเหตุ :</label>
                         </div>
                         <div class="col-md-8">
-                            <textarea class="form-control" id="input_invbill_remark" name="input_invbill_remark" rows="3"></textarea>
+                            <textarea class="form-control" id="input_invbill_remark" name="input_invbill_remark" rows="2"></textarea>
+                        </div>
+                    </div>
+                    <div class="row g-3 align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="input_invbill_page" class="col-form-label">จำนวนเอกสารรวม </label>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="number" id="input_invbill_page" name="input_invbill_page" class="form-control ">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="input_invbill_page" class="col-form-label">ฉบับ</label>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 ">
+                    <div class="row g-3 align-items-center mb-3 mt-2">
+                        <div class="col-md-6 ">
+                            <label for="input_invbill_deli" class="col-form-label ">ค่าขนส่ง (บาท) :</label>
+                        </div>
+
+                        <div class="col-md-5">
+                            <input type="number" id="input_invbill_deli" name="input_invbill_deli" class="form-control" placeholder="0.00" title="กรุณากรอกค่าขนส่ง หากมี">
+                        </div>
+                    </div>
+
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-md-6 ">
-                            <label for="input_invbill_afterdis" class="col-form-label">ยอดรวมทั้งสิ้น (บาท):</label>
+                            <label for="input_invbill_total" class="col-form-label">ยอดรวมทั้งสิ้น (บาท) :</label>
                         </div>
                         <div class="col-md-5">
-                            <input type="number" id="input_invbill_afterdis" name="input_invbill_afterdis" class="form-control " placeholder="0.00" readonly>
+                            <input type="number" id="input_invbill_total" name="input_invbill_total" class="form-control " readonly>
                         </div>
                     </div>
-                    <div class="row g-3 align-items-center mb-3">
-                        <div class="col-md-6">
-                            <label for="input_invbill_sum" class="col-form-label">จำนวนเอกสารรวม </label>
-                        </div>
-                        <div class="col-md-5">
-                            <input type="number" id="input_invbill_sum" name="input_invbill_sum" class="form-control ">
-                        </div>
-                        <div class="col-md-1 text-end">
-                            <label for="input_invbill_sum" class="col-form-label">ฉบับ</label>
-                        </div>
-                    </div>
-
-
-
                 </div>
             </div>
+
             <div class="mx-auto d-flex justify-content-end">
                 <button type="reset" class="col-md-3 btn btn-outline-danger btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold"><i class="fa-solid fa-eraser"></i> ล้างข้อมูล</button>
-                <button type="submit" name="create_invoicebill" id="create_invoicebill" value="Create" class="ms-3 col-md-3 btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold">ต่อไป
+                <button type="submit" name="action" value="create_invoicebill" class="ms-3 col-md-3 btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold">บันทึก
                     <i class="fa-solid fa-angles-right"></i></button>
                 <input type="hidden" name="total_item" id="total_item" value="1" />
-                <input type="hidden" name="action" value="create_invoicebill">
+
             </div>
 
         </form>
@@ -240,35 +247,38 @@ if (isset($_POST['action'])) {
                     html_code += '<tr id="row_id_' + count + '">';
                     html_code += '<td><span id="sr_no"></span></td>';
 
-                    html_code += '<td><input type="text" name="item_order[]" id="item_order' + count +
+                    html_code += '<td><input type="text" name="item_name[]" id="item_name' + count +
                         '" class="form-control input-sm" required/></td>';
+
                     html_code +=
                         '<td><input type="date" name="item_inv_date[]" id="item_inv_date' +
                         count + '" data-srno="' + count +
-                        '" class="form-control input-sm  item_inv_date" required/></td>';
-                    html_code += '<td><input type="date" name="item_amount[]" id="item_amount' +
-                        count + '" data-srno="' + count +
-                        '" class="form-control input-sm  item_amount" required step="any"/></td>';
+                        '" class="form-control input-sm  item_inv_date" /></td>';
+
                     html_code +=
-                        '<td><input type="number" name="total_vat[]" id="total_vat' +
+                        '<td><input type="date" name="item_due_date[]" id="item_due_date' +
                         count + '" data-srno="' + count +
-                        '" class="form-control input-sm total_vat" required /></td>';
+                        '" class="form-control input-sm  item_due_date" /></td>';
+
                     html_code +=
-                        '<td><input type="number" name="item_total_amount[]" id="item_total_amount' +
+                        '<td><input type="number" name="item_price[]" id="item_price' +
                         count + '" data-srno="' + count +
-                        '" class="form-control input-sm number_only item_total_amount" required/></td>';
-                    // html_code += '<td><input type="number" name="item_remark[]" id="item_remark' +
-                    //     count + '" data-srno="' + count +
-                    //     '" class="form-control input-sm number_only item_remark" required step="any"/></td>';
+                        '" class="form-control input-sm number_only item_price" required step="any"/></td>';
+
                     html_code +=
-                        '<td><input type="text" name="total_price[]" id="total_price' +
+                        '<td><input type="number" name="item_vat[]" id="item_vat' +
                         count + '" data-srno="' + count +
-                        '" class="form-control input-sm total_price" readonly /></td>';
+                        '" class="form-control input-sm item_vat" required readonly /></td>';
+
+                    html_code +=
+                        '<td><input type="number" name="item_total[]" id="item_total' +
+                        count + '" data-srno="' + count +
+                        '" class="form-control input-sm number_only item_total" required readonly /></td>';
 
                     html_code += '<td><button type="button" name="remove_row" id="' + count +
                         '" class="btn btn-danger btn-xs remove_row">X</button></td>';
                     html_code += '</tr>';
-                    $('#invtation-item-table').append(html_code);
+                    $('#invoice-item-table').append(html_code);
                 });
 
                 $(document).on('click', '.remove_row', function() {
@@ -283,49 +293,44 @@ if (isset($_POST['action'])) {
                 function cal_final_total(count) {
                     var final_total_price = 0;
                     for (j = 1; j <= count; j++) {
-                        var quantity = 0;
                         var price = 0;
+                        var vat7per = 0;
                         var total_price = 0;
-                        quantity = $('#item_amount' + j).val();
-                        if (quantity > 0) {
-                            price = $('#item_price' + j).val();
-                            if (price > 0) {
-                                total_price = parseFloat(quantity) * parseFloat(price);
-                                $('#total_price' + j).val(
-                                    total_price
-                                    .toFixed(2));
 
-                                final_total_price = (final_total_price + total_price);
+                        price = $('#item_price' + j).val();
 
-                            }
+                        if (price > 0) {
+
+                            vat7per = (parseFloat(price) * 0.07);
+                            $('#item_vat' + j).val(vat7per.toFixed(2));
+
+                            total_price = (parseFloat(price) + parseFloat(vat7per));
+                            $('#item_total' + j).val(total_price.toFixed(2));
+
+
+                            final_total_price = (final_total_price + total_price);
                         }
                     }
-                    $('#input_invbill_sum').val(final_total_price.toFixed(2));
-                    var discount = 0;
-                    var afterdis = 0;
-                    var vat7per = 0;
-                    var aftervat = 0;
-                    discount = $('#input_invbill_specialdis').val();
-                    afterdis = final_total_price - discount;
-                    $('#input_invbill_afterdis').val(afterdis.toFixed(2));
-                    vat7per = (afterdis * 0.07);
-                    $('#input_invbill_vat').val(vat7per.toFixed(2));
-                    aftervat = (afterdis + vat7per);
-                    $('#input_invbill_total').val(aftervat.toFixed(2));
+
+                    var deli = 0;
+                    var final_total = 0;
+                    deli = $('#input_invbill_deli').val();
+                    final_total = final_total_price;
+                    if (deli > 0) {
+                        final_total = (final_total + parseFloat(deli));
+                    }
+
+                    $('#input_invbill_total').val(final_total.toFixed(2));
                 }
+
 
                 $(document).on('change', '.item_price', function() {
                     cal_final_total(count);
                 });
 
-                $(document).on('change', '.item_amount', function() {
+                $(document).on('change', '#input_invbill_deli', function() {
                     cal_final_total(count);
                 });
-
-                $(document).on('change', '#input_invbill_specialdis', function() {
-                    cal_final_total(count);
-                });
-
             });
         </script>
     </div>
