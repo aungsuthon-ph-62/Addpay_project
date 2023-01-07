@@ -12,7 +12,7 @@ if (isset($_POST['action'])) {
         $input_invbill_name = mysqli_real_escape_string($conn, trim($_POST['input_invbill_name']));
         $input_invbill_address = mysqli_real_escape_string($conn, trim($_POST['input_invbill_address']));
         $input_invbill_cusid = mysqli_real_escape_string($conn, trim($_POST['input_invbill_cusid']));
-        $input_invbill_deli = mysqli_real_escape_string($conn, trim($_POST['input_inv_deli']));
+        $input_invbill_deli = mysqli_real_escape_string($conn, trim($_POST['input_invbill_deli']));
         $input_invbill_total = mysqli_real_escape_string($conn, trim($_POST['input_invbill_total']));
         $input_invbill_remark = mysqli_real_escape_string($conn, trim($_POST['input_invbill_remark']));
         $uid = $_SESSION['id'];
@@ -63,6 +63,22 @@ if (isset($_POST['action'])) {
 }
 
 ?>
+<style>
+    table {
+        counter-reset: rowNumber;
+    }
+
+    table tr:not(:first-child) {
+        counter-increment: rowNumber;
+    }
+
+    table tr td:first-child::before {
+        content: counter(rowNumber);
+        min-width: 1em;
+        margin-right: 0.5em;
+    }
+</style>
+
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index">หน้าหลัก</a></li>
@@ -74,16 +90,16 @@ if (isset($_POST['action'])) {
 
 <div class="container bg-secondary-addpay rounded-5">
     <div class="main-body py-md-5 px-md-1 text-white">
-        <div id="docout_add" class="container p-3 p-md-5">
+        <div id="invoicebill" class="container p-3 p-md-5">
 
             <div class="p-4 p-md-5 bg-white rounded-5 shadow-lg">
                 <div class="text-center text-md-start text-dark my-3">
                     <h3>ข้อมูลใบแจ้งหนี้/ใบวางบิล</h3>
                 </div>
 
-                <form action="?page=invoicebill_add" method="post" name="invoicebill_add" id="invoicebill_add"  class="p-md-5">
+                <form action="?page=invoicebill_add" method="post" name="invoicebill_add" id="invoicebill_add" class="p-md-5">
                     <div class="row align-items-center text-dark px-md-5 mb-3">
-                        <div class="col-md-3">
+                        <div class="col-md-3 text-md-end">
                             <label for="input_invbill_no" class="col-form-label">เลขที่ No.</label>
                         </div>
                         <div class="col-auto">
@@ -91,7 +107,7 @@ if (isset($_POST['action'])) {
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
-                        <div class="col-md-3">
+                        <div class="col-md-3 text-md-end">
                             <label for="input_invbill_date" class="col-form-label">วันที่ date.</label>
                         </div>
                         <div class="col-auto">
@@ -99,7 +115,7 @@ if (isset($_POST['action'])) {
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
-                        <div class="col-md-3 ">
+                        <div class="col-md-3 text-md-end">
                             <label for="input_invbill_name" class="col-form-label">ชื่อลูกค้า :</label>
                         </div>
 
@@ -108,7 +124,7 @@ if (isset($_POST['action'])) {
                         </div>
                     </div>
                     <div class=" row align-items-center text-dark px-md-5 mb-3">
-                        <div class="col-md-3">
+                        <div class="col-md-3 text-md-end">
                             <label for="input_invbill_address" class="col-form-label">ที่อยู่ :</label>
                         </div>
                         <div class="col-6">
@@ -116,7 +132,7 @@ if (isset($_POST['action'])) {
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
-                        <div class="col-md-3 ">
+                        <div class="col-md-3 text-md-end">
                             <label for="input_invbill_cusid" class="col-form-label">เลขประจำตัวผู้เสียภาษี :</label>
                         </div>
                         <div class="col-6">
@@ -126,10 +142,10 @@ if (isset($_POST['action'])) {
                     </div>
                     <div class="row align-items-center text-dark px-md-2 mb-3">
                         <div class="col-md-3 ">
-                            <label for="itemtitle" class="col-form-label">รายการใบแจ้งหนี้/ใบวางบิล :</label>
+                            <h6>รายการใบเสนอราคากลาง :</h6>
                         </div>
-                        <div class="border border-secondary rounded-3 py-md-4 px-md-4">
-                            <div class="table-responsive text-center">
+                        <div class="border border-secondary rounded-3 p-4">
+                            <div class="table-responsive">
                                 <table id="invoice-item-table" class="table ">
                                     <tr>
                                         <th width="7%">ลำดับที่ <br>Item</th>
@@ -153,61 +169,63 @@ if (isset($_POST['action'])) {
                                     </tr>
                                 </table>
                                 <div class="text-center">
-                                    <button type="button" id="add_row" class="btn btn-success px-4 rounded-pill fs-5 fw-bold "><i class="fa fa-plus-circle text-white"></i> เพิ่มรายการ</button>
+                                    <button type="button" id="add_row" class="btn btn-addpay px-md-4 rounded-3"><i class="fa fa-plus-circle text-white"></i> เพิ่มรายการ</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="row g-3  mb-3">
-                                <div class="col-md-3 ">
+                            <div class="row align-items-center text-dark mb-3">
+                                <div class="col-md-4 ">
                                     <label for="input_invbill_remark" class="col-form-label">หมายเหตุ :</label>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-auto">
                                     <textarea class="form-control" id="input_invbill_remark" name="input_invbill_remark" rows="2"></textarea>
                                 </div>
                             </div>
-                            <div class="row align-items-center text-dark px-md-5 mb-3">
-                                <div class="col-md-3">
-                                    <label for="input_invbill_page" class="col-form-label">จำนวนเอกสารรวม </label>
+                            <div class="row align-items-center text-dark mb-3">
+                                <div class="col-md-4">
+                                    <label for="input_invbill_page" class="col-form-label">จำนวนเอกสารรวม :</label>
                                 </div>
                                 <div class="col-md-5">
                                     <input type="number" id="input_invbill_page" name="input_invbill_page" class="form-control ">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label for="input_invbill_page" class="col-form-label">ฉบับ</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 ">
-                            <div class="row align-items-center text-dark px-md-5 mb-3 mt-2">
-                                <div class="col-md-6 ">
+                        <div class="col-md-6 mt-md-4">
+                            <div class="row align-items-center text-dark mb-3">
+                                <div class="col-md-5 ">
                                     <label for="input_invbill_deli" class="col-form-label ">ค่าขนส่ง (บาท) :</label>
                                 </div>
 
-                                <div class="col-md-5">
+                                <div class="col-auto">
                                     <input type="number" id="input_invbill_deli" name="input_invbill_deli" class="form-control" placeholder="0.00" title="กรุณากรอกค่าขนส่ง หากมี">
                                 </div>
                             </div>
 
-                            <div class="row align-items-center text-dark px-md-5 mb-3">
-                                <div class="col-md-6 ">
+                            <div class="row align-items-center text-dark mb-3">
+                                <div class="col-md-5 ">
                                     <label for="input_invbill_total" class="col-form-label">ยอดรวมทั้งสิ้น (บาท) :</label>
                                 </div>
-                                <div class="col-md-5">
-                                    <input type="number" id="input_invbill_total" name="input_invbill_total" class="form-control " readonly>
+                                <div class="col-auto">
+                                    <input type="number" id="input_invbill_total" name="input_invbill_total" class="form-control bg" readonly>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="mx-auto d-flex justify-content-end">
-                        <<button type="reset" class="btn bg-secondary-addpay text-white me-3">
-                            <i class="fa-solid fa-arrow-rotate-left"></i> ล้างข้อมูล</button>
-                            <button type="submit" id="action" name="action" value="create_invoicebill" class="btn btn-addpay text-white create_docout">บันทึก
-                                <i class="fa-solid fa-cloud-arrow-up"></i></button>
-                            <input type="hidden" name="total_item" id="total_item" value="1" />
+                        <div class="col-md-12">
+                            <div class="d-flex justify-content-end">
+                                <button type="reset" class="btn bg-secondary-addpay text-white me-3"><i class="fa-solid fa-arrow-rotate-left"></i> ล้างข้อมูล</button>
+                                <button type="submit" name="action" value="create_invoicebill" class="btn btn-addpay text-white">บันทึก <i class="fa-solid fa-cloud-arrow-up"></i></button>
+                            </div>
+                        </div>
+                        <input type="hidden" name="total_item" id="total_item" value="1" />
                     </div>
 
                 </form>
