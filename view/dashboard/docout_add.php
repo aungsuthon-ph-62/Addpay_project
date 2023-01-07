@@ -91,7 +91,7 @@ if (isset($_POST['action'])) {
                             <label for="input_no" class="col-form-label">เลขที่</label>
                         </div>
                         <div class="col-auto">
-                            <input type="tetx" id="input_no" name="input_no" class="form-control " required>
+                            <input type="text" id="input_no" name="input_no" class="form-control " required>
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
