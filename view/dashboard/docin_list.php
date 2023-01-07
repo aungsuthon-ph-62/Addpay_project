@@ -53,7 +53,7 @@ if(isset($_GET["deletedocin"])){
 
                 <div class="p-3 p-md-5 bg-light rounded-5 shadow-lg" id="main_row">
                     <div class="table-responsive">
-                        <table class="table" id="quotationTable">
+                        <table class="table" id="docinTable">
                             <thead>
                                 <tr class="align-center" class="rows">
                                     <th style="width:25%" scope="col">เลขที่</th>
