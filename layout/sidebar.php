@@ -74,11 +74,17 @@
                     เอกสารสำคัญ
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="?page=invoicebill">
-                    <span data-feather="layers"></span>
-                    ใบวางบิล
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    ใบแจ้งหนี้
                 </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <h6 class="dropdown-header">เมนูใบแจ้งหนี้ : </h6>
+                    </li>
+                    <li><a class="dropdown-item" href="?page=doc_in">ใบวางบิล</a></li>
+                    <li><a class="dropdown-item" href="?page=doc_out">ใบกำกับภาษี</a></li>
+                </ul>
             </li>
         </ul>
 

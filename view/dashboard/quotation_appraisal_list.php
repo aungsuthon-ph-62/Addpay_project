@@ -43,10 +43,11 @@ if (isset($_GET["deletequo"])) {
                         <table class="table" id="quotationTable">
                             <thead>
                                 <tr class="align-center" class="rows">
-                                    <th scope="col" style="width:16%">เลขที่</th>
-                                    <th scope="col" style="width:16%">วันที่</th>
-                                    <th scope="col" style="width:35%">ชื่อโครงการ</th>
-                                    <th scope="col" style="width:23%">จำนวนเงินรวม</th>
+                                    <th scope="col" style="width:12%">เลขที่ใบ<br>เสนอราคา</th>
+                                    <th scope="col" style="width:10%">วันที่ในใบ<br>เสนอราคา</th>
+                                    <th scope="col" style="width:26%">ชื่อโครงการ</th>
+                                    <th scope="col" style="width:26%">ชื่อลูกค้า<br>หน่วยงาน</th>
+                                    <th scope="col" style="width:13%">จำนวนเงินรวม</th>
                                     <th scope="col" style="width:10%">ตัวเลือก</th>
                                 </tr>
                             </thead>
@@ -60,6 +61,7 @@ if (isset($_GET["deletequo"])) {
                                         <td>' . $rows["quo_no"] . '</td>
                                         <td>' . $rows["quo_date"] . '</td>
                                         <td>' . $rows["quo_namepj"] . '</td>
+                                        <td>' . $rows["quo_name"] . '</td>
                                         <td>' . $rows["quo_total"] . '</td>
                                         <td>
                                             <div class="btn-group">
@@ -68,10 +70,10 @@ if (isset($_GET["deletequo"])) {
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li><a class="dropdown-item"
-                                                            href="?page=quo_form&?pdfquo=' .encode($rows["quo_id"], secret_key()). '">พิมพ์เอกสาร</a>
+                                                            href="?page=quo_form&?pdfquo=' . $rows["quo_id"] . '">พิมพ์เอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
-                                                            href="?page=quo_edit&editquo=' .encode($rows["quo_id"], secret_key()). '">แก้ไข</a>
+                                                            href="?page=quo_edit&editquo=' . encode($rows["quo_id"], secret_key()) . '">แก้ไข</a>
                                                     </li>
                                                     <li><a class="dropdown-item deletequo" href="#" data-quo-no="' . $rows["quo_no"] . '" id="' . $rows["quo_id"] . '" >ลบ</a></li>
                                                 </ul>
