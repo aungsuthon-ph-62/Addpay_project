@@ -1,9 +1,4 @@
 <?php
-session_start();
-include("../../layout/head.php");
-require_once("../../php/conn.php");
-// $uid = $_SESSION['id'];
-
 if (isset($_POST['action'])) {
     if ($_POST['action'] == 'create_quoin') {
 
@@ -27,15 +22,14 @@ if (isset($_POST['action'])) {
             $_SESSION['error'] = "เลขที่ใบเสนอราคานี้มีในระบบแล้ว!";
             header("Location: quotation_in_add.php");
             exit;
-
         } else {
 
             if (!empty($_FILES["input_quoin_file"]["name"])) {
 
                 $targetDir = "../../uploadfile/quotationinfile/";
-                
+
                 $temp = explode(".", $_FILES["input_quoin_file"]["name"]);
-                $fileName = 'quotationin-'. $namedate . '.' . end($temp);
+                $fileName = 'quotationin-' . $namedate . '.' . end($temp);
                 $targetFilePath = $targetDir . $fileName;
                 $fileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
                 $allowTypes = array('jpg', 'png', 'jpeg', 'pdf', 'word', 'txt', 'doc', 'docx', 'ppt', 'pptx', 'PDF');
@@ -52,7 +46,6 @@ if (isset($_POST['action'])) {
                             $_SESSION['success'] = "บันทึกหนังสือเข้าสำเร็จ!";
                             header("Location: quotation_in_list.php");
                             exit;
-                            
                         } else {
 
                             unlink("../../uploadfile/quotationinfile/$fileName");
@@ -79,124 +72,110 @@ if (isset($_POST['action'])) {
 
 ?>
 <style>
-body {
-    font-family: "Kanit", sans-serif;
-    font-family: "Noto Sans", sans-serif;
-    font-family: "Noto Sans Thai", sans-serif;
-    font-family: "Poppins", sans-serif;
-    font-family: "Prompt", sans-serif;
-}
+    table {
+        counter-reset: rowNumber;
+    }
 
-table {
-    counter-reset: rowNumber;
-}
+    table tr:not(:first-child) {
+        counter-increment: rowNumber;
+    }
 
-table tr:not(:first-child) {
-    counter-increment: rowNumber;
-}
-
-table tr td:first-child::before {
-    content: counter(rowNumber);
-    min-width: 1em;
-    margin-right: 0.5em;
-}
+    table tr td:first-child::before {
+        content: counter(rowNumber);
+        min-width: 1em;
+        margin-right: 0.5em;
+    }
 </style>
 
-<body>
-    <?php require("../alert.php"); ?>
-    <div class="container-fluid">
-        <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a
-                        href="../dashboard/quotation_in_list.php">ใบเสนอราคาเข้า</a></li>
-                <li class="breadcrumb-item active" aria-current="page">สร้างใบเสนอราคาเข้า</li>
-            </ol>
-        </nav>
-        <hr>
-        <div>
-            <h3>ข้อมูลใบเสนอราคา quotation</h3>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index">หน้าหลัก</a></li>
+        <li class="breadcrumb-item"><a href="?page=quo_in">ใบเสนอราคาเข้า</a></li>
+        <li class="breadcrumb-item active" aria-current="page">สร้างใบเสนอราคาเข้า</li>
+    </ol>
+</nav>
+<hr>
+
+<div class="container bg-secondary-addpay rounded-5">
+    <div class="main-body py-md-5 px-md-1 text-white">
+        <div id="paperquotation" class="container p-3 p-md-5">
+            <div class="p-4 p-md-5 bg-white rounded-5 shadow-lg">
+                <div class="text-center text-md-start text-dark my-3">
+                    <h3>สร้างใบเสนอราคาเข้า</h3>
+                </div>
+                <form method="post" action="?page=quo_in_add" enctype="multipart/form-data" class="mt-md-5">
+                    <div class="row align-items-center text-dark px-md-5 mb-3">
+                        <div class="col-md-3 text-md-end">
+                            <h6 class="col-form-label">เลขที่ในใบเสนอราคา No.</h6>
+                        </div>
+                        <div class="col-auto">
+                            <input type="text" id="input_quoin_no" name="input_quoin_no" class="form-control " required>
+                        </div>
+                    </div>
+                    <div class="row align-items-center text-dark px-md-5 mb-3">
+                        <div class="col-md-3 text-md-end">
+                            <h6 class="col-form-label">วันที่ในใบเสนอราคา date.</h6>
+                        </div>
+                        <div class="col-auto">
+                            <input type="date" id="input_quoin_date" name="input_quoin_date" class="form-control " required>
+                        </div>
+                    </div>
+                    <div class="row align-items-center text-dark px-md-5 mb-3">
+                        <div class="col-md-3 text-md-end">
+                            <h6 class="col-form-label">ชื่อบริษัทที่ออกใบเสนอราคา :</h6>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" id="input_quoin_company" name="input_quoin_company" class="form-control " required>
+                        </div>
+                    </div>
+
+                    <div class="row align-items-center text-dark px-md-5 mb-3">
+                        <div class="col-md-3 text-md-end">
+                            <h6 class="col-form-label">อัพโหลดไฟล์ :</h6>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="form-control" type="file" id="input_quoin_file" name="input_quoin_file" required>
+                        </div>
+                    </div>
+                    <div class="row align-items-center text-dark px-md-5 mb-3">
+                        <div class="col-md-3 text-md-end">
+                            <h6 class="col-form-label">สถานะ :</h6>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="input_quoin_status" id="input_quoin_status0" value="อนุมัติ" required>
+                                <label class="form-check-label" for="input_quoin_status0">อนุมัติ</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="input_quoin_status" id="input_quoin_status1" value="รออนุมัติ" required>
+                                <label class="form-check-label" for="input_quoin_status1">รออนุมัติ</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="input_quoin_status" id="input_quoin_status2" value="ไม่อนุมัติ" required>
+                                <label class="form-check-label" for="input_quoin_status2">ไม่อนุมัติ</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center text-dark px-md-5 mb-3">
+                        <div class="col-md-3 text-md-end">
+                            <h6 class="col-form-label">หมายเหตุ :</h6>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" id="input_quoin_remark" name="input_quoin_remark" class="form-control ">
+                        </div>
+                    </div>
+
+                    <div class="row mt-5">
+                        <div class="col-md-12">
+                            <div class="d-flex justify-content-end">
+                                <button type="reset" class="btn bg-secondary-addpay text-white me-3"><i class="fa-solid fa-arrow-rotate-left"></i> ล้างข้อมูล</button>
+                                <button type="submit" name="action" value="create_quoin" class="btn btn-addpay text-white">บันทึก <i class="fa-solid fa-cloud-arrow-up"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-        <form method="post" action="quotation_in_add.php" enctype="multipart/form-data" class="px-md-5 py-md-5">
-            <div class="row g-3 align-items-center mb-3">
-                <div class="col-md-3">
-                    <label for="input_quoin_no" class="col-form-label">เลขที่ในใบเสนอราคา No.</label>
-                </div>
-                <div class="col-auto">
-                    <input type="text" id="input_quoin_no" name="input_quoin_no" class="form-control " required>
-                </div>
-            </div>
-            <div class="row g-3 align-items-center mb-3">
-                <div class="col-md-3">
-                    <label for="input_quoin_date" class="col-form-label">วันที่ในใบเสนอราคา date.</label>
-                </div>
-                <div class="col-auto">
-                    <input type="date" id="input_quoin_date" name="input_quoin_date" class="form-control " required>
-                </div>
-            </div>
-            <div class="row g-3 align-items-center mb-3">
-                <div class="col-md-3">
-                    <label for="input_quoin_company" class="col-form-label">ชื่อบริษัทที่ออกใบเสนอราคา :</label>
-                </div>
-                <div class="col-md-8">
-                    <input type="text" id="input_quoin_company" name="input_quoin_company" class="form-control "
-                        required>
-                </div>
-            </div>
-
-            <div class="row g-3 mb-3">
-                <div class="col-md-3 ">
-                    <label for="input_quoin_file" class="col-form-label">อัพโหลดไฟล์ :</label>
-                </div>
-                <div class="col-md-8">
-                    <input class="form-control" type="file" id="input_quoin_file" name="input_quoin_file" required>
-                </div>
-            </div>
-            <div class="row g-3 align-items-center mb-3">
-                <div class="col-md-3 ">
-                    <label for="input_quoin_status" class="col-form-label">สถานะ :</label>
-                </div>
-
-                <div class="col-md-8">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="input_quoin_status" id="input_quoin_status0"
-                            value="อนุมัติ" required>
-                        <label class="form-check-label" for="input_quoin_status0">อนุมัติ</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="input_quoin_status" id="input_quoin_status1"
-                            value="รออนุมัติ" required>
-                        <label class="form-check-label" for="input_quoin_status1">รออนุมัติ</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="input_quoin_status" id="input_quoin_status2"
-                            value="ไม่อนุมัติ" required>
-                        <label class="form-check-label" for="input_quoin_status2">ไม่อนุมัติ</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row g-3 align-items-center mb-3">
-                <div class="col-md-3">
-                    <label for="input_quoin_remark" class="col-form-label">หมายเหตุ :</label>
-                </div>
-                <div class="col-md-8">
-                    <input type="text" id="input_quoin_remark" name="input_quoin_remark" class="form-control ">
-                </div>
-            </div>
-
-
-
-            <div class="mx-auto d-flex justify-content-end">
-                <button type="reset"
-                    class="col-md-3 btn btn-outline-danger btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold"><i
-                        class="fa-solid fa-eraser"></i> ล้างข้อมูล</button>
-                <button type="submit" name="action" value="create_quoin"
-                    class="ms-3 col-md-3 btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold">บันทึก
-                    <i class="fa-solid fa-angles-right"></i></button>
-
-            </div>
-
-        </form>
-
     </div>
-</body>
+</div>

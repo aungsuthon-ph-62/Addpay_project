@@ -2,7 +2,8 @@
 
 if (isset($_GET['editquo'])) {
 
-    $id = $_GET['editquo'];
+    $get_decode = $_GET['editquo'];
+    $id = decode($get_decode, secret_key());
 
     $sql = "SELECT * FROM quotation_appraisal WHERE quo_id ='$id'";
     $query = $conn->query($sql);
