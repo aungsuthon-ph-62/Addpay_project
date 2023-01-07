@@ -74,27 +74,27 @@ function create_quotation()
 ?>
 
 <style>
-    body {
-        font-family: "Kanit", sans-serif;
-        font-family: "Noto Sans", sans-serif;
-        font-family: "Noto Sans Thai", sans-serif;
-        font-family: "Poppins", sans-serif;
-        font-family: "Prompt", sans-serif;
-    }
+body {
+    font-family: "Kanit", sans-serif;
+    font-family: "Noto Sans", sans-serif;
+    font-family: "Noto Sans Thai", sans-serif;
+    font-family: "Poppins", sans-serif;
+    font-family: "Prompt", sans-serif;
+}
 
-    table {
-        counter-reset: rowNumber;
-    }
+table {
+    counter-reset: rowNumber;
+}
 
-    table tr:not(:first-child) {
-        counter-increment: rowNumber;
-    }
+table tr:not(:first-child) {
+    counter-increment: rowNumber;
+}
 
-    table tr td:first-child::before {
-        content: counter(rowNumber);
-        min-width: 1em;
-        margin-right: 0.5em;
-    }
+table tr td:first-child::before {
+    content: counter(rowNumber);
+    min-width: 1em;
+    margin-right: 0.5em;
+}
 </style>
 
 <body>
@@ -103,7 +103,8 @@ function create_quotation()
         <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="../dashboard/quotation_appraisal_list.php">ใบแจ้งหนี้/ใบวางบิล</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a
+                        href="../dashboard/quotation_appraisal_list.php">ใบแจ้งหนี้/ใบวางบิล</a></li>
                 <li class="breadcrumb-item active" aria-current="page">สร้างใบแจ้งหนี้/ใบวางบิล</li>
             </ol>
         </nav>
@@ -117,7 +118,7 @@ function create_quotation()
                     <label for="input_inv_no" class="col-form-label">เลขที่ No.</label>
                 </div>
                 <div class="col-auto">
-                    <input type="number" id="input_inv_no" name="input_inv_no" class="form-control " required>
+                    <input type="tetx" id="input_inv_no" name="input_inv_no" class="form-control " required>
                 </div>
             </div>
             <div class="row g-3 align-items-center mb-3">
@@ -142,7 +143,8 @@ function create_quotation()
                     <label for="input_inv_address" class="col-form-label">ที่อยู่ :</label>
                 </div>
                 <div class="col-md-8">
-                    <textarea class="form-control" id="input_inv_address" name="input_inv_address" rows="3" required></textarea>
+                    <textarea class="form-control" id="input_inv_address" name="input_inv_address" rows="3"
+                        required></textarea>
                 </div>
             </div>
             <div class="row g-3 mb-3">
@@ -175,24 +177,33 @@ function create_quotation()
 
                             <tr id="row_id_1">
                                 <td><span id="sr_no"></span></td>
-                                <td><input type="text" name="item_order[]" id="item_order1" class="form-control input-sm" required /></td>
-                                <td><input type="date" name="item_inv_date[]" id="item_inv_date1" data-srno="1" class="form-control input-sm item_inv_date" required /></td>
-                                <td><input type="date" name="item_due_date[]" id="item_due_date1" data-srno="1" class="form-control input-sm number_only item_due_date" step="any" required /></td>
-                                <td><input type="number" name="item_amount[]" id="item_amount1" data-srno="1" class="form-control input-sm item_amount" require /></td>
-                                <td><input type="number" name="item_vat[]" id="item_vat1" class="form-control input-sm item_vat" required /></td>
-                                <td><input type="number" name="item_total_amount[]" id="item_total_amount1" data-srno="1" class="form-control input-sm item_total_amount" required /></td>
+                                <td><input type="text" name="item_order[]" id="item_order1"
+                                        class="form-control input-sm" required /></td>
+                                <td><input type="date" name="item_inv_date[]" id="item_inv_date1" data-srno="1"
+                                        class="form-control input-sm item_inv_date" required /></td>
+                                <td><input type="date" name="item_due_date[]" id="item_due_date1" data-srno="1"
+                                        class="form-control input-sm number_only item_due_date" step="any" required />
+                                </td>
+                                <td><input type="number" name="item_amount[]" id="item_amount1" data-srno="1"
+                                        class="form-control input-sm item_amount" require /></td>
+                                <td><input type="number" name="item_vat[]" id="item_vat1"
+                                        class="form-control input-sm item_vat" required /></td>
+                                <td><input type="number" name="item_total_amount[]" id="item_total_amount1"
+                                        data-srno="1" class="form-control input-sm item_total_amount" required /></td>
                                 <!-- <td><input type="text" name="item_remark[]" id="item_remark1" data-srno="1" class="form-control input-sm number_only item_remark" step="any" required /></td> -->
                                 <td></td>
                             </tr>
                         </table>
                         <div class="text-center">
-                            <button type="button" id="add_row" class="btn btn-success px-4 rounded-pill fs-5 fw-bold " ><i class="fa fa-plus-circle text-white"></i> เพิ่มรายการ</button>
+                            <button type="button" id="add_row"
+                                class="btn btn-success px-4 rounded-pill fs-5 fw-bold "><i
+                                    class="fa fa-plus-circle text-white"></i> เพิ่มรายการ</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
-            <div class="col-md-6">
+                <div class="col-md-6">
                     <div class="row g-3  mb-3">
                         <div class="col-md-3 ">
                             <label for="input_quo_remark" class="col-form-label">หมายเหตุ :</label>
@@ -209,7 +220,8 @@ function create_quotation()
                             <label for="input_quo_sum" class="col-form-label">รวม </label>
                         </div>
                         <div class="col-md-5">
-                            <input type="number" id="input_quo_sum" name="input_quo_sum" class="form-control " placeholder="0.00" readonly>
+                            <input type="number" id="input_quo_sum" name="input_quo_sum" class="form-control "
+                                placeholder="0.00" readonly>
                         </div>
                         <div class="col-md-1 text-end">
                             <label for="input_quo_sum" class="col-form-label">ฉบับ</label>
@@ -221,7 +233,8 @@ function create_quotation()
                             <label for="input_quo_afterdis" class="col-form-label">ยอดรวมทั้งสิ้น (บาท):</label>
                         </div>
                         <div class="col-md-5">
-                            <input type="number" id="input_quo_afterdis" name="input_quo_afterdis" class="form-control " placeholder="0.00" readonly>
+                            <input type="number" id="input_quo_afterdis" name="input_quo_afterdis" class="form-control "
+                                placeholder="0.00" readonly>
                         </div>
                     </div>
 
@@ -237,8 +250,11 @@ function create_quotation()
             </div> -->
 
             <div class="mx-auto d-flex justify-content-end">
-                <button type="reset" class="col-md-3 btn btn-outline-danger btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold"><i class="fa-solid fa-eraser"></i> ล้างข้อมูล</button>
-                <button type="submit" name="create_quotation" id="create_quotation" value="Create" class="ms-3 col-md-3 btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold">ต่อไป
+                <button type="reset"
+                    class="col-md-3 btn btn-outline-danger btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold"><i
+                        class="fa-solid fa-eraser"></i> ล้างข้อมูล</button>
+                <button type="submit" name="create_quotation" id="create_quotation" value="Create"
+                    class="ms-3 col-md-3 btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold">ต่อไป
                     <i class="fa-solid fa-angles-right"></i></button>
                 <input type="hidden" name="total_item" id="total_item" value="1" />
                 <input type="hidden" name="action" value="create_quotation">
@@ -246,106 +262,106 @@ function create_quotation()
 
         </form>
         <script>
-            $(document).ready(function() {
-                var final_total_price = $('#final_total_price').text();
-                var count = 1;
-                var total_item = 1;
+        $(document).ready(function() {
+            var final_total_price = $('#final_total_price').text();
+            var count = 1;
+            var total_item = 1;
 
-                $(document).on('click', '#add_row', function() {
-                    count++;
-                    total_item++;
-                    $('#total_item').val(total_item);
-                    var html_code = '';
-                    html_code += '<tr id="row_id_' + count + '">';
-                    html_code += '<td><span id="sr_no"></span></td>';
+            $(document).on('click', '#add_row', function() {
+                count++;
+                total_item++;
+                $('#total_item').val(total_item);
+                var html_code = '';
+                html_code += '<tr id="row_id_' + count + '">';
+                html_code += '<td><span id="sr_no"></span></td>';
 
-                    html_code += '<td><input type="text" name="item_order[]" id="item_order' + count +
-                        '" class="form-control input-sm" required/></td>';
-                    html_code +=
-                        '<td><input type="date" name="item_inv_date[]" id="item_inv_date' +
-                        count + '" data-srno="' + count +
-                        '" class="form-control input-sm  item_inv_date" required/></td>';
-                    html_code += '<td><input type="date" name="item_amount[]" id="item_amount' +
-                        count + '" data-srno="' + count +
-                        '" class="form-control input-sm  item_amount" required step="any"/></td>';
-                    html_code +=
-                        '<td><input type="number" name="total_vat[]" id="total_vat' +
-                        count + '" data-srno="' + count +
-                        '" class="form-control input-sm total_vat" required /></td>';
-                    html_code +=
-                        '<td><input type="number" name="item_total_amount[]" id="item_total_amount' +
-                        count + '" data-srno="' + count +
-                        '" class="form-control input-sm number_only item_total_amount" required/></td>';
-                    // html_code += '<td><input type="number" name="item_remark[]" id="item_remark' +
-                    //     count + '" data-srno="' + count +
-                    //     '" class="form-control input-sm number_only item_remark" required step="any"/></td>';
-                    html_code +=
-                        '<td><input type="text" name="total_price[]" id="total_price' +
-                        count + '" data-srno="' + count +
-                        '" class="form-control input-sm total_price" readonly /></td>';
+                html_code += '<td><input type="text" name="item_order[]" id="item_order' + count +
+                    '" class="form-control input-sm" required/></td>';
+                html_code +=
+                    '<td><input type="date" name="item_inv_date[]" id="item_inv_date' +
+                    count + '" data-srno="' + count +
+                    '" class="form-control input-sm  item_inv_date" required/></td>';
+                html_code += '<td><input type="date" name="item_amount[]" id="item_amount' +
+                    count + '" data-srno="' + count +
+                    '" class="form-control input-sm  item_amount" required step="any"/></td>';
+                html_code +=
+                    '<td><input type="number" name="total_vat[]" id="total_vat' +
+                    count + '" data-srno="' + count +
+                    '" class="form-control input-sm total_vat" required /></td>';
+                html_code +=
+                    '<td><input type="number" name="item_total_amount[]" id="item_total_amount' +
+                    count + '" data-srno="' + count +
+                    '" class="form-control input-sm number_only item_total_amount" required/></td>';
+                // html_code += '<td><input type="number" name="item_remark[]" id="item_remark' +
+                //     count + '" data-srno="' + count +
+                //     '" class="form-control input-sm number_only item_remark" required step="any"/></td>';
+                html_code +=
+                    '<td><input type="text" name="total_price[]" id="total_price' +
+                    count + '" data-srno="' + count +
+                    '" class="form-control input-sm total_price" readonly /></td>';
 
-                    html_code += '<td><button type="button" name="remove_row" id="' + count +
-                        '" class="btn btn-danger btn-xs remove_row">X</button></td>';
-                    html_code += '</tr>';
-                    $('#invtation-item-table').append(html_code);
-                });
+                html_code += '<td><button type="button" name="remove_row" id="' + count +
+                    '" class="btn btn-danger btn-xs remove_row">X</button></td>';
+                html_code += '</tr>';
+                $('#invtation-item-table').append(html_code);
+            });
 
-                $(document).on('click', '.remove_row', function() {
-                    var row_id = $(this).attr("id");
-                    $('#row_id_' + row_id).remove();
-                    total_item--;
-                    $('#total_item').val(total_item);
-                    cal_final_total(count);
-
-                });
-
-                function cal_final_total(count) {
-                    var final_total_price = 0;
-                    for (j = 1; j <= count; j++) {
-                        var quantity = 0;
-                        var price = 0;
-                        var total_price = 0;
-                        quantity = $('#item_amount' + j).val();
-                        if (quantity > 0) {
-                            price = $('#item_price' + j).val();
-                            if (price > 0) {
-                                total_price = parseFloat(quantity) * parseFloat(price);
-                                $('#total_price' + j).val(
-                                    total_price
-                                    .toFixed(2));
-
-                                final_total_price = (final_total_price + total_price);
-
-                            }
-                        }
-                    }
-                    $('#input_quo_sum').val(final_total_price.toFixed(2));
-                    var discount = 0;
-                    var afterdis = 0;
-                    var vat7per = 0;
-                    var aftervat = 0;
-                    discount = $('#input_quo_specialdis').val();
-                    afterdis = final_total_price - discount;
-                    $('#input_quo_afterdis').val(afterdis.toFixed(2));
-                    vat7per = (afterdis * 0.07);
-                    $('#input_quo_vat').val(vat7per.toFixed(2));
-                    aftervat = (afterdis + vat7per);
-                    $('#input_quo_total').val(aftervat.toFixed(2));
-                }
-
-                $(document).on('change', '.item_price', function() {
-                    cal_final_total(count);
-                });
-
-                $(document).on('change', '.item_amount', function() {
-                    cal_final_total(count);
-                });
-
-                $(document).on('change', '#input_quo_specialdis', function() {
-                    cal_final_total(count);
-                });
+            $(document).on('click', '.remove_row', function() {
+                var row_id = $(this).attr("id");
+                $('#row_id_' + row_id).remove();
+                total_item--;
+                $('#total_item').val(total_item);
+                cal_final_total(count);
 
             });
+
+            function cal_final_total(count) {
+                var final_total_price = 0;
+                for (j = 1; j <= count; j++) {
+                    var quantity = 0;
+                    var price = 0;
+                    var total_price = 0;
+                    quantity = $('#item_amount' + j).val();
+                    if (quantity > 0) {
+                        price = $('#item_price' + j).val();
+                        if (price > 0) {
+                            total_price = parseFloat(quantity) * parseFloat(price);
+                            $('#total_price' + j).val(
+                                total_price
+                                .toFixed(2));
+
+                            final_total_price = (final_total_price + total_price);
+
+                        }
+                    }
+                }
+                $('#input_quo_sum').val(final_total_price.toFixed(2));
+                var discount = 0;
+                var afterdis = 0;
+                var vat7per = 0;
+                var aftervat = 0;
+                discount = $('#input_quo_specialdis').val();
+                afterdis = final_total_price - discount;
+                $('#input_quo_afterdis').val(afterdis.toFixed(2));
+                vat7per = (afterdis * 0.07);
+                $('#input_quo_vat').val(vat7per.toFixed(2));
+                aftervat = (afterdis + vat7per);
+                $('#input_quo_total').val(aftervat.toFixed(2));
+            }
+
+            $(document).on('change', '.item_price', function() {
+                cal_final_total(count);
+            });
+
+            $(document).on('change', '.item_amount', function() {
+                cal_final_total(count);
+            });
+
+            $(document).on('change', '#input_quo_specialdis', function() {
+                cal_final_total(count);
+            });
+
+        });
         </script>
     </div>
 </body>
