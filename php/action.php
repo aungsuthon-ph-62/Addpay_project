@@ -40,12 +40,24 @@ function encode($message, $encryption_key)
     //     $nonce
     // );
     // return base64_encode($nonce . $ciphertext);
-    $ciphertext = openssl_encrypt($message, "AES-128-ECB", $encryption_key);
-    return $ciphertext; // Outputs: encrypted string
+    // $ciphertext = openssl_encrypt($message, "AES-128-ECB", $encryption_key);
+    // return $ciphertext; // Outputs: encrypted string
+
+    $ciphering = "AES-128-CTR";
+
+    // $encryption_key = "BS539TDGZF3ND71";
+
+    $options = 0;
+
+    $encryption_iv = '1234567891011121';
+
+    $encrypted = openssl_encrypt($message, $ciphering, $encryption_key, $options, $encryption_iv); 
+
+    return $encrypted;
 }
 
 // Decode
-function decode($message, $encryption_key)
+function decode($message, $decryption_key)
 {
     // $key = hex2bin($encryption_key);
     // $message = base64_decode($message);
@@ -60,8 +72,20 @@ function decode($message, $encryption_key)
     //     $nonce
     // );
     // return $plaintext;
-    $decrypted_text = openssl_decrypt($message, "AES-128-ECB", $encryption_key);
-    return $decrypted_text;
+    // $decrypted_text = openssl_decrypt($message, "AES-128-ECB", $encryption_key);
+    // return $decrypted_text;
+    $ciphering = "AES-128-CTR";
+
+    // $decryption_key = "BS539TDGZF3ND71";
+  
+    $options = 0;
+  
+    $decryption_iv = '1234567891011121';
+  
+    $decrypted = openssl_decrypt ($message, $ciphering, $decryption_key, $options, $decryption_iv); 
+  
+    return $decrypted;
+    
 }
 
 // Validate Email

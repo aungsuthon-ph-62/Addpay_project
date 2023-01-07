@@ -16,6 +16,12 @@ if (isset($_POST['action'])) {
         $input_name = mysqli_real_escape_string($conn, trim($_POST['input_name']));
         $input_position = mysqli_real_escape_string($conn, trim($_POST['input_position']));
         $uid = $_SESSION['id'];
+
+        if (empty($input_send)||empty($input_content)) {
+            $_SESSION['error'] = "กรุณากรอกข้อมูลสิ่งที่ส่งมาด้วยและเนื้อหา";
+            echo "<script> window.history.back()</script>";
+            exit;
+        }
         
 
         $no_check_query = "SELECT * FROM docout WHERE docout_no = '$input_no'";
@@ -25,7 +31,7 @@ if (isset($_POST['action'])) {
         if ($check) {
 
             $_SESSION['error'] = "เลขที่นี้มีในระบบแล้ว!";
-            echo "<script> window.location.href='?page=doc_out_add'</script>";
+            echo "<script> window.history.back()</script>";
             exit;
         } else {
 
@@ -40,7 +46,7 @@ if (isset($_POST['action'])) {
             } else {
 
                 $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-                echo "<script> window.location.href='?page=doc_out_add'</script>";
+                echo "<script> window.history.back()</script>";
                 exit;
             }
         }
@@ -85,7 +91,7 @@ if (isset($_POST['action'])) {
                             <label for="input_no" class="col-form-label">เลขที่</label>
                         </div>
                         <div class="col-auto">
-                            <input type="tetx" id="input_no" name="input_no" class="form-control " required>
+                            <input type="text" id="input_no" name="input_no" class="form-control " required>
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
@@ -118,7 +124,7 @@ if (isset($_POST['action'])) {
                             <label for="input_send" class="col-form-label">สิ่งที่ส่งมาด้วย </label>
                         </div>
                         <div class="ck-send col-md-6">
-                            <textarea type="text" id="input_send" name="input_send" class="form-control " required
+                            <textarea type="text" id="input_send" name="input_send" class="form-control "
                                 rows="3"></textarea>
                         </div>
                     </div>
@@ -178,7 +184,7 @@ if (isset($_POST['action'])) {
         </div>
     </div>
 </div>
-<script>
+<!-- <script>
 $(document).ready(function() {
     $(document).on('click', '.create_docout', function() {
         document.docout_add.submit();
@@ -186,4 +192,4 @@ $(document).ready(function() {
     });
 
 });
-</script>
+</script> -->

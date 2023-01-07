@@ -6,13 +6,13 @@ if (isset($_GET["deletedocout"])) {
     $query = $conn->query($sql);
 
     if ($query) {
-        $_SESSION['success'] = "ลบใบเสนอราคากลางสำเร็จ!";
-        echo "<script> window.location.href='?page=doc_out'</script>";
+        $_SESSION['success'] = "ลบหนังสือออกสำเร็จ!";
+        echo "<script> window.history.back()</script>";
         exit;
     }
 
     $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-    echo "<script> window.location.href='?page=doc_out'</script>";
+    echo "<script> window.history.back()</script>";
     exit;
 }
 
@@ -53,8 +53,6 @@ if (isset($_GET["deletedocout"])) {
                                 </tr>
                             </thead>
                             <?php
-                            require_once "php/action.php";
-                            require_once "php/key.inc.php";
                             $sql = "SELECT * FROM docout";
                             $query = $conn->query($sql);
                             while ($rows = $query->fetch_assoc()) {
@@ -118,3 +116,4 @@ if (isset($_GET["deletedocout"])) {
         </div>
     </div>
 </div>
+<?php $conn->close(); ?>

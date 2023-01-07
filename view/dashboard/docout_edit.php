@@ -1,8 +1,7 @@
 <?php
-require_once "php/action.php";
-require_once "php/key.inc.php";
 
 if (isset($_GET['editdocout'])) {
+    
     $get_decode = $_GET['editdocout'];
     $id = decode($get_decode, secret_key());
 
@@ -12,7 +11,7 @@ if (isset($_GET['editdocout'])) {
 
     if (!$row) {
         $_SESSION['error'] = "ไม่พบหน้าดังกล่าว!";
-        echo "<script> window.location.href='?page=doc_out';</script>";
+        echo "<script> window.history.back()</script>";
         exit;
     }
 }
@@ -25,6 +24,14 @@ if (isset($_POST['action'])) {
         
         $no_check = mysqli_real_escape_string($conn, trim($_POST['no_check']));
         $input_no = mysqli_real_escape_string($conn, trim($_POST['input_no']));
+        $input_send = mysqli_real_escape_string($conn, trim($_POST['input_send']));
+        $input_content = mysqli_real_escape_string($conn, trim($_POST['input_content']));
+
+        if (empty($input_send)||empty($input_content)) {
+            $_SESSION['error'] = "กรุณากรอกข้อมูลสิ่งที่ส่งมาด้วยและเนื้อหา";
+            echo "<script> window.history.back()</script>";
+            exit;
+        }
 
         
         if ($input_no == $no_check) {
@@ -39,7 +46,7 @@ if (isset($_POST['action'])) {
 
             if ($check) {
                 $_SESSION['error'] = "เลขที่นี้มีในระบบแล้ว!";
-                echo "<script> window.location.href='?page=doc_out_edit&editdocout=.$enid.'</script>";
+                echo "<script> window.history.back()</script>";
                 exit;
             } else {
 
@@ -82,7 +89,7 @@ function edit_docout()
     } else {
 
         $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-        echo "<script> window.location.href='?page=doc_out_edit&editdocout=.$enid.'</script>";
+        echo "<script> window.history.back()</script>";
         exit;
     }
 }
@@ -113,7 +120,7 @@ function edit_docout()
                     <h3>แก้ไขข้อมูลหนังสือออก</h3>
                 </div>
                 <form action="?page=doc_out_edit&editdocout=<?php echo encode($row['docout_id'], secret_key()); ?>"
-                    method="post" name="docout_edit" id="docout_edit" class="p-md-5">
+                    method="post" name="docout_edit" id="docout_edit" class="p-md-5" onsubmit="return validateForm()">
                     <div class="row align-items-center text-dark px-md-5 mb-3">
                         <div class="col-md-3">
                             <label for="input_no" class="col-form-label">เลขที่</label>
@@ -168,7 +175,7 @@ function edit_docout()
                             <label for="input_content" class="col-form-label">เนื้อหาข้อความ </label>
                         </div>
                         <div class="ck-details col-md-9">
-                            <textarea id="input_content" name="input_content" class="form-control" cols="40" rows="10"
+                            <textarea id="input_content" name="input_content" class="form-control"
                                 placeholder="พิมพ์เนื้อหา..."><?= $row['docout_details'] ?></textarea>
                         </div>
                     </div>
@@ -202,6 +209,22 @@ function edit_docout()
                             <input type="hidden" name="docout_id" id="docout_id" value="<?= $row['docout_id']; ?>" />
                         </div>
                     </div>
+                    <script>
+                    ClassicEditor
+                        .create(document.querySelector('#input_send'))
+
+                        .catch(error => {
+                            console.error(error);
+                        });
+                    </script>
+                    <script>
+                    ClassicEditor
+                        .create(document.querySelector('#input_content'))
+
+                        .catch(error => {
+                            console.error(error);
+                        });
+                    </script>
                 </form>
             </div>
         </div>
