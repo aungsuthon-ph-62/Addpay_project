@@ -28,7 +28,7 @@ if (isset($_GET["deletedocout"])) {
 <hr>
 
 <div class="container bg-secondary-addpay rounded-5">
-    <div class="main-body p-md-5 text-white">
+    <div class="main-body py-md-5 px-md-1 text-white">
         <div class="container">
             <div id="listquotation" class="p-3 p-md-5 text-white">
                 <div class="text-center text-md-start">
