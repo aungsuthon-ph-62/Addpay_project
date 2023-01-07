@@ -14,6 +14,7 @@ if (isset($_POST['action'])) {
         $input_invbill_cusid = mysqli_real_escape_string($conn, trim($_POST['input_invbill_cusid']));
         $input_invbill_deli = mysqli_real_escape_string($conn, trim($_POST['input_invbill_deli']));
         $input_invbill_total = mysqli_real_escape_string($conn, trim($_POST['input_invbill_total']));
+        $input_invbill_page = mysqli_real_escape_string($conn, trim($_POST['input_invbill_page']));
         $input_invbill_remark = mysqli_real_escape_string($conn, trim($_POST['input_invbill_remark']));
         $uid = $_SESSION['id'];
 
@@ -23,11 +24,11 @@ if (isset($_POST['action'])) {
 
         if ($check) {
             $_SESSION['error'] = "เลขที่ใบวางบิลนี้มีในระบบแล้ว!";
-            header("<script> window.history.back()</script>");
+            echo("<script> window.history.back()</script>");
             exit;
         } else {
-            $query = "INSERT INTO invoicebill(invbill_no, invbill_date, invbill_name, invbill_address, invbill_cusid, invbill_deli, invbill_total, invbill_remark, invbill_create, invbill_uid)
-            VALUES ('$input_invbill_no', '$input_invbill_date', '$input_invbill_name', '$input_invbill_address', '$input_invbill_cusid', '$input_invbill_deli', '$input_invbill_total', '$input_invbill_remark', '$date', '$uid')";
+            $query = "INSERT INTO invoicebill(invbill_no, invbill_date, invbill_name, invbill_address, invbill_cusid, invbill_deli, invbill_total, invbill_page, invbill_remark, invbill_create, invbill_uid)
+            VALUES ('$input_invbill_no', '$input_invbill_date', '$input_invbill_name', '$input_invbill_address', '$input_invbill_cusid', '$input_invbill_deli', '$input_invbill_total','$input_invbill_page', '$input_invbill_remark', '$date', '$uid')";
 
             if ($conn->query($query) === TRUE) {
 
@@ -36,8 +37,10 @@ if (isset($_POST['action'])) {
                 for ($count = 0; $count < $_POST["total_item"]; $count++) {
 
                     $item_name = mysqli_real_escape_string($conn, trim($_POST['item_name'][$count]));
+
                     $item_inv_date = mysqli_real_escape_string($conn, trim($_POST['item_inv_date']));
                     $item_due_date = mysqli_real_escape_string($conn, trim($_POST['item_due_date']));
+                    
                     $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
                     $item_vat = mysqli_real_escape_string($conn, trim($_POST['item_vat'][$count]));
                     $item_total = mysqli_real_escape_string($conn, trim($_POST['item_total'][$count]));
@@ -49,12 +52,12 @@ if (isset($_POST['action'])) {
                 }
 
                 $_SESSION['success'] = "บันทึกใบวางบิลสำเร็จ!";
-                header("<script> window.location.href='?page=invoicebill'</script>");
+                echo("<script> window.location.href='?page=invoicebill'</script>");
                 exit;
             } else {
                 echo "Error: " . $query . "<br>" . $conn->error;
                 $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-                header("<script> window.history.back()</script>");
+                echo("<script> window.history.back()</script>");
                 exit;
             }
         }
