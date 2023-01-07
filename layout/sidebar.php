@@ -15,9 +15,9 @@
                     <li>
                         <h6 class="dropdown-header">เมนูใบเสนอราคา : กลาง/เข้า/ออก</h6>
                     </li>
-                    <li><a class="dropdown-item" href="?page=quotation">ใบเสนอราคากลาง</a></li>
-                    <li><a class="dropdown-item" href="?page=doc_out">ใบเสนอราคาเข้า</a></li>
-                    <li><a class="dropdown-item" href="?page=doc_out">ใบเสนอราคาออก</a></li>
+                    <li><a class="dropdown-item" href="?page=quo">ใบเสนอราคากลาง</a></li>
+                    <li><a class="dropdown-item" href="?page=quo_in">ใบเสนอราคาเข้า</a></li>
+                    <li><a class="dropdown-item" href="?page=quo_out">ใบเสนอราคาออก</a></li>
                 </ul>
             </li>
             <li class="nav-item">
