@@ -152,7 +152,7 @@ function edit_docin(){
 </nav>
 <hr>
 <div class="container bg-secondary-addpay rounded-5">
-    <div class="main-body p-md-5 text-white">
+    <div class="main-body py-md-5 px-md-1 text-white">
         <div id="paperquotation" class="container p-3 p-md-5">
 
             <div class="p-4 p-md-5 bg-white rounded-5 shadow-lg">
