@@ -1,9 +1,4 @@
 <?php
-session_start();
-include("../../layout/head.php");
-require_once("../../php/conn.php");
-
-// $uid = $_SESSION['id'];
 
 if (isset($_GET['editquo'])) {
     
@@ -13,12 +8,17 @@ if (isset($_GET['editquo'])) {
     $query = $conn->query($sql);
     $row = $query->fetch_assoc();
     
+    if (!$row) {
+        $_SESSION['error'] = "ไม่พบหน้าดังกล่าว!";
+        echo "<script> window.history.back()</script>";
+        exit;
+    }
+
 }
 
 if (isset($_POST['action'])) {
     if ($_POST['action'] == 'edit_quotation') {
         
-        $id= mysqli_real_escape_string($conn,trim($_POST['quo_id']));
         $quo_no_check= mysqli_real_escape_string($conn,trim($_POST['quo_no_check']));
         $input_quo_no= mysqli_real_escape_string($conn,trim($_POST['input_quo_no']));
         
@@ -36,7 +36,7 @@ if (isset($_POST['action'])) {
             
             if ($check) {
                 $_SESSION['error'] = "เลขที่ใบเสนอราคากลางนี้มีในระบบแล้ว!";
-                header('Location: quotation_appraisal_edit.php?editquo='.$id);
+                echo "<script> window.history.back()</script>";
                 exit;
                 
             }else{
@@ -92,12 +92,12 @@ function edit_quo()
         }
 
         $_SESSION['success'] = "แก้ไขใบเสนอราคากลางสำเร็จ!";
-        header("Location: quotation_appraisal_list.php");
+        echo "<script> window.location.href='?page=quo';</script>";
         exit;
         
     } else {
         $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-        header('Location: quotation_appraisal_edit.php?editquo='.$id);
+        echo "<script> window.history.back()</script>";
         exit;
         
     }

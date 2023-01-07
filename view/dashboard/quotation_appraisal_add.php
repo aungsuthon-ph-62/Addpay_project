@@ -1,6 +1,4 @@
 <?php
-// $uid = $_SESSION['id'];
-
 if (isset($_POST['action'])) {
     if ($_POST['action'] == 'create_quotation') {
 
@@ -19,7 +17,7 @@ if (isset($_POST['action'])) {
         $input_quo_vat = mysqli_real_escape_string($conn, trim($_POST['input_quo_vat']));
         $input_quo_deli = mysqli_real_escape_string($conn, trim($_POST['input_quo_deli']));
         $input_quo_total = mysqli_real_escape_string($conn, trim($_POST['input_quo_total']));
-        $uid = 1;
+        $uid = $_SESSION['id'];
 
         $quo_no_check_query = "SELECT * FROM quotation_appraisal WHERE quo_no =  $input_quo_no";
         $query = $conn->query($quo_no_check_query);
@@ -27,7 +25,7 @@ if (isset($_POST['action'])) {
 
         if ($check) {
             $_SESSION['error'] = "เลขที่ใบเสนอราคากลางนี้มีในระบบแล้ว!";
-            header("Location: quotation_appraisal_add.php");
+            echo "<script> window.history.back()</script>";
             exit;
         } else {
             $query = "INSERT INTO quotation_appraisal (quo_no, quo_date, quo_namepj, quo_name, quo_address, quo_sum, quo_specialdis, quo_afterdis, quo_vat, quo_deli, quo_total, quo_create, quo_uid)
@@ -50,11 +48,13 @@ if (isset($_POST['action'])) {
                 }
 
                 $_SESSION['success'] = "บันทึกใบเสนอราคากลางสำเร็จ!";
-                header("Location: quotation_appraisal_list.php");
+                echo "<script> window.location.href='?page=quo'</script>";
                 exit;
+                
             } else {
+                
                 $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-                header("Location: quotation_appraisal_add.php");
+                echo "<script> window.history.back()</script>";
                 exit;
             }
         }
@@ -65,19 +65,19 @@ if (isset($_POST['action'])) {
 ?>
 
 <style>
-    table {
-        counter-reset: rowNumber;
-    }
+table {
+    counter-reset: rowNumber;
+}
 
-    table tr:not(:first-child) {
-        counter-increment: rowNumber;
-    }
+table tr:not(:first-child) {
+    counter-increment: rowNumber;
+}
 
-    table tr td:first-child::before {
-        content: counter(rowNumber);
-        min-width: 1em;
-        margin-right: 0.5em;
-    }
+table tr td:first-child::before {
+    content: counter(rowNumber);
+    min-width: 1em;
+    margin-right: 0.5em;
+}
 </style>
 
 
@@ -85,7 +85,8 @@ if (isset($_POST['action'])) {
     <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><a href="../dashboard/quotation_appraisal_list.php">ใบเสนอราคากลาง</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a
+                    href="../dashboard/quotation_appraisal_list.php">ใบเสนอราคากลาง</a></li>
             <li class="breadcrumb-item active" aria-current="page">สร้างใบเสนอราคากลาง</li>
         </ol>
     </nav>
@@ -99,7 +100,8 @@ if (isset($_POST['action'])) {
                 <label for="input_quo_no" class="col-form-label">เลขที่ No.</label>
             </div>
             <div class="col-auto">
-                <input type="number" id="input_quo_no" name="input_quo_no" class="form-control " pattern="[0-9]{1,}" title="กรุณากรอกตัวเลข 0-9 อย่างน้อย 1 ตัว" required>
+                <input type="number" id="input_quo_no" name="input_quo_no" class="form-control " pattern="[0-9]{1,}"
+                    title="กรุณากรอกตัวเลข 0-9 อย่างน้อย 1 ตัว" required>
             </div>
 
         </div>
@@ -133,7 +135,8 @@ if (isset($_POST['action'])) {
                 <label for="input_quo_address" class="col-form-label">ที่อยู่ :</label>
             </div>
             <div class="col-md-8">
-                <textarea class="form-control" id="input_quo_address" name="input_quo_address" rows="3" required></textarea>
+                <textarea class="form-control" id="input_quo_address" name="input_quo_address" rows="3"
+                    required></textarea>
             </div>
         </div>
         <div class="row g-3 align-items-center mb-3">
@@ -154,22 +157,27 @@ if (isset($_POST['action'])) {
 
                         <tr id="row_id_1">
                             <td><span id="sr_no"></span></td>
-                            <td><input type="text" name="item_name[]" id="item_name1" class="form-control input-sm" required />
+                            <td><input type="text" name="item_name[]" id="item_name1" class="form-control input-sm"
+                                    required />
                             </td>
                             <td>
-                                <input type="number" name="item_amount[]" id="item_amount1" data-srno="1" class="form-control input-sm item_amount" required />
+                                <input type="number" name="item_amount[]" id="item_amount1" data-srno="1"
+                                    class="form-control input-sm item_amount" required />
                             </td>
                             <td>
-                                <input type="number" name="item_price[]" id="item_price1" data-srno="1" class="form-control input-sm number_only item_price" step="any" required />
+                                <input type="number" name="item_price[]" id="item_price1" data-srno="1"
+                                    class="form-control input-sm number_only item_price" step="any" required />
                             </td>
                             <td>
-                                <input type="number" name="total_price[]" id="total_price1" data-srno="1" class="form-control input-sm total_price" readonly />
+                                <input type="number" name="total_price[]" id="total_price1" data-srno="1"
+                                    class="form-control input-sm total_price" readonly />
                             </td>
                             <td></td>
                         </tr>
                     </table>
                     <div class="text-center">
-                        <button type="button" id="add_row" class="btn btn-success px-4 rounded-pill fs-5 fw-bold " id="add_sub"><i class="fa fa-plus-circle text-white"></i> เพิ่มรายการ</button>
+                        <button type="button" id="add_row" class="btn btn-success px-4 rounded-pill fs-5 fw-bold "
+                            id="add_sub"><i class="fa fa-plus-circle text-white"></i> เพิ่มรายการ</button>
                     </div>
                 </div>
             </div>
@@ -183,7 +191,8 @@ if (isset($_POST['action'])) {
                     </div>
 
                     <div class="col-md-5">
-                        <input type="number" id="input_quo_deli" name="input_quo_deli" class="form-control" placeholder="0.00" title="กรุณากรอกค่าขนส่ง หากมี">
+                        <input type="number" id="input_quo_deli" name="input_quo_deli" class="form-control"
+                            placeholder="0.00" title="กรุณากรอกค่าขนส่ง หากมี">
                     </div>
                 </div>
             </div>
@@ -194,7 +203,8 @@ if (isset($_POST['action'])) {
                     </div>
 
                     <div class="col-md-5">
-                        <input type="number" id="input_quo_sum" name="input_quo_sum" class="form-control " placeholder="0.00" readonly>
+                        <input type="number" id="input_quo_sum" name="input_quo_sum" class="form-control "
+                            placeholder="0.00" readonly>
                     </div>
                 </div>
                 <div class="row g-3 align-items-center mb-3">
@@ -204,7 +214,8 @@ if (isset($_POST['action'])) {
                     </div>
 
                     <div class="col-md-5">
-                        <input type="number" id="input_quo_specialdis" name="input_quo_specialdis" class="form-control " placeholder="0.00" title="กรุณากรอกส่วนลด หากมี">
+                        <input type="number" id="input_quo_specialdis" name="input_quo_specialdis" class="form-control "
+                            placeholder="0.00" title="กรุณากรอกส่วนลด หากมี">
                     </div>
                 </div>
                 <div class="row g-3 align-items-center mb-3">
@@ -214,7 +225,8 @@ if (isset($_POST['action'])) {
                     </div>
 
                     <div class="col-md-5">
-                        <input type="number" id="input_quo_afterdis" name="input_quo_afterdis" class="form-control " placeholder="0.00" readonly>
+                        <input type="number" id="input_quo_afterdis" name="input_quo_afterdis" class="form-control "
+                            placeholder="0.00" readonly>
                     </div>
                 </div>
                 <div class="row g-3 align-items-center mb-3">
@@ -223,7 +235,8 @@ if (isset($_POST['action'])) {
                     </div>
 
                     <div class="col-md-5">
-                        <input type="number" id="input_quo_vat" name="input_quo_vat" class="form-control " placeholder="0.00" readonly>
+                        <input type="number" id="input_quo_vat" name="input_quo_vat" class="form-control "
+                            placeholder="0.00" readonly>
                     </div>
                 </div>
                 <div class="row g-3 align-items-center mb-3">
@@ -232,120 +245,124 @@ if (isset($_POST['action'])) {
                     </div>
 
                     <div class="col-md-5">
-                        <input type="number" id="input_quo_total" name="input_quo_total" class="form-control " placeholder="0.00" readonly>
+                        <input type="number" id="input_quo_total" name="input_quo_total" class="form-control "
+                            placeholder="0.00" readonly>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="mx-auto d-flex justify-content-end">
-            <button type="reset" class="col-md-3 btn btn-outline-danger btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold"><i class="fa-solid fa-eraser"></i> ล้างข้อมูล</button>
-            <button type="submit" name="action" value="create_quotation" class="ms-3 col-md-3 btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold">บันทึก
+            <button type="reset"
+                class="col-md-3 btn btn-outline-danger btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold"><i
+                    class="fa-solid fa-eraser"></i> ล้างข้อมูล</button>
+            <button type="submit" name="action" value="create_quotation"
+                class="ms-3 col-md-3 btn btn-outline-success p-2 mt-2 rounded-pill fs-5 fw-bold">บันทึก
                 <i class="fa-solid fa-angles-right"></i></button>
             <input type="hidden" name="total_item" id="total_item" value="1" />
         </div>
 
     </form>
     <script>
-        $(document).ready(function() {
-            var final_total_price = $('#final_total_price').text();
-            var count = 1;
-            var total_item = 1;
+    $(document).ready(function() {
+        var final_total_price = $('#final_total_price').text();
+        var count = 1;
+        var total_item = 1;
 
-            $(document).on('click', '#add_row', function() {
-                count++;
-                total_item++;
-                $('#total_item').val(total_item);
-                var html_code = '';
-                html_code += '<tr id="row_id_' + count + '">';
-                html_code += '<td><span id="sr_no"></span></td>';
+        $(document).on('click', '#add_row', function() {
+            count++;
+            total_item++;
+            $('#total_item').val(total_item);
+            var html_code = '';
+            html_code += '<tr id="row_id_' + count + '">';
+            html_code += '<td><span id="sr_no"></span></td>';
 
-                html_code +=
-                    '<td><input type="text" name="item_name[]" id="item_name' + count +
-                    '" class="form-control input-sm" required/></td>';
-                html_code +=
-                    '<td><input type="number" name="item_amount[]" id="item_amount' +
-                    count + '" data-srno="' + count +
-                    '" class="form-control input-sm number_only item_amount" required/></td>';
-                html_code +=
-                    '<td><input type="number" name="item_price[]" id="item_price' +
-                    count + '" data-srno="' + count +
-                    '" class="form-control input-sm number_only item_price" required step="any"/></td>';
-                html_code +=
-                    '<td><input type="text" name="total_price[]" id="total_price' +
-                    count + '" data-srno="' + count +
-                    '" class="form-control input-sm total_price" readonly /></td>';
-                html_code +=
-                    '<td><button type="button" name="remove_row" id="' + count +
-                    '" class="btn btn-danger btn-xs remove_row">X</button></td>';
-                html_code += '</tr>';
-                $('#quotation-item-table').append(html_code);
-            });
+            html_code +=
+                '<td><input type="text" name="item_name[]" id="item_name' + count +
+                '" class="form-control input-sm" required/></td>';
+            html_code +=
+                '<td><input type="number" name="item_amount[]" id="item_amount' +
+                count + '" data-srno="' + count +
+                '" class="form-control input-sm number_only item_amount" required/></td>';
+            html_code +=
+                '<td><input type="number" name="item_price[]" id="item_price' +
+                count + '" data-srno="' + count +
+                '" class="form-control input-sm number_only item_price" required step="any"/></td>';
+            html_code +=
+                '<td><input type="text" name="total_price[]" id="total_price' +
+                count + '" data-srno="' + count +
+                '" class="form-control input-sm total_price" readonly /></td>';
+            html_code +=
+                '<td><button type="button" name="remove_row" id="' + count +
+                '" class="btn btn-danger btn-xs remove_row">X</button></td>';
+            html_code += '</tr>';
+            $('#quotation-item-table').append(html_code);
+        });
 
-            $(document).on('click', '.remove_row', function() {
-                var row_id = $(this).attr("id");
-                $('#row_id_' + row_id).remove();
-                total_item--;
-                $('#total_item').val(total_item);
-                cal_final_total(count);
-
-            });
-
-            function cal_final_total(count) {
-                var final_total_price = 0;
-                for (j = 1; j <= count; j++) {
-                    var quantity = 0;
-                    var price = 0;
-                    var total_price = 0;
-                    quantity = $('#item_amount' + j).val();
-                    if (quantity > 0) {
-                        price = $('#item_price' + j).val();
-                        if (price > 0) {
-                            total_price = (parseFloat(quantity) * parseFloat(price));
-                            $('#total_price' + j).val(total_price.toFixed(2));
-
-                            final_total_price = (final_total_price + total_price);
-
-                        }
-                    }
-                }
-                $('#input_quo_sum').val(final_total_price.toFixed(2));
-                var discount = 0;
-                var afterdis = 0;
-                var vat7per = 0;
-                var aftervd = 0;
-                var afterdeli = 0;
-                var deli = 0;
-                discount = $('#input_quo_specialdis').val();
-                deli = $('#input_quo_deli').val();
-                afterdis = (final_total_price - discount);
-                $('#input_quo_afterdis').val(afterdis.toFixed(2));
-                vat7per = (afterdis * 0.07);
-                $('#input_quo_vat').val(vat7per.toFixed(2));
-                aftervd = (afterdis + vat7per);
-                if (deli > 0) {
-                    aftervd = (aftervd + parseFloat(deli));
-                }
-
-                $('#input_quo_total').val(aftervd.toFixed(2));
-            }
-
-            $(document).on('change', '.item_price', function() {
-                cal_final_total(count);
-            });
-
-            $(document).on('change', '.item_amount', function() {
-                cal_final_total(count);
-            });
-
-            $(document).on('change', '#input_quo_specialdis', function() {
-                cal_final_total(count);
-            });
-
-            $(document).on('change', '#input_quo_deli', function() {
-                cal_final_total(count);
-            });
+        $(document).on('click', '.remove_row', function() {
+            var row_id = $(this).attr("id");
+            $('#row_id_' + row_id).remove();
+            total_item--;
+            $('#total_item').val(total_item);
+            cal_final_total(count);
 
         });
+
+        function cal_final_total(count) {
+            var final_total_price = 0;
+            for (j = 1; j <= count; j++) {
+                var quantity = 0;
+                var price = 0;
+                var total_price = 0;
+                quantity = $('#item_amount' + j).val();
+                if (quantity > 0) {
+                    price = $('#item_price' + j).val();
+                    if (price > 0) {
+                        total_price = (parseFloat(quantity) * parseFloat(price));
+                        $('#total_price' + j).val(total_price.toFixed(2));
+
+                        final_total_price = (final_total_price + total_price);
+
+                    }
+                }
+            }
+            $('#input_quo_sum').val(final_total_price.toFixed(2));
+            var discount = 0;
+            var afterdis = 0;
+            var vat7per = 0;
+            var aftervd = 0;
+            var afterdeli = 0;
+            var deli = 0;
+            discount = $('#input_quo_specialdis').val();
+            deli = $('#input_quo_deli').val();
+            afterdis = (final_total_price - discount);
+            $('#input_quo_afterdis').val(afterdis.toFixed(2));
+            vat7per = (afterdis * 0.07);
+            $('#input_quo_vat').val(vat7per.toFixed(2));
+            aftervd = (afterdis + vat7per);
+            if (deli > 0) {
+                aftervd = (aftervd + parseFloat(deli));
+            }
+
+            $('#input_quo_total').val(aftervd.toFixed(2));
+        }
+
+        $(document).on('change', '.item_price', function() {
+            cal_final_total(count);
+        });
+
+        $(document).on('change', '.item_amount', function() {
+            cal_final_total(count);
+        });
+
+        $(document).on('change', '#input_quo_specialdis', function() {
+            cal_final_total(count);
+        });
+
+        $(document).on('change', '#input_quo_deli', function() {
+            cal_final_total(count);
+        });
+
+    });
     </script>
 </div>
