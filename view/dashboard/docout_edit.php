@@ -11,7 +11,7 @@ if (isset($_GET['editdocout'])) {
 
     if (!$row) {
         $_SESSION['error'] = "ไม่พบหน้าดังกล่าว!";
-        echo "<script> window.location.href='?page=doc_out';</script>";
+        echo "<script> window.history.back()</script>";
         exit;
     }
 }
@@ -24,6 +24,14 @@ if (isset($_POST['action'])) {
         
         $no_check = mysqli_real_escape_string($conn, trim($_POST['no_check']));
         $input_no = mysqli_real_escape_string($conn, trim($_POST['input_no']));
+        $input_send = mysqli_real_escape_string($conn, trim($_POST['input_send']));
+        $input_content = mysqli_real_escape_string($conn, trim($_POST['input_content']));
+
+        if (empty($input_send)||empty($input_content)) {
+            $_SESSION['error'] = "กรุณากรอกข้อมูลสิ่งที่ส่งมาด้วยและเนื้อหา";
+            echo "<script> window.history.back()</script>";
+            exit;
+        }
 
         
         if ($input_no == $no_check) {
@@ -38,7 +46,7 @@ if (isset($_POST['action'])) {
 
             if ($check) {
                 $_SESSION['error'] = "เลขที่นี้มีในระบบแล้ว!";
-                echo "<script> window.location.href='?page=doc_out_edit&editdocout=.$enid.'</script>";
+                echo "<script> window.history.back()</script>";
                 exit;
             } else {
 
@@ -81,7 +89,7 @@ function edit_docout()
     } else {
 
         $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-        echo "<script> window.location.href='?page=doc_out_edit&editdocout=.$enid.'</script>";
+        echo "<script> window.history.back()</script>";
         exit;
     }
 }
@@ -97,7 +105,6 @@ function edit_docout()
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index">หน้าหลัก</a></li>
-        <li class="breadcrumb-item"><a href="?page=doc">หนังสือ</a></li>
         <li class="breadcrumb-item"><a href="?page=doc_out">หนังสือออก</a></li>
         <li class="breadcrumb-item active" aria-current="page">แก้ไขข้อมูลหนังสือออก</li>
     </ol>
@@ -105,14 +112,14 @@ function edit_docout()
 <hr>
 
 <div class="container bg-secondary-addpay rounded-5">
-    <div class="main-body p-md-5 text-white">
+    <div class="main-body py-md-5 px-md-1 text-white">
         <div id="docout_add" class="container p-3 p-md-5">
             <div class="p-4 p-md-5 bg-white rounded-5 shadow-lg">
                 <div class="text-center text-md-start text-dark my-3">
                     <h3>แก้ไขข้อมูลหนังสือออก</h3>
                 </div>
                 <form action="?page=doc_out_edit&editdocout=<?php echo encode($row['docout_id'], secret_key()); ?>"
-                    method="post" name="docout_edit" id="docout_edit" class="p-md-5">
+                    method="post" name="docout_edit" id="docout_edit" class="p-md-5" onsubmit="return validateForm()">
                     <div class="row align-items-center text-dark px-md-5 mb-3">
                         <div class="col-md-3">
                             <label for="input_no" class="col-form-label">เลขที่</label>
@@ -167,7 +174,7 @@ function edit_docout()
                             <label for="input_content" class="col-form-label">เนื้อหาข้อความ </label>
                         </div>
                         <div class="ck-details col-md-9">
-                            <textarea id="input_content" name="input_content" class="form-control" cols="40" rows="10"
+                            <textarea id="input_content" name="input_content" class="form-control"
                                 placeholder="พิมพ์เนื้อหา..."><?= $row['docout_details'] ?></textarea>
                         </div>
                     </div>
@@ -201,6 +208,22 @@ function edit_docout()
                             <input type="hidden" name="docout_id" id="docout_id" value="<?= $row['docout_id']; ?>" />
                         </div>
                     </div>
+                    <script>
+                    ClassicEditor
+                        .create(document.querySelector('#input_send'))
+
+                        .catch(error => {
+                            console.error(error);
+                        });
+                    </script>
+                    <script>
+                    ClassicEditor
+                        .create(document.querySelector('#input_content'))
+
+                        .catch(error => {
+                            console.error(error);
+                        });
+                    </script>
                 </form>
             </div>
         </div>

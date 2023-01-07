@@ -76,7 +76,7 @@ function edit_docin(){
         
         if (!empty($_FILES["input_file"]["name"])) {
             
-            $targetDir = "../../uploadfile/docinfile/";
+            $targetDir = "uploadfile/docinfile/";
             $temp = explode(".", $_FILES["input_file"]["name"]);
             $fileName = 'docin-'.$namedate. '.' . end($temp);
             $targetFilePath = $targetDir . $fileName;
@@ -96,14 +96,14 @@ function edit_docin(){
     
                     if ($conn->query($query)) {
                         
-                        unlink("../../uploadfile/docinfile/$oldfile");
+                        unlink("uploadfile/docinfile/$oldfile");
                         $_SESSION['success'] = "แก้ไขหนังสือเข้าสำเร็จ!";
                         echo "<script> window.location.href='?page=doc_in';</script>";
                         exit;
                         
                     } else {
                         
-                        unlink("../../uploadfile/docinfile/$fileName");
+                        unlink("uploadfile/docinfile/$fileName");
                         $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
                         echo "<script> window.history.back()</script>";
                         exit;
@@ -145,19 +145,18 @@ function edit_docin(){
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index">หน้าหลัก</a></li>
-        <li class="breadcrumb-item"><a href="?page=doc">หนังสือ</a></li>
         <li class="breadcrumb-item"><a href="?page=doc_in">หนังสือเข้า</a></li>
         <li class="breadcrumb-item active" aria-current="page">แก้ไขข้อมูลหนังสือเข้า</li>
     </ol>
 </nav>
 <hr>
 <div class="container bg-secondary-addpay rounded-5">
-    <div class="main-body p-md-5 text-white">
+    <div class="main-body py-md-5 px-md-1 text-white">
         <div id="paperquotation" class="container p-3 p-md-5">
 
             <div class="p-4 p-md-5 bg-white rounded-5 shadow-lg">
                 <div class="text-center text-md-start text-dark my-3">
-                    <h3>แก้ไขข้อมูลหนังสือเข้า #</h3>
+                    <h3>แก้ไขข้อมูลหนังสือเข้า</h3>
                 </div>
                 <form action="?page=doc_in_edit&editdocin=<?php echo encode($row['docin_id'], secret_key()); ?>"
                     method="post" class="p-md-5" enctype="multipart/form-data">
