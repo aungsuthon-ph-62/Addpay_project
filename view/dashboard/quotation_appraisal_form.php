@@ -1,8 +1,9 @@
 <?php
 include('./PDF_set/PDF_conn.php');
 include('./PDF_set/readprice.php');
-$id = $_GET["pdfquo_id"];
-
+$get_decode = $_GET["pdfquo"];
+$id = decode($get_decode, secret_key());
+echo "<script> sonsole.log('{$id}')</script>";
 include("./PDF_set/PDF_head.php");
 
 require_once __DIR__ . '../../../vendor/autoload.php';
@@ -37,7 +38,7 @@ $mpdf = new \Mpdf\Mpdf([
 // $mpdf->Output('./quotation_PDF/quotation_appraisal0.pdf'); //link web of file pdf
 
 
-$sql = "SELECT * FROM `quotation_appraisal` WHERE quo_id = '$id'";
+$sql = "SELECT * FROM quotation_appraisal WHERE quo_id = $id";
 $query = $conn->query($sql);
 $infoquo = $query->fetch_assoc();
 $head = '
@@ -123,7 +124,7 @@ $head = '
         </tr>';
 
 
-$sql = "SELECT * FROM `quotation_appraisal_details` WHERE quode_quoid = '$id'";
+$sql = "SELECT * FROM quotation_appraisal_details WHERE quode_quoid = $id";
 $result = mysqli_query($conn, $sql);
 $contentitems = "";
 if (mysqli_num_rows($result) > 0) {
@@ -151,7 +152,7 @@ if (mysqli_num_rows($result) > 0) {
 
 
 $head1 = ' ';
-$sql = "SELECT * FROM `quotation_appraisal` WHERE quo_id = '$id'";
+$sql = "SELECT * FROM quotation_appraisal WHERE quo_id = $id";
 $result = mysqli_query($conn, $sql);
 $contentsum = "";
 if (mysqli_num_rows($result) > 0) {
@@ -213,7 +214,7 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 $head2 = ' ';
-$sql = "SELECT quo_total FROM `quotation_appraisal` WHERE quo_id = '$id'";
+$sql = "SELECT quo_total FROM quotation_appraisal WHERE quo_id = $id";
 $result = mysqli_query($conn, $sql);
 $footer = "";
 if (mysqli_num_rows($result) > 0) {

@@ -68,11 +68,11 @@ if (isset($_GET["deletequo"])) {
                                                     data-bs-toggle="dropdown" aria-expanded="false"><b>เลือก</b>
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item"
-                                                            href="?page=quo_form&?pdfquo=' .encode($rows["quo_id"], secret_key()). '">พิมพ์เอกสาร</a>
+                                                    <li><a class="dropdown-item" target="_blank"
+                                                            href="view/dashboard/quotation_appraisal_form.php?pdfquo=' .encodeURI($rows["quo_id"], secret_key()). '">พิมพ์เอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
-                                                            href="?page=quo_edit&editquo=' .encode($rows["quo_id"], secret_key()). '">แก้ไข</a>
+                                                            href="?page=quotation_edit&editquo=' .encode($rows["quo_id"], secret_key()). '">แก้ไข</a>
                                                     </li>
                                                     <li><a class="dropdown-item deletequo" href="#" data-quo-no="' . $rows["quo_no"] . '" id="' . $rows["quo_id"] . '" >ลบ</a></li>
                                                 </ul>

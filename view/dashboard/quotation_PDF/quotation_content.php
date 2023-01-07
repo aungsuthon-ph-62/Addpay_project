@@ -1,8 +1,10 @@
 <?php
 include('./PDF_set/PDF_conn.php');
-$id = $_GET["pdfquo_id"];
 
-$sql = "SELECT * FROM `quotation_appraisal` WHERE quo_id = '$id'";
+$get_decode = $_GET["pdfquo"];
+$id = decode($get_decode, secret_key());
+echo "<script> sonsole.log({$id})</script>";
+$sql = "SELECT * FROM quotation_appraisal WHERE quo_id = $id";
 $query = $conn->query($sql);
 $infoquo = $query->fetch_assoc();
 
@@ -99,7 +101,7 @@ echo '
 // <!--  -->
 
 
-$sql = "SELECT * FROM `quotation_appraisal_details` WHERE quode_quoid = '$id' ;";
+$sql = "SELECT * FROM quotation_appraisal_details WHERE quode_quoid = $id";
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
     $i = 0;
@@ -133,7 +135,7 @@ if (mysqli_num_rows($result) > 0) {
 // <!-- blank area -->
 
 
-$sql = "SELECT * FROM quotation_appraisal WHERE quo_id = '$id'";
+$sql = "SELECT * FROM quotation_appraisal WHERE quo_id = $id";
 $result = mysqli_query($conn, $sql);
 while ($infoquosum = mysqli_fetch_array($result)) {
     echo '
@@ -194,7 +196,7 @@ while ($infoquosum = mysqli_fetch_array($result)) {
     </div>';
 }
 
-$sql = "SELECT quo_total FROM quotation_appraisal WHERE quo_id = '$id'";
+$sql = "SELECT quo_total FROM quotation_appraisal WHERE quo_id = $id";
 $result = mysqli_query($conn, $sql);
 while ($infoquosum = mysqli_fetch_array($result)) {
 echo '
