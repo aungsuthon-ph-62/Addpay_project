@@ -7,11 +7,18 @@
                     หน้าหลัก
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="?page=quotation">
-                    <span></span>
-                    ใบเสนอราคากลาง
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    ใบเสนอราคา
                 </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <h6 class="dropdown-header">เมนูใบเสนอราคา : กลาง/เข้า/ออก</h6>
+                    </li>
+                    <li><a class="dropdown-item" href="?page=quotation">ใบเสนอราคากลาง</a></li>
+                    <li><a class="dropdown-item" href="?page=doc_out">ใบเสนอราคาเข้า</a></li>
+                    <li><a class="dropdown-item" href="?page=doc_out">ใบเสนอราคาออก</a></li>
+                </ul>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white" href="?page=">
@@ -68,12 +75,6 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="?page=">
-                    <span data-feather="layers"></span>
-                    ใบเสนอราคา
-                </a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link text-white" href="?page=invoicebill">
                     <span data-feather="layers"></span>
                     ใบวางบิล
@@ -81,7 +82,7 @@
             </li>
         </ul>
 
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+        <!-- <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
             <span>Saved reports</span>
             <a class="link-secondary" href="#" aria-label="Add a new report">
                 <span data-feather="plus-circle"></span>
@@ -112,6 +113,6 @@
                     Year-end sale
                 </a>
             </li>
-        </ul>
+        </ul> -->
     </div>
 </nav>
