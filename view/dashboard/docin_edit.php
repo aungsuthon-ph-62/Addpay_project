@@ -76,7 +76,7 @@ function edit_docin(){
         
         if (!empty($_FILES["input_file"]["name"])) {
             
-            $targetDir = "../../uploadfile/docinfile/";
+            $targetDir = "uploadfile/docinfile/";
             $temp = explode(".", $_FILES["input_file"]["name"]);
             $fileName = 'docin-'.$namedate. '.' . end($temp);
             $targetFilePath = $targetDir . $fileName;
@@ -96,14 +96,14 @@ function edit_docin(){
     
                     if ($conn->query($query)) {
                         
-                        unlink("../../uploadfile/docinfile/$oldfile");
+                        unlink("uploadfile/docinfile/$oldfile");
                         $_SESSION['success'] = "แก้ไขหนังสือเข้าสำเร็จ!";
                         echo "<script> window.location.href='?page=doc_in';</script>";
                         exit;
                         
                     } else {
                         
-                        unlink("../../uploadfile/docinfile/$fileName");
+                        unlink("uploadfile/docinfile/$fileName");
                         $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
                         echo "<script> window.history.back()</script>";
                         exit;

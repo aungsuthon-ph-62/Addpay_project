@@ -16,13 +16,13 @@ if(isset($_GET["deletedocin"])){
             
         unlink("uploadfile/docinfile/$oldfile");
         $_SESSION['success'] = "ลบหนังสือเข้าสำเร็จ!";
-        echo "<script> window.location.href='?page=doc_in';</script>";
+        echo "<script> window.history.back()</script>";
         exit; 
         
     }
     
     $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-    echo "<script> window.location.href='?page=doc_in';</script>";
+    echo "<script> window.history.back()</script>";
     exit;
     
   }

@@ -6,13 +6,13 @@ if (isset($_GET["deletedocout"])) {
     $query = $conn->query($sql);
 
     if ($query) {
-        $_SESSION['success'] = "ลบใบเสนอราคากลางสำเร็จ!";
-        echo "<script> window.location.href='?page=doc_out'</script>";
+        $_SESSION['success'] = "ลบหนังสือออกสำเร็จ!";
+        echo "<script> window.history.back()</script>";
         exit;
     }
 
     $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-    echo "<script> window.location.href='?page=doc_out'</script>";
+    echo "<script> window.history.back()</script>";
     exit;
 }
 

@@ -78,14 +78,14 @@ if(isset($_POST['action'])){
                             
                             unlink("uploadfile/docinfile/$fileName");
                             $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-                            echo "<script> window.location.href='?page=doc_in_add';</script>";
+                            echo "<script> window.history.back()</script>";
                             exit;
                             
                         }
                     } else {
                         
                         $_SESSION['error'] = "เกิดข้อผิดพลาด! อัพโหลดไฟล์ไม่สำเร็จ!";
-                        echo "<script> window.location.href='?page=doc_in_add';</script>";
+                        echo "<script> window.history.back()</script>";
                         exit;
                         
                     }
@@ -93,7 +93,7 @@ if(isset($_POST['action'])){
                 } else {
                     
                     $_SESSION['error'] = "เกิดข้อผิดพลาด! ไม่รองรับนามสกุลไฟล์ชนิดนี้!";
-                    echo "<script> window.location.href='?page=doc_in_add';</script>";
+                    echo "<script> window.history.back()</script>";
                     exit;
                     
                 }
