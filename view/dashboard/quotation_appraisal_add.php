@@ -95,7 +95,7 @@ if (isset($_POST['action'])) {
                 <div class="text-center text-md-start text-dark my-3">
                     <h3>สร้างใบเสนอราคากลาง</h3>
                 </div>
-                <form method="post" id="quotation_form" action="quotation_appraisal_add.php" class="mt-md-5">
+                <form method="post" id="quotation_form" action="?page=quo_add" class="mt-md-5">
                     <div class="row align-items-center text-dark px-md-5 mb-3">
                         <div class="col-md-3 text-md-end">
                             <h6 class="col-form-label">เลขที่ No.</h6>
