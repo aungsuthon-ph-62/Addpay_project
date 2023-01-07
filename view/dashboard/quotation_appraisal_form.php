@@ -1,9 +1,7 @@
 <?php
 include('./PDF_set/PDF_conn.php');
 include('./PDF_set/readprice.php');
-$get_decode = $_GET["pdfquo"];
-$id = decode($get_decode, secret_key());
-echo "<script> sonsole.log('{$id}')</script>";
+$id = $_GET["pdfquo"];
 include("./PDF_set/PDF_head.php");
 
 require_once __DIR__ . '../../../vendor/autoload.php';

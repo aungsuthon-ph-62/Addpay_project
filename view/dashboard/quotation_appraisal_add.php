@@ -25,7 +25,8 @@ if (isset($_POST['action'])) {
 
         if ($check) {
             $_SESSION['error'] = "เลขที่ใบเสนอราคากลางนี้มีในระบบแล้ว!";
-            echo "<script> window.history.back();cal_final_total(count);</script>";
+            echo "<script>cal_final_total(count);</script>";
+            echo "<script> window.history.back();</script>";
             exit;
         } else {
             $query = "INSERT INTO quotation_appraisal (quo_no, quo_date, quo_namepj, quo_name, quo_address, quo_sum, quo_specialdis, quo_afterdis, quo_vat, quo_deli, quo_total, quo_create, quo_uid)

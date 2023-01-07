@@ -125,8 +125,8 @@ table tr td:first-child::before {
 <nav class="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="?page=quotation">ใบเสนอราคากลาง</a></li>
-        <li class="breadcrumb-item active" aria-current="page">แก้ใบเสนอราคากลาง</li>
+        <li class="breadcrumb-item"><a href="?page=quo">ใบเสนอราคากลาง</a></li>
+        <li class="breadcrumb-item active" aria-current="page">แก้ไขใบเสนอราคากลาง</li>
     </ol>
 </nav>
 <hr>

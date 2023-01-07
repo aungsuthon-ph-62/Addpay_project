@@ -1,9 +1,6 @@
 <?php
 include('./PDF_set/PDF_conn.php');
-
-$get_decode = $_GET["pdfquo"];
-$id = decode($get_decode, secret_key());
-echo "<script> sonsole.log({$id})</script>";
+$id = $_GET["pdfquo"];
 $sql = "SELECT * FROM quotation_appraisal WHERE quo_id = $id";
 $query = $conn->query($sql);
 $infoquo = $query->fetch_assoc();

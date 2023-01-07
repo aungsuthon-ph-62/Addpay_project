@@ -18,9 +18,8 @@ if (isset($_GET["deletequo"])) {
 ?>
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index">หน้าหลัก</a></li>
-        <li class="breadcrumb-item"><a href="?page=doc">หนังสือ</a></li>
-        <li class="breadcrumb-item active" aria-current="page">หนังสือเข้า</li>
+        <li class="breadcrumb-item"><a href="index">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">ใบเสนอราคากลาง</li>
     </ol>
 </nav>
 <hr>
@@ -35,7 +34,7 @@ if (isset($_GET["deletequo"])) {
                 </div>
 
                 <div class="my-4 my-md-3 text-center text-md-end">
-                    <a class="btn btn-addpay px-md-4 rounded-3" href="?page=quotation_add">
+                    <a class="btn btn-addpay px-md-4 rounded-3" href="?page=quo_add">
                         <i class="fa-solid fa-file-circle-plus"></i> สร้างใบเสนอราคา</a>
                 </div>
 
@@ -69,10 +68,10 @@ if (isset($_GET["deletequo"])) {
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li><a class="dropdown-item" target="_blank"
-                                                            href="view/dashboard/quotation_appraisal_form.php?pdfquo=' .encodeURI($rows["quo_id"], secret_key()). '">พิมพ์เอกสาร</a>
+                                                            href="view/dashboard/quotation_appraisal_form.php?pdfquo=' .$rows["quo_id"]. '">พิมพ์เอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
-                                                            href="?page=quotation_edit&editquo=' .encode($rows["quo_id"], secret_key()). '">แก้ไข</a>
+                                                            href="?page=quo_edit&editquo=' .encode($rows["quo_id"], secret_key()). '">แก้ไข</a>
                                                     </li>
                                                     <li><a class="dropdown-item deletequo" href="#" data-quo-no="' . $rows["quo_no"] . '" id="' . $rows["quo_id"] . '" >ลบ</a></li>
                                                 </ul>
