@@ -73,7 +73,7 @@ if (isset($_GET["deletequo"])) {
                                                             href="?page=quo_form&?pdfquo=' . $rows["quo_id"] . '">พิมพ์เอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
-                                                            href="?page=quo_edit&editquo=' . $rows["quo_id"] . '">แก้ไข</a>
+                                                            href="?page=quo_edit&editquo=' . encode($rows["quo_id"], secret_key()) . '">แก้ไข</a>
                                                     </li>
                                                     <li><a class="dropdown-item deletequo" href="#" data-quo-no="' . $rows["quo_no"] . '" id="' . $rows["quo_id"] . '" >ลบ</a></li>
                                                 </ul>
