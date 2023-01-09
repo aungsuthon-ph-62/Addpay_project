@@ -129,3 +129,4 @@ if(isset($_GET["deletedocin"])){
         </div>
     </div>
 </div>
+<?php $conn->close(); ?>

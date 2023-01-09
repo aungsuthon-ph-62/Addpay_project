@@ -8,17 +8,16 @@
                 </a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
+                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     ใบเสนอราคา
                 </a>
                 <ul class="dropdown-menu">
                     <li>
                         <h6 class="dropdown-header">เมนูใบเสนอราคา : กลาง/เข้า/ออก</h6>
                     </li>
-                    <li><a class="dropdown-item" href="?page=quo">ใบเสนอราคากลาง</a></li>
-                    <li><a class="dropdown-item" href="?page=quo_in">ใบเสนอราคาเข้า</a></li>
-                    <li><a class="dropdown-item" href="?page=quo_out">ใบเสนอราคาออก</a></li>
+                    <li><a class="dropdown-item" href="?page=quo">ใบเสนอราคา-กลาง</a></li>
+                    <li><a class="dropdown-item" href="?page=quo_in">ใบเสนอราคา-เข้า</a></li>
+                    <li><a class="dropdown-item" href="?page=quo_out">ใบเสนอราคา-ออก</a></li>
                 </ul>
             </li>
             <li class="nav-item">
@@ -40,7 +39,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="?page=contract">
+                <a class="nav-link text-white" href="?page=">
                     <span data-feather="layers"></span>
                     สัญญาแนบเข้า
                 </a>
@@ -52,8 +51,7 @@
                 </a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
+                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     หนังสือ
                 </a>
                 <ul class="dropdown-menu">
@@ -71,14 +69,13 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="?page=archives">
+                <a class="nav-link text-white" href="?page=">
                     <span data-feather="layers"></span>
                     เอกสารสำคัญ
                 </a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
+                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     ใบแจ้งหนี้
                 </a>
                 <ul class="dropdown-menu">
@@ -86,7 +83,7 @@
                         <h6 class="dropdown-header">เมนูใบแจ้งหนี้ : </h6>
                     </li>
                     <li><a class="dropdown-item" href="?page=invoicebill">ใบวางบิล</a></li>
-                    <li><a class="dropdown-item" href="?page=invoicetax">ใบกำกับภาษี</a></li>
+                    <li><a class="dropdown-item" href="?page=doc_out">ใบกำกับภาษี</a></li>
                 </ul>
             </li>
         </ul>
