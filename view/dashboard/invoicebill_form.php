@@ -1,7 +1,7 @@
 <?php
-include('../../php/conn.php');
-include('./PDF_set/readprice.php');
-$id = $_GET["pdfquo_id"];
+include_once './PDF_set/PDF_conn.php';
+include_once('./PDF_set/readprice.php');
+$id = $_GET["pdfinvbill_id"];
 ?>
 
 <?php
@@ -28,13 +28,13 @@ $mpdf = new \Mpdf\Mpdf([
         ]
     ],
     'default_font' => 'sarabun',
-    'default_font_size' => 16,
+    'default_font_size' => 15,
 ]);
 
-$query = "SELECT * FROM `quotation_appraisal` WHERE quo_id = '$id'"; 
-$result = mysqli_query($conn, $query); 
-while($infoquo = mysqli_fetch_array($result)) {
-$head = '
+$query = "SELECT * FROM `quotation_appraisal` WHERE quo_id = '$id'";
+$result = mysqli_query($conn, $query);
+while ($infoquo = mysqli_fetch_array($result)) {
+    $head = '
 <div id="quotationForm" class="container mt-5" style="width: 842px;">
     <div>
         <table>
@@ -65,8 +65,8 @@ $head = '
                     <p class="text-left">วันที่/Date. </p>
                 </td>
                 <td style="width:120px; text-align: right;">
-                    <p class="underline"> <span>&nbsp;&nbsp;'.$infoquo['quo_no'].' &nbsp;&nbsp; </span> </p>
-                    <p class=" underline"> <span>&nbsp;'.$infoquo['quo_date'].' &nbsp; </span> </p>
+                    <p class="underline"> <span>&nbsp;&nbsp;' . $infoquo['quo_no'] . ' &nbsp;&nbsp; </span> </p>
+                    <p class=" underline"> <span>&nbsp;' . $infoquo['quo_date'] . ' &nbsp; </span> </p>
                 </td>
             </tr>
 
@@ -80,7 +80,7 @@ $head = '
                 <p class="text-left ">โครงการ</p>
             </td>
             <td class="underline" style="width:692px;">
-                <p class="text-left "> <span>&nbsp; '.$infoquo['quo_namepj'].' &nbsp;&nbsp;</span> </p>
+                <p class="text-left "> <span>&nbsp; ' . $infoquo['quo_namepj'] . ' &nbsp;&nbsp;</span> </p>
             </td>
         </tr>
         <tr>
@@ -88,7 +88,7 @@ $head = '
                 <p class="text-left ">ลูกค้า /หน่วยงาน </p>
             </td>
             <td class="underline" style="width:692px;">
-                <p class="text-left "> <span>&nbsp; '.$infoquo['quo_name'].' &nbsp;&nbsp;</span> </p>
+                <p class="text-left "> <span>&nbsp; ' . $infoquo['quo_name'] . ' &nbsp;&nbsp;</span> </p>
             </td>
         </tr>
         <tr>
@@ -96,7 +96,7 @@ $head = '
                 <p class="text-left ">ที่อยู่ </p>
             </td>
             <td class="underline" style="width:692px;">
-                <p class="text-left"> <span>&nbsp;'.$infoquo['quo_address'].' &nbsp;&nbsp;</span> </p>
+                <p class="text-left"> <span>&nbsp;' . $infoquo['quo_address'] . ' &nbsp;&nbsp;</span> </p>
             </td>
         </tr>
     </table>
@@ -121,17 +121,16 @@ $sql = "SELECT * FROM `quotation_appraisal_details` WHERE quode_quoid = '$id' ;"
 $result = mysqli_query($connect, $sql);
 $contentitems = "";
 if (mysqli_num_rows($result) > 0) {
-    $i=0;
-    while($infoquoitems = mysqli_fetch_assoc($result)) {
+    $i = 0;
+    while ($infoquoitems = mysqli_fetch_assoc($result)) {
         $i++;
         $contentitems .= '  <tr>
-        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">'.$i.'</td>
-        <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:50px;">'.$infoquoitems['quode_item'].'</td>
-        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">'.$infoquoitems['quode_amount'].'</td>
-        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">'.$infoquoitems['quode_price'].'</td>
-        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">'.$infoquoitems['quode_result'].'</td>
+        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $i . '</td>
+        <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:50px;">' . $infoquoitems['quode_item'] . '</td>
+        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $infoquoitems['quode_amount'] . '</td>
+        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' . $infoquoitems['quode_price'] . '</td>
+        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' . $infoquoitems['quode_result'] . '</td>
     </tr>';
-      
     }
 }
 
@@ -140,8 +139,8 @@ $sql = "SELECT * FROM `quotation_appraisal` WHERE quo_id = '$id'";
 $result = mysqli_query($connect, $sql);
 $connectsum = "";
 if (mysqli_num_rows($result) > 0) {
-    
-    while($infoquosum = mysqli_fetch_assoc($result)) {
+
+    while ($infoquosum = mysqli_fetch_assoc($result)) {
         $connectsum .= ' 
         
         <tr>
@@ -195,7 +194,6 @@ if (mysqli_num_rows($result) > 0) {
     </div>
        
 ';
-      
     }
 }
 
@@ -207,14 +205,23 @@ $mpdf->WriteHTML($a, \Mpdf\HTMLParserMode::HTML_BODY);
 $mpdf->Output('./invoicebill_PDF/invoicebill.pdf'); //link web of file pdf
 
 ?>
+<style>
+    *{
+        font-size: 14px;
+    }
+    .btn-pdf {
+        background: #fe9100;
+        background: -webkit-linear-gradient(to right, #fdb04c, #fe9100);
+        background: linear-gradient(to bottom, #fdb04c, #fe9100);
+    }
+</style>
 
 <body>
 
     <div class="container py-md-5 px-md-4" style="width: 100%; ">
         <p class="text-end text-danger ">** โปรดตรวจสอบความถูกต้องของข้อมูลก่อนกด พิมพ์เอกสาร</p>
         <div class="mx-auto d-flex justify-content-end ">
-            <a class="btn btn-outline-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold" role="button" href="./invoicebill_PDF/invoicebill.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
-            <a class="btn btn-outline-danger px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold ms-3" role="button" href="./invoicebill_list.php"><i class="fa-regular fa-rectangle-xmark"></i> ยกเลิก</a>
+            <a class="btn btn-pdf text-light px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold" role="button" href="./invoicebill_PDF/invoicebill.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
         </div>
         <hr>
         <?php

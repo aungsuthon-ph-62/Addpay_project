@@ -1,99 +1,118 @@
 <?php
-include_once '../../layout/head.php';
+if (isset($_GET["deletedocout"])) {
+    $id = $_GET["deletedocout"];
+
+    $sql = "DELETE FROM docout WHERE docout_id = '$id'";
+    $query = $conn->query($sql);
+
+    if ($query) {
+        $_SESSION['success'] = "ลบหนังสือออกสำเร็จ!";
+        echo "<script> window.history.back()</script>";
+        exit;
+    }
+
+    $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
+    echo "<script> window.history.back()</script>";
+    exit;
+}
+
 ?>
 
-<style>
-    body {
-        font-family: "Kanit", sans-serif;
-        font-family: "Noto Sans", sans-serif;
-        font-family: "Noto Sans Thai", sans-serif;
-        font-family: "Poppins", sans-serif;
-        font-family: "Prompt", sans-serif;
-    }
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index">หน้าหลัก</a></li>
+        <li class="breadcrumb-item active" aria-current="page">หนังสือออก</li>
+    </ol>
+</nav>
+<hr>
 
-    .btn-group {
-        white-space: nowrap;
-    }
-
-    @media (max-width: 767px) {
-        .table-responsive .dropdown-menu {
-            position: static !important;
-        }
-    }
-
-    @media (min-width: 768px) {
-        .table-responsive {
-            overflow: inherit;
-        }
-    }
-</style>
-
-<div class="container py-5">
-    <div class="main-body">
-        <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="../dashboard.php">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="./doc.php">หนังสือ</a></li>
-                <li class="breadcrumb-item active" aria-current="page">หนังสือออก</li>
-            </ol>
-        </nav>
-        <hr>
-        <div id="listquotation" class="container pb-md-0 mb-5">
-            <div>
-                <h3>หนังสือออก</h3>
-            </div>
-            <div class="mx-auto d-flex justify-content-end">
-                <a class="btn btn-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button" href="../dashboard/docout_add.php"><i class="fa-solid fa-file-circle-plus"></i> เพิ่มข้อมูล</a>
-            </div>
-
-            <div class="border border-secondary rounded-3 py-md-4 px-md-4 mt-2 mt-md-4" id="main_row">
-                <div class="table-responsive">
-                    <table class="table" id="quotationTable">
-                        <thead>
-                            <tr class="align-center" class="rows">
-                                <th class="text-center" style="width:5%" scope="col">ลำดับ</th>
-                                <th class="text-center" style="width:30%" scope="col">ชื่อบริษัทต้นทาง</th>
-                                <th class="text-center" style="width:10%" scope="col">วันที่</th>
-                                <th class="text-center" style="width:20%" scope="col">เรื่อง</th>
-                                <th class="text-center" style="width:20%" scope="col">เรียน (ถึงใคร)</th>
-                                <th class="text-center" style="width:20%" scope="col">ไฟล์</th>
-                                <th class="text-center" style="width:10%" scope="col">ตัวเลือก</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-center">
-                            <tr>
-                                <td>1</td>
-                                <td>บริษัท แอดเพย์ เซอร์วิสพอยท์ จำกัด</td>
-                                <td>16/11/65</td>
-                                <td>หนังสือเชิญเป็นวิทยากร</td>
-                                <td>คุณหัตถยา บำรุงสุข</td>
-                                <td><i class="fa-solid fa-file-pdf"></i> lovetoey.pdf</td>
-                                <td>
-                                    <div>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4" data-bs-toggle="dropdown" aria-expanded="false"><b>เลือก</b> </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="./docout_form.php">เปิดเอกสาร</a></li>
-                                                <li><a class="dropdown-item" href="./docout_edit.php">แก้ไข</a></li>
-                                                <li><a class="dropdown-item" href="#">ลบ</a></li>
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+<div class="container bg-secondary-addpay rounded-5">
+    <div class="main-body py-md-5 px-md-1 text-white">
+        <div class="container">
+            <div id="listquotation" class="py-4 p-md-5 text-white">
+                <div class="text-center text-md-start">
+                    <h3>หนังสือออก</h3>
                 </div>
 
-            </div>
-            <!-- Data table -->
-            <script type="text/javascript">
+                <div class="my-4 my-md-3 text-center text-md-end">
+                    <a class="btn btn-addpay px-md-4 rounded-3 " href="?page=doc_out_add">
+                        <i class="fa-solid fa-file-circle-plus"></i> เพิ่มข้อมูล</a>
+                </div>
+
+                <div class="p-3 p-md-5 bg-light rounded-5 shadow-lg" id="main_row">
+                    <div class="table-responsive">
+                        <table class="table" id="docoutTable">
+                            <thead>
+                                <tr class="align-center" class="rows">
+                                    <th style="width:17%" scope="col">เลขที่</th>
+                                    <th style="width:15%" scope="col">วันที่</th>
+                                    <th style="width:30%" scope="col">เรื่อง</th>
+                                    <th style="width:28%" scope="col">เรียน (ถึงใคร)</th>
+                                    <th style="width:10%" scope="col">ตัวเลือก</th>
+                                </tr>
+                            </thead>
+                            <?php
+                            $sql = "SELECT * FROM docout";
+                            $query = $conn->query($sql);
+                            while ($rows = $query->fetch_assoc()) {
+                                echo '
+                                    <tr>
+                                        <td>' . $rows["docout_no"] . '</td>
+                                        <td>' . $rows["docout_date"] . '</td>
+                                        <td>' . $rows["docout_title"] . '</td>
+                                        <td>' . $rows["docout_to"] . '</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4"
+                                                    data-bs-toggle="dropdown" aria-expanded="false"><b>เลือก</b>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item"
+                                                            href="view/dashboard/docout_form.php?pdfdocout=' . $rows["docout_id"] . '" target="_blank">พิมพ์เอกสาร</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item"
+                                                            href="?page=doc_out_edit&editdocout=' . encode($rows["docout_id"], secret_key()) . '">แก้ไข</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item deletedocout" href="#" data-docout-no="' . $rows["docout_no"] . '" id="' . $rows["docout_id"] . '" >ลบ</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    ';
+                            }
+
+                            ?>
+                        </table>
+                    </div>
+                </div>
+                <!-- Data table -->
+                <script type="text/javascript">
                 $(document).ready(function() {
-                    $('#quotationTable').DataTable();
+                    $('#docoutTable').DataTable();
                 });
-            </script>
-            <!-- Data table -->
+
+                $(document).on('click', '.deletedocout', function() {
+                    var id = $(this).attr("id");
+                    var show_docout_no = $(this).attr("data-docout-no");
+                    swal.fire({
+                        title: 'ต้องการลบหนังสืออกกนี้ !',
+                        text: "เลขที่หนังสืออก : " + show_docout_no,
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'yes!',
+                        cancelButtonText: 'no'
+                    }).then((result) => {
+                        if (result.value) {
+                            window.location.href = "?page=doc_out&deletedocout=" + id;
+                        }
+                    });
+                });
+                </script>
+                <!-- Data table -->
+            </div>
         </div>
     </div>
 </div>
+<?php $conn->close(); ?>

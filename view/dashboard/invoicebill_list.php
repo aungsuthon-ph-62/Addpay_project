@@ -1,8 +1,4 @@
 <?php
-session_start();
-include("../../layout/head.php");
-require_once("../../php/conn.php");
-
 if (isset($_GET["deleteinvbill"])) {
     $id = $_GET["deleteinvbill"];
 
@@ -10,64 +6,39 @@ if (isset($_GET["deleteinvbill"])) {
     $query = $conn->query($sql);
     if ($query) {
         $_SESSION['success'] = "ลบใบแจ้งหนี้/ใบวางบิลสำเร็จ!";
-        header("Location: invoicebill_list.php");
+        echo "<script> window.history.back()</script>";
         exit;
     }
     $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-    header("Location: invoicebill_list.php");
+    echo "<script> window.history.back()</script>";
     exit;
 }
 
 ?>
-<style>
-    body {
-        font-family: "Kanit", sans-serif;
-        font-family: "Noto Sans", sans-serif;
-        font-family: "Noto Sans Thai", sans-serif;
-        font-family: "Poppins", sans-serif;
-        font-family: "Prompt", sans-serif;
-    }
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index">หน้าหลัก</a></li>
+        <li class="breadcrumb-item active" aria-current="page">ใบแจ้งหนี้/ใบวางบิล</li>
+    </ol>
+</nav>
+<hr>
 
-    .btn-group {
-        white-space: nowrap;
-    }
-
-    @media (max-width: 767px) {
-        .table-responsive .dropdown-menu {
-            position: static !important;
-        }
-    }
-
-    @media (min-width: 768px) {
-        .table-responsive {
-            overflow: inherit;
-        }
-    }
-</style>
-
-<body>
-    <?php require("../alert.php"); ?>
-    <div class="container py-5">
-        <div class="main-body">
-            <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">ใบแจ้งหนี้/ใบวางบิล</li>
-                </ol>
-            </nav>
-            <hr>
-
-            <div id="listinvbill" class="container pb-md-0 mb-5">
-                <div>
+<div class="container bg-secondary-addpay rounded-5">
+    <div class="main-body p-md-5 text-white">
+        <div class="container">
+            <div id="listinvbill" class="p-3 p-md-5 text-white">
+                <div class="text-center text-md-start">
                     <h3>ใบแจ้งหนี้/ใบวางบิล</h3>
                 </div>
 
-                <div class="mx-auto d-flex justify-content-end">
-                    <a class="btn btn-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button" href="../dashboard/invoicebill_add.php"><i class="fa-solid fa-file-circle-plus"></i>
-                        สร้างใบแจ้งหนี้/ใบวางบิล</a>
+                <div class="my-4 my-md-3 text-center text-md-end">
+                    <a class="btn btn-addpay px-md-4 rounded-3 " href="?page=invoicebill_add">
+                        <i class="fa-solid fa-file-circle-plus"></i> สร้างใบแจ้งหนี้/ใบวางบิล</a>
                 </div>
 
-                <div class="border border-secondary rounded-3 py-md-4 px-md-4 mt-2 mt-md-4" id="main_row">
+               
+
+                <div class="p-3 p-md-5 bg-light rounded-5 shadow-lg" id="main_row">
                     <div class="table-responsive">
                         <table class="table" id="invbillTable">
                             <thead>
@@ -97,10 +68,10 @@ if (isset($_GET["deleteinvbill"])) {
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li><a class="dropdown-item"
-                                                            href="../dashboard/invoicebill_form.php?pdfinvbill_id=' . $rows["invbill_id"] . '">พิมพ์เอกสาร</a>
+                                                            href="view/dashboard/invoicebill_form.php?pdfinvbill_id=' . $rows["invbill_id"] . '">พิมพ์เอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
-                                                            href="../dashboard/invoicebill_edit.php?editinvbill=' . $rows["invbill_id"] . '">แก้ไข</a>
+                                                            href="?page=invoicebill_edit&editinvbill=' .encode($rows["invbill_id"], secret_key())  . '">แก้ไข</a>
                                                     </li>
                                                     <li><a class="dropdown-item deleteinvbill" href="#" data-invbill-no="' . $rows["invbill_no"] . '" id="' . $rows["invbill_id"] . '" >ลบ</a></li>
                                                 </ul>
@@ -122,8 +93,8 @@ if (isset($_GET["deleteinvbill"])) {
                             var id = $(this).attr("id");
                             var show_invbill_no = $(this).attr("data-invbill-no");
                             swal.fire({
-                                title: 'ต้องการลบใบเสนอราคากลางนี้ !',
-                                text: "เลขที่ใบเสนอราคากลาง : " + show_invbill_no,
+                                title: 'ต้องการลบใบวางบิลนี้ !',
+                                text: "เลขที่ใบวางบิล : " + show_invbill_no,
                                 type: 'warning',
                                 showCancelButton: true,
                                 confirmButtonColor: '#d33',
@@ -132,7 +103,7 @@ if (isset($_GET["deleteinvbill"])) {
                                 cancelButtonText: 'no'
                             }).then((result) => {
                                 if (result.value) {
-                                    window.location.href = "?deleteinvbill=" + id;
+                                    window.location.href = "?page=invoicebill&deleteinvbill=" + id;
                                 }
                             });
                         });
@@ -142,4 +113,5 @@ if (isset($_GET["deleteinvbill"])) {
             </div>
         </div>
     </div>
-</body>
+</div>
+<?php $conn->close(); ?>

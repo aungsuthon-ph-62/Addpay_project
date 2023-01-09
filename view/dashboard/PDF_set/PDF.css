@@ -1,4 +1,4 @@
-body{
+*{
     font-family: 'Sarabun', sans-serif;
 }
 
@@ -20,4 +20,16 @@ body{
 
 .bg-gray{
     background-color:LightGray;
+}
+
+
+
+/* docout */
+
+.docright {
+    padding-left: 80px;
+    padding-right: 100px;
+}
+.pt-10{
+    padding-top: 10px;
 }
