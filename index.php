@@ -138,6 +138,42 @@ body {
                             case "invoicebill_edit":
                                 include_once 'view/dashboard/invoicebill_edit.php';
                                 break;
+                            case "invoicetax":
+                                include_once 'view/dashboard/invoicetax_list.php';
+                                break;
+                            case "invoicetax_add":
+                                include_once 'view/dashboard/invoicetax_add.php';
+                                break;
+                            case "invoicetax_edit":
+                                include_once 'view/dashboard/invoicetax_edit.php';
+                                break;
+                            case "archives":
+                                include_once 'view/dashboard/archives_list.php';
+                                break;
+                            case "archives_add":
+                                include_once 'view/dashboard/archives_add.php';
+                                break;
+                            case "archives_edit":
+                                include_once 'view/dashboard/archives_edit.php';
+                                break;
+                            case "contract":
+                                include_once 'view/dashboard/contract_list.php';
+                                break;
+                            case "contract_add":
+                                include_once 'view/dashboard/contract_add.php';
+                                break;
+                            case "contract_edit":
+                                include_once 'view/dashboard/contract_edit.php';
+                                break;
+                            case "expenses":
+                                include_once 'view/dashboard/expenses_list.php';
+                                break;
+                            case "expenses_add":
+                                include_once 'view/dashboard/expenses_add.php';
+                                break;
+                            case "expenses_edit":
+                                include_once 'view/dashboard/expenses_edit.php';
+                                break;
                             default:
                                 include_once 'view/dashboard.php';
                         }
