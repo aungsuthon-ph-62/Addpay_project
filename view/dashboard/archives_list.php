@@ -1,7 +1,4 @@
 <?php
-session_start();
-include("../../layout/head.php");
-require_once("../../php/conn.php");
 
 if(isset($_GET["deletearchives"]))
   {
@@ -17,67 +14,39 @@ if(isset($_GET["deletearchives"]))
     
     if($query){
             
-        unlink("../../uploadfile/archivesfile/$oldfile");
-        $_SESSION['success'] = "ลบหนังสือสำคัญสำเร็จ!";
-        header("Location: archives_list.php");
+        unlink("uploadfile/archivesfile/$oldfile");
+        $_SESSION['success'] = "ลบเอกสารสำคัญสำเร็จ!";
+        echo "<script> window.history.back()</script>";
         exit; 
         
     }
     
     $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-    header("Location: archives_list.php");
+    echo "<script> window.history.back()</script>";
     exit;
     
   }
 ?>
 
-<style>
-body {
-    font-family: "Kanit", sans-serif;
-    font-family: "Noto Sans", sans-serif;
-    font-family: "Noto Sans Thai", sans-serif;
-    font-family: "Poppins", sans-serif;
-    font-family: "Prompt", sans-serif;
-}
-
-.btn-group {
-    white-space: nowrap;
-}
-
-@media (max-width: 767px) {
-    .table-responsive .dropdown-menu {
-        position: static !important;
-    }
-}
-
-@media (min-width: 768px) {
-    .table-responsive {
-        overflow: inherit;
-    }
-}
-</style>
-
-<body>
-    <?php require("../alert.php");?>
-    <div class="container py-5">
-        <div class="main-body">
-            <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../dashboard.php">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">เอกสารสำคัญ</li>
-                </ol>
-            </nav>
-            <hr>
-            <div class="container pb-md-0 mb-5">
-                <div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index">หน้าหลัก</a></li>
+        <li class="breadcrumb-item active" aria-current="page">เอกสารสำคัญ</li>
+    </ol>
+</nav>
+<hr>
+<div class="container bg-secondary-addpay rounded-5">
+    <div class="main-body py-md-5 px-md-1 text-white">
+        <div class="container">
+            <div id="listquotation" class="py-4 p-md-5 text-white">
+                <div class="text-center text-md-start">
                     <h3>เอกสารสำคัญ</h3>
                 </div>
-                <div class="mx-auto d-flex justify-content-end">
-                    <a class="btn btn-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button"
-                        href="../dashboard/archives_add.php"><i class="fa-solid fa-file-circle-plus"></i>
-                        เพิ่มข้อมูล</a>
+                <div class="my-4 my-md-3 text-center text-md-end">
+                    <a class="btn btn-addpay px-md-4 rounded-3 " href="?page=archives_add">
+                        <i class="fa-solid fa-file-circle-plus"></i> เพิ่มข้อมูล</a>
                 </div>
-                <div class="border border-secondary rounded-3 py-md-4 px-md-4 mt-2 mt-md-4" id="main_row">
+                <div class="p-3 p-md-5 bg-light rounded-5 shadow-lg" id="main_row">
                     <div class="table-responsive">
                         <table class="table" id="archivesTable">
                             <thead>
@@ -95,7 +64,7 @@ body {
                                     echo '
                                     <tr>
                                         <td>'.$rows["archives_title"].'</td>
-                                        <td><a target="_blank" href="../../uploadfile/archivesfile/'.$rows["archives_file"].'">'.$rows["archives_file"].'</a></td>
+                                        <td><a target="_blank" href="uploadfile/archivesfile/'.$rows["archives_file"].'">'.$rows["archives_file"].'</a></td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4"
@@ -103,10 +72,10 @@ body {
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li><a class="dropdown-item" target="_blank"
-                                                            href="../../uploadfile/archivesfile/'.$rows["archives_file"].'">เปิดเอกสาร</a>
+                                                            href="uploadfile/archivesfile/'.$rows["archives_file"].'">เปิดเอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
-                                                            href="../dashboard/archives_edit.php?editarchives='.$rows["archives_id"].'">แก้ไข</a>
+                                                            href="?page=archives_edit&editarchives=' . encode($rows["archives_id"], secret_key()) . '">แก้ไข</a>
                                                     </li>
                                                     <li><a class="dropdown-item deletearchives" href="#" data-archives-title="'.$rows["archives_title"].'" id="'.$rows["archives_id"].'" >ลบ</a></li>
                                                 </ul>
@@ -118,9 +87,6 @@ body {
                             ?>
                         </table>
                     </div>
-
-
-
                 </div>
                 <!-- Data table -->
                 <script type="text/javascript">
@@ -132,8 +98,8 @@ body {
                     var id = $(this).attr("id");
                     var show_archives_title = $(this).attr("data-archives-title");
                     swal.fire({
-                        title: 'ต้องการลบหนังสือสำคัญนี้ !',
-                        text: "ชื่อหนังสือสำคัญ : " + show_archives_title,
+                        title: 'ต้องการลบเอกสารสำคัญนี้ !',
+                        text: "ชื่อเอกสารสำคัญ : " + show_archives_title,
                         type: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#d33',
@@ -142,7 +108,7 @@ body {
                         cancelButtonText: 'no'
                     }).then((result) => {
                         if (result.value) {
-                            window.location.href = "?deletearchives=" + id;
+                            window.location.href = "?page=archives&deletearchives=" + id;
                         }
                     });
                 });
@@ -151,5 +117,5 @@ body {
             </div>
         </div>
     </div>
-</body>
+</div>
 <?php $conn->close(); ?>
