@@ -40,7 +40,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="?page=">
+                <a class="nav-link text-white" href="?page=contract">
                     <span data-feather="layers"></span>
                     สัญญาแนบเข้า
                 </a>

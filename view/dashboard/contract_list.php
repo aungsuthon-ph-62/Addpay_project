@@ -1,8 +1,4 @@
 <?php
-session_start();
-include("../../layout/head.php");
-require_once("../../php/conn.php");
-
 if(isset($_GET["deletecontract"]))
   {
     $id = $_GET["deletecontract"];
@@ -18,69 +14,41 @@ if(isset($_GET["deletecontract"]))
     
     if($query){
             
-        unlink("../../uploadfile/contractfile/$oldfile1"); 
-        unlink("../../uploadfile/contractfile/$oldfile2");
+        unlink("uploadfile/contractfile/$oldfile1"); 
+        unlink("uploadfile/contractfile/$oldfile2");
         $_SESSION['success'] = "ลบเอกสารสัญญาสำเร็จ!";
-        header("Location: contract_list.php");
+        echo "<script> window.history.back()</script>";
         exit; 
         
     }
     
     $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-    header("Location: contract_list.php");
+    echo "<script> window.history.back()</script>";
     exit;
     
   }
 
 ?>
 
-<style>
-body {
-    font-family: "Kanit", sans-serif;
-    font-family: "Noto Sans", sans-serif;
-    font-family: "Noto Sans Thai", sans-serif;
-    font-family: "Poppins", sans-serif;
-    font-family: "Prompt", sans-serif;
-}
-
-.btn-group {
-    white-space: nowrap;
-}
-
-@media (max-width: 767px) {
-    .table-responsive .dropdown-menu {
-        position: static !important;
-    }
-}
-
-@media (min-width: 768px) {
-    .table-responsive {
-        overflow: inherit;
-    }
-}
-</style>
-
-<body>
-    <?php require("../alert.php");?>
-    <div class="container">
-        <div class="main-body">
-            <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Contrat</li>
-                </ol>
-            </nav>
-            <hr>
-            <div class="container pb-md-0 mb-5">
-                <div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index">หน้าหลัก</a></li>
+        <li class="breadcrumb-item active" aria-current="page">เอกสารสัญญา</li>
+    </ol>
+</nav>
+<hr>
+<div class="container bg-secondary-addpay rounded-5">
+    <div class="main-body py-md-5 px-md-1 text-white">
+        <div class="container">
+            <div id="listquotation" class="py-4 p-md-5 text-white">
+                <div class="text-center text-md-start">
                     <h3>เอกสารสัญญา</h3>
                 </div>
-                <div class="mx-auto d-flex justify-content-end">
-                    <a class="btn btn-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button"
-                        href="../dashboard/docin_add.php"><i class="fa-solid fa-file-circle-plus"></i> เพิ่มข้อมูล</a>
+                <div class="my-4 my-md-3 text-center text-md-end">
+                    <a class="btn btn-addpay px-md-4 rounded-3 " href="?page=contract_add">
+                        <i class="fa-solid fa-file-circle-plus"></i> เพิ่มข้อมูล</a>
                 </div>
-
-                <div class="border border-secondary rounded-3 py-md-4 px-md-4 mt-2 mt-md-4" id="main_row">
+                <div class="p-3 p-md-5 bg-light rounded-5 shadow-lg" id="main_row">
                     <div class="table-responsive">
                         <table class="table" id="contractTable">
                             <thead>
@@ -112,13 +80,13 @@ body {
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li><a class="dropdown-item" target="_blank"
-                                                            href="../../uploadfile/contractfile/'.$rows["contract_file"].'">เปิดเอกสาร</a>
+                                                            href="uploadfile/contractfile/'.$rows["contract_file"].'">เปิดเอกสารสัญญา</a>
                                                     </li>
                                                     <li><a class="dropdown-item" target="_blank"
-                                                            href="../../uploadfile/contractfile/'.$rows["contract_filesigner"].'">เปิดเอกสารผู้เซ็นสัญญา</a>
+                                                            href="uploadfile/contractfile/'.$rows["contract_filesigner"].'">เปิดเอกสารผู้เซ็นสัญญา</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
-                                                            href="../dashboard/contract_edit.php?editcontract='.$rows["contract_id"].'">แก้ไข</a>
+                                                            href="?page=contract_edit&editcontract=' . encode($rows["contract_id"], secret_key()) . '">แก้ไข</a>
                                                     </li>
                                                     <li><a class="dropdown-item deletecontract" href="#" data-contract-title="'.$rows["contract_title"].'" id="'.$rows["contract_id"].'" >ลบ</a></li>
                                                 </ul>
@@ -151,15 +119,14 @@ body {
                         cancelButtonText: 'no'
                     }).then((result) => {
                         if (result.value) {
-                            window.location.href = "?deletecontract=" + id;
+                            window.location.href = "?page=contract&deletecontract=" + id;
                         }
                     });
                 });
                 </script>
                 <!-- Data table -->
-
             </div>
         </div>
     </div>
-</body>
+</div>
 <?php $conn->close(); ?>

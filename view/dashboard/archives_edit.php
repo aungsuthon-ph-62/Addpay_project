@@ -55,7 +55,7 @@ if(isset($_POST['action'])){
                         if ($conn->query($query)) {
                             
                             unlink("uploadfile/archivesfile/$oldfile");
-                            $_SESSION['success'] = "บันทึกหนังสือสำคัญสำเร็จ!";
+                            $_SESSION['success'] = "บันทึกเอกสารสำคัญสำเร็จ!";
                             echo "<script> window.location.href='?page=archives';</script>";
                             exit;
                             
@@ -111,7 +111,8 @@ if(isset($_POST['action'])){
                 <div class="text-center text-md-start text-dark my-3">
                     <h3>แก้ไขข้อมูลเอกสารสำคัญ</h3>
                 </div>
-                <form action="?page=archives_edit" method="post" class="" enctype="multipart/form-data">
+                <form action="?page=archives_edit&editarchives=<?php echo encode($row['archives_id'], secret_key()); ?>"
+                    method="post" class="" enctype="multipart/form-data">
                     <div class="row align-items-center text-dark px-md-5 mb-3">
                         <div class="col-md-3">
                             <h6 for="input_title" class="col-form-label">ชื่อเอกสาร </h6>

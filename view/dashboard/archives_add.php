@@ -32,7 +32,7 @@ if(isset($_POST['action'])){
 
                     if ($conn->query($query)) {
                         
-                        $_SESSION['success'] = "บันทึกหนังสือสำคัญสำเร็จ!";
+                        $_SESSION['success'] = "บันทึกเอกสารสำคัญสำเร็จ!";
                         echo "<script> window.location.href='?page=archives';</script>";
                         exit;
                         

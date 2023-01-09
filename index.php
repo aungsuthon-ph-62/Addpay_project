@@ -156,6 +156,15 @@ body {
                             case "archives_edit":
                                 include_once 'view/dashboard/archives_edit.php';
                                 break;
+                            case "contract":
+                                include_once 'view/dashboard/contract_list.php';
+                                break;
+                            case "contract_add":
+                                include_once 'view/dashboard/contract_add.php';
+                                break;
+                            case "contract_edit":
+                                include_once 'view/dashboard/contract_edit.php';
+                                break;
                             default:
                                 include_once 'view/dashboard.php';
                         }

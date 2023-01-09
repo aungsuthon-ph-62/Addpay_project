@@ -15,7 +15,7 @@ if(isset($_GET["deletearchives"]))
     if($query){
             
         unlink("uploadfile/archivesfile/$oldfile");
-        $_SESSION['success'] = "ลบหนังสือสำคัญสำเร็จ!";
+        $_SESSION['success'] = "ลบเอกสารสำคัญสำเร็จ!";
         echo "<script> window.history.back()</script>";
         exit; 
         
@@ -87,9 +87,6 @@ if(isset($_GET["deletearchives"]))
                             ?>
                         </table>
                     </div>
-
-
-
                 </div>
                 <!-- Data table -->
                 <script type="text/javascript">
