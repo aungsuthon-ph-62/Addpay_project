@@ -101,7 +101,7 @@ if (isset($_POST['action'])) {
                             <h6 class="col-form-label">เลขที่ No.</h6>
                         </div>
                         <div class="col-auto">
-                            <input type="number" id="input_quo_no" name="input_quo_no" class="form-control " pattern="[0-9]{1,}" title="กรุณากรอกตัวเลข 0-9 อย่างน้อย 1 ตัว" required>
+                            <input type="text" id="input_quo_no" name="input_quo_no" class="form-control " title="กรุณากรอกตัวเลข 0-9 อย่างน้อย 1 ตัว" required>
                         </div>
 
                     </div>
