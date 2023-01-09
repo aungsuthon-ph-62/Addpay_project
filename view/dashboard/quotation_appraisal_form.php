@@ -1,8 +1,8 @@
 <?php
-include('./PDF_set/PDF_conn.php');
-include('./PDF_set/readprice.php');
+include_once('./PDF_set/PDF_conn.php');
+include_once('./PDF_set/readprice.php');
 $id = $_GET["pdfquo"];
-include("./PDF_set/PDF_head.php");
+include_once("./PDF_set/PDF_head.php");
 
 require_once __DIR__ . '../../../vendor/autoload.php';
 
@@ -278,7 +278,7 @@ $mpdf->Output('./quotation_PDF/quotation_appraisal0.pdf');
         </div>
         <hr>
         <?php
-        include("./quotation_PDF/quotation_content.php");
+        include_once("./quotation_PDF/quotation_content.php");
         ?>
     </div>
 
