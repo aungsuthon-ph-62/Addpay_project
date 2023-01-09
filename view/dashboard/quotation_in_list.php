@@ -13,7 +13,7 @@ if (isset($_GET["deletequo"])) {
 
     if ($query) {
 
-        unlink("../../uploadfile/quotationinfile/$oldfile");
+        unlink("uploadfile/quotationinfile/$oldfile");
         $_SESSION['success'] = "ลบใบเสนอราคาสำเร็จ!";
         header("Location: quotation_in_list.php");
         exit;
@@ -78,7 +78,7 @@ if (isset($_GET["deletequo"])) {
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li><a class="dropdown-item"
-                                                            href="../../uploadfile/quotationinfile/' . $rows["quoin_file"] . '">เปิดเอกสาร</a>
+                                                            href="uploadfile/quotationinfile/' . $rows["quoin_file"] . '">เปิดเอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
                                                             href="?page=quo_in_edit&editquoin=' . encode($rows["quoin_id"], secret_key()) . '">แก้ไข</a>

@@ -68,7 +68,7 @@ if (isset($_GET["deletequoout"])) {
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li><a class="dropdown-item"
-                                                            href="../dashboard/quotation_out_form.php?pdfquoout_id=' . $rows["quoout_id"] . '">พิมพ์เอกสาร</a>
+                                                        href="view/dashboard/quotation_out_form.php?pdfquoout_id=' . $rows["quoout_id"] . '" target="_blank"">พิมพ์เอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
                                                             href="?page=quo_out_edit&editquoout=' . encode($rows["quoout_id"], secret_key()) . '">แก้ไข</a>
