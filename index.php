@@ -147,6 +147,9 @@ require_once "php/key.inc.php";
                             case "invoicetax_edit":
                                 include_once 'view/dashboard/invoicetax_edit.php';
                                 break;
+                            case "invoicetax_form":
+                                include_once 'view/dashboard/invoicetax_form.php';
+                                break;
                             default:
                                 include_once 'view/dashboard.php';
                         }

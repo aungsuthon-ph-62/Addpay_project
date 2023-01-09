@@ -94,10 +94,10 @@ if (isset($_GET["deleteinvtax"])) {
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li><a class="dropdown-item"
-                                                            href="../dashboard/invoicetax_form.php?pdfinvtax_id=' . $rows["invtax_id"] . '">พิมพ์เอกสาร</a>
+                                                            href="view/dashboard/invoicetax_form.php?pdfinvtax_id=' . $rows["invtax_id"] . '" " target="_blank">พิมพ์เอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
-                                                            href="?page=invoicetax_edit&editinvoicetax=' . $rows["invtax_id"] . '">แก้ไข</a>
+                                                            href="?page=invoicetax_edit&editinvtax=' . $rows["invtax_id"] . '">แก้ไข</a>
                                                     </li>
                                                     <li><a class="dropdown-item deleteinvtax" href="#" data-invtax-no="' . $rows["invtax_no"] . '" id="' . $rows["invtax_id"] . '" >ลบ</a></li>
                                                 </ul>
