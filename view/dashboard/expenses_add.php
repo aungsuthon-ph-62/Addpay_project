@@ -12,7 +12,6 @@ if(isset($_POST['action'])){
         $inputDate= mysqli_real_escape_string($conn,trim($_POST['inputDate']));
         $inputList= mysqli_real_escape_string($conn,trim($_POST['inputList']));
         $inputAmount= mysqli_real_escape_string($conn,trim($_POST['inputAmount']));
-        $inputFile= mysqli_real_escape_string($conn,trim($_POST['inputFile']));
         $uid = $_SESSION['id'];
 
         if (!empty($_FILES["inputFile"]["name"])) {
