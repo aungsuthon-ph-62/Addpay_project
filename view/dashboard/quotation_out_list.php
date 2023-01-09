@@ -71,7 +71,7 @@ if (isset($_GET["deletequoout"])) {
                                                             href="../dashboard/quotation_out_form.php?pdfquoout_id=' . $rows["quoout_id"] . '">พิมพ์เอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
-                                                            href="../dashboard/quotation_out_edit.php?editquoout=' . $rows["quoout_id"] . '">แก้ไข</a>
+                                                            href="?page=quo_out_edit&editquoout=' . encode($rows["quoout_id"], secret_key()) . '">แก้ไข</a>
                                                     </li>
                                                     <li><a class="dropdown-item deletequoout" href="#" data-quoout-no="' . $rows["quoout_no"] . '" id="' . $rows["quoout_id"] . '" >ลบ</a></li>
                                                 </ul>

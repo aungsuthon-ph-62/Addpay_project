@@ -81,8 +81,8 @@ if (isset($_POST['action'])) {
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index">หน้าหลัก</a></li>
-        <li class="breadcrumb-item"><a href="?page=quo_in">ใบเสนอราคาเข้า</a></li>
-        <li class="breadcrumb-item active" aria-current="page">สร้างใบเสนอราคาเข้า</li>
+        <li class="breadcrumb-item"><a href="?page=quo_out">ใบเสนอราคาออก</a></li>
+        <li class="breadcrumb-item active" aria-current="page">สร้างใบเสนอราคาออก</li>
     </ol>
 </nav>
 <hr>
@@ -178,8 +178,8 @@ if (isset($_POST['action'])) {
                         <div class="col-md-6">
                             <div class="row align-items-center text-dark px-md-5 mb-3">
                                 <div class="col-md-6 text-md-end">
-                                    <label for="input_quoout_deli" class="col-form-label ">ค่าขนส่ง(บาท)
-                                        :</label>
+                                    <h6 class="col-form-label ">ค่าขนส่ง(บาท)
+                                        :</h6>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="number" id="input_quoout_deli" name="input_quoout_deli" class="form-control " placeholder="0.00" title="กรุณากรอกค่าขนส่ง หากมี" value="<?= $row['quoout_deli'] ?>">
@@ -189,7 +189,7 @@ if (isset($_POST['action'])) {
                         <div class="col-md-6">
                             <div class="row align-items-center text-dark px-md-5 mb-3">
                                 <div class="col-md-6 text-md-end">
-                                    <label for="input_quoout_sum" class="col-form-label">รวมเป็นเงิน(บาท) :</label>
+                                    <h6 class="col-form-label">รวมเป็นเงิน(บาท) :</h6>
                                 </div>
 
                                 <div class="col-md-6">
@@ -198,8 +198,8 @@ if (isset($_POST['action'])) {
                             </div>
                             <div class="row align-items-center text-dark px-md-5 mb-3">
                                 <div class="col-md-6 text-md-end">
-                                    <label for="input_quoout_specialdis" class="col-form-label text-danger">หักส่วนลดพิเศษ(บาท)
-                                        :</label>
+                                    <h6 class="col-form-label text-danger">หักส่วนลดพิเศษ(บาท)
+                                        :</h6>
                                 </div>
 
                                 <div class="col-md-6">
@@ -208,7 +208,7 @@ if (isset($_POST['action'])) {
                             </div>
                             <div class="row align-items-center text-dark px-md-5 mb-3">
                                 <div class="col-md-6 text-md-end">
-                                    <label for="input_quoout_afterdis" class="col-form-label">ยอดรวมหลังหักส่วนลด(บาท) :</label>
+                                    <h6 class="col-form-label">ยอดรวมหลังหักส่วนลด(บาท) :</h6>
                                 </div>
 
                                 <div class="col-md-6">
@@ -217,7 +217,7 @@ if (isset($_POST['action'])) {
                             </div>
                             <div class="row align-items-center text-dark px-md-5 mb-3">
                                 <div class="col-md-6 text-md-end">
-                                    <label for="input_quoout_vat" class="col-form-label">ภาษีมูลค่าเพิ่ม 7%(บาท) :</label>
+                                    <h6 class="col-form-label">ภาษีมูลค่าเพิ่ม 7%(บาท) :</h6>
                                 </div>
 
                                 <div class="col-md-6">
@@ -226,7 +226,7 @@ if (isset($_POST['action'])) {
                             </div>
                             <div class="row align-items-center text-dark px-md-5 mb-3">
                                 <div class="col-md-6 text-md-end">
-                                    <label for="input_quoout_total" class="col-form-label">จํานวนเงินรวมทั้งสิ้น(บาท) :</label>
+                                    <h6 class="col-form-label">จํานวนเงินรวมทั้งสิ้น(บาท) :</h6>
                                 </div>
 
                                 <div class="col-md-6">
