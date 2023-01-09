@@ -31,87 +31,92 @@ $mpdf = new \Mpdf\Mpdf([
     'default_font_size' => 15,
 ]);
 
-$query = "SELECT * FROM `quotation_appraisal` WHERE quo_id = '$id'";
+$query = "SELECT * FROM `invoicebill` WHERE invbill_id = '$id'";
 $result = mysqli_query($conn, $query);
-while ($infoquo = mysqli_fetch_array($result)) {
+while ($infoinvb = mysqli_fetch_array($result)) {
     $head = '
-<div id="quotationForm" class="container mt-5" style="width: 842px;">
+    <div id="invoicebillForm" class="container mt-5" style="width: 842px;">
     <div>
         <table>
             <tr>
-                <td style="width:250px">
+                <td style="width:250px;">
                     <div class="logo">
-                        <img src="../image/addpay-form-text.png" class="img-fluid position-relative" width="200" hight="auto" alt="addpay_logo_form">
+                        <img src="../../image/addpay-form-text.png" class="img-fluid position-relative" width="150" hight="auto" alt="addpay_logo_form">
                     </div>
                 </td>
-                <td style="width:592px">
-                    <div style="margin-left: 40px;">
-                        <b class="text-left"> บริษัท แอดเพย์ เซอร์วิสพอยท์ จํากัด</b><br>
-                        <p class="text-left">406 หมู่ 18 ตําบลขามใหญ่ อําเภอเมือง จังหวัดอุบลราชธานี โทร. 045-317123</p>
+                <td VALIGN="middle" style="width:592px;" >
+                    <label class="text-left"> บริษัท แอดเพยเ์ซอร์วิสพอยท์จำกัด (สำนักงานใหญ่)</label><br>
+                    <label class="text-left">406 หมู่ 18 ตําบลขามใหญ่ อําเภอเมือง จังหวัดอุบลราชธานี 34000</label>
+                </td>
+                
+            </tr>
+            
+        </table>
+        <table style="margin-top: 15px;">
+            <tr>
+                <td style="width:642px;">
+                    <label>โทร . 045-317123 Fax. 045-317678</label><br>
+                    <label>เลขประจำตัวผู้เสียภาษีอากร 0 3455 58001 37 0</label>
+                </td>
+            
+                <td class="text-center" style="width:200px; border: 1px solid;">
+                    <div style=" padding:10px 20px; margin:0;"> 
+                        <b >ใบแจ้งหนี้ / ใบวางบิล</b>
                     </div>
                 </td>
             </tr>
+            <tr>
+                <td style="width:592px;">
+                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;เรียน แผนกบัญชีและการเงิน</label>
+                </td>
+            </tr>
+        </table>
+
+        <table style="width: 842px; border:1px solid; border-collapse: collapse; padding: 0; margin: 0; ">
+            <tr style="border-bottom: 1px solid;">
+                <td align="left" style="border-left: 1px solid ; width: 642px;">
+                    <label>ชื่อลูกค้า / Customer :</label> &nbsp;&nbsp;' . $infoinvb['invbill_name']  . '<br>
+                    <label>ที่อยู่ / Address :</label> &nbsp;&nbsp;' . $infoinvb['invbill_address']  . '<br>
+                    <label>เลขประจำตัวผู้เสียภาษี :</label> &nbsp;&nbsp;' . $infoinvb['invbill_cusid']  . '
+                </td>
+                <td VALIGN="TOP" align="left" style="border-left: 1px solid ; width: 200px;">
+                    <label>เลขที่ / No.</label> &nbsp;&nbsp;' . $infoinvb['invbill_no']  . '<br>
+                    <label>วันที่ / Date.</label> &nbsp;&nbsp;' . $infoinvb['invbill_date']  . '
+                </td>
+            </tr>
+
+
         </table>
         <table>
             <tr>
-                <td class="text-center" style="width:200px;  border: 1px solid; padding: 8px;">
-                    <b>ใบเสนอราคา</b><br>
-                    <b>Quotation</b>
-                </td>
-                <td style="width:422px; text-align: right;"></td>
-                
-                <td style="width:100px;  text-align: right;">
-                    <p class="text-left">เลขที่/No.</p>
-                    <p class="text-left">วันที่/Date. </p>
-                </td>
-                <td style="width:120px; text-align: right;">
-                    <p class="underline"> <span>&nbsp;&nbsp;' . $infoquo['quo_no'] . ' &nbsp;&nbsp; </span> </p>
-                    <p class=" underline"> <span>&nbsp;' . $infoquo['quo_date'] . ' &nbsp; </span> </p>
+                <td style="width:592px;">
+                    <label>&nbsp;ได้รับวางบิลจาก บริษัท แอดเพย์ เซอร์วิสพอยท์ จำกัด ตามรายการต่อไปนี้</label>
                 </td>
             </tr>
-
         </table>
-    </div>
 
-    <div>
-    <table style="margin-top: 5px;">
-        <tr>
-            <td style="width:150px;">
-                <p class="text-left ">โครงการ</p>
-            </td>
-            <td class="underline" style="width:692px;">
-                <p class="text-left "> <span>&nbsp; ' . $infoquo['quo_namepj'] . ' &nbsp;&nbsp;</span> </p>
-            </td>
-        </tr>
-        <tr>
-            <td style="width:150px;">
-                <p class="text-left ">ลูกค้า /หน่วยงาน </p>
-            </td>
-            <td class="underline" style="width:692px;">
-                <p class="text-left "> <span>&nbsp; ' . $infoquo['quo_name'] . ' &nbsp;&nbsp;</span> </p>
-            </td>
-        </tr>
-        <tr>
-            <td style="width:150px;">
-                <p class="text-left ">ที่อยู่ </p>
-            </td>
-            <td class="underline" style="width:692px;">
-                <p class="text-left"> <span>&nbsp;' . $infoquo['quo_address'] . ' &nbsp;&nbsp;</span> </p>
-            </td>
-        </tr>
-    </table>
-</div>
-
-
-<div>
-    <table style="width: 842px; border:1px solid; border-collapse: collapse; padding: 0; margin: 0; margin-top:5px;">
-        <tr style="background-color:LightGray; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
-            <th class="text-center" style="border-left: 1px solid; width: 59px;">ลำดับที่</th>
-            <th class="text-center" style="border-left: 1px solid; width: 497px;">รายการ / Description</th>
-            <th class="text-center" style="border-left: 1px solid; width: 67px;">จำนวน<br>Amount</th>
-            <th class="text-center" style="border-left: 1px solid; width: 109px;">ราคา / หน่วย<br>Unit / Price</th>
-            <th class="text-center" style="border-left: 1px solid; width: 109px;">จำนวนเงิน<br>บาท</th>
-        </tr>
+        <div>
+            <table style="width: 737px; border:1px solid blue; border-collapse: collapse; padding: 0; margin: 0; margin-top:0px;">
+                <tr style=" border-collapse: collapse; padding: 0; margin: 0;">
+                    <td class="text-center" style="border-left: 1px solid blue; width: 10%;">ลำดับที่</td>
+                    <td class="text-center" style="border-left: 1px solid blue; width: 20%;">รายการ</td>
+                    <td class="text-center" style="border-left: 1px solid blue; width: 14%;">วันที่ใบแจ้งหนี้/<br>ใบกำกับภาษี</td>
+                    <td class="text-center" style="border-left: 1px solid blue; width: 14%;">กำหนดชำระ</td>
+                    <td class="text-center" style="border-left: 1px solid blue; width: 15%;">จำนวนก่อน<br>ภาษีมูลค่าเพิ่ม</td>
+                    <td class="text-center" style="border-left: 1px solid blue; width: 15%;">ภาษีมูลค่าเพิ่ม</td>
+                    <td class="text-center" style="border-left: 1px solid blue; width: 12%;">จำนวนเงินรวม</td>
+                    
+                </tr>
+                <tr style=" border-bottom:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
+                    <td class="text-center" style="border-left: 1px solid blue; width: 10%;"><br>Item</td>
+                    <td class="text-center" style="border-left: 1px solid blue; width: 20%;"><br>Order</td>
+                    <td class="text-center" style="border-left: 1px solid blue; width: 14%;"><br>invoice Date</td>
+                    <td class="text-center" style="border-left: 1px solid blue; width: 14%;"><br>Due Date</td>
+                    <td class="text-center" style="border-left: 1px solid blue; width: 15%;"><br>Amount</td>
+                    <td class="text-center" style="border-left: 1px solid blue; width: 15%;"><br>Vat</td>
+                    <td class="text-center" style="border-left: 1px solid blue; width: 12%;"><br>Total Amount</td>
+                    
+                </tr>
 
 ';
 }
@@ -197,13 +202,18 @@ if (mysqli_num_rows($result) > 0) {
     }
 }
 
+// $stylesheet = file_get_contents('./PDF_set/PDF.css');
+// $mpdf->WriteHTML($stylesheet, \Mpdf\HTMLParserMode::HEADER_CSS);
+// $mpdf->WriteHTML($head);
+// $mpdf->WriteHTML($contentitems);
+// $mpdf->WriteHTML($contentsum);
+// $mpdf->WriteHTML($footer);
+// $mpdf->WriteHTML($head1);
+// $mpdf->WriteHTML($head2);
 
-$a = file_get_contents('./invoicebill_PDF/invoicebill_content.php');
-$stylesheet = file_get_contents('./PDF_set/PDF.css');
-$mpdf->WriteHTML($stylesheet, \Mpdf\HTMLParserMode::HEADER_CSS);
-$mpdf->WriteHTML($a, \Mpdf\HTMLParserMode::HTML_BODY);
-$mpdf->Output('./invoicebill_PDF/invoicebill.pdf'); //link web of file pdf
+// mysqli_close($conn);
 
+// $mpdf->Output('./invoicebill_PDF/invoice_bill0.pdf');
 ?>
 <style>
     *{
