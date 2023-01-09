@@ -129,4 +129,3 @@ if(isset($_GET["deletedocin"])){
         </div>
     </div>
 </div>
-?page=doc_in
