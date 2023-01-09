@@ -206,6 +206,9 @@ $mpdf->Output('./invoicebill_PDF/invoicebill.pdf'); //link web of file pdf
 
 ?>
 <style>
+    *{
+        font-size: 14px;
+    }
     .btn-pdf {
         background: #fe9100;
         background: -webkit-linear-gradient(to right, #fdb04c, #fe9100);
