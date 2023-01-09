@@ -10,12 +10,11 @@ while ($infodoc = mysqli_fetch_array($result)) {
         <div class="main-body">
             <table>
                 <tr>
-                    <td class="pt-10" style="width: 250px;">
+                    <td class="pt-10" style="width: 300px;">
                         <img src="../../image/logo-addpay.png" alt="" width="200" hight="auto">
                     </td>
-                    <td class="docright pt-10" style="width: 100px;">
-
-                    <td class="docright pt-10" style="width: 300px;">
+                    
+                    <td class="docright pt-10 ms-5" style="width: 500px;">
                         <b>บริษัท แอดเพย์ เซอร์วิสพอยท์ จำกัด
                             ADDPAY SERVICE POINT CO.,LTD.
                             406 หมู่ 18 ตำบลขามใหญ่ อำเภอเมือง จังหวัดอุบลราชธานี</b>

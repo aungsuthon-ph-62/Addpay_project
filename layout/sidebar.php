@@ -8,8 +8,7 @@
                 </a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
+                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     ใบเสนอราคา
                 </a>
                 <ul class="dropdown-menu">
@@ -52,8 +51,7 @@
                 </a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
+                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     หนังสือ
                 </a>
                 <ul class="dropdown-menu">
@@ -77,8 +75,7 @@
                 </a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
+                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     ใบแจ้งหนี้
                 </a>
                 <ul class="dropdown-menu">
@@ -86,7 +83,7 @@
                         <h6 class="dropdown-header">เมนูใบแจ้งหนี้ : </h6>
                     </li>
                     <li><a class="dropdown-item" href="?page=invoicebill">ใบวางบิล</a></li>
-                    <li><a class="dropdown-item" href="?page=invoicetax">ใบกำกับภาษี</a></li>
+                    <li><a class="dropdown-item" href="?page=doc_out">ใบกำกับภาษี</a></li>
                 </ul>
             </li>
         </ul>

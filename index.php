@@ -138,15 +138,6 @@ body {
                             case "invoicebill_edit":
                                 include_once 'view/dashboard/invoicebill_edit.php';
                                 break;
-                            case "invoicetax":
-                                include_once 'view/dashboard/invoicetax_list.php';
-                                break;
-                            case "invoicetax_add":
-                                include_once 'view/dashboard/invoicetax_add.php';
-                                break;
-                            case "invoicetax_edit":
-                                include_once 'view/dashboard/invoicetax_edit.php';
-                                break;
                             default:
                                 include_once 'view/dashboard.php';
                         }

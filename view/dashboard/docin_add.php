@@ -30,7 +30,7 @@ if (isset($_POST['action'])) {
         $input_srcname = mysqli_real_escape_string($conn, trim($_POST['input_srcname']));
         $input_title = mysqli_real_escape_string($conn, trim($_POST['input_title']));
         $input_to = mysqli_real_escape_string($conn, trim($_POST['input_to']));
-        $uid = 1;
+        $uid = $_SESSION['id'];
 
         // $enc_no = encode($input_no, secret_key());
         // $enc_date = encode($input_date, secret_key());
@@ -114,7 +114,8 @@ if (isset($_POST['action'])) {
                 <div class="text-center text-md-start text-dark my-3">
                     <h3>เพิ่มข้อมูลหนังสือเข้า</h3>
                 </div>
-                <form action="?page=doc_in_add" id="docin_form" name="docin_form" method="post" class="form-anticlear p-md-5" enctype="multipart/form-data">
+                <form action="?page=doc_in_add" id="docin_form" name="docin_form" method="post"
+                    class="form-anticlear p-md-5" enctype="multipart/form-data">
                     <div class="row align-items-center text-dark px-md-5 mb-3">
                         <div class="col-md-3">
                             <h6 for="input_no" class="col-form-label">เลขที่ </h6>
@@ -170,8 +171,11 @@ if (isset($_POST['action'])) {
                     <div class=" row mt-5">
                         <div class="col-md-12">
                             <div class="d-flex justify-content-end">
-                                <button type="reset" class="btn bg-secondary-addpay text-white me-3"><i class="fa-solid fa-arrow-rotate-left"></i> ล้างข้อมูล</button>
-                                <button type="submit" name="action" value="create_docin" class=" btn btn-addpay text-white">บันทึก <i class="fa-solid fa-cloud-arrow-up"></i></button>
+                                <button type="reset" class="btn bg-secondary-addpay text-white me-3"><i
+                                        class="fa-solid fa-arrow-rotate-left"></i> ล้างข้อมูล</button>
+                                <button type="submit" name="action" value="create_docin"
+                                    class=" btn btn-addpay text-white">บันทึก <i
+                                        class="fa-solid fa-cloud-arrow-up"></i></button>
                             </div>
                         </div>
                     </div>
