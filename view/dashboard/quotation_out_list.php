@@ -1,16 +1,18 @@
 <?php
 if (isset($_GET["deletequoout"])) {
+    
     $id = $_GET["deletequoout"];
 
     $sql = "DELETE FROM quotation_out WHERE quoout_id = '$id'";
     $query = $conn->query($sql);
+    
     if ($query) {
         $_SESSION['success'] = "ลบใบเสนอราคาสำเร็จ!";
-        header("Location: quotation_out_list.php");
+        echo "<script> window.history.back()</script>";
         exit;
     }
     $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-    header("Location: quotation_out_list.php");
+    echo "<script> window.history.back()</script>";
     exit;
 }
 
@@ -23,8 +25,6 @@ if (isset($_GET["deletequoout"])) {
     </ol>
 </nav>
 <hr>
-
-
 <div class="container bg-secondary-addpay rounded-5">
     <div class="main-body py-md-5 px-md-1 text-white">
         <div class="container">
@@ -86,31 +86,32 @@ if (isset($_GET["deletequoout"])) {
                 </div>
                 <!-- Data table -->
                 <script type="text/javascript">
-                    $(document).ready(function() {
-                        $('#quotationoutTable').DataTable();
+                $(document).ready(function() {
+                    $('#quotationoutTable').DataTable();
 
-                        $(document).on('click', '.deletequoout', function() {
-                            var id = $(this).attr("id");
-                            var show_quoout_no = $(this).attr("data-quoout-no");
-                            swal.fire({
-                                title: 'ต้องการลบใบเสนอราคานี้ !',
-                                text: "เลขที่ใบเสนอราคา : " + show_quoout_no,
-                                type: 'warning',
-                                showCancelButton: true,
-                                confirmButtonColor: '#d33',
-                                cancelButtonColor: '#3085d6',
-                                confirmButtonText: 'yes!',
-                                cancelButtonText: 'no'
-                            }).then((result) => {
-                                if (result.value) {
-                                    window.location.href = "?deletequoout=" + id;
-                                }
-                            });
+                    $(document).on('click', '.deletequoout', function() {
+                        var id = $(this).attr("id");
+                        var show_quoout_no = $(this).attr("data-quoout-no");
+                        swal.fire({
+                            title: 'ต้องการลบใบเสนอราคานี้ !',
+                            text: "เลขที่ใบเสนอราคา : " + show_quoout_no,
+                            type: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33',
+                            cancelButtonColor: '#3085d6',
+                            confirmButtonText: 'yes!',
+                            cancelButtonText: 'no'
+                        }).then((result) => {
+                            if (result.value) {
+                                window.location.href = "?deletequoout=" + id;
+                            }
                         });
                     });
+                });
                 </script>
                 <!-- Data table -->
             </div>
         </div>
     </div>
 </div>
+<?php $conn->close(); ?>
