@@ -93,8 +93,8 @@ if (isset($_GET["deleteinvbill"])) {
                             var id = $(this).attr("id");
                             var show_invbill_no = $(this).attr("data-invbill-no");
                             swal.fire({
-                                title: 'ต้องการลบใบเสนอราคากลางนี้ !',
-                                text: "เลขที่ใบเสนอราคากลาง : " + show_invbill_no,
+                                title: 'ต้องการลบใบวางบิลนี้ !',
+                                text: "เลขที่ใบวางบิล : " + show_invbill_no,
                                 type: 'warning',
                                 showCancelButton: true,
                                 confirmButtonColor: '#d33',
@@ -103,7 +103,7 @@ if (isset($_GET["deleteinvbill"])) {
                                 cancelButtonText: 'no'
                             }).then((result) => {
                                 if (result.value) {
-                                    window.location.href = "?deleteinvbill=" + id;
+                                    window.location.href = "?page=invoicebill&deleteinvbill=" + id;
                                 }
                             });
                         });

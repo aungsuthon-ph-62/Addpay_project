@@ -37,19 +37,19 @@ if (isset($_POST['action'])) {
                 for ($count = 0; $count < $_POST["total_item"]; $count++) {
 
                     $item_name = mysqli_real_escape_string($conn, trim($_POST['item_name'][$count]));
-
-                    $item_inv_date = mysqli_real_escape_string($conn, trim($_POST['item_inv_date']));
-                    $item_due_date = mysqli_real_escape_string($conn, trim($_POST['item_due_date']));
+                    $item_inv_date = mysqli_real_escape_string($conn, trim($_POST['item_inv_date'][$count]));
+                    $item_due_date = mysqli_real_escape_string($conn, trim($_POST['item_due_date'][$count]));
                     
                     $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
                     $item_vat = mysqli_real_escape_string($conn, trim($_POST['item_vat'][$count]));
                     $item_total = mysqli_real_escape_string($conn, trim($_POST['item_total'][$count]));
 
 
-                    $query = "INSERT INTO invoicebill_details (invbilld_bid, invbilld_item, invbilld_inv_date, invbilld_due_date, invbilld_price, invbilld_vat, invbilld_result, invbilld_create, invbilld_uid)
+                    $query = "INSERT INTO invoicebill_details (invbilld_bid, invbilld_item, invibilld_inv_date, invibilld_due_date, invbilld_price, invbilld_vat, invbilld_result,invbilld_create, invbilld_uid)
                     VALUES ('$last_id', '$item_name', '$item_inv_date', '$item_due_date', '$item_price', '$item_vat', '$item_total', '$date', '$uid')";
-                    mysqli_query($conn, $query);
+                    $conn->query($query);
                 }
+                
 
                 $_SESSION['success'] = "บันทึกใบวางบิลสำเร็จ!";
                 echo("<script> window.location.href='?page=invoicebill'</script>");
@@ -145,7 +145,7 @@ if (isset($_POST['action'])) {
                     </div>
                     <div class="row align-items-center text-dark px-md-2 mb-3">
                         <div class="col-md-3 ">
-                            <h6>รายการใบเสนอราคากลาง :</h6>
+                            <h6>รายการใบวางบิล :</h6>
                         </div>
                         <div class="border border-secondary rounded-3 p-4">
                             <div class="table-responsive">
@@ -164,10 +164,10 @@ if (isset($_POST['action'])) {
                                     <tr id="row_id_1">
                                         <td><span id="sr_no"></span></td>
                                         <td><input type="text" name="item_name[]" id="item_name1" class="form-control input-sm" required /></td>
-                                        <td><input type="date" name="item_inv_date[]" id="item_inv_date1" data-srno="1" class="form-control input-sm item_inv_date" /></td>
-                                        <td><input type="date" name="item_due_date[]" id="item_due_date1" data-srno="1" class="form-control input-sm item_due_date" /></td>
+                                        <td><input type="date" name="item_inv_date[]" id="item_inv_date1" class="form-control input-sm item_inv_date" /></td>
+                                        <td><input type="date" name="item_due_date[]" id="item_due_date1" class="form-control input-sm item_due_date" /></td>
                                         <td><input type="number" name="item_price[]" id="item_price1" data-srno="1" class="form-control input-sm item_price" step="any" required /></td>
-                                        <td><input type="number" name="item_vat[]" id="item_vat1" class="form-control input-sm item_vat" required readonly /></td>
+                                        <td><input type="number" name="item_vat[]" id="item_vat1" data-srno="1" class="form-control input-sm item_vat" required readonly /></td>
                                         <td><input type="number" name="item_total[]" id="item_total1" data-srno="1" class="form-control input-sm item_total" required readonly /></td>
                                     </tr>
                                 </table>
