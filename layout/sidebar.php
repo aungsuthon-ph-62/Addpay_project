@@ -71,7 +71,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="?page=">
+                <a class="nav-link text-white" href="?page=archives">
                     <span data-feather="layers"></span>
                     เอกสารสำคัญ
                 </a>

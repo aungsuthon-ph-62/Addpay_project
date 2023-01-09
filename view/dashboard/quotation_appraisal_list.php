@@ -116,3 +116,4 @@ if (isset($_GET["deletequo"])) {
         </div>
     </div>
 </div>
+<?php $conn->close(); ?>

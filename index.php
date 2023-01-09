@@ -147,6 +147,15 @@ body {
                             case "invoicetax_edit":
                                 include_once 'view/dashboard/invoicetax_edit.php';
                                 break;
+                            case "archives":
+                                include_once 'view/dashboard/archives_list.php';
+                                break;
+                            case "archives_add":
+                                include_once 'view/dashboard/archives_add.php';
+                                break;
+                            case "archives_edit":
+                                include_once 'view/dashboard/archives_edit.php';
+                                break;
                             default:
                                 include_once 'view/dashboard.php';
                         }
