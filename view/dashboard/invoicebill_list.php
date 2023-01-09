@@ -71,7 +71,7 @@ if (isset($_GET["deleteinvbill"])) {
                                                             href="../dashboard/invoicebill_form.php?pdfinvbill_id=' . $rows["invbill_id"] . '">พิมพ์เอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
-                                                            href="?page=doc_out_edit&editinvbill=' . $rows["invbill_id"] . '">แก้ไข</a>
+                                                            href="?page=invoicebill_edit&editinvbill=' .encode($rows["invbill_id"], secret_key())  . '">แก้ไข</a>
                                                     </li>
                                                     <li><a class="dropdown-item deleteinvbill" href="#" data-invbill-no="' . $rows["invbill_no"] . '" id="' . $rows["invbill_id"] . '" >ลบ</a></li>
                                                 </ul>

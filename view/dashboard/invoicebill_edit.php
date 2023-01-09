@@ -5,7 +5,7 @@ if (isset($_GET['editinvbill'])) {
     $get_decode = $_GET['editinvbill'];
     $id = decode($get_decode, secret_key());
 
-    $sql = "SELECT * FROM invoicebill WHERE invbill ='$id'";
+    $sql = "SELECT * FROM invoicebill WHERE invbill_id ='$id'";
     $query = $conn->query($sql);
     $row = $query->fetch_assoc();
 
@@ -51,6 +51,7 @@ function edit_invbill()
     date_default_timezone_set('Asia/Bangkok');
     $date = date("Y-m-d H:i:s");
 
+    $id = mysqli_real_escape_string($conn, trim($_POST['invbill_id']));
     $input_invbill_no = mysqli_real_escape_string($conn, trim($_POST['input_invbill_no']));
     $input_invbill_date = mysqli_real_escape_string($conn, trim($_POST['input_invbill_date']));
     $input_invbill_name = mysqli_real_escape_string($conn, trim($_POST['input_invbill_name']));
@@ -64,26 +65,29 @@ function edit_invbill()
 
     $query1 = "UPDATE invoicebill SET invbill_no='$input_invbill_no', invbill_date='$input_invbill_date', invbill_name='$input_invbill_name',
         invbill_address='$input_invbill_address', invbill_cusid='$input_invbill_cusid', invbill_deli='$input_invbill_deli', invbill_total='$input_invbill_total', 
-        invbill_update='$date', invbill_uid='$uid' WHERE invbill='$id'";
+        invbill_page='$input_invbill_page', invbill_remark='$input_invbill_remark', invbill_update='$date', invbill_uid='$uid' WHERE invbill_id='$id'";
 
-    $query2 = "DELETE FROM invoicebill_details WHERE quode_quoid = '$id'";
+    $query2 = "DELETE FROM invoicebill_details WHERE invbilld_bid = '$id'";
 
     if ($conn->query($query1) === TRUE && $conn->query($query2) === TRUE) {
 
         for ($count = 0; $count < $_POST["total_item"]; $count++) {
 
             $item_name = mysqli_real_escape_string($conn, trim($_POST['item_name'][$count]));
-            $item_amount = mysqli_real_escape_string($conn, trim($_POST['item_amount'][$count]));
-            $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
-            $total_price = mysqli_real_escape_string($conn, trim($_POST['total_price'][$count]));
+            $item_inv_date = mysqli_real_escape_string($conn, trim($_POST['item_inv_date'][$count]));
+            $item_due_date = mysqli_real_escape_string($conn, trim($_POST['item_due_date'][$count]));
 
-            $query = "INSERT INTO invoicebill_details (quode_quoid, quode_item, quode_amount, quode_price,  quode_result, quode_create, quode_update, quode_uid)
-                VALUES ('$id', '$item_name', '$item_amount', '$item_price', '$total_price', '$quo_date_create', '$date', '$uid')";
-            $conn->query($query);
+            $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
+            $item_vat = mysqli_real_escape_string($conn, trim($_POST['item_vat'][$count]));
+            $item_total = mysqli_real_escape_string($conn, trim($_POST['item_total'][$count]));
+
+            $query = "INSERT INTO invoicebill_details (invbilld_bid, invbilld_item, invibilld_inv_date, invibilld_due_date, invbilld_price, invbilld_vat, invbilld_result,invbilld_create, invbilld_uid)
+                    VALUES ('$id', '$item_name', '$item_inv_date', '$item_due_date', '$item_price', '$item_vat', '$item_total', '$date', '$uid')";
+                    $conn->query($query);
         }
 
         $_SESSION['success'] = "แก้ไขใบวางบิลสำเร็จ!";
-        echo "<script> window.location.href='?page=quo';</script>";
+        echo "<script> window.location.href='?page=invoicebill';</script>";
         exit;
     } else {
         $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
@@ -159,7 +163,7 @@ function edit_invbill()
                             <label for="input_invbill_address" class="col-form-label">ที่อยู่ :</label>
                         </div>
                         <div class="col-6">
-                            <textarea class="form-control" id="input_invbill_address" name="input_invbill_address" rows="3" required value="<?= $row['invbill_address'] ?>"></textarea>
+                            <textarea class="form-control" id="input_invbill_address" name="input_invbill_address" rows="3" required><?= $row['invbill_address']; ?></textarea>
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
@@ -190,7 +194,7 @@ function edit_invbill()
                                     </tr>
                                     <?php
 
-                                    $sql = "SELECT * FROM invoicebill_details WHERE invbill_bid ='$id'";
+                                    $sql = "SELECT * FROM invoicebill_details WHERE invbilld_bid ='$id'";
                                     $query = $conn->query($sql);
                                     $n = 0;
                                     while ($rows = $query->fetch_assoc()) {
@@ -199,12 +203,27 @@ function edit_invbill()
 
                                         <tr id="row_id_1">
                                             <td><span id="sr_no"></span></td>
-                                            <td><input type="text" name="item_name[]" id="item_name1" class="form-control input-sm" required /></td>
-                                            <td><input type="date" name="item_inv_date[]" id="item_inv_date1" class="form-control input-sm item_inv_date" /></td>
-                                            <td><input type="date" name="item_due_date[]" id="item_due_date1" class="form-control input-sm item_due_date" /></td>
-                                            <td><input type="number" name="item_price[]" id="item_price1" data-srno="1" class="form-control input-sm item_price" step="any" required /></td>
-                                            <td><input type="number" name="item_vat[]" id="item_vat1" data-srno="1" class="form-control input-sm item_vat" required readonly /></td>
-                                            <td><input type="number" name="item_total[]" id="item_total1" data-srno="1" class="form-control input-sm item_total" required readonly /></td>
+                                            <td>
+                                                <input type="text" name="item_name[]" id="item_name<?= $n; ?>" class="form-control input-sm" required value="<?= $rows["invbilld_item"]; ?>" />
+                                            </td>
+                                            <td>
+                                                <input type="date" name="item_inv_date[]" id="item_inv_date<?= $n; ?>" class="form-control input-sm item_inv_date" value="<?= $rows["invbilld_inv_date"]; ?>" />
+                                            </td>
+                                            <td>
+                                                <input type="date" name="item_due_date[]" id="item_due_date<?= $n; ?>" class="form-control input-sm item_due_date" value="<?= $rows["invbilld_due_date"]; ?>" />
+                                            </td>
+                                            <td>
+                                                <input type="number" name="item_price[]" id="item_price<?= $n; ?>" data-srno="<?= $n; ?>" class="form-control input-sm item_price" step="any" required value="<?= $rows["invbilld_price"]; ?>" />
+                                            </td>
+                                            <td>
+                                                <input type="number" name="item_vat[]" id="item_vat<?= $n; ?>" data-srno="<?= $n; ?>" class="form-control input-sm item_vat" required readonly value="<?= $rows["invbilld_vat"]; ?>" />
+                                            </td>
+                                            <td>
+                                                <input type="number" name="item_total[]" id="item_total<?= $n; ?>" data-srno="<?= $n; ?>" class="form-control input-sm item_total" required readonly value="<?= $rows["invbilld_result"]; ?>" />
+                                            </td>
+                                            <td>
+                                                <button type="button" name="remove_row" id="<?= $n; ?>" class="btn btn-danger btn-xs remove_row">X</button>
+                                            </td>
                                         </tr>
                                     <?php
                                     }
