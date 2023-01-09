@@ -138,6 +138,9 @@ require_once "php/key.inc.php";
                             case "invoicebill_edit":
                                 include_once 'view/dashboard/invoicebill_edit.php';
                                 break;
+                            case "invoicebill_form":
+                                include_once 'view/dashboard/invoicebill_form.php';
+                                break;
                             default:
                                 include_once 'view/dashboard.php';
                         }
