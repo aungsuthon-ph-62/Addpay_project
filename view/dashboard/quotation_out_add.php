@@ -63,19 +63,19 @@ if (isset($_POST['action'])) {
 
 ?>
 <style>
-    table {
-        counter-reset: rowNumber;
-    }
+table {
+    counter-reset: rowNumber;
+}
 
-    table tr:not(:first-child) {
-        counter-increment: rowNumber;
-    }
+table tr:not(:first-child) {
+    counter-increment: rowNumber;
+}
 
-    table tr td:first-child::before {
-        content: counter(rowNumber);
-        min-width: 1em;
-        margin-right: 0.5em;
-    }
+table tr td:first-child::before {
+    content: counter(rowNumber);
+    min-width: 1em;
+    margin-right: 0.5em;
+}
 </style>
 
 <nav aria-label="breadcrumb">
@@ -100,7 +100,8 @@ if (isset($_POST['action'])) {
                             <h6 class="col-form-label">เลขที่ No.</h6>
                         </div>
                         <div class="col-auto">
-                            <input type="number" id="input_quoout_no" name="input_quoout_no" class="form-control " required>
+                            <input type="number" id="input_quoout_no" name="input_quoout_no" class="form-control "
+                                required>
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
@@ -108,7 +109,8 @@ if (isset($_POST['action'])) {
                             <h6 class="col-form-label">วันที่ date.</h6>
                         </div>
                         <div class="col-auto">
-                            <input type="date" id="input_quoout_date" name="input_quoout_date" class="form-control " required>
+                            <input type="date" id="input_quoout_date" name="input_quoout_date" class="form-control "
+                                required>
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
@@ -116,7 +118,8 @@ if (isset($_POST['action'])) {
                             <h6 class="col-form-label">ชื่อลูกค้า :</h6>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" id="input_quoout_name" name="input_quoout_name" class="form-control " required>
+                            <input type="text" id="input_quoout_name" name="input_quoout_name" class="form-control "
+                                required>
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
@@ -124,7 +127,8 @@ if (isset($_POST['action'])) {
                             <h6 class="col-form-label">ที่อยู่ :</h6>
                         </div>
                         <div class="col-md-8">
-                            <textarea class="form-control" id="input_quoout_address" name="input_quoout_address" rows="3" required></textarea>
+                            <textarea class="form-control" id="input_quoout_address" name="input_quoout_address"
+                                rows="3" required></textarea>
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
@@ -133,7 +137,9 @@ if (isset($_POST['action'])) {
                         </div>
 
                         <div class="col-md-8">
-                            <input type="number" id="input_quoout_numtax" name="input_quoout_numtax" class="form-control " pattern="[0-9]{13}" title="กรุณากรอกตัวเลข 0-9 จำนวน 13 หลัก ไม่มี (-)">
+                            <input type="number" id="input_quoout_numtax" name="input_quoout_numtax"
+                                class="form-control " pattern="[0-9]{13}"
+                                title="กรุณากรอกตัวเลข 0-9 จำนวน 13 หลัก ไม่มี (-)">
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
@@ -154,22 +160,28 @@ if (isset($_POST['action'])) {
 
                                     <tr id="row_id_1">
                                         <td><span id="sr_no"></span></td>
-                                        <td><input type="text" name="item_name[]" id="item_name1" class="form-control input-sm" required />
+                                        <td><input type="text" name="item_name[]" id="item_name1"
+                                                class="form-control input-sm" required />
                                         </td>
                                         <td>
-                                            <input type="number" name="item_amount[]" id="item_amount1" data-srno="1" class="form-control input-sm item_amount" required />
+                                            <input type="number" name="item_amount[]" id="item_amount1" data-srno="1"
+                                                class="form-control input-sm item_amount" required />
                                         </td>
                                         <td>
-                                            <input type="number" name="item_price[]" id="item_price1" data-srno="1" class="form-control input-sm number_only item_price" step="any" required />
+                                            <input type="number" name="item_price[]" id="item_price1" data-srno="1"
+                                                class="form-control input-sm number_only item_price" step="any"
+                                                required />
                                         </td>
                                         <td>
-                                            <input type="number" name="total_price[]" id="total_price1" data-srno="1" class="form-control input-sm total_price" readonly />
+                                            <input type="number" name="total_price[]" id="total_price1" data-srno="1"
+                                                class="form-control input-sm total_price" readonly />
                                         </td>
                                         <td></td>
                                     </tr>
                                 </table>
                                 <div class="text-center">
-                                    <button type="button" id="add_row" class="btn btn-addpay px-md-4 rounded-3" id="add_sub"><i class="fa fa-plus-circle text-white"></i> เพิ่มรายการ</button>
+                                    <button type="button" id="add_row" class="btn btn-addpay px-md-4 rounded-3"
+                                        id="add_sub"><i class="fa fa-plus-circle text-white"></i> เพิ่มรายการ</button>
                                 </div>
                             </div>
                         </div>
@@ -182,7 +194,9 @@ if (isset($_POST['action'])) {
                                         :</h6>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="number" id="input_quoout_deli" name="input_quoout_deli" class="form-control " placeholder="0.00" title="กรุณากรอกค่าขนส่ง หากมี" value="<?= $row['quoout_deli'] ?>">
+                                    <input type="number" id="input_quoout_deli" name="input_quoout_deli"
+                                        class="form-control " placeholder="0.00" title="กรุณากรอกค่าขนส่ง หากมี"
+                                        value="<?= $row['quoout_deli'] ?>">
                                 </div>
                             </div>
                         </div>
@@ -193,7 +207,8 @@ if (isset($_POST['action'])) {
                                 </div>
 
                                 <div class="col-md-6">
-                                    <input type="number" id="input_quoout_sum" name="input_quoout_sum" class="form-control " placeholder="0.00" readonly>
+                                    <input type="number" id="input_quoout_sum" name="input_quoout_sum"
+                                        class="form-control " placeholder="0.00" readonly>
                                 </div>
                             </div>
                             <div class="row align-items-center text-dark px-md-5 mb-3">
@@ -203,7 +218,9 @@ if (isset($_POST['action'])) {
                                 </div>
 
                                 <div class="col-md-6">
-                                    <input type="number" step="any" id="input_quoout_specialdis" name="input_quoout_specialdis" class="form-control " placeholder="0.00" title="กรุณากรอกส่วนลด หากมี">
+                                    <input type="number" step="any" id="input_quoout_specialdis"
+                                        name="input_quoout_specialdis" class="form-control " placeholder="0.00"
+                                        title="กรุณากรอกส่วนลด หากมี">
                                 </div>
                             </div>
                             <div class="row align-items-center text-dark px-md-5 mb-3">
@@ -212,7 +229,8 @@ if (isset($_POST['action'])) {
                                 </div>
 
                                 <div class="col-md-6">
-                                    <input type="number" id="input_quoout_afterdis" name="input_quoout_afterdis" class="form-control " placeholder="0.00" readonly>
+                                    <input type="number" id="input_quoout_afterdis" name="input_quoout_afterdis"
+                                        class="form-control " placeholder="0.00" readonly>
                                 </div>
                             </div>
                             <div class="row align-items-center text-dark px-md-5 mb-3">
@@ -221,7 +239,8 @@ if (isset($_POST['action'])) {
                                 </div>
 
                                 <div class="col-md-6">
-                                    <input type="number" id="input_quoout_vat" name="input_quoout_vat" class="form-control " placeholder="0.00" readonly>
+                                    <input type="number" id="input_quoout_vat" name="input_quoout_vat"
+                                        class="form-control " placeholder="0.00" readonly>
                                 </div>
                             </div>
                             <div class="row align-items-center text-dark px-md-5 mb-3">
@@ -230,7 +249,8 @@ if (isset($_POST['action'])) {
                                 </div>
 
                                 <div class="col-md-6">
-                                    <input type="number" id="input_quoout_total" name="input_quoout_total" class="form-control " placeholder="0.00" readonly>
+                                    <input type="number" id="input_quoout_total" name="input_quoout_total"
+                                        class="form-control " placeholder="0.00" readonly>
                                 </div>
                             </div>
                         </div>
@@ -238,114 +258,118 @@ if (isset($_POST['action'])) {
                     <div class="row mt-5">
                         <div class="col-md-12">
                             <div class="d-flex justify-content-end">
-                                <button type="reset" class="btn bg-secondary-addpay text-white me-3"><i class="fa-solid fa-arrow-rotate-left"></i> ล้างข้อมูล</button>
-                                <button type="submit" name="action" value="create_quoout" class="btn btn-addpay text-white">บันทึก <i class="fa-solid fa-cloud-arrow-up"></i></button>
+                                <button type="reset" class="btn bg-secondary-addpay text-white me-3"><i
+                                        class="fa-solid fa-arrow-rotate-left"></i> ล้างข้อมูล</button>
+                                <button type="submit" name="action" value="create_quoout"
+                                    class="btn btn-addpay text-white">บันทึก <i
+                                        class="fa-solid fa-cloud-arrow-up"></i></button>
                                 <input type="hidden" name="total_item" id="total_item" value="1" />
                             </div>
                         </div>
                     </div>
-
                 </form>
                 <script>
-                    $(document).ready(function() {
-                        var final_total_price = $('#final_total_price').text();
-                        var count = 1;
-                        var total_item = 1;
+                $(document).ready(function() {
+                    var final_total_price = $('#final_total_price').text();
+                    var count = 1;
+                    var total_item = 1;
 
-                        $(document).on('click', '#add_row', function() {
-                            count++;
-                            total_item++;
-                            $('#total_item').val(total_item);
-                            var html_code = '';
-                            html_code += '<tr id="row_id_' + count + '">';
-                            html_code += '<td><span id="sr_no"></span></td>';
-                            html_code +=
-                                '<td><input type="text" name="item_name[]" id="item_name' + count +
-                                '" class="form-control input-sm" required/></td>';
-                            html_code +=
-                                '<td><input type="number" name="item_amount[]" id="item_amount' +
-                                count + '" data-srno="' + count +
-                                '" class="form-control input-sm number_only item_amount" required/></td>';
-                            html_code +=
-                                '<td><input type="number" name="item_price[]" id="item_price' +
-                                count + '" data-srno="' + count +
-                                '" class="form-control input-sm number_only item_price" required step="any"/></td>';
-                            html_code +=
-                                '<td><input type="number" name="total_price[]" id="total_price' +
-                                count + '" data-srno="' + count +
-                                '" class="form-control input-sm total_price" readonly /></td>';
-                            html_code +=
-                                '<td><button type="button" name="remove_row" id="' + count +
-                                '" class="btn btn-danger btn-xs remove_row">X</button></td>';
-                            html_code += '</tr>';
-                            $('#quoout-item-table').append(html_code);
-                        });
+                    $(document).on('click', '#add_row', function() {
+                        count++;
+                        total_item++;
+                        $('#total_item').val(total_item);
+                        var html_code = '';
+                        html_code += '<tr id="row_id_' + count + '">';
+                        html_code += '<td><span id="sr_no"></span></td>';
+                        html_code +=
+                            '<td><input type="text" name="item_name[]" id="item_name' + count +
+                            '" class="form-control input-sm" required/></td>';
+                        html_code +=
+                            '<td><input type="number" name="item_amount[]" id="item_amount' +
+                            count + '" data-srno="' + count +
+                            '" class="form-control input-sm number_only item_amount" required/></td>';
+                        html_code +=
+                            '<td><input type="number" name="item_price[]" id="item_price' +
+                            count + '" data-srno="' + count +
+                            '" class="form-control input-sm number_only item_price" required step="any"/></td>';
+                        html_code +=
+                            '<td><input type="number" name="total_price[]" id="total_price' +
+                            count + '" data-srno="' + count +
+                            '" class="form-control input-sm total_price" readonly /></td>';
+                        html_code +=
+                            '<td><button type="button" name="remove_row" id="' + count +
+                            '" class="btn btn-danger btn-xs remove_row">X</button></td>';
+                        html_code += '</tr>';
+                        $('#quoout-item-table').append(html_code);
+                    });
 
-                        $(document).on('click', '.remove_row', function() {
-                            var row_id = $(this).attr("id");
-                            $('#row_id_' + row_id).remove();
-                            total_item--;
-                            $('#total_item').val(total_item);
-                            cal_final_total(count);
-
-                        });
-
-                        function cal_final_total(count) {
-                            var final_total_price = 0;
-                            for (j = 1; j <= count; j++) {
-                                var quantity = 0;
-                                var price = 0;
-                                var total_price = 0;
-                                quantity = $('#item_amount' + j).val();
-                                if (quantity > 0) {
-                                    price = $('#item_price' + j).val();
-                                    if (price > 0) {
-                                        total_price = (parseFloat(quantity) * parseFloat(price));
-                                        $('#total_price' + j).val(total_price.toFixed(2));
-
-                                        final_total_price = (final_total_price + total_price);
-
-                                    }
-                                }
-                            }
-                            $('#input_quoout_sum').val(final_total_price.toFixed(2));
-                            var discount = 0;
-                            var afterdis = 0;
-                            var vat7per = 0;
-                            var aftervd = 0;
-                            var afterdeli = 0;
-                            var deli = 0;
-                            discount = $('#input_quoout_specialdis').val();
-                            deli = $('#input_quoout_deli').val();
-                            afterdis = (final_total_price - discount);
-                            $('#input_quoout_afterdis').val(afterdis.toFixed(2));
-                            vat7per = (afterdis * 0.07);
-                            $('#input_quoout_vat').val(vat7per.toFixed(2));
-                            aftervd = (afterdis + vat7per);
-                            if (deli > 0) {
-                                aftervd = (aftervd + parseFloat(deli));
-                            }
-
-                            $('#input_quoout_total').val(aftervd.toFixed(2));
-                        }
-
-                        $(document).on('change', '.item_price', function() {
-                            cal_final_total(count);
-                        });
-
-                        $(document).on('change', '.item_amount', function() {
-                            cal_final_total(count);
-                        });
-
-                        $(document).on('change', '#input_quoout_specialdis', function() {
-                            cal_final_total(count);
-                        });
-
-                        $(document).on('change', '#input_quoout_deli', function() {
-                            cal_final_total(count);
-                        });
+                    $(document).on('click', '.remove_row', function() {
+                        var row_id = $(this).attr("id");
+                        $('#row_id_' + row_id).remove();
+                        total_item--;
+                        $('#total_item').val(total_item);
+                        cal_final_total(count);
 
                     });
+
+                    function cal_final_total(count) {
+                        var final_total_price = 0;
+                        for (j = 1; j <= count; j++) {
+                            var quantity = 0;
+                            var price = 0;
+                            var total_price = 0;
+                            quantity = $('#item_amount' + j).val();
+                            if (quantity > 0) {
+                                price = $('#item_price' + j).val();
+                                if (price > 0) {
+                                    total_price = (parseFloat(quantity) * parseFloat(price));
+                                    $('#total_price' + j).val(total_price.toFixed(2));
+
+                                    final_total_price = (final_total_price + total_price);
+
+                                }
+                            }
+                        }
+                        $('#input_quoout_sum').val(final_total_price.toFixed(2));
+                        var discount = 0;
+                        var afterdis = 0;
+                        var vat7per = 0;
+                        var aftervd = 0;
+                        var afterdeli = 0;
+                        var deli = 0;
+                        discount = $('#input_quoout_specialdis').val();
+                        deli = $('#input_quoout_deli').val();
+                        afterdis = (final_total_price - discount);
+                        $('#input_quoout_afterdis').val(afterdis.toFixed(2));
+                        vat7per = (afterdis * 0.07);
+                        $('#input_quoout_vat').val(vat7per.toFixed(2));
+                        aftervd = (afterdis + vat7per);
+                        if (deli > 0) {
+                            aftervd = (aftervd + parseFloat(deli));
+                        }
+
+                        $('#input_quoout_total').val(aftervd.toFixed(2));
+                    }
+
+                    $(document).on('change', '.item_price', function() {
+                        cal_final_total(count);
+                    });
+
+                    $(document).on('change', '.item_amount', function() {
+                        cal_final_total(count);
+                    });
+
+                    $(document).on('change', '#input_quoout_specialdis', function() {
+                        cal_final_total(count);
+                    });
+
+                    $(document).on('change', '#input_quoout_deli', function() {
+                        cal_final_total(count);
+                    });
+
+                });
                 </script>
             </div>
-            </body>
+        </div>
+    </div>
+</div>
