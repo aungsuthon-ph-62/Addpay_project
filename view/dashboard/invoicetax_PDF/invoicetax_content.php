@@ -10,81 +10,51 @@ echo '
 
 <div id="invtaxForm" class="container mt-5" style="width: 842px;">
     <div>
-        <table>
+        <table style="padding-bottom: 20px;">
             <tr>
-                <td style="width:250px;">
+                <td style="width:200px;">
                     <div class="logo">
-                        <img src="../../image/addpay-form-text.png" class="img-fluid position-relative" width="200" hight="auto" alt="addpay_logo_form">
+                        <img src="../../image/addpay-form-text.png" class="img-fluid position-relative" width="150" hight="auto" alt="addpay_logo_form">
                     </div>
                 </td>
-                <td style="width:592px;">
-                    <div style="margin-left: 60px;">
-                        <b class="text-left"> บริษัท แอดเพย์ เซอร์วิสพอยท์ จํากัด</b><br>
-                        <p class="text-left">406 หมู่ 18 ตําบลขามใหญ่ อําเภอเมือง จังหวัดอุบลราชธานี โทร. 045-317123</p>
+                <td style="width:442px; text-align: center;" >
+                    <div>
+                        <b> บริษัท แอดเพยเ์ซอร์วิสพอยท์จำกัด (สำนักงานใหญ่)</b><br>
+                        <b> 406 หมู่ 18 ตําบลขามใหญ่ อําเภอเมือง จังหวัดอุบลราชธานี 34000</b><br>
+                        <b> เลขประจำตัวผู้เสียภาษีอากร 0 3455 58001 37 0</b><br>
+                        <b> โทร . 045-317123 Fax. 045-317678</b><br>
+                        
                     </div>
                 </td>
-            </tr>
-        </table>
-        <table>
-
-            <tr style=" border-collapse: collapse; padding: 0; margin: 0;">
-                <td class="text-center" style="width: 200px;  border: 1px solid; padding: 8px;" ROWSPAN="2">
-                    <b>ใบแจ้งหนี้/ ใบกำกับภาษี</b><br>
+                <td VALIGN="middle" class="text-center" style="width:200px;  ">
+                        <b style="border: 1px solid; padding:20px; margin:0;">ใบแจ้งหนี้ / ใบกำกับภาษี</b>
                 </td>
-                <td  style="text-align: right; width: 500px; border-collapse: collapse; padding: 0; margin: 0;">เลขที่/No.</td>
-                
-                <td class="underline" style="text-align: center; width: 142px;">
-                    <p class="text-left"> <span>&nbsp;' .$infoinvtax['invtax_no']   . ' &nbsp;&nbsp;</span> </p>
-                </td>
-
-            </tr>
-            <tr>
-                <td style="text-align: right; border-collapse: collapse; padding: 0; margin: 0;">วันที่/Date.</td>
-                <td class="underline" style="text-align: center;">
-                    <p class="text-left"> <span>&nbsp;' . $infoinvtax['invtax_date']  . ' &nbsp;&nbsp;</span> </p>
-                </td>
-                
             </tr>
             
-        </table>
-    </div>
 
-    <!--  -->
-    <!--php  ดึงข้อมูลลูกค้า -->
-    <!--  -->
-    <div>
-        <table style="margin-top: 5px;">
-            <tr>
-                <td style="width:200px;">
-                    <p class="text-left ">ชื่อ ลูกค้า :</p>
-                </td>
-                <td class="underline" style="width:642px;">
-                    <p class="text-left "> <span>&nbsp; ' . $infoinvtax['invtax_name'] . ' &nbsp;&nbsp;</span> </p>
-                </td>
-            </tr>
-            <tr>
-                <td style="width:200px;">
-                    <p class="text-left ">ที่อยู่ :</p>
-                </td>
-                <td class="underline" style="width:642px;">
-                    <p class="text-left"> <span>&nbsp;' . $infoinvtax['invtax_address'] . ' &nbsp;&nbsp;</span> </p>
-                </td>
-            </tr>
-            <tr>
-                <td style="width:200px;">
-                    <p class="text-left ">เลขประจำตัวผู้เสียภาษี : </p>
-                </td>
-                <td class="underline" style="width:642px;">
-                    <p class="text-left "> <span>&nbsp;' . $infoinvtax['invtax_cusid'] . ' &nbsp;&nbsp;</span> </p>
-                </td>
-            </tr>
+        </table>
         
-        </table>
-    </div>
+<!--php  ดึงข้อมูลลูกค้า -->
+<table style="width: 842px; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;  margin-top: 10px; ">
+    <tr style="border-bottom: 1px solid;">
+        <td align="left" style="border-left: 1px solid; width: 556px;">
+            <label>ชื่อลูกค้า / Customer :</label> &nbsp;&nbsp;' . $infoinvtax['invtax_name']  . '<br>
+            <label>ที่อยู่ / Address :</label> &nbsp;&nbsp;' . $infoinvtax['invtax_address']  . '<br>
+            <label>เลขประจำตัวผู้เสียภาษี :</label> &nbsp;&nbsp;' . $infoinvtax['invtax_cusid']  . '
+        </td>
+        <td VALIGN="TOP" align="left" style="border-left: 1px solid; width: 285px;">
+            <label>เลขที่ / No.</label> &nbsp;&nbsp;' . $infoinvtax['invtax_no']  . '<br>
+            <label>วันที่ / Date.</label> &nbsp;&nbsp;' . $infoinvtax['invtax_date']  . '
+        </td>
+    </tr>
+
+
+</table>
+
 
 
     <div>
-        <table style="width: 842px; border:1px solid; border-collapse: collapse; padding: 0; margin: 0; margin-top:5px;">
+        <table style="width: 842px; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
             <tr style="background-color:LightGray; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
                 <th class="text-center" style="border-left: 1px solid; width: 59px;">ลำดับที่</th>
                 <th class="text-center" style="border-left: 1px solid; width: 497px;">รายการ / Description</th>
@@ -106,13 +76,12 @@ if (mysqli_num_rows($result) > 0) {
         $i++;
         echo ' <tr>
             <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:10px;">' . $i . '</td>
-            <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:10px;">' .$infoinvtaxitems['invtaxd_item'] .'</td>
-            <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:10px;">' .$infoinvtaxitems['invtaxd_amount'] . '</td>
-            <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:10px;">' .number_format($infoinvtaxitems['invtaxd_price'],2) . '</td>
-            <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:10px;">' .number_format($infoinvtaxitems['invtaxd_result'],2) . '</td>
+            <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:10px;">' . $infoinvtaxitems['invtaxd_item'] . '</td>
+            <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:10px;">' . $infoinvtaxitems['invtaxd_amount'] . '</td>
+            <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:10px;">' . number_format($infoinvtaxitems['invtaxd_price'], 2) . '</td>
+            <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:10px;">' . number_format($infoinvtaxitems['invtaxd_result'], 2) . '</td>
         </tr>';
     }
-    
 }
 
 // <!-- blank area -->
@@ -120,7 +89,7 @@ if (mysqli_num_rows($result) > 0) {
 $sql = "SELECT * FROM invoicetax WHERE invtax_id = '$id'";
 $result = mysqli_query($conn, $sql);
 while ($infoinvtaxsum = mysqli_fetch_array($result)) {
-echo '
+    echo '
 
 <tr>
     <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;"></td>
@@ -153,17 +122,17 @@ echo '
 
 
     <td style="text-align: right; border-left: 0px solid;" colspan="2">รวมเงิน</td>
-    <td style="text-align: right; border-left: 1px solid;">' . number_format($infoinvtaxsum['invtax_sum'],2) . '</td>
+    <td style="text-align: right; border-left: 1px solid;">' . number_format($infoinvtaxsum['invtax_sum'], 2) . '</td>
 </tr>
 <tr
     style="background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
     <td style="text-align: right; border-left: 0px solid;" colspan="2">ภาษีมูลค่าเพิ่ม 7%</td>
-    <td style="text-align: right; border-left: 1px solid;">' . number_format($infoinvtaxsum['invtax_vat'],2) . '</td>
+    <td style="text-align: right; border-left: 1px solid;">' . number_format($infoinvtaxsum['invtax_vat'], 2) . '</td>
 </tr>
 <tr
     style=" background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
     <td style="text-align: right; border-left: px solid;" colspan="2">จำนวนเงินรวมทั้งสิน</td>
-    <td style="text-align: right; border-left: 1px solid;">' . number_format($infoinvtaxsum['invtax_total'],2) . '</td>
+    <td style="text-align: right; border-left: 1px solid;">' . number_format($infoinvtaxsum['invtax_total'], 2) . '</td>
 </tr>
 
 
@@ -178,7 +147,7 @@ while ($infoinvtaxsum = mysqli_fetch_array($result)) {
     echo '
     <div>
         <!-- footer -->
-        <table style="width: 842px; border:1px solid; border-collapse: collapse; padding: 0; margin-top: 10px; ">
+        <table style="width: 842px; border:1px solid; border-collapse: collapse; padding: 0;">
             <tr>
                 <td VALIGN="TOP" style="text-align: center; width: 50%; border:1px solid; border-collapse: collapse; padding: 10px; margin: 0; height: 100px;">
                     <p> ข้าพเจ้าได้รับเอกสารข้างต้นถูกต้องครบถ้วนแล้ว </p>
@@ -192,7 +161,7 @@ while ($infoinvtaxsum = mysqli_fetch_array($result)) {
                     <p>(นายวรกฤต ศิรธนิตรา)</p>
                     <p>ผู้มีอำนาจลงนาม</p>
                     <!-- วันที่ในใบเสนอราคา -->
-                    <p>วันที่ 11 มกราคม 2564</p>
+                    <p> วันที่&nbsp;…………………/…………………/…………………</p>
                     <p>เลขบัญชี 850-6000-548 ธนาคารกรุงไทย สาขาสุนีย์</p>
                 </td>
                 

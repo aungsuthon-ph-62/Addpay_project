@@ -215,7 +215,7 @@ if (isset($_POST['action'])) {
                         <div class="col-md-12">
                             <div class="d-flex justify-content-end">
                                 <button type="reset" class="btn bg-secondary-addpay text-white me-3"><i class="fa-solid fa-eraser"></i> ล้างข้อมูล</button>
-                                <button type="submit" name="action" value="create_invtax" class="btn btn-addpay text-white">บันทึก<i class="fa-solid fa-angles-right"></i></button>
+                                <button type="submit" name="action" value="create_invtax" class="btn btn-addpay text-white">บันทึก<i class="fa-solid fa-cloud-arrow-up"></i></i></button>
                             </div>
                         </div>
                         <input type="hidden" name="total_item" id="total_item" value="1" />
