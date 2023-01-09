@@ -56,7 +56,7 @@ echo '
 
     <div>
         <table style="width: 842px; border:1px solid; border-bottom: 0;border-collapse: collapse; padding: 0; margin: 0;">
-            <tr style="background-color:LightGray; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
+            <tr style="border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
                 <th class="text-center" style="border-left: 1px solid; width: 59px;">ลำดับที่</th>
                 <th class="text-center" style="border-left: 1px solid; width: 497px;">รายการ / Description</th>
                 <th class="text-center" style="border-left: 1px solid; width: 88px;">จำนวน<br>Amount</th>
@@ -109,7 +109,7 @@ while ($infoinvtaxsum = mysqli_fetch_array($result)) {
 <!-- end blank area-->
 
 
-<tr style="text-align:center; background-color:LightGray; border:1px solid;border-bottom: 0; border-collapse: collapse; padding: 0; margin: 0;">
+<tr style="text-align:center; border:1px solid;border-bottom: 0; border-collapse: collapse; padding: 0; margin: 0;">
     <td VALIGN="middle" style=" border:1px solid; border-collapse: collapse; padding: 5px; margin: 0;" VALIGN="TOP" ROWSPAN="5" colspan="2" >
         ' . Convert($infoinvtaxsum['invtax_total']) . ' <br> (ตัวอักษร)
     </td>
@@ -126,12 +126,12 @@ while ($infoinvtaxsum = mysqli_fetch_array($result)) {
     <td style="text-align: right; border-left: 1px solid;">' . number_format($infoinvtaxsum['invtax_sum'], 2) . '</td>
 </tr>
 <tr
-    style="background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
+    style="width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
     <td style="text-align: right; border-left: 0px solid;" colspan="2">ภาษีมูลค่าเพิ่ม 7%</td>
     <td style="text-align: right; border-left: 1px solid;">' . number_format($infoinvtaxsum['invtax_vat'], 2) . '</td>
 </tr>
 <tr
-    style=" background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
+    style=" width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
     <td style="text-align: right; border-left: px solid;" colspan="2">จำนวนเงินรวมทั้งสิน</td>
     <td style="text-align: right; border-left: 1px solid;">' . number_format($infoinvtaxsum['invtax_total'], 2) . '</td>
 </tr>

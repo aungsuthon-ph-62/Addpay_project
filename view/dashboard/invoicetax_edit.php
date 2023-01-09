@@ -165,11 +165,11 @@ function edit_invtax()
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
                         <div class="col-md-3 text-md-end ">
-                            <label for="input_invtax_cusid" class="col-form-label" require>เลขประจำตัวผู้เสียภาษี :</label>
+                            <label for="input_invtax_cusid" class="col-form-label">เลขประจำตัวผู้เสียภาษี :</label>
                         </div>
 
                         <div class="col-md-8">
-                            <input type="number" id="input_invtax_cusid" name="input_invtax_cusid" class="form-control " pattern="[0-9]{13}" title="กรุณากรอกตัวเลข 0-9 จำนวน 13 หลัก ไม่มี (-)" value="<?= $row['invtax_cusid'] ?>">
+                            <input type="text" id="input_invtax_cusid" name="input_invtax_cusid" class="form-control " pattern="[0-9]{13}" title="กรุณากรอกตัวเลข 0-9 จำนวน 13 หลัก ไม่มี (-)"required value="<?= $row['invtax_cusid'] ?>">
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
