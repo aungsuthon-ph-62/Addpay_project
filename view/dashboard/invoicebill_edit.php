@@ -82,8 +82,8 @@ function edit_invbill()
             $item_vat = mysqli_real_escape_string($conn, trim($_POST['item_vat'][$count]));
             $item_total = mysqli_real_escape_string($conn, trim($_POST['item_total'][$count]));
 
-            $query = "INSERT INTO invoicebill_details (invbilld_bid, invbilld_item, invibilld_inv_date, invibilld_due_date, invbilld_price, invbilld_vat, invbilld_result, invbilld_create, invbilld_update, invbilld_uid)
-                    VALUES ('$id', '$item_name', '$item_inv_date', '$item_due_date', '$item_price', '$item_vat', '$item_total', '$date', '$date_invbill_create', '$uid')";
+            $query = "INSERT INTO invoicebill_details (invbilld_bid, invbilld_item, invbilld_inv_date, invbilld_due_date, invbilld_price, invbilld_vat, invbilld_result, invbilld_create, invbilld_update, invbilld_uid)
+                    VALUES ('$id', '$item_name', '$item_inv_date', '$item_due_date', '$item_price', '$item_vat', '$item_total', '$date_invbill_create', '$date', '$uid')";
             $conn->query($query);
         }
 
@@ -209,7 +209,7 @@ table tr td:first-child::before {
                                         $n = $n + 1;
                                     ?>
 
-                                    <tr id="row_id_1">
+                                    <tr id="row_id_<?= $n; ?>">
                                         <td><span id="sr_no"></span></td>
                                         <td>
                                             <input type="text" name="item_name[]" id="item_name<?= $n; ?>"
@@ -218,12 +218,12 @@ table tr td:first-child::before {
                                         </td>
                                         <td>
                                             <input type="date" name="item_inv_date[]" id="item_inv_date<?= $n; ?>"
-                                                class="form-control input-sm item_inv_date"
+                                                data-srno="<?= $n; ?>" class="form-control input-sm item_inv_date"
                                                 value="<?= $rows["invbilld_inv_date"]; ?>" />
                                         </td>
                                         <td>
                                             <input type="date" name="item_due_date[]" id="item_due_date<?= $n; ?>"
-                                                class="form-control input-sm item_due_date"
+                                                data-srno="<?= $n; ?>" class="form-control input-sm item_due_date"
                                                 value="<?= $rows["invbilld_due_date"]; ?>" />
                                         </td>
                                         <td>
@@ -265,7 +265,7 @@ table tr td:first-child::before {
                                 </div>
                                 <div class="col-auto">
                                     <textarea class="form-control" id="input_invbill_remark" name="input_invbill_remark"
-                                        rows="2" value="<?= $row['invbill_remark'] ?>"></textarea>
+                                        rows="2"><?= $row['invbill_remark'] ?></textarea>
                                 </div>
                             </div>
                             <div class="row align-items-center text-dark mb-3">
