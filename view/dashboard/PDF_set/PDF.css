@@ -1,78 +1,35 @@
-body {
-  font-family: "Sarabun", sans-serif;
+*{
+    font-family: 'Sarabun', sans-serif;
 }
 
 .text-center {
-  text-align: center;
+    text-align: center;
 }
 
 .text-left {
-  justify-items: left;
+    justify-items: left;
 }
 
 .text-right {
-  text-align: right;
+    text-align: right;
 }
 
 .underline {
-  border-bottom: 2px solid;
+    border-bottom: 2px solid;
 }
 
-.bg-gray {
-  background-color: LightGray;
+.bg-gray{
+    background-color:LightGray;
 }
+
+
 
 /* docout */
 
 .docright {
-  padding-left: 80px;
-  padding-right: 100px;
+    padding-left: 80px;
+    padding-right: 100px;
 }
-.pt-10 {
-  padding-top: 10px;
-}
-
-.btn {
-  transition: all 0.2s ease-in-out;
-}
-
-.btn:hover {
-  border-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transform: scale(1.1);
-}
-
-.bg-primary-addpay {
-  /* fallback for old browsers */
-  background: #07aaf2;
-
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(to right, #07aaf2, #50b4df);
-
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(to bottom, #079ad9, #07aaf2, #50b4df);
-}
-
-/* Darkblue Background Color */
-.bg-secondary-addpay {
-  /* fallback for old browsers */
-  background: #046197;
-
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(to right, #046197, #034266);
-
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(to bottom, #046197, #034266);
-}
-
-/* Button Color */
-.btn-addpay {
-  /* fallback for old browsers */
-  background: #fe9100;
-
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(to right, #fdb04c, #fe9100);
-
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(to bottom, #fdb04c, #fe9100);
+.pt-10{
+    padding-top: 10px;
 }

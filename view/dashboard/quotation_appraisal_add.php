@@ -25,7 +25,6 @@ if (isset($_POST['action'])) {
         $check = $query->fetch_assoc();
 
         if ($check) {
-    
             $_SESSION['error'] = "เลขที่ใบเสนอราคากลางนี้มีในระบบแล้ว!";
             echo "<script>window.history.back();</script>";
             exit;
