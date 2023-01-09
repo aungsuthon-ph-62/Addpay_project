@@ -31,14 +31,6 @@ $mpdf = new \Mpdf\Mpdf([
     'default_font_size' => 16,
 ]);
 
-
-// $a = file_get_contents('./invtaxtation_PDF/invtaxtation_content.php');
-// $stylesheet = file_get_contents('./PDF_set/PDF.css');
-// $mpdf->WriteHTML($stylesheet, \Mpdf\HTMLParserMode::HEADER_CSS);
-// $mpdf->WriteHTML($a, \Mpdf\HTMLParserMode::HTML_BODY);
-// $mpdf->Output('./invtaxtation_PDF/invtaxtation_appraisal0.pdf'); //link web of file pdf
-
-
 $sql = "SELECT * FROM invoicetax WHERE invtax_id = '$id'";
 $query = $conn->query($sql);
 $infoinvtax = $query->fetch_assoc();
@@ -247,13 +239,27 @@ $mpdf->Output('./invoicetax_PDF/invoicetax0.pdf');
 
 ?>
 
+
+<style>
+.btn-pdf{
+    background: #fe9100; 
+    background: -webkit-linear-gradient(to right, #fdb04c, #fe9100); 
+    background: linear-gradient(to bottom, #fdb04c, #fe9100);
+}
+.btn-pdf:hover {
+    border-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+}
+
+</style>
+
 <body>
 
     <div class="container py-md-5 px-md-4" style="width: 100%; ">
         <p class="text-end text-danger ">** โปรดตรวจสอบความถูกต้องของข้อมูลก่อนกด พิมพ์เอกสาร</p>
-        <div class="mx-auto d-flex justify-content-end ">
-            <a class="btn btn-outline-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold" role="button" href="./invoicetax_PDF/invoicetax0.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
-            <a class="btn btn-outline-danger px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold ms-3" role="button" href="?page=invoicetax"><i class="fa-regular fa-rectangle-xmark"></i> ยกเลิก</a>
+        <div class="mx-auto d-flex justify-content-end me-5">
+            <a class="btn btn-pdf px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold text-light" role="button" href="./invoicetax_PDF/invoicetax0.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
         </div>
         <hr>
         <?php

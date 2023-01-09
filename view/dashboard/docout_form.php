@@ -136,7 +136,7 @@ $mpdf->Output('./docout_PDF/docout_PDF.pdf'); //link web of file pdf
 ?>
 <style>
 .btn-pdf{
-    background: #fe9100; 
+    background: red; 
     background: -webkit-linear-gradient(to right, #fdb04c, #fe9100); 
     background: linear-gradient(to bottom, #fdb04c, #fe9100);
 }
