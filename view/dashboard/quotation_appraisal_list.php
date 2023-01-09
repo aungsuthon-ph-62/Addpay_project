@@ -70,7 +70,7 @@ if (isset($_GET["deletequo"])) {
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li><a class="dropdown-item"
-                                                            href="?page=quo_form&?pdfquo=' . $rows["quo_id"] . '">พิมพ์เอกสาร</a>
+                                                            href="view/dashboard/quotation_appraisal_form.php?pdfquo=' . $rows["quo_id"] . '" target="_blank"">พิมพ์เอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
                                                             href="?page=quo_edit&editquo=' . encode($rows["quo_id"], secret_key()) . '">แก้ไข</a>
@@ -88,31 +88,32 @@ if (isset($_GET["deletequo"])) {
                 </div>
                 <!-- Data table -->
                 <script type="text/javascript">
-                    $(document).ready(function() {
-                        $('#quotationTable').DataTable();
+                $(document).ready(function() {
+                    $('#quotationTable').DataTable();
 
-                        $(document).on('click', '.deletequo', function() {
-                            var id = $(this).attr("id");
-                            var show_quo_no = $(this).attr("data-quo-no");
-                            swal.fire({
-                                title: 'ต้องการลบใบเสนอราคากลางนี้ !',
-                                text: "เลขที่ใบเสนอราคากลาง : " + show_quo_no,
-                                type: 'warning',
-                                showCancelButton: true,
-                                confirmButtonColor: '#d33',
-                                cancelButtonColor: '#3085d6',
-                                confirmButtonText: 'yes!',
-                                cancelButtonText: 'no'
-                            }).then((result) => {
-                                if (result.value) {
-                                    window.location.href = "?page=quo&deletequo=" + id;
-                                }
-                            });
+                    $(document).on('click', '.deletequo', function() {
+                        var id = $(this).attr("id");
+                        var show_quo_no = $(this).attr("data-quo-no");
+                        swal.fire({
+                            title: 'ต้องการลบใบเสนอราคากลางนี้ !',
+                            text: "เลขที่ใบเสนอราคากลาง : " + show_quo_no,
+                            type: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33',
+                            cancelButtonColor: '#3085d6',
+                            confirmButtonText: 'yes!',
+                            cancelButtonText: 'no'
+                        }).then((result) => {
+                            if (result.value) {
+                                window.location.href = "?page=quo&deletequo=" + id;
+                            }
                         });
                     });
+                });
                 </script>
                 <!-- Data table -->
             </div>
         </div>
     </div>
 </div>
+<?php $conn->close(); ?>

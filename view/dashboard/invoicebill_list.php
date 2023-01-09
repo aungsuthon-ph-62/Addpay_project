@@ -68,10 +68,10 @@ if (isset($_GET["deleteinvbill"])) {
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li><a class="dropdown-item"
-                                                            href="../dashboard/invoicebill_form.php?pdfinvbill_id=' . $rows["invbill_id"] . '">พิมพ์เอกสาร</a>
+                                                            href="view/dashboard/invoicebill_form.php?pdfinvbill_id=' . $rows["invbill_id"] . '">พิมพ์เอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
-                                                            href="?page=doc_out_edit&editinvbill=' . $rows["invbill_id"] . '">แก้ไข</a>
+                                                            href="?page=invoicebill_edit&editinvbill=' .encode($rows["invbill_id"], secret_key())  . '">แก้ไข</a>
                                                     </li>
                                                     <li><a class="dropdown-item deleteinvbill" href="#" data-invbill-no="' . $rows["invbill_no"] . '" id="' . $rows["invbill_id"] . '" >ลบ</a></li>
                                                 </ul>
@@ -93,8 +93,8 @@ if (isset($_GET["deleteinvbill"])) {
                             var id = $(this).attr("id");
                             var show_invbill_no = $(this).attr("data-invbill-no");
                             swal.fire({
-                                title: 'ต้องการลบใบเสนอราคากลางนี้ !',
-                                text: "เลขที่ใบเสนอราคากลาง : " + show_invbill_no,
+                                title: 'ต้องการลบใบวางบิลนี้ !',
+                                text: "เลขที่ใบวางบิล : " + show_invbill_no,
                                 type: 'warning',
                                 showCancelButton: true,
                                 confirmButtonColor: '#d33',
@@ -103,7 +103,7 @@ if (isset($_GET["deleteinvbill"])) {
                                 cancelButtonText: 'no'
                             }).then((result) => {
                                 if (result.value) {
-                                    window.location.href = "?deleteinvbill=" + id;
+                                    window.location.href = "?page=invoicebill&deleteinvbill=" + id;
                                 }
                             });
                         });

@@ -134,14 +134,21 @@ mysqli_close($conn);
 $mpdf->Output('./docout_PDF/docout_PDF.pdf'); //link web of file pdf
 
 ?>
+<style>
+.btn-pdf{
+    background: #fe9100; 
+    background: -webkit-linear-gradient(to right, #fdb04c, #fe9100); 
+    background: linear-gradient(to bottom, #fdb04c, #fe9100);
+}
 
+</style>
 <body>
 
     <div class="container  py-md-5 px-md-4" style="width: 100%;">
         <p class="text-end text-danger ">** โปรดตรวจสอบความถูกต้องของข้อมูลก่อนกด พิมพ์เอกสาร</p>
         <div class="mx-auto d-flex justify-content-end me-5">
-            <a class="btn btn-outline-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button" href="./docout_PDF/docout_PDF.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
-            <a class="btn btn-outline-danger px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold ms-3" role="button" href="./docout_list.php"><i class="fa-regular fa-rectangle-xmark"></i> ยกเลิก</a>
+            <a class="btn btn-pdf px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold text-light" role="button" href="./docout_PDF/docout_PDF.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
+            
         </div><hr>
         <?php
         include_once "./docout_PDF/docout_content.php";

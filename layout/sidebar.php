@@ -82,8 +82,8 @@
                     <li>
                         <h6 class="dropdown-header">เมนูใบแจ้งหนี้ : </h6>
                     </li>
-                    <li><a class="dropdown-item" href="?page=doc_in">ใบวางบิล</a></li>
-                    <li><a class="dropdown-item" href="?page=invoicetax">ใบกำกับภาษี</a></li>
+                    <li><a class="dropdown-item" href="?page=invoicebill">ใบวางบิล</a></li>
+                    <li><a class="dropdown-item" href="?page=doc_out">ใบกำกับภาษี</a></li>
                 </ul>
             </li>
         </ul>

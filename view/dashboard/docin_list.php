@@ -129,4 +129,4 @@ if(isset($_GET["deletedocin"])){
         </div>
     </div>
 </div>
-<?php $conn->close(); ?>
+?page=doc_in
