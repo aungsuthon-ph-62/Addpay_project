@@ -20,13 +20,14 @@ echo '
                     <div class="text-center">
                         <b> บริษัท แอดเพยเ์ซอร์วิสพอยท์จำกัด (สำนักงานใหญ่)</b><br>
                         <!-- <p class="text-left">406 หมู่ 18 ตําบลขามใหญ่ อําเภอเมือง จังหวัดอุบลราชธานี โทร. 045-317123</p> -->
+                        
                         <label for="">406 หมู่18 ตำบลขามใหญ่ อำเภอเมือง จังหวัดอุบลราชธานี34000<br>
                             เลขประจำตัวผู้เสียภาษีอากร 0 3455 58001 37 0<br>
                             โทร . 045-317123 Fax. 045-317678</label>
                     </div>
                 </td>
-                <td class="text-center" style="width:200px;  border: 1px solid; padding:5px; margin:0;">
-                    <b>ใบแจ้งหนี้ / ใบกำกับภาษี</b>
+                <td class="text-center" style="width:200px; ">
+                    <b style="border: 1px solid; padding:20px; margin:0;">ใบแจ้งหนี้ / ใบกำกับภาษี</b>
                 </td>
             </tr>
 
@@ -52,15 +53,25 @@ echo '
 
         <div>
             <table style="width: 842px; border:1px solid; border-collapse: collapse; padding: 0; margin: 0; margin-top:0px;">
-                <tr style="background-color:LightGray; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
-                    <td class="text-center" style="border-left: 1px solid; width: 42px;">ลำดับที่ <br><br> Item</td>
-                    <td class="text-center" style="border-left: 1px solid; width: 126px;">รายการ <br><br> Order</td>
-                    <td class="text-center" style="border-left: 1px solid; width: 93px;">วันที่ใบแจ้งหนี้/<br>ใบกำกับภาษี<br>invoice Date</td>
-                    <td class="text-center" style="border-left: 1px solid; width: 93px;">กำหนดชำระ<br> Due Date</td>
-                    <td class="text-center" style="border-left: 1px solid; width: 118px;">จำนวนก่อน<br>ภาษีมูลค่าเพิ่ม<br>Amount</td>
-                    <td class="text-center" style="border-left: 1px solid; width: 135px;">ภาษีมูลค่าเพิ่ม <br> Vat</td>
-                    <td class="text-center" style="border-left: 1px solid; width: 101px;">จำนวนเงินรวม<br>Total Amount</td>
-                    <td class="text-center" style="border-left: 1px solid; width: 109px;">หมายเหตุ<br>Remark</td>
+                <tr style="background-color:LightGray; border-collapse: collapse; padding: 0; margin: 0;">
+                    <td class="text-center" style="border-left: 1px solid; width: 80px;">ลำดับที่</td>
+                    <td class="text-center" style="border-left: 1px solid; width: 126px;">รายการ</td>
+                    <td class="text-center" style="border-left: 1px solid; width: 95px;">วันที่ใบแจ้งหนี้/<br>ใบกำกับภาษี</td>
+                    <td class="text-center" style="border-left: 1px solid; width: 93px;">กำหนดชำระ</td>
+                    <td class="text-center" style="border-left: 1px solid; width: 118px;">จำนวนก่อน<br>ภาษีมูลค่าเพิ่ม</td>
+                    <td class="text-center" style="border-left: 1px solid; width: 118px;">ภาษีมูลค่าเพิ่ม</td>
+                    <td class="text-center" style="border-left: 1px solid; width: 101px;">จำนวนเงินรวม</td>
+                    <td class="text-center" style="border-left: 1px solid; width: 109px;">หมายเหตุ</td>
+                </tr>
+                <tr style="background-color:LightGray; border-bottom:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
+                    <td class="text-center" style="border-left: 1px solid; width: 80px;"><br>Item</td>
+                    <td class="text-center" style="border-left: 1px solid; width: 126px;"><br>Order</td>
+                    <td class="text-center" style="border-left: 1px solid; width: 95px;"><br>invoice Date</td>
+                    <td class="text-center" style="border-left: 1px solid; width: 93px;"><br>Due Date</td>
+                    <td class="text-center" style="border-left: 1px solid; width: 118px;"><br>Amount</td>
+                    <td class="text-center" style="border-left: 1px solid; width: 118px;"><br>Vat</td>
+                    <td class="text-center" style="border-left: 1px solid; width: 101px;"><br>Total Amount</td>
+                    <td class="text-center" style="border-left: 1px solid; width: 109px;"><br>Remark</td>
                 </tr>';
 
 
