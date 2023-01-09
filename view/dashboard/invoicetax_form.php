@@ -39,27 +39,25 @@ $head = '
     <div>
         <table style="padding-bottom: 20px;">
             <tr>
-                <td style="width:200px;">
+                <td style="width:150px;" rowspan="4">
                     <div class="logo">
-                        <img src="../../image/addpay-form-text.png" class="img-fluid position-relative" width="150" hight="auto" alt="addpay_logo_form">
+                        <img src="../../image/addpay-form-text.png" class="img-fluid position-relative" width="130" hight="auto" alt="addpay_logo_form">
                     </div>
                 </td>
-                <td style="width:442px; text-align: center;" >
-                    <div>
+                <td style="width:472px; text-align: center;" rowspan="4">
                         <b> บริษัท แอดเพยเ์ซอร์วิสพอยท์จำกัด (สำนักงานใหญ่)</b><br>
                         <b> 406 หมู่ 18 ตําบลขามใหญ่ อําเภอเมือง จังหวัดอุบลราชธานี 34000</b><br>
                         <b> เลขประจำตัวผู้เสียภาษีอากร 0 3455 58001 37 0</b><br>
                         <b> โทร . 045-317123 Fax. 045-317678</b><br>
-                        
-                    </div>
-                </td>
-                <td VALIGN="middle" class="text-center" style="width:200px; border: 1px solid;  padding:20px; margin:0; ">
-                    <b style="">
-                     <label>ใบแจ้งหนี้ / ใบกำกับภาษี</label>
-                    </b>
+                  
                 </td>
             </tr>
-        
+            <tr>
+                <td  class="text-center" style="width:220px;  border: 1px solid; margin:0; " rowspan="2">
+                        <b>ใบแจ้งหนี้ / ใบกำกับภาษี</b>
+                </td>
+            </tr>
+            
 
         </table>
 
@@ -79,7 +77,7 @@ $head = '
 </table>
 
 <div>
-    <table style="width: 842px; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
+    <table style="width: 842px; border:1px solid;border-bottom: 0; border-collapse: collapse; padding: 0; margin: 0;">
         <tr style="background-color:LightGray; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
             <th class="text-center" style="border-left: 1px solid; width: 59px;">ลำดับที่</th>
             <th class="text-center" style="border-left: 1px solid; width: 497px;">รายการ / Description</th>
@@ -133,8 +131,8 @@ if (mysqli_num_rows($result) > 0) {
             <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;"></td>
         </tr>
 
-        <tr style="text-align:center; background-color:LightGray; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
-            <td style=" text-align:center; border:1px solid; border-collapse: collapse; padding: 5px; margin: 0;" VALIGN="TOP" ROWSPAN="5" colspan="2" >
+        <tr style="text-align:center; background-color:LightGray; border:1px solid; border-bottom: 0; border-collapse: collapse; padding: 0; margin: 0;">
+            <td style=" text-align:center; border:1px solid; border-collapse: collapse; padding: 5px; margin: 0;" VALIGN="middle" ROWSPAN="5" colspan="2" >
                 ' . Convert($infoinvtaxsum['invtax_total']) . ' <br> (ตัวอักษร)
             </td>
 
@@ -145,7 +143,7 @@ if (mysqli_num_rows($result) > 0) {
                 <td style="text-align: right; border-left: 0px solid;" colspan="2">ภาษีมูลค่าเพิ่ม 7%</td>
                 <td style="text-align: right; border-left: 1px solid;">' . number_format($infoinvtaxsum['invtax_vat'], 2) . '</td>
             </tr>
-            <tr style=" background-color:LightGray; width: 100%; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
+            <tr style=" background-color:LightGray; width: 100%; border:1px solid;border-bottom: 0; border-collapse: collapse; padding: 0; margin: 0;">
                 <td style="text-align: right; border-left: px solid;" colspan="2">จำนวนเงินรวมทั้งสิน</td>
                 <td style="text-align: right; border-left: 1px solid;">' . number_format($infoinvtaxsum['invtax_total'], 2) . '</td>
             </tr>
@@ -170,7 +168,7 @@ if (mysqli_num_rows($result) > 0) {
         <!-- footer -->
         <table style="width: 842px; border:1px solid; border-collapse: collapse; padding: 0; ">
             <tr>
-                <td VALIGN="TOP" style="text-align: center; width: 50%; border:1px solid; border-collapse: collapse; padding: 10px; margin: 0; height: 100px;">
+                <td VALIGN="TOP" style="text-align: center; width: 50%; border:1px solid; border-bottom: border-right: 0;0;border-collapse: collapse; padding: 10px; margin: 0; height: 100px;">
                     <p> ข้าพเจ้าได้รับเอกสารข้างต้นถูกต้องครบถ้วนแล้ว </p>
                     <p>ผู้รับเอกสาร</p>
                     <br><br><br><br><br>
@@ -178,7 +176,7 @@ if (mysqli_num_rows($result) > 0) {
                     </p>
                     <p> วันที่&nbsp;…………………/…………………/…………………</p>
                 </td>
-                <td VALIGN="BOTTOM" style="text-align: center; width: 50%; border:1px solid; border-collapse: collapse; padding: 10px; margin: 0; height: 100px;">
+                <td VALIGN="BOTTOM" style="text-align: center; width: 50%; border:1px solid; border-bottom: 0;border-collapse: collapse; padding: 10px; margin: 0; height: 100px;">
                     <p>(นายวรกฤต ศิรธนิตรา)</p>
                     <p>ผู้มีอำนาจลงนาม</p>
                     <!-- วันที่ในใบเสนอราคา -->
@@ -188,7 +186,7 @@ if (mysqli_num_rows($result) > 0) {
                 
         </table>
         
-        <p style="text-align: center;">กรุณาตรวจสอบเอกสารและหัก ณ ที่จ่าย (ถ้ามี)พร้อมส่งหนังสือรับรองการหักภาษี ณ ที่จ่ายมาด้วยทุกครั้งที่ชำระเงิน</p>
+        <p style="text-align: center;">กรุณาตรวจสอบเอกสารและหัก ณ ที่จ่าย (ถ้ามี) พร้อมส่งหนังสือรับรองการหักภาษี ณ ที่จ่ายมาด้วยทุกครั้งที่ชำระเงิน</p>
     </div>
 
         ';

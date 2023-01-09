@@ -10,33 +10,34 @@ echo '
 
 <div id="invtaxForm" class="container mt-5" style="width: 842px;">
     <div>
-        <table style="padding-bottom: 20px;">
-            <tr>
-                <td style="width:200px;">
-                    <div class="logo">
-                        <img src="../../image/addpay-form-text.png" class="img-fluid position-relative" width="150" hight="auto" alt="addpay_logo_form">
-                    </div>
-                </td>
-                <td style="width:442px; text-align: center;" >
-                    <div>
-                        <b> บริษัท แอดเพยเ์ซอร์วิสพอยท์จำกัด (สำนักงานใหญ่)</b><br>
-                        <b> 406 หมู่ 18 ตําบลขามใหญ่ อําเภอเมือง จังหวัดอุบลราชธานี 34000</b><br>
-                        <b> เลขประจำตัวผู้เสียภาษีอากร 0 3455 58001 37 0</b><br>
-                        <b> โทร . 045-317123 Fax. 045-317678</b><br>
-                        
-                    </div>
-                </td>
-                <td VALIGN="middle" class="text-center" style="width:200px;  ">
-                        <b style="border: 1px solid; padding:20px; margin:0;">ใบแจ้งหนี้ / ใบกำกับภาษี</b>
-                </td>
-            </tr>
-            
+    <table>
+        <tr>
+            <td style="width:200px;">
+                <div class="logo">
+                    <img src="../../image/addpay-form-text.png" class="img-fluid position-relative" width="150" hight="auto" alt="addpay_logo_form">
+                </div>
+            </td>
+            <td style="width:442px; text-align: center;" >
+                <div>
+                    <b> บริษัท แอดเพยเ์ซอร์วิสพอยท์จำกัด (สำนักงานใหญ่)</b><br>
+                    <b> 406 หมู่ 18 ตําบลขามใหญ่ อําเภอเมือง จังหวัดอุบลราชธานี 34000</b><br>
+                    <b> เลขประจำตัวผู้เสียภาษีอากร 0 3455 58001 37 0</b><br>
+                    <b> โทร . 045-317123 Fax. 045-317678</b><br>
+                    
+                </div>
+            </td>
+            <td VALIGN="middle" class="text-center" style="width:200px;  ">
+                <p style="border: 1px solid; padding:20px; margin:0;">
+                    <b style=" ">ใบแจ้งหนี้ / ใบกำกับภาษี</b>
+                </p>
+            </td>
+        </tr>
 
         </table>
         
 <!--php  ดึงข้อมูลลูกค้า -->
-<table style="width: 842px; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;  margin-top: 10px; ">
-    <tr style="border-bottom: 1px solid;">
+<table style="width: 842px; border:1px solid;border-bottom: 0; border-collapse: collapse; padding: 0; margin: 0;  margin-top: 10px; ">
+    <tr style="border-bottom: 0 solid;">
         <td align="left" style="border-left: 1px solid; width: 556px;">
             <label>ชื่อลูกค้า / Customer :</label> &nbsp;&nbsp;' . $infoinvtax['invtax_name']  . '<br>
             <label>ที่อยู่ / Address :</label> &nbsp;&nbsp;' . $infoinvtax['invtax_address']  . '<br>
@@ -54,7 +55,7 @@ echo '
 
 
     <div>
-        <table style="width: 842px; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
+        <table style="width: 842px; border:1px solid; border-bottom: 0;border-collapse: collapse; padding: 0; margin: 0;">
             <tr style="background-color:LightGray; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
                 <th class="text-center" style="border-left: 1px solid; width: 59px;">ลำดับที่</th>
                 <th class="text-center" style="border-left: 1px solid; width: 497px;">รายการ / Description</th>
@@ -108,8 +109,8 @@ while ($infoinvtaxsum = mysqli_fetch_array($result)) {
 <!-- end blank area-->
 
 
-<tr style="text-align:center; background-color:LightGray; border:1px solid; border-collapse: collapse; padding: 0; margin: 0;">
-    <td style=" border:1px solid; border-collapse: collapse; padding: 5px; margin: 0;" VALIGN="TOP" ROWSPAN="5" colspan="2" >
+<tr style="text-align:center; background-color:LightGray; border:1px solid;border-bottom: 0; border-collapse: collapse; padding: 0; margin: 0;">
+    <td VALIGN="middle" style=" border:1px solid; border-collapse: collapse; padding: 5px; margin: 0;" VALIGN="TOP" ROWSPAN="5" colspan="2" >
         ' . Convert($infoinvtaxsum['invtax_total']) . ' <br> (ตัวอักษร)
     </td>
     
@@ -147,9 +148,9 @@ while ($infoinvtaxsum = mysqli_fetch_array($result)) {
     echo '
     <div>
         <!-- footer -->
-        <table style="width: 842px; border:1px solid; border-collapse: collapse; padding: 0;">
+        <table style="width: 842px; border:1px solid; border-top: 0;border-collapse: collapse; padding: 0;">
             <tr>
-                <td VALIGN="TOP" style="text-align: center; width: 50%; border:1px solid; border-collapse: collapse; padding: 10px; margin: 0; height: 100px;">
+                <td VALIGN="TOP" style="text-align: center; width: 50%; border-left:0 solid; border-bottom: 0;border-collapse: collapse; padding: 10px; margin: 0; height: 100px;">
                     <p> ข้าพเจ้าได้รับเอกสารข้างต้นถูกต้องครบถ้วนแล้ว </p>
                     <p>ผู้รับเอกสาร</p>
                     <br><br><br><br><br>
@@ -157,7 +158,7 @@ while ($infoinvtaxsum = mysqli_fetch_array($result)) {
                     </p>
                     <p> วันที่&nbsp;…………………/…………………/…………………</p>
                 </td>
-                <td VALIGN="BOTTOM" style="text-align: center; width: 50%; border:1px solid; border-collapse: collapse; padding: 10px; margin: 0; height: 100px;">
+                <td VALIGN="BOTTOM" style="text-align: center; width: 50%; border:1px solid;border-top: 0; border-bottom: 0;border-collapse: collapse; padding: 10px; margin: 0; height: 100px;">
                     <p>(นายวรกฤต ศิรธนิตรา)</p>
                     <p>ผู้มีอำนาจลงนาม</p>
                     <!-- วันที่ในใบเสนอราคา -->
@@ -167,7 +168,7 @@ while ($infoinvtaxsum = mysqli_fetch_array($result)) {
                 
         </table>
         <br>
-        <p style="text-align: center;">กรุณาตรวจสอบเอกสารและหัก ณ ที่จ่าย (ถ้ามี)พร้อมส่งหนังสือรับรองการหักภาษี ณ ที่จ่ายมาด้วยทุกครั้งที่ชำระเงิน</p>
+        <p style="text-align: center;">กรุณาตรวจสอบเอกสารและหัก ณ ที่จ่าย (ถ้ามี) พร้อมส่งหนังสือรับรองการหักภาษี ณ ที่จ่ายมาด้วยทุกครั้งที่ชำระเงิน</p>
     </div>
 
 
