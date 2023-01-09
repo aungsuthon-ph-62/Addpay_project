@@ -65,9 +65,9 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="?page=">
+                <a class="nav-link text-white" href="?page=expenses">
                     <span data-feather="layers"></span>
-                    การเงิน/บัญชี
+                    ใบสำคัญจ่าย
                 </a>
             </li>
             <li class="nav-item">

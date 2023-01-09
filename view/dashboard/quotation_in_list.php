@@ -39,7 +39,7 @@ if (isset($_GET["deletequo"])) {
         <div class="container">
             <div id="listquotation" class="py-4 p-md-5 text-white">
                 <div class="text-center text-md-start">
-                    <h3>ใบเสนอราคากลาง</h3>
+                    <h3>ใบเสนอราคาเข้า</h3>
                 </div>
 
                 <div class="my-4 my-md-3 text-center text-md-end">
@@ -96,28 +96,28 @@ if (isset($_GET["deletequo"])) {
                 </div>
                 <!-- Data table -->
                 <script type="text/javascript">
-                    $(document).ready(function() {
-                        $('#quotationTable').DataTable();
+                $(document).ready(function() {
+                    $('#quotationTable').DataTable();
 
-                        $(document).on('click', '.deletequo', function() {
-                            var id = $(this).attr("id");
-                            var show_quo_no = $(this).attr("data-quo-no");
-                            swal.fire({
-                                title: 'ต้องการลบใบเสนอราคานี้ !',
-                                text: "เลขที่ใบเสนอราคา : " + show_quo_no,
-                                type: 'warning',
-                                showCancelButton: true,
-                                confirmButtonColor: '#d33',
-                                cancelButtonColor: '#3085d6',
-                                confirmButtonText: 'yes!',
-                                cancelButtonText: 'no'
-                            }).then((result) => {
-                                if (result.value) {
-                                    window.location.href = "?deletequo=" + id;
-                                }
-                            });
+                    $(document).on('click', '.deletequo', function() {
+                        var id = $(this).attr("id");
+                        var show_quo_no = $(this).attr("data-quo-no");
+                        swal.fire({
+                            title: 'ต้องการลบใบเสนอราคานี้ !',
+                            text: "เลขที่ใบเสนอราคา : " + show_quo_no,
+                            type: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33',
+                            cancelButtonColor: '#3085d6',
+                            confirmButtonText: 'yes!',
+                            cancelButtonText: 'no'
+                        }).then((result) => {
+                            if (result.value) {
+                                window.location.href = "?deletequo=" + id;
+                            }
                         });
                     });
+                });
                 </script>
                 <!-- Data table -->
             </div>

@@ -165,6 +165,15 @@ body {
                             case "contract_edit":
                                 include_once 'view/dashboard/contract_edit.php';
                                 break;
+                            case "expenses":
+                                include_once 'view/dashboard/expenses_list.php';
+                                break;
+                            case "expenses_add":
+                                include_once 'view/dashboard/expenses_add.php';
+                                break;
+                            case "expenses_edit":
+                                include_once 'view/dashboard/expenses_edit.php';
+                                break;
                             default:
                                 include_once 'view/dashboard.php';
                         }
