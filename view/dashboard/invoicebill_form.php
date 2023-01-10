@@ -294,7 +294,7 @@ $mpdf->Output('./invoicebill_PDF/invoice_bill0.pdf');
     <div class="container py-md-5 px-md-4" style="width: 100%; ">
         <p class="text-end text-danger ">** โปรดตรวจสอบความถูกต้องของข้อมูลก่อนกด พิมพ์เอกสาร</p>
         <div class="mx-auto d-flex justify-content-end ">
-            <a class="btn btn-pdf text-light px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold" role="button" href="./invoicebill_PDF/invoicebill.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
+            <a class="btn btn-pdf text-light px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold" role="button" href="./invoicebill_PDF/invoice_bill0.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
         </div>
         <hr>
         <?php
