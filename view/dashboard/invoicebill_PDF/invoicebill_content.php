@@ -113,7 +113,7 @@ if (mysqli_num_rows($result) > 0) {
                     <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:20px;">' . number_format($infoinvbitems['invbilld_vat'], 2) . '</td>
                     <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; height:20px;">' . number_format($infoinvbitems['invbilld_result'], 2) . '</td>';
                     if($i==1){
-                        $sp=$sp+3;
+                        $sp=$sp+5;
                         echo '<td VALIGN="TOP" rowspan='.$sp.' style="text-align: center; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6;">Company Founder</td>';
                     }
         echo    '</tr>';
@@ -159,7 +159,7 @@ while ($infoinvbsum = mysqli_fetch_array($result)) {
             </tr>
         
             <tr style="border-collapse: collapse;">
-                <td style="text-align:center; height:30px;" >รวม</td>
+                <td style="text-align:center; height:30px; border-left: 1.4px solid #3585c6;" >รวม</td>
                 <td style="text-align: center; height:30px; border-bottom:1.3px dotted #3585c6;">' . $infoinvbsum['invbill_page'] . '</td>
                 <td style="text-align: left; border-right: 1.4px solid #3585c6; height:30px;" colspan="2">ฉบับ</td>
 
@@ -169,13 +169,12 @@ while ($infoinvbsum = mysqli_fetch_array($result)) {
                 <td VALIGN="middle" style="height:30px; text-align:right; padding:0; border-bottom:1.4px solid #3585c6; border-right:1.4px solid #3585c6; border-collapse: collapse; padding: 5px; margin: 0;" ROWSPAN="2" >
                     ' . number_format($infoinvbsum['invbill_total'], 2) . '
                 </td>
-                <td VALIGN="middle" style="height:30px; text-align:right; padding:0; border-bottom:1.4px solid #3585c6; border-right:1.4px solid #3585c6; border-collapse: collapse; padding: 5px; margin: 0;" ROWSPAN="2" ></td>
                 
             </tr>
 
 
             <tr style="border-bottom: 1.4px solid ;">
-                <td style="text-align: center; background-color:#b4dfee; height:30px;">ตัวอักษร</td>
+                <td style="text-align: center; background-color:#b4dfee; height:30px; border-left: 1.4px solid #3585c6;">ตัวอักษร</td>
                 <td style="text-align: center; border-right: 1.4px solid #3585c6; height:30px;" colspan="3">' . Convert($infoinvbsum['invbill_total']) . '</td>
             </tr>
             
