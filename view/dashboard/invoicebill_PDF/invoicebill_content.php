@@ -1,7 +1,6 @@
 <?php
 include('./PDF_set/PDF_conn.php');
 $id = $_GET["pdfinvbill_id"];
-
 $sql = "SELECT * FROM `invoicebill` WHERE invbill_id = '$id'";
 $query = $conn->query($sql);
 $infoinvb = $query->fetch_assoc();
@@ -31,7 +30,7 @@ echo '
                     <label>เลขประจำตัวผู้เสียภาษีอากร 0 3455 58001 37 0</label>
                 </td>
             
-                <td class="text-center" style="width:200px; border: 1px solid;">
+                <td class="text-center" style="width:200px; border: 1.4px solid;">
                     <div style=" padding:10px 20px; margin:0;"> 
                         <b >ใบแจ้งหนี้ / ใบวางบิล</b>
                     </div>
@@ -44,14 +43,14 @@ echo '
             </tr>
         </table>
 
-        <table style="width: 842px; border:1px solid; border-collapse: collapse; padding: 0; margin: 0; ">
-            <tr style="border-bottom: 1px solid;">
-                <td align="left" style="border-left: 1px solid ; width: 642px;">
+        <table style="width: 842px; border:1.4px solid; border-collapse: collapse; padding: 0; margin: 0; ">
+            <tr style="border-bottom: 1.4px solid;">
+                <td align="left" style="border-left: 1.4px solid ; width: 642px;">
                     <label>ชื่อลูกค้า / Customer :</label> &nbsp;&nbsp;' . $infoinvb['invbill_name']  . '<br>
                     <label>ที่อยู่ / Address :</label> &nbsp;&nbsp;' . $infoinvb['invbill_address']  . '<br>
                     <label>เลขประจำตัวผู้เสียภาษี :</label> &nbsp;&nbsp;' . $infoinvb['invbill_cusid']  . '
                 </td>
-                <td VALIGN="TOP" align="left" style="border-left: 1px solid ; width: 200px;">
+                <td VALIGN="TOP" align="left" style="border-left: 1.4px solid ; width: 200px;">
                     <label>เลขที่ / No.</label> &nbsp;&nbsp;' . $infoinvb['invbill_no']  . '<br>
                     <label>วันที่ / Date.</label> &nbsp;&nbsp;' . $infoinvb['invbill_date']  . '
                 </td>
@@ -67,28 +66,31 @@ echo '
             </tr>
         </table>
 
-        <div>
-            <table style="width: 737px;  border-collapse: collapse; padding: 0; margin: 0; margin-top:0px;">
-                <tr style="border-top:1px solid blue; border-collapse: collapse; padding: 0; margin: 0;">
-                    <td class="text-center" style="border-left: 1px solid blue; width: 10%;">ลำดับที่</td>
-                    <td class="text-center" style="border-left: 1px solid blue; width: 20%;">รายการ</td>
-                    <td class="text-center" style="border-left: 1px solid blue; width: 14%;">วันที่ใบแจ้งหนี้/<br>ใบกำกับภาษี</td>
-                    <td class="text-center" style="border-left: 1px solid blue; width: 14%;">กำหนดชำระ</td>
-                    <td class="text-center" style="border-left: 1px solid blue; width: 15%;">จำนวนก่อน<br>ภาษีมูลค่าเพิ่ม</td>
-                    <td class="text-center" style="border-left: 1px solid blue; width: 15%;">ภาษีมูลค่าเพิ่ม</td>
-                    <td class="text-center" style="border-left: 1px solid blue; border-right: 1px solid blue; width: 12%;">จำนวนเงินรวม</td>
-                    
+        <div >
+            <table style="width: 842px;  border-collapse: collapse; padding: 0; margin: 0; margin-top:0px;">
+                <tr style="border-top:1.4px solid #3585c6; border-collapse: collapse; padding: 0; margin: 0;">
+                    <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 8%;">ลำดับที่</td>
+                    <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 15%;">รายการ</td>
+                    <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 14%;">วันที่ใบแจ้งหนี้/<br>ใบกำกับภาษี</td>
+                    <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 14%;">กำหนดชำระ</td>
+                    <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 13%;">จำนวนก่อน<br>ภาษีมูลค่าเพิ่ม</td>
+                    <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 13%;">ภาษีมูลค่าเพิ่ม</td>
+                    <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 12%;">จำนวนเงินรวม</td>
+                    <td class="text-center" style="border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; width: 11%;">หมายเหตุ</td>
                 </tr>
-                <tr style=" border-bottom:1px solid blue; border-collapse: collapse; padding: 0; margin: 0;">
-                    <td class="text-center" style="border-left: 1px solid blue; width: 10%;"><br>Item</td>
-                    <td class="text-center" style="border-left: 1px solid blue; width: 20%;"><br>Order</td>
-                    <td class="text-center" style="border-left: 1px solid blue; width: 14%;"><br>invoice Date</td>
-                    <td class="text-center" style="border-left: 1px solid blue; width: 14%;"><br>Due Date</td>
-                    <td class="text-center" style="border-left: 1px solid blue; width: 15%;"><br>Amount</td>
-                    <td class="text-center" style="border-left: 1px solid blue; width: 15%;"><br>Vat</td>
-                    <td class="text-center" style="border-left: 1px solid blue; border-right: 1px solid blue; width: 12%;"><br>Total Amount</td>
-                    
-                </tr>';
+                <tr style=" border-bottom:1.4px solid #3585c6; border-collapse: collapse; padding: 0; margin: 0;">
+                    <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 8%;"><br>Item</td>
+                    <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 15%;"><br>Order</td>
+                    <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 14%;"><br>invoice Date</td>
+                    <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 14%;"><br>Due Date</td>
+                    <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 13%;"><br>Amount</td>
+                    <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 13%;"><br>Vat</td>
+                    <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 12%;"><br>Total Amount</td>
+                    <td class="text-center" style="border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; width: 11%;"><br>Remark</td>
+
+                    <td VALIGN="TOP" style="text-align: right; border-right: 1.4px solid #3585c6; border-bottom:1.4px solid #3585c6; height:20px;" ROWSPAN="10" ></td>
+                </tr>
+            ';
 
 
 // <!--  -->
@@ -104,25 +106,27 @@ if (mysqli_num_rows($result) > 0) {
         $i++;
         echo ' 
                 <tr>
-                    <td VALIGN="TOP" style="text-align: center; border-left: 1px solid blue; height:20px;">' . $i . '</td>
-                    <td VALIGN="TOP" style="text-align: left; border-left: 1px solid blue; height:20px;">' . $infoinvbitems['invbilld_item'] . ' </td>
-                    <td VALIGN="TOP" style="text-align: center; border-left: 1px solid blue; height:20px;">' . $infoinvbitems['invbilld_inv_date'] . '</td>
-                    <td VALIGN="TOP" style="text-align: center; border-left: 1px solid blue; height:20px;">' . $infoinvbitems['invbilld_due_date'] . '</td>
-                    <td VALIGN="TOP" style="text-align: right; border-left: 1px solid blue; height:20px;">' . number_format($infoinvbitems['invbilld_price'], 2) . '</td>
-                    <td VALIGN="TOP" style="text-align: right; border-left: 1px solid blue; height:20px;">' . number_format($infoinvbitems['invbilld_vat'], 2) . '</td>
-                    <td VALIGN="TOP" style="text-align: right; border-left: 1px solid blue; border-right: 1px solid blue; height:20px;">' . number_format($infoinvbitems['invbilld_result'], 2) . '</td>
+                    <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:20px;">' . $i . '</td>
+                    <td VALIGN="TOP" style="text-align: left; border-left: 1.4px solid #3585c6; height:20px;">' . $infoinvbitems['invbilld_item'] . ' </td>
+                    <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:20px;">' . $infoinvbitems['invbilld_inv_date'] . '</td>
+                    <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:20px;">' . $infoinvbitems['invbilld_due_date'] . '</td>
+                    <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:20px;">' . number_format($infoinvbitems['invbilld_price'], 2) . '</td>
+                    <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:20px;">' . number_format($infoinvbitems['invbilld_vat'], 2) . '</td>
+                    <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; height:20px;">' . number_format($infoinvbitems['invbilld_result'], 2) . '</td>
+                    
                 </tr>';
     }
     $i = $i + 1;
     echo '
             <tr>
-                <td VALIGN="TOP" style="text-align: center; border-left: 1px solid blue; height:50px;">' . $i . '</td>
-                <td VALIGN="TOP" style="text-align: left; border-left: 1px solid blue; height:50px;">ค่าขนส่ง</td>
-                <td VALIGN="TOP" style="text-align: center; border-left: 1px solid blue; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1px solid blue; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1px solid blue; height:50px;">' . number_format($infoinvb['invbill_deli']) . '</td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1px solid blue; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1px solid blue; border-right: 1px solid blue; height:50px;">' . number_format($infoinvb['invbill_deli']) . '</td>
+                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:50px;">' . $i . '</td>
+                <td VALIGN="TOP" style="text-align: left; border-left: 1.4px solid #3585c6; height:50px;">ค่าขนส่ง</td>
+                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:50px;">' . number_format($infoinvb['invbill_deli'], 2) . '</td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; height:50px;">' . number_format($infoinvb['invbill_deli'], 2) . '</td>
+                
             </tr>';
 }
 
@@ -132,70 +136,101 @@ $result = mysqli_query($conn, $sql);
 while ($infoinvbsum = mysqli_fetch_array($result)) {
     echo '
             <tr>
-                <td VALIGN="TOP" style="text-align: center; border-left: 1px solid blue; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: left; border-left: 1px solid blue; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: center; border-left: 1px solid blue; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1px solid blue; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1px solid blue; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1px solid blue; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1px solid blue; border-right: 1px solid blue; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: left; border-left: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; height:50px;"></td>
+                
             </tr>
             <tr>
-                <td VALIGN="TOP" style="text-align: center; border-left: 1px solid blue; border-bottom: 1px solid blue; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: left; border-left: 1px solid blue; border-bottom: 1px solid blue; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: center; border-left: 1px solid blue; border-bottom: 1px solid blue; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1px solid blue; border-bottom: 1px solid blue; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1px solid blue; border-bottom: 1px solid blue; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1px solid blue; border-bottom: 1px solid blue; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1px solid blue; border-right: 1px solid blue; border-bottom: 1px solid blue; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: left; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:50px;"></td>
+                
             </tr>
         
-            <tr style="border-collapse: collapse; ">
-                <td style="text-align:center;" >รวม</td>
-                <td style="text-align: center; ">1</td>
-                <td style="text-align: left; border-right: 1px solid blue;" colspan="2">ฉบับ</td>
+            <tr style="border-collapse: collapse;">
+                <td style="text-align:center; height:30px;" >รวม</td>
+                <td style="text-align: center; height:30px; border-bottom:1.3px dotted #3585c6;">' . $infoinvbsum['invbill_page'] . '</td>
+                <td style="text-align: left; border-right: 1.4px solid #3585c6; height:30px;" colspan="2">ฉบับ</td>
 
-                <td VALIGN="middle" style=" text-align:center;padding:20px 0; border:1px solid blue; border-collapse: collapse; padding: 5px; margin: 0;" ROWSPAN="2" colspan="3">
-                    <b>สามหมื่นห</b>
-                    <p>(ตัวอักษร)</p>
+                <td VALIGN="middle" style="height:30px; background-color:#b4dfee; border-bottom:1.4px solid #3585c6; text-align:center; padding:0;  border-collapse: collapse; padding: 5px; margin: 0;" ROWSPAN="2" colspan="2">
+                    ยอดรวมทั้งสิ้น(บาท)
+                </td>
+                <td VALIGN="middle" style="height:30px; text-align:right; padding:0; border-bottom:1.4px solid #3585c6; border-right:1.4px solid #3585c6; border-collapse: collapse; padding: 5px; margin: 0;" ROWSPAN="2" >
+                    ' . number_format($infoinvbsum['invbill_total'], 2) . '
+                </td>
+                
+            </tr>
+
+
+            <tr style="border-bottom: 1.4px solid ;">
+                <td style="text-align: center; background-color:#b4dfee; height:30px;">ตัวอักษร</td>
+                <td style="text-align: center; border-right: 1.4px solid #3585c6; height:30px;" colspan="3">' . Convert($infoinvbsum['invbill_total']) . '</td>
+            </tr>
+            
+        </table>
+        <table>
+            <tr>
+                <td style="width:592px;">
+                    <label>&nbsp;ข้าพเจ้าได้รับวางบิลตามรายการข้างต้นเรียบร้อยแล้ว</label>
                 </td>
             </tr>
-
-            <tr style="border-bottom: 1px solid ;">
-                <td style="text-align: center;">ตัวอักษร</td>
-                <td style="text-align: center; border-right: 1px solid blue;" colspan="3">14,018.69</td>
-            </tr>
-            
-            
-
         </table>
 
-    </div>';
-}
+    </div>
 
-
-// <!-- ดึงข้อมูลเงินเป็นตัวอักษร -->
-// <!-- text price -->
-$sql = "SELECT quo_total FROM invoicebill WHERE quo_id = '$id'";
-$result = mysqli_query($conn, $sql);
-while ($infoinvbsum = mysqli_fetch_array($result)) {
-    echo '
-        <div>
-            <table style="width: 842px; border:1px solid blue; border-collapse: collapse; padding: 0; margin-top: 10px; ">
+    <div>
+            <table style="width: 842px; border:1.4px solid #3585c6; border-collapse: collapse; padding: 0; margin-top: 10px; ">
                 <tr>
-                    <td VALIGN="TOP" style="text-align: center; width: 50%; border:1px solid blue; border-collapse: collapse; padding: 10px; margin: 0; height: 100px;">
-                        <b> ข้าพเจ้าได้รับเอกสารข้างต้นถูกต้องครบถ้วนแล้ว</b>
-                        <br><br><br><br><br>
-                        <p> ผู้รับเอกสาร</p>
-                        <p> วันที่&nbsp;................................................................................</p>
+                    <td VALIGN="TOP" style="text-align: ; width: 50%; border:1.4px solid #3585c6; border-collapse: collapse; padding: 5px; margin: 0; ">
+                        <table>
+                            <tr style="height:20px;">
+                                <td style="width: 55%;">ผู้รับวางบิล (Received By)</td>
+                                <td style="width: 45%;">สำหรับลูกค้า (For Customer)</td>
+                            </tr>
+                            <tr style="height:80px;"></tr>
+                            <tr style="height:40px;">
+                                <td style="width: 55%;">(.......................................)</td>
+                                <td style="width: 45%;">(.......................................)</td>
+                            </tr>
+                            <tr style="height:25px;">
+                                <td style="width: 55%;">วันที่รับวางบิล (Received Date)</td>
+                                <td style="width: 45%;">........../.............../..............</td>
+                            </tr>
+                            <tr style="height:25px;">
+                                <td style="width: 55%;">กำหนดชำระ (Payment Date)</td>
+                                <td style="width: 45%;">........../.............../..............</td>
+                            </tr>
+                            <tr style="height:25px;">
+                                <td style="width: 55%;">เบอร์ติดต่อ</td>
+                                <td style="width: 45%;"></td>
+                            </tr>
+                        </table>
                     </td>
-                    <td VALIGN="TOP" style="text-align: center; width: 50%; border:1px solid blue; border-collapse: collapse; padding: 10px; margin: 0; height: 100px;">
-                        <p>ขอแสงความนับถือ</p>
-                        <br><br><br><br><br>
-                        <p>ผู้มีอำนาจลงนาม / Authorlzed Siganture</p>
 
-                        <!-- วันที่ในใบเสนอราคา -->
-                        <p>วันที่ 11 มกราคม 2564</p>
+                    <td VALIGN="TOP" style="text-align: center; width: 50%; border:1.4px solid #3585c6; border-collapse: collapse; padding: 10px; margin: 0; height: 100px;">
+                        <table>
+                            <tr style="height:20px;">ผู้วางบิล</tr>
+                            <tr style="height:55px;"></tr>
+                            <tr style="height:40px;"></tr>
+                            <tr style="height:25px;">
+                                <td style=" text-align: left;">ติดต่อเรา Tel 058-4964855</td>
+                            </tr>
+                            <tr style="height:25px;">
+                                <td style=" text-align: left;">สอบถามเพื่มเติมเรื่องการชำระเงินกรุณาติดต่อ</td>
+                            </tr>
+                            <tr style="height:25px;">
+                                <td style=" text-align: left;">เจ้าหน้าที่ : คุณจิติรัตน์ 045-317123</td>
+                            </tr>
+                        </table>
                     </td>
 
             </table>
