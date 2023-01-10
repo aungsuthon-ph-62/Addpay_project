@@ -87,8 +87,6 @@ echo '
                     <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 13%;"><br>Vat</td>
                     <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 12%;"><br>Total Amount</td>
                     <td class="text-center" style="border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; width: 11%;"><br>Remark</td>
-
-                    <td VALIGN="TOP" style="text-align: right; border-right: 1.4px solid #3585c6; border-bottom:1.4px solid #3585c6; height:20px;" ROWSPAN="10" ></td>
                 </tr>
             ';
 
@@ -101,9 +99,10 @@ echo '
 $sql = "SELECT * FROM `invoicebill_details` WHERE invbilld_bid = '$id' ;";
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
+    $sp =mysqli_num_rows($result);
     $i = 0;
     while ($infoinvbitems = mysqli_fetch_assoc($result)) {
-        $i++;
+        $i ++;
         echo ' 
                 <tr>
                     <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:20px;">' . $i . '</td>
@@ -112,11 +111,14 @@ if (mysqli_num_rows($result) > 0) {
                     <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:20px;">' . $infoinvbitems['invbilld_due_date'] . '</td>
                     <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:20px;">' . number_format($infoinvbitems['invbilld_price'], 2) . '</td>
                     <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:20px;">' . number_format($infoinvbitems['invbilld_vat'], 2) . '</td>
-                    <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; height:20px;">' . number_format($infoinvbitems['invbilld_result'], 2) . '</td>
-                    
-                </tr>';
+                    <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; height:20px;">' . number_format($infoinvbitems['invbilld_result'], 2) . '</td>';
+                    if($i==1){
+                        $sp=$sp+3;
+                        echo '<td VALIGN="TOP" rowspan='.$sp.' style="text-align: center; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6;">Company Founder</td>';
+                    }
+        echo    '</tr>';
     }
-    $i = $i + 1;
+    $i ++;
     echo '
             <tr>
                 <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:50px;">' . $i . '</td>
@@ -136,23 +138,23 @@ $result = mysqli_query($conn, $sql);
 while ($infoinvbsum = mysqli_fetch_array($result)) {
     echo '
             <tr>
-                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: left; border-left: 1.4px solid #3585c6; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; height:50px;"></td>
-                
+                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:20px;"></td>
+                <td VALIGN="TOP" style="text-align: left; border-left: 1.4px solid #3585c6; height:20px;"></td>
+                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:20px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:20px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:20px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:20px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; height:20px;"></td>
             </tr>
             <tr>
-                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: left; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:20px;"></td>
+                <td VALIGN="TOP" style="text-align: left; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:20px;"></td>
+                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:20px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:20px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:20px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:20px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:20px;"></td>
+        </td>
                 
             </tr>
         
@@ -167,6 +169,7 @@ while ($infoinvbsum = mysqli_fetch_array($result)) {
                 <td VALIGN="middle" style="height:30px; text-align:right; padding:0; border-bottom:1.4px solid #3585c6; border-right:1.4px solid #3585c6; border-collapse: collapse; padding: 5px; margin: 0;" ROWSPAN="2" >
                     ' . number_format($infoinvbsum['invbill_total'], 2) . '
                 </td>
+                <td VALIGN="middle" style="height:30px; text-align:right; padding:0; border-bottom:1.4px solid #3585c6; border-right:1.4px solid #3585c6; border-collapse: collapse; padding: 5px; margin: 0;" ROWSPAN="2" ></td>
                 
             </tr>
 
