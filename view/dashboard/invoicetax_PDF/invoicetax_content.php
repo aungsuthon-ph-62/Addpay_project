@@ -167,9 +167,14 @@ while ($infoinvtaxsum = mysqli_fetch_array($result)) {
                 </td>
                 
         </table>
-        <br>
-        <p style="text-align: center;">กรุณาตรวจสอบเอกสารและหัก ณ ที่จ่าย (ถ้ามี) พร้อมส่งหนังสือรับรองการหักภาษี ณ ที่จ่ายมาด้วยทุกครั้งที่ชำระเงิน</p>
-    </div>
+        <table style="margin-top:10px;">
+                <tr>
+                    <td style="width:842px; text-align: center; ">
+                        <label>&nbsp;กรุณาตรวจสอบเอกสารและหัก ณ ที่จ่าย (ถ้ามี) พร้อมส่งหนังสือรับรองการหักภาษี ณ ที่จ่ายมาด้วยทุกครั้งที่ชำระเงิน</label>
+                    </td>
+                </tr>
+            </table>
+     </div>
 
 
 </div>';
