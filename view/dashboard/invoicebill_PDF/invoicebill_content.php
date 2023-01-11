@@ -6,7 +6,7 @@ $query = $conn->query($sql);
 $infoinvb = $query->fetch_assoc();
 
 echo '
-<div id="invoicebillForm" class="container mt-5" style="width: 842px;">
+<div id="invoicebillForm" class="content container mt-5" style="width: 842px;">
     <div>
         <table>
             <tr>
@@ -37,31 +37,31 @@ echo '
                 </td>
             </tr>
             <tr>
-                <td style="width:592px;">
-                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;เรียน แผนกบัญชีและการเงิน</label>
+                <td>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;เรียน แผนกบัญชีและการเงิน</p>
                 </td>
             </tr>
         </table>
 
         <table style="width: 842px; border:1.4px solid; border-collapse: collapse; padding: 0; margin: 0; ">
             <tr style="border-bottom: 1.4px solid;">
-                <td align="left" style="border-left: 1.4px solid ; width: 642px;">
-                    <label>ชื่อลูกค้า / Customer :</label> &nbsp;&nbsp;' . $infoinvb['invbill_name']  . '<br>
-                    <label>ที่อยู่ / Address :</label> &nbsp;&nbsp;' . $infoinvb['invbill_address']  . '<br>
-                    <label>เลขประจำตัวผู้เสียภาษี :</label> &nbsp;&nbsp;' . $infoinvb['invbill_cusid']  . '
+                <td VALIGN="TOP" align="left" style="border-left: 1.4px solid ;padding:3px 70px; width: 642px;">
+                    <b>ชื่อลูกค้า / Customer:</b> &nbsp;' . $infoinvb['invbill_name']  . '<br>
+                    <b>ที่อยู่ / Address:</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $infoinvb['invbill_address']  . '<br>
+                    <b>เลขประจำตัวผู้เสียภาษี:</b> &nbsp;' . $infoinvb['invbill_cusid']  . '
                 </td>
-                <td VALIGN="TOP" align="left" style="border-left: 1.4px solid ; width: 200px;">
-                    <label>เลขที่ / No.</label> &nbsp;&nbsp;' . $infoinvb['invbill_no']  . '<br>
-                    <label>วันที่ / Date.</label> &nbsp;&nbsp;' . $infoinvb['invbill_date']  . '
+                <td VALIGN="TOP" align="left" style="border-left: 1.4px solid  ;padding:3px 15px; width: 200px;">
+                    <label>เลขที่ / No.</label> <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $infoinvb['invbill_no']  . '</b><br>
+                    <label>วันที่ / Date</label> &nbsp;&nbsp;' . ConvDate($infoinvb['invbill_date'])  . '
                 </td>
             </tr>
 
 
         </table>
-        <table>
+        <table style="width: 842px;">
             <tr>
-                <td style="width:592px;">
-                    <label>&nbsp;ได้รับวางบิลจาก บริษัท แอดเพย์ เซอร์วิสพอยท์ จำกัด ตามรายการต่อไปนี้</label>
+                <td>
+                    <p>&nbsp;ได้รับวางบิลจาก บริษัท แอดเพย์ เซอร์วิสพอยท์ จำกัด ตามรายการต่อไปนี้</p>
                 </td>
             </tr>
         </table>
@@ -102,13 +102,15 @@ if (mysqli_num_rows($result) > 0) {
     $sp =mysqli_num_rows($result);
     $i = 0;
     while ($infoinvbitems = mysqli_fetch_assoc($result)) {
-        $i ++;$invd='-';$dued='-';
+        $i ++;
+        $invd='';
+        $dued='';
         
         if($infoinvbitems['invbilld_inv_date']>0){
-            $invd=$infoinvbitems['invbilld_inv_date'];
+            $invd=ConvDate($infoinvbitems['invbilld_inv_date']);
         }
         if($infoinvbitems['invbilld_due_date']>0){
-            $dued=$infoinvbitems['invbilld_due_date'];
+            $dued=ConvDate($infoinvbitems['invbilld_due_date']);
         }
         echo ' 
                 <tr>
@@ -121,7 +123,7 @@ if (mysqli_num_rows($result) > 0) {
                     <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; height:20px;">' . number_format($infoinvbitems['invbilld_result'], 2) . '</td>';
                     if($i==1){
                         $sp=$sp+5;
-                        echo '<td VALIGN="TOP" rowspan='.$sp.' style="text-align: center; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6;">'.$infoinvb['invbill_remark'].'</td>';
+                        echo '<td VALIGN="TOP" rowspan='.$sp.' style="text-align: center; border-bottom: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6;">'.$infoinvb['invbill_remark'].'</td>';
                     }
         echo    '</tr>';
     }
@@ -130,10 +132,10 @@ if (mysqli_num_rows($result) > 0) {
             <tr>
                 <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:50px;">' . $i . '</td>
                 <td VALIGN="TOP" style="text-align: left; border-left: 1.4px solid #3585c6; height:50px;">ค่าขนส่ง</td>
-                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:50px;">-</td>
-                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:50px;">-</td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:50px;">' . number_format($infoinvb['invbill_deli'], 2) . '</td>
-                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:50px;">-</td>
+                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:50px;"></td>
                 <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; height:50px;">' . number_format($infoinvb['invbill_deli'], 2) . '</td>
                 
             </tr>';
@@ -166,7 +168,7 @@ while ($infoinvbsum = mysqli_fetch_array($result)) {
             </tr>
         
             <tr style="border-collapse: collapse;">
-                <td style="text-align:center; height:30px; border-left: 1.4px solid #3585c6;" >รวม</td>
+                <td style="text-align:center; height:30px; " >รวม</td>
                 <td style="text-align: center; height:30px; border-bottom:1.3px dotted #3585c6;">' . $infoinvbsum['invbill_page'] . '</td>
                 <td style="text-align: left; border-right: 1.4px solid #3585c6; height:30px;" colspan="2">ฉบับ</td>
 
@@ -180,9 +182,9 @@ while ($infoinvbsum = mysqli_fetch_array($result)) {
             </tr>
 
 
-            <tr style="border-bottom: 1.4px solid ;">
-                <td style="text-align: center; background-color:#b4dfee; height:30px; border-left: 1.4px solid #3585c6;">ตัวอักษร</td>
-                <td style="text-align: center; border-right: 1.4px solid #3585c6; height:30px;" colspan="3">' . Convert($infoinvbsum['invbill_total']) . '</td>
+            <tr style="">
+                <td style="text-align: center; background-color:#b4dfee; height:30px;border-bottom: 1.4px solid ;">ตัวอักษร</td>
+                <td style="text-align: center; border-right: 1.4px solid #3585c6;border-bottom: 1.4px solid ; height:30px;" colspan="3">' . Convert($infoinvbsum['invbill_total']) . '</td>
             </tr>
             
         </table>
@@ -197,53 +199,47 @@ while ($infoinvbsum = mysqli_fetch_array($result)) {
     </div>
 
     <div>
-            <table style="width: 842px; border:1.4px solid #3585c6; border-collapse: collapse; padding: 0; margin-top: 10px; ">
-                <tr>
-                    <td VALIGN="TOP" style="text-align: ; width: 50%; border:1.4px solid #3585c6; border-collapse: collapse; padding: 5px; margin: 0; ">
-                        <table>
-                            <tr style="height:20px;">
-                                <td style="width: 55%;">ผู้รับวางบิล (Received By)</td>
-                                <td style="width: 45%;">สำหรับลูกค้า (For Customer)</td>
-                            </tr>
-                            <tr style="height:80px;"></tr>
-                            <tr style="height:40px;">
-                                <td style="width: 55%;">(.......................................)</td>
-                                <td style="width: 45%;">(.......................................)</td>
-                            </tr>
-                            <tr style="height:25px;">
-                                <td style="width: 55%;">วันที่รับวางบิล (Received Date)</td>
-                                <td style="width: 45%;">........../.............../..............</td>
-                            </tr>
-                            <tr style="height:25px;">
-                                <td style="width: 55%;">กำหนดชำระ (Payment Date)</td>
-                                <td style="width: 45%;">........../.............../..............</td>
-                            </tr>
-                            <tr style="height:25px;">
-                                <td style="width: 55%;">เบอร์ติดต่อ</td>
-                                <td style="width: 45%;"></td>
-                            </tr>
-                        </table>
-                    </td>
+        <table style="width: 842px; border:1.4px solid #3585c6; border-collapse: collapse; padding: 0; margin-top: 10px; ">
+            <tr>
+                <td VALIGN="TOP" style="text-align: ; width: 50%; border:1.4px solid #3585c6; border-collapse: collapse; padding: 5px; margin: 0; "ROWSPAN="2">
+                    <p>&nbsp;&nbsp;ผู้รับวางบิล (Received By) &nbsp;&nbsp;&nbsp;&nbsp; สำหรับลูกค้า (For Customer)</p>
+                    <br>
+                    <br>
+                    <br>
+                    <p>&nbsp;&nbsp;(.......................................) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (.......................................)</p>
+                    <p>วันที่รับวางบิล (Received Date)&nbsp;&nbsp; ........../.............../..............</p>
+                    
+                    <p>กำหนดชำระ (Payment Date)&nbsp;&nbsp; ........../.............../..............</p>
+                
+                    <p>เบอร์ติดต่อ</p>
+                
+                </td>
 
-                    <td VALIGN="TOP" style="text-align: center; width: 50%; border:1.4px solid #3585c6; border-collapse: collapse; padding: 10px; margin: 0; height: 100px;">
-                        <table>
-                            <tr style="height:20px;">ผู้วางบิล</tr>
-                            <tr style="height:55px;"></tr>
-                            <tr style="height:40px;"></tr>
-                            <tr style="height:25px;">
-                                <td style=" text-align: left;">ติดต่อเรา Tel 058-4964855</td>
-                            </tr>
-                            <tr style="height:25px;">
-                                <td style=" text-align: left;">สอบถามเพื่มเติมเรื่องการชำระเงินกรุณาติดต่อ</td>
-                            </tr>
-                            <tr style="height:25px;">
-                                <td style=" text-align: left;">เจ้าหน้าที่ : คุณจิติรัตน์ 045-317123</td>
-                            </tr>
-                        </table>
-                    </td>
-
-            </table>
-        </div>
-
-    </div>';
+                <td VALIGN="TOP" style="text-align: center; width: 50%; border:0; border-collapse: collapse; padding: 10px; margin: 0; height: 100px;">
+                        <p>ผู้วางบิล</p>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                </td>
+            </tr>
+            <tr>
+                <td style=" border-collapse: collapse; padding: 10px; margin: 0; height: 100px;">
+                    <p>
+                        ติดต่อเรา Tel 058-4964855<br>
+                        สอบถามเพื่มเติมเรื่องการชำระเงินกรุณาติดต่อ<br>
+                        เจ้าหน้าที่ : คุณจิติรัตน์ 045-317123
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <table style="margin-top:10px;">
+            <tr>
+                <td style="width:842px; text-align: center;">
+                    <label>&nbsp;กรุณาตรวจสอบเอกสารและหัก ณ ที่จ่าย (ถ้ามี) พร้อมส่งหนังสือรับรองการหักภาษี ณ ที่จ่ายมาด้วยทุกครั้งที่ชำระเงิน</label>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>';
 }

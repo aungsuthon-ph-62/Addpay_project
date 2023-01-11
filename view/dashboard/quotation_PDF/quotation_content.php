@@ -40,7 +40,7 @@ echo '
             <tr>
                 <td style="text-align: right; border-collapse: collapse; padding: 0; margin: 0;">วันที่/Date.</td>
                 <td class="underline" style="text-align: center;">
-                    <p class="text-left"> <span>&nbsp;' . $infoquo['quo_date']  . ' &nbsp;&nbsp;</span> </p>
+                    <p class="text-left"> <span>&nbsp;' . ConvDate($infoquo['quo_date'])  . ' &nbsp;&nbsp;</span> </p>
                 </td>
                 
             </tr>
@@ -193,7 +193,7 @@ while ($infoquosum = mysqli_fetch_array($result)) {
     </div>';
 }
 
-$sql = "SELECT quo_total FROM quotation_appraisal WHERE quo_id = $id";
+$sql = "SELECT * FROM quotation_appraisal WHERE quo_id = $id";
 $result = mysqli_query($conn, $sql);
 while ($infoquosum = mysqli_fetch_array($result)) {
 echo '
@@ -219,7 +219,7 @@ echo '
                     <p>ผู้มีอำนาจลงนาม / Authorlzed Siganture</p>
 
                     <!-- วันที่ในใบเสนอราคา -->
-                    <p>วันที่ 11 มกราคม 2564</p>
+                    <p>วันที่ ' . DateThai($infoquosum['quo_date'])  . '</p>
                 </td>
 
         </table>

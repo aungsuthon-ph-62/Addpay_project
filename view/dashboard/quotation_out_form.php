@@ -49,6 +49,7 @@
 <?php
 include_once('./PDF_set/PDF_conn.php');
 include_once('./PDF_set/readprice.php');
+include_once './PDF_set/thaidate.php';
 $id = $_GET["pdfquoout_id"];
 ?>
 
@@ -125,7 +126,7 @@ $head = '
             <tr >
                 <td style="text-align: right; border-collapse: collapse; padding: 0; margin: 0;">วันที่/Date.</td>
                 <td class="underline" style="text-align: center;">
-                    <p class="text-left"> <span>&nbsp;' . $infoquo['quoout_date']  . ' &nbsp;&nbsp;</span> </p>
+                    <p class="text-left"> <span>&nbsp;' . ConvDate($infoquo['quoout_date'])  . ' &nbsp;&nbsp;</span> </p>
                 </td>
                 
             </tr>
@@ -269,7 +270,7 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 $head2 = ' ';
-$sql = "SELECT quoout_total FROM `quotation_out` WHERE quoout_id = '$id'";
+$sql = "SELECT * FROM `quotation_out` WHERE quoout_id = '$id'";
 $result = mysqli_query($conn, $sql);
 $footer = "";
 if (mysqli_num_rows($result) > 0) {
@@ -297,7 +298,7 @@ if (mysqli_num_rows($result) > 0) {
                     <p>ผู้มีอำนาจลงนาม / Authorlzed Siganture</p>
 
                     <!-- วันที่ในใบเสนอราคา -->
-                    <p>วันที่ 11 มกราคม 2564</p>
+                    <p>วันที่ '. DateThai($infoquotext['quoout_date']).'</p>
                 </td>
 
         </table>
