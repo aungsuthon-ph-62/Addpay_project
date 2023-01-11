@@ -54,7 +54,7 @@ if(isset($_GET["deletedocin"])){
                     <div class="table-responsive">
                         <table class="table" id="docinTable">
                             <thead>
-                                <tr class="align-center row">
+                                <tr class="align-center col">
                                     <th style="width:25%" scope="col">เลขที่</th>
                                     <th style="width:15%" scope="col">วันที่</th>
                                     <th style="width:30%" scope="col">ชื่อบริษัทต้นทาง</th>
@@ -94,9 +94,6 @@ if(isset($_GET["deletedocin"])){
                             ?>
                         </table>
                     </div>
-
-
-
                 </div>
                 <!-- Data table -->
                 <script type="text/javascript">
