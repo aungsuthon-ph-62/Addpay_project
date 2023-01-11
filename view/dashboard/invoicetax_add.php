@@ -89,7 +89,7 @@ if (isset($_POST['action'])) {
 </style>
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="index">หน้าหลัก</a></li>
         <li class="breadcrumb-item active" aria-current="page"><a href="../dashboard/invoicetax_list.php">ใบแจ้งหนี้/ใบกำกับภาษี</a></li>
         <li class="breadcrumb-item active" aria-current="page">สร้างใบแจ้งหนี้/ใบกำกับภาษี</li>
     </ol>
