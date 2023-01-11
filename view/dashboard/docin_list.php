@@ -54,7 +54,7 @@ if(isset($_GET["deletedocin"])){
                     <div class="table-responsive">
                         <table class="table" id="docinTable">
                             <thead>
-                                <tr class="align-center" class="rows">
+                                <tr class="align-center row">
                                     <th style="width:25%" scope="col">เลขที่</th>
                                     <th style="width:15%" scope="col">วันที่</th>
                                     <th style="width:30%" scope="col">ชื่อบริษัทต้นทาง</th>
@@ -129,4 +129,4 @@ if(isset($_GET["deletedocin"])){
         </div>
     </div>
 </div>
-?page=doc_in
+<?php $conn->close(); ?>

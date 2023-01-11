@@ -22,7 +22,7 @@
     <!-- FAVICON -->
 
     <!-- CSS -->
-    <link rel="stylesheet" href="./PDF_set/PDF.css">
+    <link rel="stylesheet" href="PDF.css">
     <!-- CSS -->
     
     <!-- Font Form -->

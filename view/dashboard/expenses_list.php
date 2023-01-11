@@ -1,8 +1,4 @@
 <?php
-session_start();
-include("../../layout/head.php");
-require_once("../../php/conn.php");
-
 if (isset($_GET["deleteexpenses"])) {
     $id = $_GET["deleteexpenses"];
 
@@ -16,70 +12,40 @@ if (isset($_GET["deleteexpenses"])) {
 
     if ($query) {
 
-        unlink("../../uploadfile/expensesfile/$oldfile");
+        unlink("uploadfile/expensesfile/$oldfile");
         $_SESSION['success'] = "ลบใบสำคัญจ่ายสำเร็จ!";
-        header("Location: expenses_list.php");
+        echo "<script> window.history.back()</script>";
         exit;
     }
 
     $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-    header("Location: expenses_list.php");
+    echo "<script> window.history.back()</script>";
     exit;
 }
 
 ?>
 
-<style>
-body {
-    font-family: "Kanit", sans-serif;
-    font-family: "Noto Sans", sans-serif;
-    font-family: "Noto Sans Thai", sans-serif;
-    font-family: "Poppins", sans-serif;
-    font-family: "Prompt", sans-serif;
-}
-
-.btn-group {
-    white-space: nowrap;
-}
-
-@media (max-width: 767px) {
-    .table-responsive .dropdown-menu {
-        position: static !important;
-    }
-}
-
-@media (min-width: 768px) {
-    .table-responsive {
-        overflow: inherit;
-    }
-}
-</style>
-
-<body>
-    <?php require("../alert.php"); ?>
-    <div class="container py-5">
-        <div class="main-body">
-            <nav aria-label="breadcrumb" class="main-breadcrumb mt-2">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../dashboard.php">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="../dashboard/account.php">การเงิน บัญชี</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">ใบสำคัญจ่าย</li>
-                </ol>
-            </nav>
-            <hr>
-            <div id="listquotation" class="container pb-md-0 mb-5">
-                <div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index">หน้าหลัก</a></li>
+        <li class="breadcrumb-item active" aria-current="page">ใบสำคัญจ่าย</li>
+    </ol>
+</nav>
+<hr>
+<div class="container bg-secondary-addpay rounded-5">
+    <div class="main-body py-md-5 px-md-1 text-white">
+        <div class="container">
+            <div id="" class="py-4 p-md-5 text-white">
+                <div class="text-center text-md-start">
                     <h3>ใบสำคัญจ่าย</h3>
                 </div>
-                <div class="mx-auto d-flex justify-content-end">
-                    <a class="btn btn-success px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold " role="button"
-                        href="../dashboard/expenses_add.php"><i class="fa-solid fa-file-circle-plus"></i>
-                        เพิ่มข้อมูล</a>
+                <div class="my-4 my-md-3 text-center text-md-end">
+                    <a class="btn btn-addpay px-md-4 rounded-3 " href="?page=expenses_add">
+                        <i class="fa-solid fa-file-circle-plus"></i> เพิ่มข้อมูล</a>
                 </div>
-
-                <div class="border border-secondary rounded-3 py-md-4 px-md-4 mt-2 mt-md-4" id="main_row">
+                <div class="p-3 p-md-5 bg-light rounded-5 shadow-lg" id="main_row">
                     <div class="table-responsive">
-                        <table class="table" id="quotationTable">
+                        <table class="table" id="expensesTable">
                             <thead>
                                 <tr class="align-center" class="rows">
                                     <th style="width:15%" scope="col">เลขที่</th>
@@ -110,10 +76,10 @@ body {
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li><a class="dropdown-item" target="_blank"
-                                                            href="../../uploadfile/expensesfile/' . $rows["expenses_file"] . '">เปิดเอกสาร</a>
+                                                            href="uploadfile/expensesfile/' . $rows["expenses_file"] . '">เปิดเอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
-                                                            href="../dashboard/expenses_edit.php?editexpenses=' . $rows["expenses_id"] . '">แก้ไข</a>
+                                                            href="?page=expenses_edit&editexpenses=' . encode($rows["expenses_id"], secret_key()) . '">แก้ไข</a>
                                                     </li>
                                                     <li><a class="dropdown-item deleteexpenses" data-expenses-list="'.$rows["expenses_list"].'" id="' . $rows["expenses_id"] . '" >ลบ</a></li>
                                                 </ul>
@@ -131,7 +97,7 @@ body {
                 <!-- Data table -->
                 <script type="text/javascript">
                 $(document).ready(function() {
-                    $('#quotationTable').DataTable();
+                    $('#expensesTable').DataTable();
                 });
 
                 $(document).on('click', '.deleteexpenses', function() {
@@ -148,7 +114,7 @@ body {
                         cancelButtonText: 'no'
                     }).then((result) => {
                         if (result.value) {
-                            window.location.href = "?deleteexpenses=" + id;
+                            window.location.href = "?page=expenses&deleteexpenses=" + id;
                         }
                     });
                 });
@@ -156,8 +122,7 @@ body {
                 <!-- Data table -->
 
             </div>
-
         </div>
     </div>
-</body>
+</div>
 <?php $conn->close(); ?>

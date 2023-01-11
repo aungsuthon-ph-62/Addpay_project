@@ -1,7 +1,7 @@
 <?php
-if (isset($_GET["deletequo"])) {
+if (isset($_GET["deletequoin"])) {
 
-    $id = $_GET["deletequo"];
+    $id = $_GET["deletequoin"];
 
     $sql = "SELECT quoin_file FROM quotation_in WHERE quoin_id = '$id'";
     $query = $conn->query($sql);
@@ -13,14 +13,14 @@ if (isset($_GET["deletequo"])) {
 
     if ($query) {
 
-        unlink("../../uploadfile/quotationinfile/$oldfile");
+        unlink("uploadfile/quotationinfile/$oldfile");
         $_SESSION['success'] = "ลบใบเสนอราคาสำเร็จ!";
-        header("Location: quotation_in_list.php");
+        echo "<script> window.history.back()</script>";
         exit;
     }
 
     $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-    header("Location: quotation_in_list.php");
+    echo "<script> window.history.back()</script>";
     exit;
 }
 
@@ -39,7 +39,7 @@ if (isset($_GET["deletequo"])) {
         <div class="container">
             <div id="listquotation" class="py-4 p-md-5 text-white">
                 <div class="text-center text-md-start">
-                    <h3>ใบเสนอราคากลาง</h3>
+                    <h3>ใบเสนอราคาเข้า</h3>
                 </div>
 
                 <div class="my-4 my-md-3 text-center text-md-end">
@@ -49,7 +49,7 @@ if (isset($_GET["deletequo"])) {
 
                 <div class="p-3 p-md-5 bg-light rounded-5 shadow-lg" id="main_row">
                     <div class="table-responsive">
-                        <table class="table" id="quotationTable">
+                        <table class="table" id="quotationinTable">
                             <thead>
                                 <tr class="rows align-center">
                                     <th scope="col" style="width:15%;">เลขที่</th>
@@ -78,12 +78,12 @@ if (isset($_GET["deletequo"])) {
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li><a class="dropdown-item"
-                                                            href="../../uploadfile/quotationinfile/' . $rows["quoin_file"] . '">เปิดเอกสาร</a>
+                                                            href="uploadfile/quotationinfile/' . $rows["quoin_file"] . '">เปิดเอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
                                                             href="?page=quo_in_edit&editquoin=' . encode($rows["quoin_id"], secret_key()) . '">แก้ไข</a>
                                                     </li>
-                                                    <li><a class="dropdown-item deletequo" href="#" data-quo-no="' . $rows["quoin_no"] . '" id="' . $rows["quoin_id"] . '" >ลบ</a></li>
+                                                    <li><a class="dropdown-item deletequoin" href="#" data-quoin-no="' . $rows["quoin_no"] . '" id="' . $rows["quoin_id"] . '" >ลบ</a></li>
                                                 </ul>
                                             </div>
                                         </td>
@@ -96,31 +96,32 @@ if (isset($_GET["deletequo"])) {
                 </div>
                 <!-- Data table -->
                 <script type="text/javascript">
-                    $(document).ready(function() {
-                        $('#quotationTable').DataTable();
+                $(document).ready(function() {
+                    $('#quotationinTable').DataTable();
 
-                        $(document).on('click', '.deletequo', function() {
-                            var id = $(this).attr("id");
-                            var show_quo_no = $(this).attr("data-quo-no");
-                            swal.fire({
-                                title: 'ต้องการลบใบเสนอราคานี้ !',
-                                text: "เลขที่ใบเสนอราคา : " + show_quo_no,
-                                type: 'warning',
-                                showCancelButton: true,
-                                confirmButtonColor: '#d33',
-                                cancelButtonColor: '#3085d6',
-                                confirmButtonText: 'yes!',
-                                cancelButtonText: 'no'
-                            }).then((result) => {
-                                if (result.value) {
-                                    window.location.href = "?deletequo=" + id;
-                                }
-                            });
+                    $(document).on('click', '.deletequoin', function() {
+                        var id = $(this).attr("id");
+                        var show_quoin_no = $(this).attr("data-quoin-no");
+                        swal.fire({
+                            title: 'ต้องการลบใบเสนอราคานี้ !',
+                            text: "เลขที่ใบเสนอราคา : " + show_quoin_no,
+                            type: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33',
+                            cancelButtonColor: '#3085d6',
+                            confirmButtonText: 'yes!',
+                            cancelButtonText: 'no'
+                        }).then((result) => {
+                            if (result.value) {
+                                window.location.href = "?page=quo_in&deletequoin=" + id;
+                            }
                         });
                     });
+                });
                 </script>
                 <!-- Data table -->
             </div>
         </div>
     </div>
 </div>
+<?php $conn->close(); ?>

@@ -25,7 +25,28 @@ if (isset($_POST['action'])) {
         $check = $query->fetch_assoc();
 
         if ($check) {
+            
             $_SESSION['error'] = "เลขที่ใบเสนอราคากลางนี้มีในระบบแล้ว!";
+            unset($_SESSION['svinput']);unset($_SESSION['deli']);unset($_SESSION['spe']);
+            if($input_quo_deli>0){$_SESSION['deli'] = $input_quo_deli;}
+            if($input_quo_specialdis>0){$_SESSION['spe'] = $input_quo_specialdis;}
+            
+            $inputArray = array();
+            
+            for ($count = 0; $count < $_POST["total_item"]; $count++) {
+                
+                $item_name = mysqli_real_escape_string($conn, trim($_POST['item_name'][$count]));
+                $item_amount = mysqli_real_escape_string($conn, trim($_POST['item_amount'][$count]));
+                $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
+                $total_price = mysqli_real_escape_string($conn, trim($_POST['total_price'][$count]));
+                
+                $subinputArray = array($item_name,$item_amount,$item_price,$total_price);
+                $inputArray[] = $subinputArray;
+        
+            }
+
+            $_SESSION['svinput']=$inputArray;
+            
             echo "<script>window.history.back();</script>";
             exit;
             
@@ -50,11 +71,32 @@ if (isset($_POST['action'])) {
                 }
 
                 $_SESSION['success'] = "บันทึกใบเสนอราคากลางสำเร็จ!";
+                unset($_SESSION['svinput']);unset($_SESSION['deli']);unset($_SESSION['spe']);
                 echo "<script> window.location.href='?page=quo'</script>";
                 exit;
+                
             } else {
 
                 $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
+                unset($_SESSION['svinput']);unset($_SESSION['deli']);unset($_SESSION['spe']);
+                if($input_quo_deli>0){$_SESSION['deli'] = $input_quo_deli;}
+                if($input_quo_specialdis>0){$_SESSION['spe'] = $input_quo_specialdis;}
+                
+                $inputArray = array();
+                
+                for ($count = 0; $count < $_POST["total_item"]; $count++) {
+                    
+                    $item_name = mysqli_real_escape_string($conn, trim($_POST['item_name'][$count]));
+                    $item_amount = mysqli_real_escape_string($conn, trim($_POST['item_amount'][$count]));
+                    $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
+                    $total_price = mysqli_real_escape_string($conn, trim($_POST['total_price'][$count]));
+                    
+                    $subinputArray = array($item_name,$item_amount,$item_price,$total_price);
+                    $inputArray[] = $subinputArray;
+            
+                }
+
+                $_SESSION['svinput']=$inputArray;
                 echo "<script> window.history.back()</script>";
                 exit;
             }
@@ -157,7 +199,46 @@ table tr td:first-child::before {
                                         <th width="20%">จำนวนเงิน(บาท)</th>
                                         <th width="5%">ลบ</th>
                                     </tr>
+                                    <?php if(isset($_SESSION['svinput'])) {
+                                        
+                                        $svinput=$_SESSION["svinput"];
+                                        $n=0;
+                                        
+                                        foreach($svinput as $index => $array){
+                                            $n++;
+                                            ?>
+                                    <tr id="row_id_<?= $n; ?>">
+                                        <td><span id="sr_no"></span></td>
+                                        <td>
+                                            <input type="text" name="item_name[]" id="item_name<?= $n; ?>"
+                                                class="form-control input-sm item_name" data-srno="<?= $n; ?>"
+                                                value="<?= $svinput[$index][0] ?>" required />
+                                        </td>
+                                        <td>
+                                            <input type="number" name="item_amount[]" id="item_amount<?= $n; ?>"
+                                                data-srno="<?= $n; ?>" class="form-control input-sm item_amount"
+                                                value="<?= $svinput[$index][1] ?>" required />
+                                        </td>
+                                        <td>
+                                            <input type="number" name="item_price[]" id="item_price<?= $n; ?>"
+                                                data-srno="<?= $n; ?>" class="form-control input-sm  item_price"
+                                                value="<?= $svinput[$index][2] ?>" required />
+                                        </td>
+                                        <td>
+                                            <input type="number" name="total_price[]" id="total_price<?= $n; ?>"
+                                                data-srno="<?= $n; ?>" class="form-control input-sm total_price"
+                                                value="<?= $svinput[$index][3] ?>" readonly />
+                                        </td>
+                                        <td>
+                                            <button type="button" name="remove_row" id="<?= $n; ?>"
+                                                class="btn btn-danger btn-xs remove_row">X</button>
+                                        </td>
+                                    </tr>
 
+                                    <?php }
+                                }else{ 
+                                    $n=1;$deli=0;$spe=0;
+                                    ?>
                                     <tr id="row_id_1">
                                         <td><span id="sr_no"></span></td>
                                         <td><input type="text" name="item_name[]" id="item_name1"
@@ -177,6 +258,9 @@ table tr td:first-child::before {
                                         </td>
                                         <td></td>
                                     </tr>
+                                    <?php 
+                                } 
+                                ?>
                                 </table>
                                 <div class="text-center">
                                     <button type="button" id="add_row" class="btn btn-addpay px-md-4 rounded-3"
@@ -192,8 +276,9 @@ table tr td:first-child::before {
                                     <h6>ค่าขนส่ง(บาท) :</h6>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="number" id="input_quo_deli" name="input_quo_deli" class="form-control "
-                                        placeholder="0.00" title="กรุณากรอกค่าขนส่ง หากมี">
+                                    <input type="number" id="input_quo_deli" name="input_quo_deli" class="form-control"
+                                        placeholder="0.00" title="กรุณากรอกค่าขนส่ง หากมี"
+                                        value="<?php if(isset($_SESSION['deli'])) {echo $_SESSION["deli"];} ?>">
                                 </div>
                             </div>
                         </div>
@@ -217,7 +302,8 @@ table tr td:first-child::before {
 
                                 <div class="col-md-6">
                                     <input type="number" id="input_quo_specialdis" name="input_quo_specialdis"
-                                        class="form-control " placeholder="0.00" title="กรุณากรอกส่วนลด หากมี">
+                                        class="form-control " placeholder="0.00" title="กรุณากรอกส่วนลด หากมี"
+                                        value="<?php if(isset($_SESSION['spe'])) {echo $_SESSION["spe"];} ?>">
                                 </div>
                             </div>
                             <div class="row align-items-center text-dark px-md-5 mb-3">
@@ -265,55 +351,55 @@ table tr td:first-child::before {
                                         class="fa-solid fa-cloud-arrow-up"></i></button>
                             </div>
                         </div>
-                        <input type="hidden" name="total_item" id="total_item" value="1" />
+                        <input type="hidden" name="total_item" id="total_item" value="<?=$n;?>" />
                     </div>
                 </form>
                 <script>
                 $(document).ready(function() {
                     var final_total_price = $('#final_total_price').text();
-                    var count = 1;
-                    var total_item = 1;
+                    var count = <?=$n;?>;
+                    var total_item = <?=$n;?>;
 
                     $(document).on('click', '#add_row', function() {
                         count++;
                         total_item++;
                         $('#total_item').val(total_item);
                         var html_code = '';
-                        html_code += '<tr id="row_id_' + count + '">';
-                        html_code += '<td><span id="sr_no"></span></td>';
-
-                        html_code +=
-                            '<td><input type="text" name="item_name[]" id="item_name' + count +
-                            '" class="form-control input-sm" required/></td>';
-                        html_code +=
-                            '<td><input type="number" name="item_amount[]" id="item_amount' +
-                            count + '" data-srno="' + count +
-                            '" class="form-control input-sm number_only item_amount" required/></td>';
-                        html_code +=
-                            '<td><input type="number" name="item_price[]" id="item_price' +
-                            count + '" data-srno="' + count +
-                            '" class="form-control input-sm number_only item_price" required step="any"/></td>';
-                        html_code +=
-                            '<td><input type="text" name="total_price[]" id="total_price' +
-                            count + '" data-srno="' + count +
+                        html_code += '<tr id=" row_id_' + count + '">';
+                        html_code
+                            += '<td><span id="sr_no"></span></td>';
+                        html_code
+                            += '<td><input type="text" name="item_name[]" id="item_name' + count +
+                            '" class="form-control input-sm" required /></td>';
+                        html_code
+                            += '<td><input type="number" name="item_amount[]" id="item_amount' + count +
+                            '" data-srno="' +
+                            count +
+                            '" class="form-control input-sm number_only item_amount" required /></td>';
+                        html_code += '<td><input type="number" name="item_price[]" id="item_price' +
+                            count +
+                            '" data-srno="' + count +
+                            '" class="form-control input-sm number_only item_price" required step="any" /></td>';
+                        html_code += '<td><input type="text" name="total_price[]" id="total_price' +
+                            count +
+                            '" data-srno="' + count +
                             '" class="form-control input-sm total_price" readonly /></td>';
-                        html_code +=
-                            '<td><button type="button" name="remove_row" id="' + count +
+                        html_code += '<td><button type="button" name="remove_row" id="' + count +
                             '" class="btn btn-danger btn-xs remove_row">X</button></td>';
                         html_code += '</tr>';
                         $('#quotation-item-table').append(html_code);
                     });
+                    $(document).on('click', '.remove_row',
+                        function() {
+                            var row_id = $(this).attr("id");
+                            $('#row_id_' + row_id).remove();
+                            total_item--;
+                            $('#total_item').val(total_item);
+                            cal_final_total(count);
+                        });
 
-                    $(document).on('click', '.remove_row', function() {
-                        var row_id = $(this).attr("id");
-                        $('#row_id_' + row_id).remove();
-                        total_item--;
-                        $('#total_item').val(total_item);
-                        cal_final_total(count);
-
-                    });
-
-                    function cal_final_total(count) {
+                    function
+                    cal_final_total(count) {
                         var final_total_price = 0;
                         for (j = 1; j <= count; j++) {
                             var quantity = 0;
@@ -367,6 +453,10 @@ table tr td:first-child::before {
                     $(document).on('change', '#input_quo_deli', function() {
                         cal_final_total(count);
                     });
+
+                    <?php if(isset($_SESSION['svinput'])){
+                        echo "cal_final_total(count);";
+                }?>
 
                 });
                 </script>

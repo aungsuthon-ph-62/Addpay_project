@@ -15,9 +15,9 @@
                     <li>
                         <h6 class="dropdown-header">เมนูใบเสนอราคา : กลาง/เข้า/ออก</h6>
                     </li>
-                    <li><a class="dropdown-item" href="?page=quo">ใบเสนอราคากลาง</a></li>
-                    <li><a class="dropdown-item" href="?page=quo_in">ใบเสนอราคาเข้า</a></li>
-                    <li><a class="dropdown-item" href="?page=quo_out">ใบเสนอราคาออก</a></li>
+                    <li><a class="dropdown-item" href="?page=quo">ใบเสนอราคา-กลาง</a></li>
+                    <li><a class="dropdown-item" href="?page=quo_in">ใบเสนอราคา-เข้า</a></li>
+                    <li><a class="dropdown-item" href="?page=quo_out">ใบเสนอราคา-ออก</a></li>
                 </ul>
             </li>
             <li class="nav-item">
@@ -63,9 +63,9 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="?page=">
+                <a class="nav-link text-white" href="?page=expenses">
                     <span data-feather="layers"></span>
-                    การเงิน/บัญชี
+                    ใบสำคัญจ่าย
                 </a>
             </li>
             <li class="nav-item">

@@ -61,6 +61,7 @@ function edit_invbill()
     $input_invbill_total = mysqli_real_escape_string($conn, trim($_POST['input_invbill_total']));
     $input_invbill_page = mysqli_real_escape_string($conn, trim($_POST['input_invbill_page']));
     $input_invbill_remark = mysqli_real_escape_string($conn, trim($_POST['input_invbill_remark']));
+    $date_invbill_create = mysqli_real_escape_string($conn, trim($_POST['date_invbill_create']));
     $uid = $_SESSION['id'];
 
     $query1 = "UPDATE invoicebill SET invbill_no='$input_invbill_no', invbill_date='$input_invbill_date', invbill_name='$input_invbill_name',
@@ -81,9 +82,9 @@ function edit_invbill()
             $item_vat = mysqli_real_escape_string($conn, trim($_POST['item_vat'][$count]));
             $item_total = mysqli_real_escape_string($conn, trim($_POST['item_total'][$count]));
 
-            $query = "INSERT INTO invoicebill_details (invbilld_bid, invbilld_item, invibilld_inv_date, invibilld_due_date, invbilld_price, invbilld_vat, invbilld_result,invbilld_create, invbilld_uid)
-                    VALUES ('$id', '$item_name', '$item_inv_date', '$item_due_date', '$item_price', '$item_vat', '$item_total', '$date', '$uid')";
-                    $conn->query($query);
+            $query = "INSERT INTO invoicebill_details (invbilld_bid, invbilld_item, invbilld_inv_date, invbilld_due_date, invbilld_price, invbilld_vat, invbilld_result, invbilld_create, invbilld_update, invbilld_uid)
+                    VALUES ('$id', '$item_name', '$item_inv_date', '$item_due_date', '$item_price', '$item_vat', '$item_total', '$date_invbill_create', '$date', '$uid')";
+            $conn->query($query);
         }
 
         $_SESSION['success'] = "แก้ไขใบวางบิลสำเร็จ!";
@@ -99,19 +100,19 @@ function edit_invbill()
 ?>
 
 <style>
-    table {
-        counter-reset: rowNumber;
-    }
+table {
+    counter-reset: rowNumber;
+}
 
-    table tr:not(:first-child) {
-        counter-increment: rowNumber;
-    }
+table tr:not(:first-child) {
+    counter-increment: rowNumber;
+}
 
-    table tr td:first-child::before {
-        content: counter(rowNumber);
-        min-width: 1em;
-        margin-right: 0.5em;
-    }
+table tr td:first-child::before {
+    content: counter(rowNumber);
+    min-width: 1em;
+    margin-right: 0.5em;
+}
 </style>
 
 <nav aria-label="breadcrumb">
@@ -132,13 +133,16 @@ function edit_invbill()
                     <h3>ข้อมูลใบแจ้งหนี้/ใบวางบิล</h3>
                 </div>
 
-                <form action="?page=invoicebill_edit" method="post" id="invoicebill_form" class="p-md-5">
+                <form
+                    action="?page=invoicebill_edit&editinvbill=<?php echo encode($row['invbill_id'], secret_key()); ?>"
+                    method="post" id="invoicebill_form" class="p-md-5">
                     <div class="row align-items-center text-dark px-md-5 mb-3">
                         <div class="col-md-3 text-md-end">
                             <label for="input_invbill_no" class="col-form-label">เลขที่ No.</label>
                         </div>
                         <div class="col-auto">
-                            <input type="text" id="input_invbill_no" name="input_invbill_no" class="form-control " required value="<?= $row['invbill_no'] ?>">
+                            <input type="text" id="input_invbill_no" name="input_invbill_no" class="form-control "
+                                required value="<?= $row['invbill_no'] ?>">
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
@@ -146,7 +150,8 @@ function edit_invbill()
                             <label for="input_invbill_date" class="col-form-label">วันที่ date.</label>
                         </div>
                         <div class="col-auto">
-                            <input type="date" id="input_invbill_date" name="input_invbill_date" class="form-control " required value="<?= $row['invbill_date'] ?>">
+                            <input type="date" id="input_invbill_date" name="input_invbill_date" class="form-control "
+                                required value="<?= $row['invbill_date'] ?>">
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
@@ -155,7 +160,8 @@ function edit_invbill()
                         </div>
 
                         <div class="col-6">
-                            <input type="text" id="input_invbill_name" name="input_invbill_name" class="form-control " required value="<?= $row['invbill_name'] ?>">
+                            <input type="text" id="input_invbill_name" name="input_invbill_name" class="form-control "
+                                required value="<?= $row['invbill_name'] ?>">
                         </div>
                     </div>
                     <div class=" row align-items-center text-dark px-md-5 mb-3">
@@ -163,7 +169,8 @@ function edit_invbill()
                             <label for="input_invbill_address" class="col-form-label">ที่อยู่ :</label>
                         </div>
                         <div class="col-6">
-                            <textarea class="form-control" id="input_invbill_address" name="input_invbill_address" rows="3" required><?= $row['invbill_address']; ?></textarea>
+                            <textarea class="form-control" id="input_invbill_address" name="input_invbill_address"
+                                rows="3" required><?= $row['invbill_address']; ?></textarea>
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
@@ -171,7 +178,8 @@ function edit_invbill()
                             <label for="input_invbill_cusid" class="col-form-label">เลขประจำตัวผู้เสียภาษี :</label>
                         </div>
                         <div class="col-6">
-                            <input type="text" id="input_invbill_cusid" name="input_invbill_cusid" class="form-control " required value="<?= $row['invbill_cusid'] ?>">
+                            <input type="text" id="input_invbill_cusid" name="input_invbill_cusid" class="form-control "
+                                required value="<?= $row['invbill_cusid'] ?>">
 
                         </div>
                     </div>
@@ -201,36 +209,50 @@ function edit_invbill()
                                         $n = $n + 1;
                                     ?>
 
-                                        <tr id="row_id_1">
-                                            <td><span id="sr_no"></span></td>
-                                            <td>
-                                                <input type="text" name="item_name[]" id="item_name<?= $n; ?>" class="form-control input-sm" required value="<?= $rows["invbilld_item"]; ?>" />
-                                            </td>
-                                            <td>
-                                                <input type="date" name="item_inv_date[]" id="item_inv_date<?= $n; ?>" class="form-control input-sm item_inv_date" value="<?= $rows["invbilld_inv_date"]; ?>" />
-                                            </td>
-                                            <td>
-                                                <input type="date" name="item_due_date[]" id="item_due_date<?= $n; ?>" class="form-control input-sm item_due_date" value="<?= $rows["invbilld_due_date"]; ?>" />
-                                            </td>
-                                            <td>
-                                                <input type="number" name="item_price[]" id="item_price<?= $n; ?>" data-srno="<?= $n; ?>" class="form-control input-sm item_price" step="any" required value="<?= $rows["invbilld_price"]; ?>" />
-                                            </td>
-                                            <td>
-                                                <input type="number" name="item_vat[]" id="item_vat<?= $n; ?>" data-srno="<?= $n; ?>" class="form-control input-sm item_vat" required readonly value="<?= $rows["invbilld_vat"]; ?>" />
-                                            </td>
-                                            <td>
-                                                <input type="number" name="item_total[]" id="item_total<?= $n; ?>" data-srno="<?= $n; ?>" class="form-control input-sm item_total" required readonly value="<?= $rows["invbilld_result"]; ?>" />
-                                            </td>
-                                            <td>
-                                                <button type="button" name="remove_row" id="<?= $n; ?>" class="btn btn-danger btn-xs remove_row">X</button>
-                                            </td>
-                                        </tr>
+                                    <tr id="row_id_<?= $n; ?>">
+                                        <td><span id="sr_no"></span></td>
+                                        <td>
+                                            <input type="text" name="item_name[]" id="item_name<?= $n; ?>"
+                                                class="form-control input-sm" required
+                                                value="<?= $rows["invbilld_item"]; ?>" />
+                                        </td>
+                                        <td>
+                                            <input type="date" name="item_inv_date[]" id="item_inv_date<?= $n; ?>"
+                                                data-srno="<?= $n; ?>" class="form-control input-sm item_inv_date"
+                                                value="<?= $rows["invbilld_inv_date"]; ?>" />
+                                        </td>
+                                        <td>
+                                            <input type="date" name="item_due_date[]" id="item_due_date<?= $n; ?>"
+                                                data-srno="<?= $n; ?>" class="form-control input-sm item_due_date"
+                                                value="<?= $rows["invbilld_due_date"]; ?>" />
+                                        </td>
+                                        <td>
+                                            <input type="number" name="item_price[]" id="item_price<?= $n; ?>"
+                                                data-srno="<?= $n; ?>" class="form-control input-sm item_price"
+                                                step="any" required value="<?= $rows["invbilld_price"]; ?>" />
+                                        </td>
+                                        <td>
+                                            <input type="number" name="item_vat[]" id="item_vat<?= $n; ?>"
+                                                data-srno="<?= $n; ?>" class="form-control input-sm item_vat" required
+                                                readonly value="<?= $rows["invbilld_vat"]; ?>" />
+                                        </td>
+                                        <td>
+                                            <input type="number" name="item_total[]" id="item_total<?= $n; ?>"
+                                                data-srno="<?= $n; ?>" class="form-control input-sm item_total" required
+                                                readonly value="<?= $rows["invbilld_result"]; ?>" />
+                                        </td>
+                                        <td>
+                                            <button type="button" name="remove_row" id="<?= $n; ?>"
+                                                class="btn btn-danger btn-xs remove_row">X</button>
+                                        </td>
+                                    </tr>
                                     <?php
                                     }
                                     ?>
                                 </table>
                                 <div class="text-center">
-                                    <button type="button" id="add_row" class="btn btn-addpay px-md-4 rounded-3"><i class="fa fa-plus-circle text-white"></i> เพิ่มรายการ</button>
+                                    <button type="button" id="add_row" class="btn btn-addpay px-md-4 rounded-3"><i
+                                            class="fa fa-plus-circle text-white"></i> เพิ่มรายการ</button>
                                 </div>
                             </div>
                         </div>
@@ -242,7 +264,8 @@ function edit_invbill()
                                     <label for="input_invbill_remark" class="col-form-label">หมายเหตุ :</label>
                                 </div>
                                 <div class="col-auto">
-                                    <textarea class="form-control" id="input_invbill_remark" name="input_invbill_remark" rows="2" value="<?= $row['invbill_remark'] ?>"></textarea>
+                                    <textarea class="form-control" id="input_invbill_remark" name="input_invbill_remark"
+                                        rows="2"><?= $row['invbill_remark'] ?></textarea>
                                 </div>
                             </div>
                             <div class="row align-items-center text-dark mb-3">
@@ -250,7 +273,8 @@ function edit_invbill()
                                     <label for="input_invbill_page" class="col-form-label">จำนวนเอกสารรวม :</label>
                                 </div>
                                 <div class="col-md-5">
-                                    <input type="number" id="input_invbill_page" name="input_invbill_page" class="form-control" required value="<?= $row['invbill_page'] ?>">
+                                    <input type="number" id="input_invbill_page" name="input_invbill_page"
+                                        class="form-control" required value="<?= $row['invbill_page'] ?>">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="input_invbill_page" class="col-form-label">ฉบับ</label>
@@ -264,16 +288,20 @@ function edit_invbill()
                                 </div>
 
                                 <div class="col-auto">
-                                    <input type="number" id="input_invbill_deli" name="input_invbill_deli" class="form-control" placeholder="0.00" title="กรุณากรอกค่าขนส่ง หากมี" value="<?= $row['invbill_deli'] ?>">
+                                    <input type="number" id="input_invbill_deli" name="input_invbill_deli"
+                                        class="form-control" placeholder="0.00" title="กรุณากรอกค่าขนส่ง หากมี"
+                                        value="<?= $row['invbill_deli'] ?>">
                                 </div>
                             </div>
 
                             <div class="row align-items-center text-dark mb-3">
                                 <div class="col-md-5 ">
-                                    <label for="input_invbill_total" class="col-form-label">ยอดรวมทั้งสิ้น (บาท) :</label>
+                                    <label for="input_invbill_total" class="col-form-label">ยอดรวมทั้งสิ้น (บาท)
+                                        :</label>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="number" id="input_invbill_total" name="input_invbill_total" class="form-control bg" readonly value="<?= $row['invbill_total'] ?>">
+                                    <input type="number" id="input_invbill_total" name="input_invbill_total"
+                                        class="form-control bg" readonly value="<?= $row['invbill_total'] ?>">
                                 </div>
                             </div>
                         </div>
@@ -283,13 +311,19 @@ function edit_invbill()
                     <div class="mx-auto d-flex justify-content-end">
                         <div class="col-md-12">
                             <div class="d-flex justify-content-end">
-                                <button type="reset" class="btn bg-secondary-addpay text-white me-3"><i class="fa-solid fa-arrow-rotate-left"></i> ล้างข้อมูล</button>
-                                <button type="submit" name="action" value="edit_invoicebill" class="btn btn-addpay text-white">บันทึก <i class="fa-solid fa-cloud-arrow-up"></i></button>
+                                <button type="reset" class="btn bg-secondary-addpay text-white me-3"><i
+                                        class="fa-solid fa-arrow-rotate-left"></i> ล้างข้อมูล</button>
+                                <button type="submit" name="action" value="edit_invoicebill"
+                                    class="btn btn-addpay text-white">บันทึก <i
+                                        class="fa-solid fa-cloud-arrow-up"></i></button>
 
                                 <input type="hidden" name="total_item" id="total_item" value="<?= $n; ?>" />
-                                <input type="hidden" name="invbill_no_check" id="invbill_no_check" value="<?= $row['invbill_no']; ?>" />
-                                <input type="hidden" name="invbill_id" id="invbill_id" value="<?= $row['invbill_id']; ?>" />
-                                <input type="hidden" name="invbill_date_edit" id="invbill_date_edit" value="<?= $row['invbill_edit']; ?>" />
+                                <input type="hidden" name="invbill_no_check" id="invbill_no_check"
+                                    value="<?= $row['invbill_no']; ?>" />
+                                <input type="hidden" name="invbill_id" id="invbill_id"
+                                    value="<?= $row['invbill_id']; ?>" />
+                                <input type="hidden" name="date_invbill_create" id="date_invbill_create"
+                                    value="<?= $row['invbill_create']; ?>" />
 
                             </div>
                         </div>
@@ -298,104 +332,104 @@ function edit_invbill()
 
                 </form>
                 <script>
-                    $(document).ready(function() {
-                        var final_total_price = $('#final_total_price').text();
-                        var count = "<?= $n; ?>";
-                        var total_item = "<?= $n; ?>";
+                $(document).ready(function() {
+                    var final_total_price = $('#final_total_price').text();
+                    var count = "<?= $n; ?>";
+                    var total_item = "<?= $n; ?>";
 
-                        $(document).on('click', '#add_row', function() {
-                            count++;
-                            total_item++;
-                            $('#total_item').val(total_item);
-                            var html_code = '';
-                            html_code += '<tr id="row_id_' + count + '">';
-                            html_code += '<td><span id="sr_no"></span></td>';
+                    $(document).on('click', '#add_row', function() {
+                        count++;
+                        total_item++;
+                        $('#total_item').val(total_item);
+                        var html_code = '';
+                        html_code += '<tr id="row_id_' + count + '">';
+                        html_code += '<td><span id="sr_no"></span></td>';
 
-                            html_code += '<td><input type="text" name="item_name[]" id="item_name' + count +
-                                '" class="form-control input-sm" required/></td>';
+                        html_code += '<td><input type="text" name="item_name[]" id="item_name' + count +
+                            '" class="form-control input-sm" required/></td>';
 
-                            html_code +=
-                                '<td><input type="date" name="item_inv_date[]" id="item_inv_date' +
-                                count + '" data-srno="' + count +
-                                '" class="form-control input-sm  item_inv_date" /></td>';
+                        html_code +=
+                            '<td><input type="date" name="item_inv_date[]" id="item_inv_date' +
+                            count + '" data-srno="' + count +
+                            '" class="form-control input-sm  item_inv_date" /></td>';
 
-                            html_code +=
-                                '<td><input type="date" name="item_due_date[]" id="item_due_date' +
-                                count + '" data-srno="' + count +
-                                '" class="form-control input-sm  item_due_date" /></td>';
+                        html_code +=
+                            '<td><input type="date" name="item_due_date[]" id="item_due_date' +
+                            count + '" data-srno="' + count +
+                            '" class="form-control input-sm  item_due_date" /></td>';
 
-                            html_code +=
-                                '<td><input type="number" name="item_price[]" id="item_price' +
-                                count + '" data-srno="' + count +
-                                '" class="form-control input-sm number_only item_price" required step="any"/></td>';
+                        html_code +=
+                            '<td><input type="number" name="item_price[]" id="item_price' +
+                            count + '" data-srno="' + count +
+                            '" class="form-control input-sm number_only item_price" required step="any"/></td>';
 
-                            html_code +=
-                                '<td><input type="number" name="item_vat[]" id="item_vat' +
-                                count + '" data-srno="' + count +
-                                '" class="form-control input-sm item_vat" required readonly /></td>';
+                        html_code +=
+                            '<td><input type="number" name="item_vat[]" id="item_vat' +
+                            count + '" data-srno="' + count +
+                            '" class="form-control input-sm item_vat" required readonly /></td>';
 
-                            html_code +=
-                                '<td><input type="number" name="item_total[]" id="item_total' +
-                                count + '" data-srno="' + count +
-                                '" class="form-control input-sm number_only item_total" required readonly /></td>';
+                        html_code +=
+                            '<td><input type="number" name="item_total[]" id="item_total' +
+                            count + '" data-srno="' + count +
+                            '" class="form-control input-sm number_only item_total" required readonly /></td>';
 
-                            html_code += '<td><button type="button" name="remove_row" id="' + count +
-                                '" class="btn btn-danger btn-xs remove_row">X</button></td>';
-                            html_code += '</tr>';
-                            $('#invoice-item-table').append(html_code);
-                        });
+                        html_code += '<td><button type="button" name="remove_row" id="' + count +
+                            '" class="btn btn-danger btn-xs remove_row">X</button></td>';
+                        html_code += '</tr>';
+                        $('#invoice-item-table').append(html_code);
+                    });
 
-                        $(document).on('click', '.remove_row', function() {
-                            var row_id = $(this).attr("id");
-                            $('#row_id_' + row_id).remove();
-                            total_item--;
-                            $('#total_item').val(total_item);
-                            cal_final_total(count);
+                    $(document).on('click', '.remove_row', function() {
+                        var row_id = $(this).attr("id");
+                        $('#row_id_' + row_id).remove();
+                        total_item--;
+                        $('#total_item').val(total_item);
+                        cal_final_total(count);
 
-                        });
+                    });
 
-                        function cal_final_total(count) {
-                            var final_total_price = 0;
-                            for (j = 1; j <= count; j++) {
-                                var price = 0;
-                                var vat7per = 0;
-                                var total_price = 0;
+                    function cal_final_total(count) {
+                        var final_total_price = 0;
+                        for (j = 1; j <= count; j++) {
+                            var price = 0;
+                            var vat7per = 0;
+                            var total_price = 0;
 
-                                price = $('#item_price' + j).val();
+                            price = $('#item_price' + j).val();
 
-                                if (price > 0) {
+                            if (price > 0) {
 
-                                    vat7per = (parseFloat(price) * 0.07);
-                                    $('#item_vat' + j).val(vat7per.toFixed(2));
+                                vat7per = (parseFloat(price) * 0.07);
+                                $('#item_vat' + j).val(vat7per.toFixed(2));
 
-                                    total_price = (parseFloat(price) + parseFloat(vat7per));
-                                    $('#item_total' + j).val(total_price.toFixed(2));
+                                total_price = (parseFloat(price) + parseFloat(vat7per));
+                                $('#item_total' + j).val(total_price.toFixed(2));
 
 
-                                    final_total_price = (final_total_price + total_price);
-                                }
+                                final_total_price = (final_total_price + total_price);
                             }
-
-                            var deli = 0;
-                            var final_total = 0;
-                            deli = $('#input_invbill_deli').val();
-                            final_total = final_total_price;
-                            if (deli > 0) {
-                                final_total = (final_total + parseFloat(deli));
-                            }
-
-                            $('#input_invbill_total').val(final_total.toFixed(2));
                         }
 
+                        var deli = 0;
+                        var final_total = 0;
+                        deli = $('#input_invbill_deli').val();
+                        final_total = final_total_price;
+                        if (deli > 0) {
+                            final_total = (final_total + parseFloat(deli));
+                        }
 
-                        $(document).on('change', '.item_price', function() {
-                            cal_final_total(count);
-                        });
+                        $('#input_invbill_total').val(final_total.toFixed(2));
+                    }
 
-                        $(document).on('change', '#input_invbill_deli', function() {
-                            cal_final_total(count);
-                        });
+
+                    $(document).on('change', '.item_price', function() {
+                        cal_final_total(count);
                     });
+
+                    $(document).on('change', '#input_invbill_deli', function() {
+                        cal_final_total(count);
+                    });
+                });
                 </script>
             </div>
         </div>
