@@ -36,7 +36,7 @@ if (isset($_GET["deleteinvbill"])) {
                         <i class="fa-solid fa-file-circle-plus"></i> สร้างใบแจ้งหนี้/ใบวางบิล</a>
                 </div>
 
-               
+
 
                 <div class="p-3 p-md-5 bg-light rounded-5 shadow-lg" id="main_row">
                     <div class="table-responsive">
@@ -67,7 +67,7 @@ if (isset($_GET["deleteinvbill"])) {
                                                     data-bs-toggle="dropdown" aria-expanded="false"><b>เลือก</b>
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item"
+                                                    <li><a class="dropdown-item" target="_blank"
                                                             href="view/dashboard/invoicebill_form.php?pdfinvbill_id=' . $rows["invbill_id"] . '">พิมพ์เอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
@@ -86,28 +86,28 @@ if (isset($_GET["deleteinvbill"])) {
                 </div>
                 <!-- Data table -->
                 <script type="text/javascript">
-                    $(document).ready(function() {
-                        $('#invbillTable').DataTable();
+                $(document).ready(function() {
+                    $('#invbillTable').DataTable();
 
-                        $(document).on('click', '.deleteinvbill', function() {
-                            var id = $(this).attr("id");
-                            var show_invbill_no = $(this).attr("data-invbill-no");
-                            swal.fire({
-                                title: 'ต้องการลบใบวางบิลนี้ !',
-                                text: "เลขที่ใบวางบิล : " + show_invbill_no,
-                                type: 'warning',
-                                showCancelButton: true,
-                                confirmButtonColor: '#d33',
-                                cancelButtonColor: '#3085d6',
-                                confirmButtonText: 'yes!',
-                                cancelButtonText: 'no'
-                            }).then((result) => {
-                                if (result.value) {
-                                    window.location.href = "?page=invoicebill&deleteinvbill=" + id;
-                                }
-                            });
+                    $(document).on('click', '.deleteinvbill', function() {
+                        var id = $(this).attr("id");
+                        var show_invbill_no = $(this).attr("data-invbill-no");
+                        swal.fire({
+                            title: 'ต้องการลบใบวางบิลนี้ !',
+                            text: "เลขที่ใบวางบิล : " + show_invbill_no,
+                            type: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33',
+                            cancelButtonColor: '#3085d6',
+                            confirmButtonText: 'yes!',
+                            cancelButtonText: 'no'
+                        }).then((result) => {
+                            if (result.value) {
+                                window.location.href = "?page=invoicebill&deleteinvbill=" + id;
+                            }
                         });
                     });
+                });
                 </script>
                 <!-- Data table -->
             </div>
