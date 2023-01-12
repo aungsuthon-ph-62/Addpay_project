@@ -123,7 +123,7 @@ if (mysqli_num_rows($result) > 0) {
                     <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; height:20px; padding:0 10px;">' . number_format($infoinvbitems['invbilld_result'], 2) . '</td>';
                     if($i==1){
                         $sp=$sp+5;
-                        echo '<td VALIGN="TOP" rowspan='.$sp.' style="text-align: center; border-bottom: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6;">'.$infoinvb['invbill_remark'].'</td>';
+                        echo '<td VALIGN="TOP" rowspan='.$sp.' style="text-align: left; border-bottom: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6;"><p class="brword">' . $infoinvb['invbill_remark'] . '</p></td>';
                     }
         echo    '</tr>';
     }

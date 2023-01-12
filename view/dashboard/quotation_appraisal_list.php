@@ -14,7 +14,7 @@ if (isset($_GET["deletequo"])) {
     echo "<script> window.history.back()</script>";
     exit;
 }
-
+unset($_SESSION['svinput']);unset($_SESSION['deli']);unset($_SESSION['spe']);
 ?>
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
