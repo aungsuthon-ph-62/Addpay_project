@@ -118,9 +118,9 @@ if (mysqli_num_rows($result) > 0) {
                     <td VALIGN="TOP" style="text-align: left; border-left: 1.4px solid #3585c6; height:20px;">' . $infoinvbitems['invbilld_item'] . ' </td>
                     <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:20px;">' . $invd . '</td>
                     <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:20px;">' . $dued . '</td>
-                    <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:20px;">' . number_format($infoinvbitems['invbilld_price'], 2) . '</td>
-                    <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:20px;">' . number_format($infoinvbitems['invbilld_vat'], 2) . '</td>
-                    <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; height:20px;">' . number_format($infoinvbitems['invbilld_result'], 2) . '</td>';
+                    <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:20px; padding:0 10px;">' . number_format($infoinvbitems['invbilld_price'], 2) . '</td>
+                    <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:20px; padding:0 10px;">' . number_format($infoinvbitems['invbilld_vat'], 2) . '</td>
+                    <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; height:20px; padding:0 10px;">' . number_format($infoinvbitems['invbilld_result'], 2) . '</td>';
                     if($i==1){
                         $sp=$sp+5;
                         echo '<td VALIGN="TOP" rowspan='.$sp.' style="text-align: center; border-bottom: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6;">'.$infoinvb['invbill_remark'].'</td>';
@@ -136,7 +136,7 @@ if (mysqli_num_rows($result) > 0) {
                 <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:50px;"></td>
                 <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:50px;"></td>
                 <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:50px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; height:50px;">' . number_format($infoinvb['invbill_deli'], 2) . '</td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; height:50px; padding:0 10px;">' . number_format($infoinvb['invbill_deli'], 2) . '</td>
                 
             </tr>';
 }
@@ -172,10 +172,10 @@ while ($infoinvbsum = mysqli_fetch_array($result)) {
                 <td style="text-align: center; height:30px; border-bottom:1.3px dotted #3585c6;">' . $infoinvbsum['invbill_page'] . '</td>
                 <td style="text-align: left; border-right: 1.4px solid #3585c6; height:30px;" colspan="2">ฉบับ</td>
 
-                <td VALIGN="middle" style="height:30px; background-color:#b4dfee; border-bottom:1.4px solid #3585c6; text-align:center; padding:0;  border-collapse: collapse; padding: 5px; margin: 0;" ROWSPAN="2" colspan="2">
+                <td VALIGN="middle" style="height:30px; background-color:#b4dfee; border-bottom:1.4px solid #3585c6; text-align:center; padding:0;  border-collapse: collapse;  margin: 0;" ROWSPAN="2" colspan="2">
                     ยอดรวมทั้งสิ้น(บาท)
                 </td>
-                <td VALIGN="middle" style="height:30px; text-align:right; padding:0; border-bottom:1.4px solid #3585c6; border-right:1.4px solid #3585c6; border-collapse: collapse; padding: 5px; margin: 0;" ROWSPAN="2" >
+                <td VALIGN="middle" style="height:30px; text-align:right; border-bottom:1.4px solid #3585c6; border-right:1.4px solid #3585c6; border-collapse: collapse; padding:0 10px; margin: 0;" ROWSPAN="2" >
                     ' . number_format($infoinvbsum['invbill_total'], 2) . '
                 </td>
                 

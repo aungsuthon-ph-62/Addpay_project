@@ -24,8 +24,33 @@ if (isset($_POST['action'])) {
 
         if ($check) {
             $_SESSION['error'] = "เลขที่ใบวางบิลนี้มีในระบบแล้ว!";
+
+            unset($_SESSION['svinput']);unset($_SESSION['deli']);
+            if($input_invbill_deli>0){$_SESSION['deli'] = $input_invbill_deli;}
+        
+            $inputArray = array();
+            
+            for ($count = 0; $count < $_POST["total_item"]; $count++) {
+                
+                $item_name = mysqli_real_escape_string($conn, trim($_POST['item_name'][$count]));
+                $item_inv_date = mysqli_real_escape_string($conn, trim($_POST['item_inv_date'][$count]));
+                $item_due_date = mysqli_real_escape_string($conn, trim($_POST['item_due_date'][$count]));
+                
+                $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
+                $item_vat = mysqli_real_escape_string($conn, trim($_POST['item_vat'][$count]));
+                $item_total = mysqli_real_escape_string($conn, trim($_POST['item_total'][$count]));
+
+                $subinputArray = array($item_name,$item_inv_date,$item_due_date,$item_price,$item_vat,$item_total);
+                $inputArray[] = $subinputArray;
+        
+            }
+
+            $_SESSION['svinput']=$inputArray;
+
+
             echo("<script> window.history.back()</script>");
             exit;
+
         } else {
             $query = "INSERT INTO invoicebill (invbill_no, invbill_date, invbill_name, invbill_address, invbill_cusid, invbill_deli, invbill_total, invbill_page, invbill_remark, invbill_create, invbill_uid)
             VALUES ('$input_invbill_no', '$input_invbill_date', '$input_invbill_name', '$input_invbill_address', '$input_invbill_cusid', '$input_invbill_deli', '$input_invbill_total','$input_invbill_page', '$input_invbill_remark', '$date', '$uid')";
@@ -51,11 +76,33 @@ if (isset($_POST['action'])) {
                 }
                 
                 $_SESSION['success'] = "บันทึกใบวางบิลสำเร็จ!";
+                unset($_SESSION['svinput']);unset($_SESSION['deli']);
                 echo("<script> window.location.href='?page=invoicebill'</script>");
                 exit;
             } else {
-                echo "Error: " . $query . "<br>" . $conn->error;
+
                 $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
+                unset($_SESSION['svinput']);unset($_SESSION['deli']);
+                if($input_quo_deli>0){$_SESSION['deli'] = $input_quo_deli;}
+                
+                $inputArray = array();
+                
+                for ($count = 0; $count < $_POST["total_item"]; $count++) {
+                    
+                    $item_name = mysqli_real_escape_string($conn, trim($_POST['item_name'][$count]));
+                    $item_inv_date = mysqli_real_escape_string($conn, trim($_POST['item_inv_date'][$count]));
+                    $item_due_date = mysqli_real_escape_string($conn, trim($_POST['item_due_date'][$count]));
+                    
+                    $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
+                    $item_vat = mysqli_real_escape_string($conn, trim($_POST['item_vat'][$count]));
+                    $item_total = mysqli_real_escape_string($conn, trim($_POST['item_total'][$count]));
+
+                    $subinputArray = array($item_name,$item_inv_date,$item_due_date,$item_price,$item_vat,$item_total);
+                    $inputArray[] = $subinputArray;
+            
+                }
+
+                $_SESSION['svinput']=$inputArray;
                 echo("<script> window.history.back()</script>");
                 exit;
             }
@@ -165,7 +212,37 @@ table tr td:first-child::before {
                                         <th width="10%">จำนวนเงินรวม <br> Total Amount</th>
                                         <th width="5%">ลบ</th>
                                     </tr>
+                                    <?php if(isset($_SESSION['svinput'])) {
+                                        
+                                        $svinput=$_SESSION["svinput"];
+                                        $n=0;
+                                        
+                                        foreach($svinput as $index => $array){
+                                            $n++;
+                                            ?>
+                                    <tr id="row_id_<?= $n; ?>">
+                                        <td><span id="sr_no"></span></td>
+                                        <td><input type="text" name="item_name[]" id="item_name1"
+                                                class="form-control input-sm" value="<?= $svinput[$index][0] ?>"required /></td>
+                                        <td><input type="date" name="item_inv_date[]" id="item_inv_date1"
+                                                class="form-control input-sm item_inv_date" value="<?= $svinput[$index][1] ?>"/></td>
+                                        <td><input type="date" name="item_due_date[]" id="item_due_date1"
+                                                class="form-control input-sm item_due_date" value="<?= $svinput[$index][2] ?>"/></td>
+                                        <td><input type="number" name="item_price[]" id="item_price1" data-srno="1"
+                                                class="form-control input-sm item_price" step="any" value="<?= $svinput[$index][3] ?>"required /></td>
+                                        <td><input type="number" name="item_vat[]" id="item_vat1" data-srno="1"
+                                                class="form-control input-sm item_vat" value="<?= $svinput[$index][4] ?>" required readonly /></td>
+                                        <td><input type="number" name="item_total[]" id="item_total1" data-srno="1"
+                                                class="form-control input-sm item_total" value="<?= $svinput[$index][5] ?>" required readonly /></td>
+                                        <td>
+                                            <button type="button" name="remove_row" id="<?= $n; ?>"
+                                                class="btn btn-danger btn-xs remove_row">X</button></td>
+                                    </tr>
 
+                                    <?php }
+                                }else{ 
+                                    $n=1;$deli=0;
+                                    ?> 
                                     <tr id="row_id_1">
                                         <td><span id="sr_no"></span></td>
                                         <td><input type="text" name="item_name[]" id="item_name1"
@@ -181,6 +258,9 @@ table tr td:first-child::before {
                                         <td><input type="number" name="item_total[]" id="item_total1" data-srno="1"
                                                 class="form-control input-sm item_total" required readonly /></td>
                                     </tr>
+                                    <?php 
+                                } 
+                                ?>
                                 </table>
                                 <div class="text-center">
                                     <button type="button" id="add_row" class="btn btn-addpay px-md-4 rounded-3"><i
@@ -221,7 +301,8 @@ table tr td:first-child::before {
 
                                 <div class="col-auto">
                                     <input type="number" id="input_invbill_deli" name="input_invbill_deli"
-                                        class="form-control" placeholder="0.00" title="กรุณากรอกค่าขนส่ง หากมี">
+                                        class="form-control" placeholder="0.00" title="กรุณากรอกค่าขนส่ง หากมี"
+                                        value="<?php if(isset($_SESSION['deli'])) {echo $_SESSION["deli"];} ?>">
                                 </div>
                             </div>
 
@@ -255,8 +336,8 @@ table tr td:first-child::before {
                 <script>
                 $(document).ready(function() {
                     var final_total_price = $('#final_total_price').text();
-                    var count = 1;
-                    var total_item = 1;
+                    var count = <?=$n;?>;
+                    var total_item = <?=$n;?>;
 
                     $(document).on('click', '#add_row', function() {
                         count++;
@@ -350,6 +431,10 @@ table tr td:first-child::before {
                     $(document).on('change', '#input_invbill_deli', function() {
                         cal_final_total(count);
                     });
+
+                    <?php if(isset($_SESSION['svinput'])){
+                        echo "cal_final_total(count);";
+                    }?>
                 });
                 </script>
             </div>
