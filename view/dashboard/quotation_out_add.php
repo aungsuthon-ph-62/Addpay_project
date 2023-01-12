@@ -26,8 +26,8 @@ if (isset($_POST['action'])) {
         if ($check) {
             $_SESSION['error'] = "เลขที่ใบเสนอราคานี้มีในระบบแล้ว!";
             unset($_SESSION['svinput']);unset($_SESSION['deli']);unset($_SESSION['spe']);
-            if($input_quo_deli>0){$_SESSION['deli'] = $input_quo_deli;}
-            if($input_quo_specialdis>0){$_SESSION['spe'] = $input_quo_specialdis;}
+            if($input_quoout_deli>0){$_SESSION['deli'] = $input_quoout_deli;}
+            if($input_quoout_specialdis>0){$_SESSION['spe'] = $input_quoout_specialdis;}
             
             $inputArray = array();
             
@@ -132,13 +132,13 @@ table tr td:first-child::before {
                 <div class="text-center text-md-start text-dark my-3">
                     <h3>สร้างใบเสนอราคาออก</h3>
                 </div>
-                <form method="post" id="quoout_form" action="?page=quo_out_add.php" class="mt-md-5">
+                <form method="post" id="quoout_form" action="?page=quo_out_add" class="mt-md-5">
                     <div class="row align-items-center text-dark px-md-5 mb-3">
                         <div class="col-md-3 text-md-end">
                             <h6 class="col-form-label">เลขที่ No.</h6>
                         </div>
                         <div class="col-auto">
-                            <input type="number" id="input_quoout_no" name="input_quoout_no" class="form-control "
+                            <input type="text" id="input_quoout_no" name="input_quoout_no" class="form-control "
                                 required>
                         </div>
                     </div>
