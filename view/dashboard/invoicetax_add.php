@@ -24,6 +24,22 @@ if (isset($_POST['action'])) {
 
         if ($check) {
             $_SESSION['error'] = "เลขที่ใบแจ้งหนี้/ใบกำกับภาษีนี้มีในระบบแล้ว!";
+            unset($_SESSION['svinput']);
+            $inputArray = array();
+            
+            for ($count = 0; $count < $_POST["total_item"]; $count++) {
+                
+                $item_name = mysqli_real_escape_string($conn, trim($_POST['item_name'][$count]));
+                $item_amount = mysqli_real_escape_string($conn, trim($_POST['item_amount'][$count]));
+                $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
+                $total_price = mysqli_real_escape_string($conn, trim($_POST['total_price'][$count]));
+                
+                $subinputArray = array($item_name,$item_amount,$item_price,$total_price);
+                $inputArray[] = $subinputArray;
+        
+            }
+
+            $_SESSION['svinput']=$inputArray;
             echo "<script> window.history.back()</script>";
             // header("Location: invoicetax_add.php");
             exit;
@@ -52,8 +68,25 @@ if (isset($_POST['action'])) {
                 // header("Location: invoicetax_list.php");
                 exit;
             } else {
-                echo "Error: " . $query . "<br>" . $conn->error;
                 $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
+                unset($_SESSION['svinput']);
+                
+                $inputArray = array();
+                
+                for ($count = 0; $count < $_POST["total_item"]; $count++) {
+                    
+                    $item_name = mysqli_real_escape_string($conn, trim($_POST['item_name'][$count]));
+                    $item_amount = mysqli_real_escape_string($conn, trim($_POST['item_amount'][$count]));
+                    $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
+                    $total_price = mysqli_real_escape_string($conn, trim($_POST['total_price'][$count]));
+                    
+                    $subinputArray = array($item_name,$item_amount,$item_price,$total_price);
+                    $inputArray[] = $subinputArray;
+            
+                }
+
+                $_SESSION['svinput']=$inputArray;
+
                 echo "<script> window.history.back()</script>";
                 // header("Location: invoicetax_add.php");
                 exit;
@@ -90,7 +123,7 @@ if (isset($_POST['action'])) {
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index">หน้าหลัก</a></li>
-        <li class="breadcrumb-item active" aria-current="page"><a href="../dashboard/invoicetax_list.php">ใบแจ้งหนี้/ใบกำกับภาษี</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><a href="?page=invoicetax">ใบแจ้งหนี้/ใบกำกับภาษี</a></li>
         <li class="breadcrumb-item active" aria-current="page">สร้างใบแจ้งหนี้/ใบกำกับภาษี</li>
     </ol>
 </nav>
@@ -159,6 +192,45 @@ if (isset($_POST['action'])) {
                                         <th width="20%">จำนวนเงินรวม <br> Total</th>
                                         <th width="5%">ลบ</th>
                                     </tr>
+                                    <?php if(isset($_SESSION['svinput'])) {
+                                        
+                                        $svinput=$_SESSION["svinput"];
+                                        $n=0;
+                                        
+                                        foreach($svinput as $index => $array){
+                                            $n++;
+                                            ?>
+                                    <tr id="row_id_<?= $n; ?>">
+                                        <td><span id="sr_no"></span></td>
+                                        <td>
+                                            <input type="text" name="item_name[]" id="item_name<?= $n; ?>"
+                                                class="form-control input-sm item_name" data-srno="<?= $n; ?>"
+                                                value="<?= $svinput[$index][0] ?>" required />
+                                        </td>
+                                        <td>
+                                            <input type="number" name="item_amount[]" id="item_amount<?= $n; ?>"
+                                                data-srno="<?= $n; ?>" class="form-control input-sm item_amount"
+                                                value="<?= $svinput[$index][1] ?>" required />
+                                        </td>
+                                        <td>
+                                            <input type="number" name="item_price[]" id="item_price<?= $n; ?>"
+                                                data-srno="<?= $n; ?>" class="form-control input-sm  item_price" 
+                                                value="<?= $svinput[$index][2] ?>"  step="any" required />
+                                        </td>
+                                        <td>
+                                            <input type="number" name="total_price[]" id="total_price<?= $n; ?>"
+                                                data-srno="<?= $n; ?>" class="form-control input-sm total_price"
+                                                value="<?= $svinput[$index][3] ?>" readonly />
+                                        </td>
+                                        <td>
+                                            <button type="button" name="remove_row" id="<?= $n; ?>"
+                                                class="btn btn-danger btn-xs remove_row">X</button>
+                                        </td>
+                                    </tr>
+                                    <?php }
+                                }else{ 
+                                    $n=1;$deli=0;$spe=0;
+                                    ?>
 
                                     <tr id="row_id_1">
                                         <td><span id="sr_no"></span></td>
@@ -175,6 +247,9 @@ if (isset($_POST['action'])) {
                                         </td>
                                         <td></td>
                                     </tr>
+                                    <?php 
+                                } 
+                                ?>
                                 </table>
                                 <div class="text-center">
                                     <button type="button" id="add_row" class="btn btn-addpay px-md-4 rounded-3" id="add_sub"><i class="fa fa-plus-circle text-white"></i> เพิ่มรายการ</button>
@@ -183,12 +258,12 @@ if (isset($_POST['action'])) {
                         </div>
                     </div>
                     <div class="row d-flex flex-row-reverse">
-                        <div class="col-md-6 ">
+                        <div class="col-md-7 ">
                             <div class="row align-items-center text-dark px-md-5 mb-3">
                                 <div class="col-md-6">
                                     <label for="input_invtax_sum" class="col-form-label">รวมเป็นเงิน(บาท) :</label>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-6">
                                     <input type="number" id="input_invtax_sum" name="input_invtax_sum" class="form-control " placeholder="0.00" readonly>
                                 </div>
                             </div>
@@ -196,7 +271,7 @@ if (isset($_POST['action'])) {
                                 <div class="col-md-6 ">
                                     <label for="input_invtax_vat" class="col-form-label">ภาษีมูลค่าเพิ่ม 7%(บาท) :</label>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-6">
                                     <input type="number" id="input_invtax_vat" name="input_invtax_vat" class="form-control " placeholder="0.00" readonly>
                                 </div>
                             </div>
@@ -204,7 +279,7 @@ if (isset($_POST['action'])) {
                                 <div class="col-md-6">
                                     <label for="input_invtax_total" class="col-form-label">จํานวนเงินรวมทั้งสิ้น(บาท) :</label>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-6">
                                     <input type="number" id="input_invtax_total" name="input_invtax_total" class="form-control " placeholder="0.00" readonly>
                                 </div>
                             </div>
@@ -226,8 +301,8 @@ if (isset($_POST['action'])) {
                 <script>
                     $(document).ready(function() {
                         var final_total_price = $('#final_total_price').text();
-                        var count = 1;
-                        var total_item = 1;
+                        var count = <?=$n;?>;
+                        var total_item = <?=$n;?>;
 
                         $(document).on('click', '#add_row', function() {
                             count++;
@@ -306,13 +381,9 @@ if (isset($_POST['action'])) {
                             cal_final_total(count);
                         });
 
-                        // $(document).on('change', '#input_invtax_specialdis', function() {
-                        //     cal_final_total(count);
-                        // });
-
-                        // $(document).on('change', '#input_invtax_deli', function() {
-                        //     cal_final_total(count);
-                        // });
+                        <?php if(isset($_SESSION['svinput'])){
+                            echo "cal_final_total(count);";
+                        }?>
 
                     });
                 </script>
