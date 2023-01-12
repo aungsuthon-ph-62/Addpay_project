@@ -1,51 +1,58 @@
 <style>
-    *{
-        font-size: 14px;
-    }
-    .btn {
-        transition: all 0.2s ease-in-out;
-    }
+* {
+    font-size: 14px;
+}
 
-    .btn:hover {
-        border-color: white;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        transform: scale(1.1);
-    }
+.btn {
+    transition: all 0.2s ease-in-out;
+}
 
-    .bg-primary-addpay {
-        /* fallback for old browsers */
-        background: #07aaf2;
+.btn:hover {
+    border-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+}
 
-        /* Chrome 10-25, Safari 5.1-6 */
-        background: -webkit-linear-gradient(to right, #07aaf2, #50b4df);
+.bg-primary-addpay {
+    /* fallback for old browsers */
+    background: #07aaf2;
 
-        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        background: linear-gradient(to bottom, #079ad9, #07aaf2, #50b4df);
-    }
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, #07aaf2, #50b4df);
 
-    /* Darkblue Background Color */
-    .bg-secondary-addpay {
-        /* fallback for old browsers */
-        background: #046197;
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to bottom, #079ad9, #07aaf2, #50b4df);
+}
 
-        /* Chrome 10-25, Safari 5.1-6 */
-        background: -webkit-linear-gradient(to right, #046197, #034266);
+/* Darkblue Background Color */
+.bg-secondary-addpay {
+    /* fallback for old browsers */
+    background: #046197;
 
-        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        background: linear-gradient(to bottom, #046197, #034266);
-    }
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, #046197, #034266);
 
-    /* Button Color */
-    .btn-addpay {
-        /* fallback for old browsers */
-        background: #fe9100;
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to bottom, #046197, #034266);
+}
 
-        /* Chrome 10-25, Safari 5.1-6 */
-        background: -webkit-linear-gradient(to right, #fdb04c, #fe9100);
+/* Button Color */
+.btn-addpay {
+    /* fallback for old browsers */
+    background: #fe9100;
 
-        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        background: linear-gradient(to bottom, #fdb04c, #fe9100);
-    }
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, #fdb04c, #fe9100);
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to bottom, #fdb04c, #fe9100);
+}
+
+p.brword {
+    padding: 0 5 0 5;
+    width: 89.11px;
+    word-wrap: break-word;
+}
 </style>
 <link rel="stylesheet" href="./PDF_set/PDF.css">
 
@@ -195,7 +202,7 @@ if (mysqli_num_rows($result) > 0) {
         <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; height:20px;">' . number_format($infoinvbitems['invbilld_result'], 2) . '</td>';
         if ($i == 1) {
             $sp = $sp + 5;
-            $contentitems .= '<td VALIGN="TOP" rowspan=' . $sp . ' style="text-align: center; border-bottom: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6;">' . $infoinvb['invbill_remark'] . '</td>';
+            $contentitems .= '<td VALIGN="TOP" rowspan=' . $sp . ' style="text-align: left; border-bottom: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; "><p class="brword">' . $infoinvb['invbill_remark'] . '</p></td>';
         }
         $contentitems .= '</tr>';
     }
@@ -342,9 +349,11 @@ $mpdf->Output('./invoicebill_PDF/invoice_bill0.pdf');
 <body>
 
     <div class="container py-md-5 px-md-4" style="width: 100%; ">
-        <p style="font-size: 16px;" class="text-end text-danger ">** โปรดตรวจสอบความถูกต้องของข้อมูลก่อนกด พิมพ์เอกสาร</p>
+        <p style="font-size: 16px;" class="text-end text-danger ">** โปรดตรวจสอบความถูกต้องของข้อมูลก่อนกด พิมพ์เอกสาร
+        </p>
         <div class="mx-auto d-flex justify-content-end ">
-            <a class="btn btn-addpay px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold text-light" role="button" href="./invoicebill_PDF/invoice_bill0.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
+            <a class="btn btn-addpay px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold text-light" role="button"
+                href="./invoicebill_PDF/invoice_bill0.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
         </div>
         <hr>
         <?php
