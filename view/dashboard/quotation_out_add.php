@@ -17,7 +17,7 @@ if (isset($_POST['action'])) {
         $input_quoout_vat = mysqli_real_escape_string($conn, trim($_POST['input_quoout_vat']));
         $input_quoout_deli = mysqli_real_escape_string($conn, trim($_POST['input_quoout_deli']));
         $input_quoout_total = mysqli_real_escape_string($conn, trim($_POST['input_quoout_total']));
-        $uid = 1;
+        $uid = $_SESSION['id'];
 
         $quoout_no_check_query = "SELECT * FROM quotation_out WHERE quoout_no =  '$input_quoout_no'";
         $query = $conn->query($quoout_no_check_query);
@@ -25,7 +25,26 @@ if (isset($_POST['action'])) {
 
         if ($check) {
             $_SESSION['error'] = "เลขที่ใบเสนอราคานี้มีในระบบแล้ว!";
-            header("Location: quotation_out_add.php");
+            unset($_SESSION['svinput']);unset($_SESSION['deli']);unset($_SESSION['spe']);
+            if($input_quo_deli>0){$_SESSION['deli'] = $input_quo_deli;}
+            if($input_quo_specialdis>0){$_SESSION['spe'] = $input_quo_specialdis;}
+            
+            $inputArray = array();
+            
+            for ($count = 0; $count < $_POST["total_item"]; $count++) {
+                
+                $item_name = mysqli_real_escape_string($conn, trim($_POST['item_name'][$count]));
+                $item_amount = mysqli_real_escape_string($conn, trim($_POST['item_amount'][$count]));
+                $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
+                $total_price = mysqli_real_escape_string($conn, trim($_POST['total_price'][$count]));
+                
+                $subinputArray = array($item_name,$item_amount,$item_price,$total_price);
+                $inputArray[] = $subinputArray;
+        
+            }
+
+            $_SESSION['svinput']=$inputArray;
+            echo "<script> window.history.back()</script>";
             exit;
         } else {
             $query = "INSERT INTO quotation_out (quoout_no, quoout_date, quoout_name, quoout_address, quoout_numtax, quoout_sum, quoout_specialdis, quoout_afterdis, quoout_vat, quoout_deli, quoout_total, quoout_create, quoout_uid)
@@ -48,12 +67,31 @@ if (isset($_POST['action'])) {
                 }
 
                 $_SESSION['success'] = "บันทึกสำเร็จ!";
-                header("Location: quotation_out_list.php");
+                echo "<script> window.location.href='?page=quo_out'</script>";
                 exit;
             } else {
                 echo "Error: " . $query . "<br>" . $conn->error;
                 $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-                header("Location: quotation_out_add.php");
+                unset($_SESSION['svinput']);unset($_SESSION['deli']);unset($_SESSION['spe']);
+                if($input_quo_deli>0){$_SESSION['deli'] = $input_quo_deli;}
+                if($input_quo_specialdis>0){$_SESSION['spe'] = $input_quo_specialdis;}
+                
+                $inputArray = array();
+                
+                for ($count = 0; $count < $_POST["total_item"]; $count++) {
+                    
+                    $item_name = mysqli_real_escape_string($conn, trim($_POST['item_name'][$count]));
+                    $item_amount = mysqli_real_escape_string($conn, trim($_POST['item_amount'][$count]));
+                    $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
+                    $total_price = mysqli_real_escape_string($conn, trim($_POST['total_price'][$count]));
+                    
+                    $subinputArray = array($item_name,$item_amount,$item_price,$total_price);
+                    $inputArray[] = $subinputArray;
+            
+                }
+
+                $_SESSION['svinput']=$inputArray;
+                echo "<script> window.history.back()</script>";
                 exit;
             }
         }
@@ -94,7 +132,7 @@ table tr td:first-child::before {
                 <div class="text-center text-md-start text-dark my-3">
                     <h3>สร้างใบเสนอราคาออก</h3>
                 </div>
-                <form method="post" id="quoout_form" action="quotation_out_add.php" class="mt-md-5">
+                <form method="post" id="quoout_form" action="?page=quo_out_add.php" class="mt-md-5">
                     <div class="row align-items-center text-dark px-md-5 mb-3">
                         <div class="col-md-3 text-md-end">
                             <h6 class="col-form-label">เลขที่ No.</h6>
@@ -158,10 +196,50 @@ table tr td:first-child::before {
                                         <th width="5%">ลบ</th>
                                     </tr>
 
+                                    <?php if(isset($_SESSION['svinput'])) {
+                                        
+                                        $svinput=$_SESSION["svinput"];
+                                        $n=0;
+                                        
+                                        foreach($svinput as $index => $array){
+                                            $n++;
+                                            ?>
+                                    <tr id="row_id_<?= $n; ?>">
+                                        <td><span id="sr_no"></span></td>
+                                        <td>
+                                            <input type="text" name="item_name[]" id="item_name<?= $n; ?>"
+                                                class="form-control input-sm item_name" data-srno="<?= $n; ?>"
+                                                value="<?= $svinput[$index][0] ?>" required />
+                                        </td>
+                                        <td>
+                                            <input type="number" name="item_amount[]" id="item_amount<?= $n; ?>"
+                                                data-srno="<?= $n; ?>" class="form-control input-sm item_amount"
+                                                value="<?= $svinput[$index][1] ?>" required />
+                                        </td>
+                                        <td>
+                                            <input type="number" name="item_price[]" id="item_price<?= $n; ?>"
+                                                data-srno="<?= $n; ?>" class="form-control input-sm  item_price"
+                                                value="<?= $svinput[$index][2] ?>" required />
+                                        </td>
+                                        <td>
+                                            <input type="number" name="total_price[]" id="total_price<?= $n; ?>"
+                                                data-srno="<?= $n; ?>" class="form-control input-sm total_price"
+                                                value="<?= $svinput[$index][3] ?>" readonly />
+                                        </td>
+                                        <td>
+                                            <button type="button" name="remove_row" id="<?= $n; ?>"
+                                                class="btn btn-danger btn-xs remove_row">X</button>
+                                        </td>
+                                    </tr>
+
+                                    <?php }
+                                }else{ 
+                                    $n=1;$deli=0;$spe=0;
+                                    ?>
                                     <tr id="row_id_1">
                                         <td><span id="sr_no"></span></td>
                                         <td><input type="text" name="item_name[]" id="item_name1"
-                                                class="form-control input-sm" required />
+                                                class="form-control input-sm item_name" required />
                                         </td>
                                         <td>
                                             <input type="number" name="item_amount[]" id="item_amount1" data-srno="1"
@@ -169,8 +247,7 @@ table tr td:first-child::before {
                                         </td>
                                         <td>
                                             <input type="number" name="item_price[]" id="item_price1" data-srno="1"
-                                                class="form-control input-sm number_only item_price" step="any"
-                                                required />
+                                                class="form-control input-sm  item_price" step="any" required />
                                         </td>
                                         <td>
                                             <input type="number" name="total_price[]" id="total_price1" data-srno="1"
@@ -178,6 +255,9 @@ table tr td:first-child::before {
                                         </td>
                                         <td></td>
                                     </tr>
+                                    <?php 
+                                } 
+                                ?>
                                 </table>
                                 <div class="text-center">
                                     <button type="button" id="add_row" class="btn btn-addpay px-md-4 rounded-3"
@@ -196,7 +276,7 @@ table tr td:first-child::before {
                                 <div class="col-md-6">
                                     <input type="number" id="input_quoout_deli" name="input_quoout_deli"
                                         class="form-control " placeholder="0.00" title="กรุณากรอกค่าขนส่ง หากมี"
-                                        value="<?= $row['quoout_deli'] ?>">
+                                        value="<?php if(isset($_SESSION['deli'])) {echo $_SESSION["deli"];} ?>">
                                 </div>
                             </div>
                         </div>
@@ -220,7 +300,8 @@ table tr td:first-child::before {
                                 <div class="col-md-6">
                                     <input type="number" step="any" id="input_quoout_specialdis"
                                         name="input_quoout_specialdis" class="form-control " placeholder="0.00"
-                                        title="กรุณากรอกส่วนลด หากมี">
+                                        title="กรุณากรอกส่วนลด หากมี"
+                                        value="<?php if(isset($_SESSION['spe'])) {echo $_SESSION["spe"];} ?>">
                                 </div>
                             </div>
                             <div class="row align-items-center text-dark px-md-5 mb-3">
@@ -263,7 +344,7 @@ table tr td:first-child::before {
                                 <button type="submit" name="action" value="create_quoout"
                                     class="btn btn-addpay text-white">บันทึก <i
                                         class="fa-solid fa-cloud-arrow-up"></i></button>
-                                <input type="hidden" name="total_item" id="total_item" value="1" />
+                                <input type="hidden" name="total_item" id="total_item" value="<?=$n;?>" />
                             </div>
                         </div>
                     </div>
@@ -271,8 +352,8 @@ table tr td:first-child::before {
                 <script>
                 $(document).ready(function() {
                     var final_total_price = $('#final_total_price').text();
-                    var count = 1;
-                    var total_item = 1;
+                    var count = <?=$n;?>;
+                    var total_item = <?=$n;?>;
 
                     $(document).on('click', '#add_row', function() {
                         count++;
@@ -366,6 +447,10 @@ table tr td:first-child::before {
                     $(document).on('change', '#input_quoout_deli', function() {
                         cal_final_total(count);
                     });
+
+                    <?php if(isset($_SESSION['svinput'])){
+                        echo "cal_final_total(count);";
+                    }?>
 
                 });
                 </script>

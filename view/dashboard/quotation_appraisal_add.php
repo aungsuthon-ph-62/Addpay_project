@@ -456,7 +456,7 @@ table tr td:first-child::before {
 
                     <?php if(isset($_SESSION['svinput'])){
                         echo "cal_final_total(count);";
-                }?>
+                    }?>
 
                 });
                 </script>
