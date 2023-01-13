@@ -124,13 +124,13 @@ if (mysqli_num_rows($result) > 0) {
                     if($i==1){
                         $sp=$sp+5;
                         echo '<td VALIGN="TOP" rowspan="' . $sp . '" style="text-align: left; border-bottom: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6;"> 
-                        <p style="padding: 2px;
+                        <div style="padding: 2px;
                         width: 91px;
                         margin: 0 auto;
                         font-size: 14x;
                         line-height: 1;
                         letter-spacing: 1px;
-                        word-break: break-all;">' . $infoinvb['invbill_remark'] . '</p></td>';
+                        word-break: break-all;">' . $infoinvb['invbill_remark'] . '</div></td>';
                     }
         echo    '</tr>';
     }
