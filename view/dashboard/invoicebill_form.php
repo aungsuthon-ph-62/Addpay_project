@@ -152,7 +152,7 @@ $head = '
         </table>
 
         <div >
-            <table style="width: 842px;  border-collapse: collapse; padding: 0; margin: 0; margin-top:0px;">
+            <table width="842" style=" border-collapse: collapse; padding: 0; margin: 0; margin-top:0px; overflow: wrap">
                 <tr style="border:1.4px solid #3585c6; border-bottom:0;border-collapse: collapse; padding: 0; margin: 0;">
                     <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 8%;">ลำดับที่</td>
                     <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 15%;">รายการ</td>
@@ -171,7 +171,7 @@ $head = '
                     <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 13%;"><br>Amount</td>
                     <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 13%;"><br>Vat</td>
                     <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 12%;"><br>Total Amount</td>
-                    <td class="text-center" style="border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; width: 11%;"><br>Remark</td>
+                    <td class="text-center" style="border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; width:11%;"><br>Remark</td>
                 </tr>';
 
 
@@ -179,6 +179,9 @@ $sql = "SELECT * FROM `invoicebill_details` WHERE invbilld_bid = '$id' ;";
 $result = mysqli_query($conn, $sql);
 $contentitems = "";
 if (mysqli_num_rows($result) > 0) {
+    // $str="rsgnuiagnrrsGBRrsBRgsjngrbejr";
+    // $newtext = wordwrap($str,15,"<br/>");
+    // echo "<script>console.log('{$newtext}');</script>";
     $sp = mysqli_num_rows($result);
     $i = 0;
     while ($infoinvbitems = mysqli_fetch_assoc($result)) {
@@ -202,7 +205,7 @@ if (mysqli_num_rows($result) > 0) {
         <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; height:20px;">' . number_format($infoinvbitems['invbilld_result'], 2) . '</td>';
         if ($i == 1) {
             $sp = $sp + 5;
-            $contentitems .= '<td class="brpoint" VALIGN="TOP" rowspan=' . $sp . ' style="width: 89.11px; word-break:break-all; text-align: left; border-bottom: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; width:89.11px;">' . $infoinvb['invbill_remark'] . '</td>';
+            $contentitems .= '<td class="brpoint" VALIGN="TOP" rowspan=' . $sp . ' style="padding:0 5px;border-bottom: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6;">' . $infoinvb['invbill_remark'] . '</td>';
         }
         $contentitems .= '</tr>';
     }
