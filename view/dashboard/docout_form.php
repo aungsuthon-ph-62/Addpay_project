@@ -83,22 +83,8 @@ while ($infodoc = mysqli_fetch_array($result)) {
                     <td VALIGN="TOP" style="">สิ่งที่ส่งมาด้วย</td>
                     <td style=" padding-left:10px; ">'.$infodoc['docout_send'].'</td>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td style=" padding-left:10px"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td style=" padding-left:10px"></td>
-                </tr>
             </table>
-            <table>
-                <tr>
-                    <td><div style="width: 50rem; word-wrap: break-word;">'.$infodoc['docout_details'].'</div></td>
-                </tr>
-            </table>
-
-            
+            <div style="padding-left:5px;">'.$infodoc['docout_details'].'</div>
             <table style="text-align: center; width: 100%;">
                 <tr>
                     <td style=" padding-top:50px">
