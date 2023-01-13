@@ -94,7 +94,7 @@ while ($infodoc = mysqli_fetch_array($result)) {
             </table>
             <table>
                 <tr>
-                    <td>'.$infodoc['docout_details'].'</td>
+                    <td><div style="width: 50rem; word-wrap: break-word;">'.$infodoc['docout_details'].'</div></td>
                 </tr>
             </table>
 
@@ -135,21 +135,23 @@ $mpdf->Output('./docout_PDF/docout_PDF.pdf'); //link web of file pdf
 
 ?>
 <style>
-.btn-pdf{
-    background: red; 
-    background: -webkit-linear-gradient(to right, #fdb04c, #fe9100); 
+.btn-pdf {
+    background: red;
+    background: -webkit-linear-gradient(to right, #fdb04c, #fe9100);
     background: linear-gradient(to bottom, #fdb04c, #fe9100);
 }
-
 </style>
+
 <body>
 
     <div class="container  py-md-5 px-md-4" style="width: 100%;">
         <p class="text-end text-danger ">** โปรดตรวจสอบความถูกต้องของข้อมูลก่อนกด พิมพ์เอกสาร</p>
         <div class="mx-auto d-flex justify-content-end me-5">
-            <a class="btn btn-pdf px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold text-light" role="button" href="./docout_PDF/docout_PDF.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
-            
-        </div><hr>
+            <a class="btn btn-pdf px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold text-light" role="button"
+                href="./docout_PDF/docout_PDF.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
+
+        </div>
+        <hr>
         <?php
         include_once "./docout_PDF/docout_content.php";
         ?>
