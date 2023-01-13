@@ -48,12 +48,12 @@
     background: linear-gradient(to bottom, #fdb04c, #fe9100);
 }
 
-p.brword {
-    padding: 0 5 0 5;
-    width: 89.11px;
-    word-wrap: break-word;
-}
+/* td .brpoint {
+    inline-size: 89.11px;
+    overflow-wrap: break-word;
+} */
 </style>
+
 <link rel="stylesheet" href="./PDF_set/PDF.css">
 
 <?php
@@ -202,7 +202,7 @@ if (mysqli_num_rows($result) > 0) {
         <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; height:20px;">' . number_format($infoinvbitems['invbilld_result'], 2) . '</td>';
         if ($i == 1) {
             $sp = $sp + 5;
-            $contentitems .= '<td VALIGN="TOP" rowspan=' . $sp . ' style="text-align: left; border-bottom: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; "><p class="brword">' . $infoinvb['invbill_remark'] . '</p></td>';
+            $contentitems .= '<td class="brpoint" VALIGN="TOP" rowspan=' . $sp . ' style="width: 89.11px; word-break:break-all; text-align: left; border-bottom: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; width:89.11px;">' . $infoinvb['invbill_remark'] . '</td>';
         }
         $contentitems .= '</tr>';
     }
