@@ -62,7 +62,7 @@ while ($infodoc = mysqli_fetch_array($result)) {
             </table>
             <table>
                 <tr>
-                    <td><div style="width: 50rem; word-wrap: break-word;">'.$infodoc['docout_details'].'</div></td>
+                    <td style=" width: 785px; word-break:break-all">'.$infodoc['docout_details'].'</td>
                 </tr>
             </table>
 
