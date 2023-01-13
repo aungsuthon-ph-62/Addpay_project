@@ -66,8 +66,8 @@ echo '
             </tr>
         </table>
 
-        <div >
-            <table style="width: 842px;  border-collapse: collapse; padding: 0; margin: 0; margin-top:0px;">
+        <div style="width: 842px; ">
+            <table style="table-layout: fixed; width: 100%;  border-collapse: collapse; padding: 0; margin: 0; margin-top:0px;">
                 <tr style="border-top:1.4px solid #3585c6; border-collapse: collapse; padding: 0; margin: 0;">
                     <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 8%;">ลำดับที่</td>
                     <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 15%;">รายการ</td>
@@ -123,7 +123,14 @@ if (mysqli_num_rows($result) > 0) {
                     <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; height:20px; padding:0 10px;">' . number_format($infoinvbitems['invbilld_result'], 2) . '</td>';
                     if($i==1){
                         $sp=$sp+5;
-                        echo '<td VALIGN="TOP" rowspan='.$sp.' style="text-align: left; border-bottom: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6;"><p class="brword">' . $infoinvb['invbill_remark'] . '</p></td>';
+                        echo '<td VALIGN="TOP" rowspan="' . $sp . '" style="text-align: left; border-bottom: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6;"> 
+                        <p style="padding: 2px;
+                        width: 91px;
+                        margin: 0 auto;
+                        font-size: 14x;
+                        line-height: 1;
+                        letter-spacing: 1px;
+                        word-break: break-all;">' . $infoinvb['invbill_remark'] . '</p></td>';
                     }
         echo    '</tr>';
     }
