@@ -13,7 +13,7 @@ if (isset($_GET["deleteinvbill"])) {
     echo "<script> window.history.back()</script>";
     exit;
 }
-
+unset($_SESSION['svinput']);unset($_SESSION['deli']);
 ?>
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">

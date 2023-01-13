@@ -14,7 +14,7 @@ if (isset($_GET["deleteinvtax"])) {
     echo "<script> window.history.back()</script>";
     exit;
 }
-
+unset($_SESSION['svinput']);
 ?>
 <style>
 .btn-group {

@@ -47,7 +47,6 @@ if (isset($_POST['action'])) {
 
             $_SESSION['svinput']=$inputArray;
 
-
             echo("<script> window.history.back()</script>");
             exit;
 
@@ -223,26 +222,33 @@ table tr td:first-child::before {
                                     <tr id="row_id_<?= $n; ?>">
                                         <td><span id="sr_no"></span></td>
                                         <td><input type="text" name="item_name[]" id="item_name1"
-                                                class="form-control input-sm" value="<?= $svinput[$index][0] ?>"required /></td>
+                                                class="form-control input-sm" value="<?= $svinput[$index][0] ?>"
+                                                required /></td>
                                         <td><input type="date" name="item_inv_date[]" id="item_inv_date1"
-                                                class="form-control input-sm item_inv_date" value="<?= $svinput[$index][1] ?>"/></td>
+                                                class="form-control input-sm item_inv_date"
+                                                value="<?= $svinput[$index][1] ?>" /></td>
                                         <td><input type="date" name="item_due_date[]" id="item_due_date1"
-                                                class="form-control input-sm item_due_date" value="<?= $svinput[$index][2] ?>"/></td>
+                                                class="form-control input-sm item_due_date"
+                                                value="<?= $svinput[$index][2] ?>" /></td>
                                         <td><input type="number" name="item_price[]" id="item_price1" data-srno="1"
-                                                class="form-control input-sm item_price" step="any" value="<?= $svinput[$index][3] ?>"required /></td>
+                                                class="form-control input-sm item_price" step="any"
+                                                value="<?= $svinput[$index][3] ?>" required /></td>
                                         <td><input type="number" name="item_vat[]" id="item_vat1" data-srno="1"
-                                                class="form-control input-sm item_vat" value="<?= $svinput[$index][4] ?>" required readonly /></td>
+                                                class="form-control input-sm item_vat"
+                                                value="<?= $svinput[$index][4] ?>" required readonly /></td>
                                         <td><input type="number" name="item_total[]" id="item_total1" data-srno="1"
-                                                class="form-control input-sm item_total" value="<?= $svinput[$index][5] ?>" required readonly /></td>
+                                                class="form-control input-sm item_total"
+                                                value="<?= $svinput[$index][5] ?>" required readonly /></td>
                                         <td>
                                             <button type="button" name="remove_row" id="<?= $n; ?>"
-                                                class="btn btn-danger btn-xs remove_row">X</button></td>
+                                                class="btn btn-danger btn-xs remove_row">X</button>
+                                        </td>
                                     </tr>
 
                                     <?php }
                                 }else{ 
                                     $n=1;$deli=0;
-                                    ?> 
+                                    ?>
                                     <tr id="row_id_1">
                                         <td><span id="sr_no"></span></td>
                                         <td><input type="text" name="item_name[]" id="item_name1"
