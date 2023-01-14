@@ -15,7 +15,8 @@ if (isset($_GET["deletedocout"])) {
     echo "<script> window.history.back()</script>";
     exit;
 }
-
+unset($_SESSION['input_send']) ;
+unset($_SESSION['input_content']);
 ?>
 
 <nav aria-label="breadcrumb">
