@@ -76,11 +76,11 @@ if (mysqli_num_rows($result) > 0) {
     while ($infoinvtaxitems = mysqli_fetch_assoc($result)) {
         $i++;
         echo ' <tr>
-            <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:10px;">' . $i . '</td>
-            <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:10px;">' . $infoinvtaxitems['invtaxd_item'] . '</td>
-            <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:10px; ">' . $infoinvtaxitems['invtaxd_amount'] . '</td>
-            <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:10px;  padding: 0 10px;">' . number_format($infoinvtaxitems['invtaxd_price'], 2) . '</td>
-            <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:10px; padding: 0 10px;">' . number_format($infoinvtaxitems['invtaxd_result'], 2) . '</td>
+            <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; line-height:20px;">' . $i . '</td>
+            <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; line-height:20px;">' . $infoinvtaxitems['invtaxd_item'] . '</td>
+            <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; line-height:20px; ">' . $infoinvtaxitems['invtaxd_amount'] . '</td>
+            <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; line-height:20px;  padding: 0 10px;">' . number_format($infoinvtaxitems['invtaxd_price'], 2) . '</td>
+            <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; line-height:20px; padding: 0 10px;">' . number_format($infoinvtaxitems['invtaxd_result'], 2) . '</td>
         </tr>';
     }
 }
