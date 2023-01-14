@@ -43,16 +43,37 @@ echo '
             </tr>
         </table>
 
-        <table style="width: 842px; border:1.4px solid; border-collapse: collapse; padding: 0; margin: 0; ">
-            <tr style="border-bottom: 1.4px solid;">
-                <td VALIGN="TOP" align="left" style="border-left: 1.4px solid ;padding:3px 70px; width: 642px;">
-                    <b>ชื่อลูกค้า / Customer:</b> &nbsp;' . $infoinvb['invbill_name']  . '<br>
-                    <b>ที่อยู่ / Address:</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $infoinvb['invbill_address']  . '<br>
-                    <b>เลขประจำตัวผู้เสียภาษี:</b> &nbsp;' . $infoinvb['invbill_cusid']  . '
+        <table style="width: 842px; border:1.4px solid; border-collapse: collapse; padding: 0; margin: 0; overflow: wrap;">
+            <tr style="border-bottom: 0 solid;">
+                <td VALIGN="TOP" align="left" style="border-left: 1px solid; width: 220px; padding:3px 0 3px 60px;">
+                    <b>ชื่อลูกค้า / Customer :</b> <br>
                 </td>
-                <td VALIGN="TOP" align="left" style="border-left: 1.4px solid  ;padding:3px 15px; width: 200px;">
-                    <label>เลขที่ / No.</label> <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $infoinvb['invbill_no']  . '</b><br>
-                    <label>วันที่ / Date</label> &nbsp;&nbsp;' . ConvDate($infoinvb['invbill_date'])  . '
+                <td VALIGN="TOP" align="left" style=" width: 422px; padding:3px 100px 3px 0;">
+                    ' .  $infoinvb['invbill_name']  . '><br>
+                </td>
+                <td VALIGN="TOP" align="left" style="border-left: 1px solid; width: 200px;">
+                    <b>เลขที่ / No.</b> &nbsp;&nbsp;' .  $infoinvb['invbill_no']  . '<br>
+                </td>
+            </tr>
+            <tr style="border-bottom: 0 solid;">
+                <td VALIGN="TOP" align="left" style="border-left: 1px solid; width: 220px; padding:3px 0 3px 60px;">
+                    <b>ที่อยู่ / Address :</b><br>
+                </td>
+                <td VALIGN="TOP" align="left" style="width: 422px; padding:3px 100px 3px 0; word-break:break-all;">
+                    <div>' . $infoinvb['invbill_address'] . '</div><br>
+                </td>
+                <td VALIGN="TOP" align="left" style="border-left: 1px solid; width: 200px;">
+                    <b>วันที่ / Date.</b> &nbsp;&nbsp;' . ConvDate($infoinvb['invbill_date'])  . '
+                </td>
+            </tr>
+            <tr style="border-bottom: 0 solid;">
+                <td VALIGN="TOP" align="left" style="border-left: 1px solid; width: 220px;padding:3px 0 3px 60px;">
+                    <b>เลขประจำตัวผู้เสียภาษี :</b>
+                </td>
+                <td VALIGN="TOP" align="left" style=" width: 422px; padding:3px 100px 3px 0;">
+                    ' . $infoinvb['invbill_cusid']  . '
+                </td>
+                <td VALIGN="TOP" align="left" style="border-left: 1px solid; width: 200px;">
                 </td>
             </tr>
 
