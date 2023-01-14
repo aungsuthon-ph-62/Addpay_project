@@ -36,16 +36,37 @@ echo '
         </table>
         
 <!--php  ดึงข้อมูลลูกค้า -->
-<table style="width: 842px; border:1px solid;border-bottom: 0; border-collapse: collapse; padding: 0; margin: 0;  margin-top: 10px; ">
+<table style="width: 842px; border:1px solid;border-bottom: 0; border-collapse: collapse; padding: 0; margin: 0;  margin-top: 10px; overflow: wrap;">
     <tr style="border-bottom: 0 solid;">
-        <td align="left" style="border-left: 1px solid; width: 576px;">
-            <b>ชื่อลูกค้า / Customer :</b> &nbsp;&nbsp;<b>' . $infoinvtax['invtax_name']  . '</b><br>
-            <b>ที่อยู่ / Address :</b> &nbsp;&nbsp;<b>' . $infoinvtax['invtax_address']  . '</b><br>
-            <b>เลขประจำตัวผู้เสียภาษี :</b> &nbsp;&nbsp;<b>' . $infoinvtax['invtax_cusid']  . '</b>
+        <td VALIGN="TOP" align="left" style="border-left: 1px solid; width: 150px;">
+            <b>ชื่อลูกค้า / Customer :</b> <br>
+        </td>
+        <td VALIGN="TOP" align="left" style=" width: 426px;">
+            <b>' . $infoinvtax['invtax_name']  . '</b><br>
         </td>
         <td VALIGN="TOP" align="left" style="border-left: 1px solid; width: 266px;">
             <b>เลขที่ / No.</b> &nbsp;&nbsp;' . $infoinvtax['invtax_no']  . '<br>
-            <b>วันที่ / Date.</b> &nbsp;&nbsp;' . $infoinvtax['invtax_date']  . '
+        </td>
+    </tr>
+    <tr style="border-bottom: 0 solid;">
+        <td VALIGN="TOP" align="left" style="border-left: 1px solid; width: 150px;">
+            <b>ที่อยู่ / Address :</b><br>
+        </td>
+        <td VALIGN="TOP" align="left" style="width: 426px;">
+           <b>' . $infoinvtax['invtax_address']  . '</b><br>
+        </td>
+        <td VALIGN="TOP" align="left" style="border-left: 1px solid; width: 266px;">
+            <b>วันที่ / Date.</b> &nbsp;&nbsp;' . ConvDate($infoinvtax['invtax_date'])  . '
+        </td>
+    </tr>
+    <tr style="border-bottom: 0 solid;">
+        <td VALIGN="TOP" align="left" style="border-left: 1px solid; width: 150px;">
+            <b>เลขประจำตัวผู้เสียภาษี :</b>
+        </td>
+        <td VALIGN="TOP" align="left" style=" width: 426px;">
+            <b>' . $infoinvtax['invtax_cusid']  . '</b>
+        </td>
+        <td VALIGN="TOP" align="left" style="border-left: 1px solid; width: 266px;">
         </td>
     </tr>
 
