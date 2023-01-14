@@ -48,6 +48,10 @@
     background: linear-gradient(to bottom, #fdb04c, #fe9100);
 }
 
+/* td .brpoint {
+    inline-size: 89.11px;
+    overflow-wrap: break-word;
+} */
 </style>
 
 <link rel="stylesheet" href="./PDF_set/PDF.css">
@@ -124,39 +128,18 @@ $head = '
             </tr>
         </table>
 
-        <table style="width: 842px; border:1.4px solid; border-collapse: collapse; padding: 0; margin: 0; overflow: wrap;">
-            <tr style="">
-                <td VALIGN="TOP" align="left" style="padding:3px 0 3px 70px; width: 220px;">
-                    <b>ชื่อลูกค้า / Customer:</b><br>
-                </td>
-                <td VALIGN="TOP" align="left" style="padding:3px 100px 3px 0; width: 422px;">' . $infoinvb['invbill_name']  . '<br>
+        <table style="width: 842px; border:1.4px solid; border-collapse: collapse; padding: 0; margin: 0; ">
+            <tr style="border-bottom: 1.4px solid;">
+                <td VALIGN="TOP" align="left" style="border-left: 1.4px solid ;padding:3px 70px; width: 642px;">
+                    <b>ชื่อลูกค้า / Customer:</b> &nbsp;' . $infoinvb['invbill_name']  . '<br>
+                    <b>ที่อยู่ / Address:</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $infoinvb['invbill_address']  . '<br>
+                    <b>เลขประจำตัวผู้เสียภาษี:</b> &nbsp;' . $infoinvb['invbill_cusid']  . '
                 </td>
                 <td VALIGN="TOP" align="left" style="border-left: 1.4px solid  ;padding:3px 15px; width: 200px;">
                     <label>เลขที่ / No.</label> <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $infoinvb['invbill_no']  . '</b><br>
-                </td>
-            </tr>
-            <tr style="">
-                <td VALIGN="TOP" align="left" style="padding:3px 0 3px 70px; width: 220px;">
-                    <b>ที่อยู่ / Address:</b><br>
-                </td>
-                <td VALIGN="TOP" align="left" style="padding:3px 100px 3px 0; width: 422px; word-break:break-all;">
-                    ' . $infoinvb['invbill_address']  . '<br>
-                </td>
-                <td VALIGN="TOP" align="left" style="border-left: 1.4px solid  ;padding:3px 15px; width: 200px;">
                     <label>วันที่ / Date</label> &nbsp;&nbsp;' . ConvDate($infoinvb['invbill_date'])  . '
                 </td>
             </tr>
-            <tr style="border-bottom: 1.4px solid;">
-                <td VALIGN="TOP" align="left" style="padding:3px 0 3px 70px; width: 220px;">
-                    <b>เลขประจำตัวผู้เสียภาษี:</b>
-                </td>
-                <td VALIGN="TOP" align="left" style="padding:3px 100px 3px 0; width: 422px;">' . $infoinvb['invbill_cusid']  . '
-                </td>
-
-                <td VALIGN="TOP" align="left" style="border-left: 1.4px solid  ;padding:3px 15px; width: 200px;">
-                </td>
-            </tr>
-
 
 
         </table>
@@ -169,7 +152,7 @@ $head = '
         </table>
 
         <div >
-            <table width="842" style=" border-collapse: collapse; padding: 0; margin: 0; margin-top:0px; overflow: wrap;">
+            <table width="842" style=" border-collapse: collapse; padding: 0; margin: 0; margin-top:0px; overflow: wrap">
                 <tr style="border:1.4px solid #3585c6; border-bottom:0;border-collapse: collapse; padding: 0; margin: 0;">
                     <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 8%;">ลำดับที่</td>
                     <td class="text-center" style="border-left: 1.4px solid #3585c6; width: 15%;">รายการ</td>
@@ -213,29 +196,29 @@ if (mysqli_num_rows($result) > 0) {
             $dued = ConvDate($infoinvbitems['invbilld_due_date']);
         }
         $contentitems .= '<tr>
-        <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:20px;">' . $i . '</td>
-        <td VALIGN="TOP" style="text-align: left; border-left: 1.4px solid #3585c6; height:20px; padding:0 5px;">' . $infoinvbitems['invbilld_item'] . ' </td>
-        <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:20px;">' . $invd . '</td>
-        <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:20px;">' . $dued . '</td>
-        <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:20px; padding-right: 5px;">' . number_format($infoinvbitems['invbilld_price'], 2) . '</td>
-        <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:20px; padding-right: 5px;">' . number_format($infoinvbitems['invbilld_vat'], 2) . '</td>
-        <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; height:20px; padding-right: 5px;">' . number_format($infoinvbitems['invbilld_result'], 2) . '</td>';
+        <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; line-height:20px;">' . $i . '</td>
+        <td VALIGN="TOP" style="text-align: left; border-left: 1.4px solid #3585c6; line-height:20px;">' . $infoinvbitems['invbilld_item'] . ' </td>
+        <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; line-height:20px;">' . $invd . '</td>
+        <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; line-height:20px;">' . $dued . '</td>
+        <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; line-height:20px;">' . number_format($infoinvbitems['invbilld_price'], 2) . '</td>
+        <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; line-height:20px;">' . number_format($infoinvbitems['invbilld_vat'], 2) . '</td>
+        <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; line-height:20px;">' . number_format($infoinvbitems['invbilld_result'], 2) . '</td>';
         if ($i == 1) {
             $sp = $sp + 5;
-            $contentitems .= '<td VALIGN="TOP" rowspan=' . $sp . ' style="padding:0 5px;border-bottom: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6;">' . $infoinvb['invbill_remark'] . '</td>';
+            $contentitems .= '<td class="brpoint" VALIGN="TOP" rowspan=' . $sp . ' style="padding:0 5px;border-bottom: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6;">' . $infoinvb['invbill_remark'] . '</td>';
         }
         $contentitems .= '</tr>';
     }
 
     $i = $i + 1;
     $contentitems .= '<tr>
-    <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:50px;">' . $i . '</td>
-    <td VALIGN="TOP" style="text-align: left; border-left: 1.4px solid #3585c6; height:50px;">ค่าขนส่ง</td>
-    <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:50px;"></td>
-    <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:50px;"></td>
-    <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:50px;"></td>
-    <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:50px;"></td>
-    <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; height:50px;padding-right: 5px;">' . number_format($infoinvb['invbill_deli'], 2) . '</td>
+    <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; line-height:20px;">' . $i . '</td>
+    <td VALIGN="TOP" style="text-align: left; border-left: 1.4px solid #3585c6; line-height:20px;">ค่าขนส่ง</td>
+    <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; line-height:20px;"></td>
+    <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; line-height:20px;"></td>
+    <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; line-height:20px;"></td>
+    <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; line-height:20px;"></td>
+    <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; line-height:20px;">' . number_format($infoinvb['invbill_deli'], 2) . '</td>
     
 </tr>';
 }
@@ -276,10 +259,10 @@ if (mysqli_num_rows($result) > 0) {
                 <td style="text-align: center; height:30px; border-bottom:1.3px dotted #3585c6;">' . $infoinvbsum['invbill_page'] . '</td>
                 <td style="text-align: left; border-right: 1.4px solid #3585c6; height:30px;" colspan="2">ฉบับ</td>
 
-                <td VALIGN="middle" style="height:30px; background-color:#b4dfee; border-bottom:1.4px solid #3585c6; text-align:center;  border-collapse: collapse; padding: 5px; margin: 0;" ROWSPAN="2" colspan="2">
+                <td VALIGN="middle" style="height:30px; background-color:#b4dfee; border-bottom:1.4px solid #3585c6; text-align:center; padding:0;  border-collapse: collapse; padding: 5px; margin: 0;" ROWSPAN="2" colspan="2">
                     ยอดรวมทั้งสิ้น(บาท)
                 </td>
-                <td VALIGN="middle" style="height:30px; text-align:right;  border-bottom:1.4px solid #3585c6; border-right:1.4px solid #3585c6; border-collapse: collapse; padding: 5px; margin: 0;" ROWSPAN="2" >
+                <td VALIGN="middle" style="height:30px; text-align:right; padding:0; border-bottom:1.4px solid #3585c6; border-right:1.4px solid #3585c6; border-collapse: collapse; padding: 5px; margin: 0;" ROWSPAN="2" >
                     ' . number_format($infoinvbsum['invbill_total'], 2) . '
                 </td>
                 
