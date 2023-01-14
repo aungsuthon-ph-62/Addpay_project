@@ -96,11 +96,11 @@ function edit_docout()
 
 ?>
 
-<style>
+<!-- <style>
 .ck-editor__editable_inline {
     min-height: 250px;
 }
-</style>
+</style> -->
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -121,26 +121,26 @@ function edit_docout()
                 <form action="?page=doc_out_edit&editdocout=<?php echo encode($row['docout_id'], secret_key()); ?>"
                     method="post" name="docout_edit" id="docout_edit" class="p-md-5" onsubmit="return validateForm()">
                     <div class="row align-items-center text-dark px-md-5 mb-3">
-                        <div class="col-md-3">
-                            <label for="input_no" class="col-form-label">เลขที่</label>
+                        <div class="col-md-2">
+                            <h6 class="col-form-label">เลขที่</h6>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-md-6">
                             <input type="text" id="input_no" name="input_no" class="form-control " required
                                 value="<?= $row['docout_no'] ?>">
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
-                        <div class="col-md-3">
-                            <label for="inputdate" class="col-form-label">วันที่ </label>
+                        <div class="col-md-2">
+                            <h6 class="col-form-label">วันที่ </h6>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-md-6">
                             <input type="date" id="input_date" name="input_date" class="form-control " required
                                 value="<?= $row['docout_date'] ?>">
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
-                        <div class="col-md-3">
-                            <label for="input_title" class="col-form-label">ชื่อเรื่อง </label>
+                        <div class="col-md-2">
+                            <h6 class="col-form-label">ชื่อเรื่อง </h6>
                         </div>
                         <div class="col-md-6">
                             <input type="text" id="input_title" name="input_title" class="form-control " required
@@ -148,8 +148,8 @@ function edit_docout()
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
-                        <div class="col-md-3 ">
-                            <label for="input_to" class="col-form-label">เรียน (ถึงใคร) </label>
+                        <div class="col-md-2 ">
+                            <h6 class="col-form-label">เรียน (ถึงใคร) </้>
                         </div>
 
                         <div class="col-md-6">
@@ -160,27 +160,27 @@ function edit_docout()
 
 
                     <div class="row align-items-center text-dark px-md-5 mb-3">
-                        <div class="col-md-3">
-                            <label for="input_send" class="col-form-label">สิ่งที่ส่งมาด้วย </label>
+                        <div class="col-md-auto">
+                            <h6 class="col-form-label">สิ่งที่ส่งมาด้วย </h6>
                         </div>
-                        <div class="ck-send col-md-9 ">
+                        <div class="ck-send col-md-12 ">
                             <textarea id="input_send" name="input_send" class="form-control"
                                 placeholder="พิมพ์เนื้อหา..."><?= $row['docout_send'] ?></textarea>
                         </div>
                     </div>
 
                     <div class="row align-items-center text-dark px-md-5 mb-3">
-                        <div class="col-md-3">
-                            <label for="input_content" class="col-form-label">เนื้อหาข้อความ </label>
+                        <div class="col-md-auto">
+                            <h6 class="col-form-label">เนื้อหาข้อความ </h6>
                         </div>
-                        <div class="ck-details col-md-9">
+                        <div class="ck-details col-md-12">
                             <textarea id="input_content" name="input_content" class="form-control"
                                 placeholder="พิมพ์เนื้อหา..."><?= $row['docout_details'] ?></textarea>
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
                         <div class="col-md-3 ">
-                            <label for="input_name" class="col-form-label">ชื่อกำกับลายเซ็น</label>
+                            <h6 class="col-form-label">ชื่อกำกับลายเซ็น</h6>
                         </div>
                         <div class="col-md-6">
                             <input type="text" id="input_name" name="input_name" class="form-control " required
@@ -189,7 +189,7 @@ function edit_docout()
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
                         <div class="col-md-3 ">
-                            <label for="input_position" class="col-form-label">ตำแหน่งกำกับลายเซ็น</label>
+                            <h6 class="col-form-label">ตำแหน่งกำกับลายเซ็น</h6>
                         </div>
                         <div class="col-md-6">
                             <input type="text" id="input_position" name="input_position" class="form-control " required
@@ -208,7 +208,7 @@ function edit_docout()
                             <input type="hidden" name="docout_id" id="docout_id" value="<?= $row['docout_id']; ?>" />
                         </div>
                     </div>
-                    <script>
+                    <!-- <script>
                     ClassicEditor
                         .create(document.querySelector('#input_send'))
 
@@ -223,7 +223,7 @@ function edit_docout()
                         .catch(error => {
                             console.error(error);
                         });
-                    </script>
+                    </script> -->
                 </form>
             </div>
         </div>

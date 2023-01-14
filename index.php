@@ -197,7 +197,12 @@ require_once "php/key.inc.php";
     ?>
 
     <script>
-        var editor = new FroalaEditor('#textArea');
+        new FroalaEditor('#input_send', {
+            height: 350
+        })
+        new FroalaEditor('#input_content', {
+            height: 350
+        })
     </script>
 </body>
 

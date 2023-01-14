@@ -53,8 +53,8 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
 
     <!-- Froala -->
-    <link href="node_modules/froala-editor/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="node_modules/froala-editor/js/froala_editor.pkgd.min.js"></script>
+    <link href="library/node_modules/froala-editor/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="library/node_modules/froala-editor/js/froala_editor.pkgd.min.js"></script>
     <!-- Froala -->
 
 
