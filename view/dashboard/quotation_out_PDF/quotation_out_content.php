@@ -106,24 +106,24 @@ if (mysqli_num_rows($result) > 0) {
     while ($infoquoitems = mysqli_fetch_assoc($result)) {
         $i++;
         echo ' <tr>
-            <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $i . '</td>
-            <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:50px;">' . $infoquoitems['quooutde_item'] .
+            <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; line-height:20px;">' . $i . '</td>
+            <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; line-height:20px;">' . $infoquoitems['quooutde_item'] .
                 '</td>
-            <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' .
+            <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; line-height:20px;">' .
                 $infoquoitems['quooutde_amount'] . '</td>
-            <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' .
+            <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; line-height:20px;">' .
                 number_format($infoquoitems['quooutde_price'],2) . '</td>
-            <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' .
+            <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; line-height:20px;">' .
                 number_format($infoquoitems['quooutde_result'],2) . '</td>
         </tr>';
     }
     $i=$i+1;
     echo '<tr>
-        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;">' . $i . '</td>
-        <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:50px;">ค่าขนส่ง</td>
-        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:50px;"></td>
-        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;"></td>
-        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:50px;">' . $infoquo['quoout_deli'] . '</td>
+        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; line-height:20px;">' . $i . '</td>
+        <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; line-height:20px;">ค่าขนส่ง</td>
+        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid;line-height:20px; "></td>
+        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; line-height:20px;"></td>
+        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; line-height:20px;">' . $infoquo['quoout_deli'] . '</td>
     </tr>';
 }
 

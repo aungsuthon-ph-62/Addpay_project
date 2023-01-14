@@ -8,7 +8,8 @@
                 </a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     ใบเสนอราคา
                 </a>
                 <ul class="dropdown-menu">
@@ -39,7 +40,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="?page=">
+                <a class="nav-link text-white" href="?page=contract">
                     <span data-feather="layers"></span>
                     สัญญาแนบเข้า
                 </a>
@@ -51,7 +52,8 @@
                 </a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     หนังสือ
                 </a>
                 <ul class="dropdown-menu">
@@ -69,13 +71,14 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="?page=">
+                <a class="nav-link text-white" href="?page=archives">
                     <span data-feather="layers"></span>
                     เอกสารสำคัญ
                 </a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     ใบแจ้งหนี้
                 </a>
                 <ul class="dropdown-menu">
