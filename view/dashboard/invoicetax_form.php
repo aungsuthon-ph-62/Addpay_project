@@ -1,52 +1,52 @@
 <style>
-* {
-    font-size: 14px;
-}
+    * {
+        font-size: 14px;
+    }
 
-.btn {
-    transition: all 0.2s ease-in-out;
-}
+    .btn {
+        transition: all 0.2s ease-in-out;
+    }
 
-.btn:hover {
-    border-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transform: scale(1.1);
-}
+    .btn:hover {
+        border-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transform: scale(1.1);
+    }
 
-.bg-primary-addpay {
-    /* fallback for old browsers */
-    background: #07aaf2;
+    .bg-primary-addpay {
+        /* fallback for old browsers */
+        background: #07aaf2;
 
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, #07aaf2, #50b4df);
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, #07aaf2, #50b4df);
 
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to bottom, #079ad9, #07aaf2, #50b4df);
-}
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to bottom, #079ad9, #07aaf2, #50b4df);
+    }
 
-/* Darkblue Background Color */
-.bg-secondary-addpay {
-    /* fallback for old browsers */
-    background: #046197;
+    /* Darkblue Background Color */
+    .bg-secondary-addpay {
+        /* fallback for old browsers */
+        background: #046197;
 
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, #046197, #034266);
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, #046197, #034266);
 
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to bottom, #046197, #034266);
-}
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to bottom, #046197, #034266);
+    }
 
-/* Button Color */
-.btn-addpay {
-    /* fallback for old browsers */
-    background: #fe9100;
+    /* Button Color */
+    .btn-addpay {
+        /* fallback for old browsers */
+        background: #fe9100;
 
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, #fdb04c, #fe9100);
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, #fdb04c, #fe9100);
 
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to bottom, #fdb04c, #fe9100);
-}
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to bottom, #fdb04c, #fe9100);
+    }
 </style>
 <link rel="stylesheet" href="./PDF_set/PDF.css">
 
@@ -114,7 +114,7 @@ $head = '
         </table>
 
 <!--php  ดึงข้อมูลลูกค้า -->
-<table style="width: 842px; border:1px solid;border-bottom: 0; border-collapse: collapse; padding: 0; margin: 0;  margin-top: 10px; overflow: wrap;">
+<table style="width: 842px; border:1px solid;border-bottom: 0; border-collapse: collapse; padding: 0; margin: 0;  margin-top: 10px; ">
     <tr style="border-bottom: 0 solid;">
         <td VALIGN="TOP" align="left" style="border-left: 1px solid; width: 150px;">
             <b>ชื่อลูกค้า / Customer :</b> <br>
@@ -137,7 +137,7 @@ $head = '
             <b>วันที่ / Date.</b> &nbsp;&nbsp;' . ConvDate($infoinvtax['invtax_date'])  . '
         </td>
     </tr>
-        <tr style="border-bottom: 0 solid;">
+    <tr style="border-bottom: 0 solid;">
         <td VALIGN="TOP" align="left" style="border-left: 1px solid; width: 150px;">
             <b>เลขประจำตัวผู้เสียภาษี :</b>
         </td>
@@ -170,11 +170,11 @@ if (mysqli_num_rows($result) > 0) {
     while ($infoinvtaxitems = mysqli_fetch_assoc($result)) {
         $i++;
         $contentitems .= '<tr>
-        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; line-height:20px;">' . $i . '</td>
-        <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; line-height:20px;">' . $infoinvtaxitems['invtaxd_item'] . '</td>
-        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; line-height:20px;">' . $infoinvtaxitems['invtaxd_amount'] . '</td>
-        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; line-height:20px; padding: auto 5px;">' . number_format($infoinvtaxitems['invtaxd_price'], 2) . '</td>
-        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; line-height:20px; padding: auto 5px;">' . number_format($infoinvtaxitems['invtaxd_result'], 2) . '</td>
+        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:10px;">' . $i . '</td>
+        <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; height:10px;">' . $infoinvtaxitems['invtaxd_item'] . '</td>
+        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; height:10px;">' . $infoinvtaxitems['invtaxd_amount'] . '</td>
+        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:10px; padding: auto 5px;">' . number_format($infoinvtaxitems['invtaxd_price'], 2) . '</td>
+        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; height:10px; padding: auto 5px;">' . number_format($infoinvtaxitems['invtaxd_result'], 2) . '</td>
     </tr>';
     }
 }
@@ -298,31 +298,29 @@ $mpdf->Output('./invoicetax_PDF/invoicetax0.pdf');
 
 
 <style>
-* {
-    font-size: 14px;
-}
+    * {
+        font-size: 14px;
+    }
 
-.btn-pdf {
-    background: #fe9100;
-    background: -webkit-linear-gradient(to right, #fdb04c, #fe9100);
-    background: linear-gradient(to bottom, #fdb04c, #fe9100);
-}
+    .btn-pdf {
+        background: #fe9100;
+        background: -webkit-linear-gradient(to right, #fdb04c, #fe9100);
+        background: linear-gradient(to bottom, #fdb04c, #fe9100);
+    }
 
-.btn-pdf:hover {
-    border-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transform: scale(1.1);
-}
+    .btn-pdf:hover {
+        border-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transform: scale(1.1);
+    }
 </style>
 
 <body>
 
     <div class="container py-md-5 px-md-4" style="width: 100%; ">
-        <p style="font-size: 16px;" class="text-end text-danger ">** โปรดตรวจสอบความถูกต้องของข้อมูลก่อนกด พิมพ์เอกสาร
-        </p>
+        <p style="font-size: 16px;" class="text-end text-danger ">** โปรดตรวจสอบความถูกต้องของข้อมูลก่อนกด พิมพ์เอกสาร</p>
         <div class="mx-auto d-flex justify-content-end me-5">
-            <a class="btn btn-addpay px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold text-light" role="button"
-                href="./invoicetax_PDF/invoicetax0.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
+            <a class="btn btn-addpay px-2 px-md-4 mt-2 rounded-3 fs-5 fw-bold text-light" role="button" href="./invoicetax_PDF/invoicetax0.pdf"><i class="fa-solid fa-print"></i> พิมพ์เอกสาร</a>
         </div>
         <hr>
         <?php
