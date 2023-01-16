@@ -137,7 +137,7 @@ $head = '
                 <p class="text-left ">โครงการ</p>
             </td>
             <td class="underline" style="width:692px;">
-                <p class="text-left "> <span>&nbsp; ' . $infoquo['quo_namepj'] . ' &nbsp;&nbsp;</span> </p>
+                <p class="text-left "> <span>&nbsp;' . $infoquo['quo_namepj'] . ' &nbsp;&nbsp;</span> </p>
             </td>
         </tr>
         <tr>
