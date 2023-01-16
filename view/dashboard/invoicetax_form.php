@@ -131,7 +131,7 @@ $head = '
             <b>ที่อยู่ / Address :</b><br>
         </td>
         <td VALIGN="TOP" align="left" style="width: 426px;">
-        <b>' . $infoinvtax['invtax_address']  . '</b><br>
+            <b>' . $infoinvtax['invtax_address']  . '</b><br>
         </td>
         <td VALIGN="TOP" align="left" style="border-left: 1px solid; width: 266px;">
             <b>วันที่ / Date.</b> &nbsp;&nbsp;' . ConvDate($infoinvtax['invtax_date'])  . '
