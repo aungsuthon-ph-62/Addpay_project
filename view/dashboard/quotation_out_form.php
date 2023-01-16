@@ -140,7 +140,7 @@ $head = '
                     <p class="text-left ">ชื่อ ลูกค้า :</p>
                 </td>
                 <td class="underline" style="width:642px;">
-                    <p class="text-left "><span>&nbsp;' . $infoquo['quoout_name'] . ' &nbsp;&nbsp;</span> </p>
+                    <p class="text-left "><span>' . $infoquo['quoout_name'] . ' &nbsp;&nbsp;</span> </p>
                 </td>
             </tr>
             <tr>
