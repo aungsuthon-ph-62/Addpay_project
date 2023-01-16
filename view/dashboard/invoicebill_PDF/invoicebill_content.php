@@ -60,7 +60,7 @@ echo '
                     <b>ที่อยู่ / Address :</b><br>
                 </td>
                 <td VALIGN="TOP" align="left" style="width: 422px; padding:3px 100px 3px 0; word-break:break-all;">
-                    <div>' . $infoinvb['invbill_address'] . '</div><br>
+                    ' . $infoinvb['invbill_address'] . '<br>
                 </td>
                 <td VALIGN="TOP" align="left" style="border-left: 1px solid; width: 200px;">
                     <b>วันที่ / Date.</b> &nbsp;&nbsp;' . ConvDate($infoinvb['invbill_date'])  . '
