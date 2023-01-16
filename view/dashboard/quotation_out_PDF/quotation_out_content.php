@@ -117,14 +117,17 @@ if (mysqli_num_rows($result) > 0) {
                 number_format($infoquoitems['quooutde_result'],2) . '</td>
         </tr>';
     }
-    $i=$i+1;
-    echo '<tr>
-        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; line-height:20px;">' . $i . '</td>
-        <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; line-height:20px;">ค่าขนส่ง</td>
-        <td VALIGN="TOP" style="text-align: center; border-left: 1px solid;line-height:20px; "></td>
-        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; line-height:20px;"></td>
-        <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; line-height:20px;">' . $infoquo['quoout_deli'] . '</td>
-    </tr>';
+    if($infoquo['quoout_deli']>0){
+        $i=$i+1;
+        echo '<tr>
+            <td VALIGN="TOP" style="text-align: center; border-left: 1px solid; line-height:20px;">' . $i . '</td>
+            <td VALIGN="TOP" style="text-align: left; border-left: 1px solid; line-height:20px;">ค่าขนส่ง</td>
+            <td VALIGN="TOP" style="text-align: center; border-left: 1px solid;line-height:20px; "></td>
+            <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; line-height:20px;"></td>
+            <td VALIGN="TOP" style="text-align: right; border-left: 1px solid; line-height:20px;">' . $infoquo['quoout_deli'] . '</td>
+        </tr>';
+    }
+    
 }
 
 // <!-- blank area -->

@@ -142,14 +142,16 @@ if (mysqli_num_rows($result) > 0) {
                     <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; line-height:20px;">' . number_format($infoinvbitems['invbilld_price'], 2) . '</td>
                     <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; line-height:20px;">' . number_format($infoinvbitems['invbilld_vat'], 2) . '</td>
                     <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; line-height:20px;">' . number_format($infoinvbitems['invbilld_result'], 2) . '</td>';
+                    
                     if($i==1){
                         $sp=$sp+5;
                         echo '<td VALIGN="TOP" rowspan='.$sp.' style="text-align: left; border-bottom: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6;"><div style="padding:0 5px ;width: 89.11px; word-break:break-all">' . $infoinvb['invbill_remark'] . '</div></td>';
                     }
         echo    '</tr>';
     }
-    $i ++;
-    echo '
+    if($infoinvb['invbill_deli']>0){
+        $i ++;
+        echo '
             <tr>
                 <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; line-height:20px;">' . $i . '</td>
                 <td VALIGN="TOP" style="text-align: left; border-left: 1.4px solid #3585c6; line-height:20px;">ค่าขนส่ง</td>
@@ -160,6 +162,8 @@ if (mysqli_num_rows($result) > 0) {
                 <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; line-height:20px;">' . number_format($infoinvb['invbill_deli'], 2) . '</td>
                 
             </tr>';
+    }
+    
 }
 
 //<!-- blank area -->
@@ -168,22 +172,22 @@ $result = mysqli_query($conn, $sql);
 while ($infoinvbsum = mysqli_fetch_array($result)) {
     echo '
             <tr>
-                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:20px;"></td>
-                <td VALIGN="TOP" style="text-align: left; border-left: 1.4px solid #3585c6; height:20px;"></td>
-                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:20px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:20px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:20px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:20px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; height:20px;"></td>
+                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: left; border-left: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; height:50px;"></td>
             </tr>
             <tr>
-                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:20px;"></td>
-                <td VALIGN="TOP" style="text-align: left; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:20px;"></td>
-                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:20px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:20px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:20px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:20px;"></td>
-                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:20px;"></td>
+                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: left; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: center; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:50px;"></td>
+                <td VALIGN="TOP" style="text-align: right; border-left: 1.4px solid #3585c6; border-right: 1.4px solid #3585c6; border-bottom: 1.4px solid #3585c6; height:50px;"></td>
         </td>
                 
             </tr>
