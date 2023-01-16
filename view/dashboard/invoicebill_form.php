@@ -157,8 +157,6 @@ $head = '
                 <td VALIGN="TOP" align="left" style="border-left: 1px solid; width: 200px;">
                 </td>
             </tr>
-
-
         </table>
         <table style="width: 842px;">
             <tr>
