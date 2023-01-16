@@ -60,7 +60,7 @@ if (isset($_POST['action'])) {
 
 ?>
 
-<style>
+<!-- <style>
     .ck-send .ck-editor__editable_inline {
         min-height: 100px;
     }
@@ -68,7 +68,7 @@ if (isset($_POST['action'])) {
     .ck-content .ck-editor__editable_inline {
         min-height: 250px;
     }
-</style>
+</style> -->
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -90,32 +90,32 @@ if (isset($_POST['action'])) {
                 </div>
                 <form action="?page=doc_out_add" method="post" name="docout_add" id="docout_add" class="p-md-5">
                     <div class="row align-items-center text-dark px-md-5 mb-3">
-                        <div class="col-md-3">
-                            <label for="input_no" class="col-form-label">เลขที่</label>
+                        <div class="col-md-2">
+                            <h6 class="col-form-label">เลขที่</h6>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-md-6">
                             <input type="text" id="input_no" name="input_no" class="form-control " required>
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
-                        <div class="col-md-3">
-                            <label for="inputdate" class="col-form-label">วันที่ </label>
+                        <div class="col-md-2">
+                            <h6 class="col-form-label">วันที่ </h6>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-md-6">
                             <input type="date" id="input_date" name="input_date" class="form-control " required>
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
-                        <div class="col-md-3">
-                            <label for="input_title" class="col-form-label">ชื่อเรื่อง </label>
+                        <div class="col-md-2">
+                            <h6 class="col-form-label">ชื่อเรื่อง </h6>
                         </div>
                         <div class="col-md-6">
                             <input type="text" id="input_title" name="input_title" class="form-control " required>
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
-                        <div class="col-md-3 ">
-                            <label for="input_to" class="col-form-label">เรียน (ถึงใคร) </label>
+                        <div class="col-md-2">
+                            <h6 class="col-form-label">เรียน (ถึงใคร) </h6>
                         </div>
 
                         <div class="col-md-6">
@@ -123,19 +123,19 @@ if (isset($_POST['action'])) {
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
-                        <div class="col-md-3 ">
-                            <label for="input_send" class="col-form-label">สิ่งที่ส่งมาด้วย </label>
+                        <div class="col-auto">
+                            <h6 class="col-form-label">สิ่งที่ส่งมาด้วย </h6>
                         </div>
-                        <div class="ck-send col-md-6">
+                        <div class="ck-send col-md-12">
                             <textarea type="text" id="input_send" name="input_send" class="form-control "><?php 
                             if(isset($_SESSION['input_send'])){echo $_SESSION['input_send'];}?></textarea>
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
-                        <div class="col-md-3">
-                            <label for="input_content" class="col-form-label">เนื้อหาข้อความ </label>
+                        <div class="col-auto">
+                            <h6 class="col-form-label">เนื้อหาข้อความ </h6>
                         </div>
-                        <div class="ck-content col-md-9">
+                        <div class="ck-content col-md-12">
                             <textarea id="input_content" name="input_content" class="form-control"
                                 placeholder="พิมพ์เนื้อหา..."><?php 
                             if(isset($_SESSION['input_content'])){echo $_SESSION['input_content'];}?></textarea>
@@ -143,7 +143,7 @@ if (isset($_POST['action'])) {
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
                         <div class="col-md-3 ">
-                            <label for="input_name" class="col-form-label">ชื่อกำกับลายเซ็น</label>
+                            <h6 class="col-form-label">ชื่อกำกับลายเซ็น</h6>
                         </div>
                         <div class="col-md-6">
                             <input type="text" id="input_name" name="input_name" class="form-control " required>
@@ -151,7 +151,7 @@ if (isset($_POST['action'])) {
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
                         <div class="col-md-3 ">
-                            <label for="input_position" class="col-form-label">ตำแหน่งกำกับลายเซ็น</label>
+                            <h6 class="col-form-label">ตำแหน่งกำกับลายเซ็น</h6>
                         </div>
                         <div class="col-md-6">
                             <input type="text" id="input_position" name="input_position" class="form-control " required>
@@ -165,7 +165,7 @@ if (isset($_POST['action'])) {
                             </div>
                         </div>
                     </div>
-                    <script>
+                    <!-- <script>
                         ClassicEditor
                             .create(document.querySelector('#input_send'))
 
@@ -180,7 +180,8 @@ if (isset($_POST['action'])) {
                             .catch(error => {
                                 console.error(error);
                             });
-                    </script>
+                    </script> -->
+                    
                 </form>
             </div>
         </div>
