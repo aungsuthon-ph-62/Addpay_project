@@ -31,7 +31,7 @@ if(isset($_POST['action'])){
         $uid = $_SESSION['id'];
 
         $query = "UPDATE contract SET contract_lgdeld='$input_lgdeld', contract_lgexpd='$input_lgexpd', contract_comp='$input_comp',
-                    contract_title='$input_title', contract_ann='$input_ann', contract_update='$date', contract_uid='$uid'";
+                    contract_title='$input_title', contract_ann='$input_ann', contract_update='$date', contract_uid='$uid' WHERE contract_id ='$id'";
             
         if ($conn->query($query)) {
             
