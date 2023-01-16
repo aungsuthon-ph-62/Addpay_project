@@ -13,10 +13,12 @@
         <!-- <a href="#" class="text-decoration-none">
                 <img src="image/addpaylogo.png" alt="Profile Picture" class="img-fluid rounded-circle shadow " style="width: auto; height: 3rem;">
             </a> -->
-        <form action="php/action.php" method="post">
-            <input type="hidden" name="action" value="logout">
-            <button type="submit" class="btn btn-danger me-md-5">ออกจากระบบ <i class="fa-solid fa-right-from-bracket"></i></button>
-        </form>
+        <div class="d-none d-md-block">
+            <form action="php/action.php" method="post">
+                <input type="hidden" name="action" value="logout">
+                <button type="submit" class="btn btn-danger me-md-5">ออกจากระบบ <i class="fa-solid fa-right-from-bracket"></i></button>
+            </form>
+        </div>
 
     </div>
 </header>

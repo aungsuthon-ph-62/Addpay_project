@@ -8,8 +8,7 @@
                 </a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
+                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     ใบเสนอราคา
                 </a>
                 <ul class="dropdown-menu">
@@ -52,8 +51,7 @@
                 </a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
+                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     หนังสือ
                 </a>
                 <ul class="dropdown-menu">
@@ -76,9 +74,8 @@
                     เอกสารสำคัญ
                 </a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
+            <li class="nav-item dropdown mb-5">
+                <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     ใบแจ้งหนี้
                 </a>
                 <ul class="dropdown-menu">
@@ -90,7 +87,12 @@
                 </ul>
             </li>
         </ul>
-
+        <div class="d-block d-md-none text-center">
+            <form action="php/action.php" method="post">
+                <input type="hidden" name="action" value="logout">
+                <button type="submit" class="btn btn-danger me-md-5">ออกจากระบบ <i class="fa-solid fa-right-from-bracket"></i></button>
+            </form>
+        </div>
         <!-- <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
             <span>Saved reports</span>
             <a class="link-secondary" href="#" aria-label="Add a new report">
