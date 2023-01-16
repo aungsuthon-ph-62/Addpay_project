@@ -48,8 +48,8 @@ if (isset($_GET["deletequoin"])) {
                 </div>
 
                 <div class="p-3 p-md-5 bg-light rounded-5 shadow-lg" id="main_row">
-                    <div class="table-responsive">
-                        <table class="table" id="quotationinTable">
+                    <div class="table-responsive text-dark">
+                        <table class="table table-hover" id="quotationinTable">
                             <thead>
                                 <tr class="rows align-center">
                                     <th scope="col" style="width:15%;">เลขที่</th>

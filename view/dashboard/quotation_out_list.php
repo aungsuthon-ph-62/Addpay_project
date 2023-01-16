@@ -38,9 +38,9 @@ unset($_SESSION['svinput']);unset($_SESSION['deli']);unset($_SESSION['spe']);
                         <i class="fa-solid fa-file-circle-plus"></i> สร้างใบเสนอราคาออก</a>
                 </div>
 
-                <div class="p-3 p-md-5 bg-light rounded-5 shadow-lg" id="main_row">">
-                    <div class="table-responsive">
-                        <table class="table" id="quotationoutTable">
+                <div class="p-3 p-md-5 bg-light rounded-5 shadow-lg" id="main_row">
+                    <div class="table-responsive text-dark">
+                        <table class="table table-hover" id="quotationoutTable">
                             <thead>
                                 <tr class="align-center" class="rows">
                                     <th scope="col" class="text-center" style="width:15%">เลขที่ใบเสนอราคา</th>

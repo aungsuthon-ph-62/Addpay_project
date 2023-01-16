@@ -51,8 +51,8 @@ if(isset($_GET["deletedocin"])){
                 </div>
 
                 <div class="p-3 p-md-5 bg-light rounded-5 shadow-lg" id="main_row">
-                    <div class="table-responsive">
-                        <table class="table" id="docinTable">
+                    <div class="table-responsive text-dark">
+                        <table class="table table-hover" id="docinTable">
                             <thead>
                                 <tr class="align-center col">
                                     <th style="width:25%" scope="col">เลขที่</th>

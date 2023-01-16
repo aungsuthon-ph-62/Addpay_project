@@ -56,8 +56,8 @@ unset($_SESSION['svinput']);
                         สร้างใบแจ้งหนี้/ใบกำกับภาษี</a>
                 </div>
                 <div class="p-3 p-md-5 bg-light rounded-5 shadow-lg" id="main_row">
-                    <div class="table-responsive">
-                        <table class="table" id="invtaxTable">
+                    <div class="table-responsive text-dark">
+                        <table class="table table-hover" id="invtaxTable">
                             <thead>
                                 <tr class="rows align-center">
                                     <th scope="col" style="width:20%;">เลขที่</th>

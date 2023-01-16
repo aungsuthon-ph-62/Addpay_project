@@ -49,8 +49,8 @@ if(isset($_GET["deletecontract"]))
                         <i class="fa-solid fa-file-circle-plus"></i> เพิ่มข้อมูล</a>
                 </div>
                 <div class="p-3 p-md-5 bg-light rounded-5 shadow-lg" id="main_row">
-                    <div class="table-responsive">
-                        <table class="table" id="contractTable">
+                    <div class="table-responsive text-dark">
+                        <table class="table table-hover" id="contractTable">
                             <thead>
                                 <tr class="align-center" class="rows">
                                     <th style="width:10%" scope="col">วันที่ส่ง LG</th>

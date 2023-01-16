@@ -39,8 +39,8 @@ unset($_SESSION['svinput']);unset($_SESSION['deli']);
 
 
                 <div class="p-3 p-md-5 bg-light rounded-5 shadow-lg" id="main_row">
-                    <div class="table-responsive">
-                        <table class="table" id="invbillTable">
+                    <div class="table-responsive text-dark">
+                        <table class="table table-hover" id="invbillTable">
                             <thead>
                                 <tr class="rows align-center">
                                     <th scope="col" class="text-center" style="width:10%;">เลขที่</th>
