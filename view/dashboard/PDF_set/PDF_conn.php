@@ -1,7 +1,7 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
+$servername = "addpaycrypto.com";
+$username = "addpay_backoffice";
+$password = "ae_2022";
 $dbname = "addpay_e_office";
 
 // Create connection
