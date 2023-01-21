@@ -60,11 +60,11 @@ unset($_SESSION['svinput']);
                         <table class="table table-hover" id="invtaxTable">
                             <thead>
                                 <tr class="rows align-center">
-                                    <th scope="col" style="width:20%;">เลขที่</th>
-                                    <th scope="col" style="width:15%;">วันที่ในใบกำกับภาษี</th>
-                                    <th scope="col" style="width:30%;">ชื่อลูกค้า</th>
-                                    <th scope="col" style="width:25%;">จำนวนเงินรวม</th>
-                                    <th scope="col" style="width:10%;">ตัวเลือก</th>
+                                    <th class="text-start" scope="col" style="width:10%;">เลขที่</th>
+                                    <th class="text-center" scope="col" style="width:20%;">วันที่ในใบกำกับภาษี</th>
+                                    <th class="text-center" scope="col" style="width:40%;">ชื่อลูกค้า</th>
+                                    <th class="text-center" scope="col" style="width:15%;">จำนวนเงินรวม</th>
+                                    <th class="text-center" scope="col" style="width:10%;">ตัวเลือก</th>
                                 </tr>
                             </thead>
                             <?php
@@ -74,11 +74,11 @@ unset($_SESSION['svinput']);
                             while ($rows = $query->fetch_assoc()) {
                                 echo '
                                     <tr>
-                                        <td >' . $rows["invtax_no"] . '</td>
-                                        <td >' . $rows["invtax_date"] . '</td>
+                                        <td class="text-start" >' . $rows["invtax_no"] . '</td>
+                                        <td class="text-center">' . ConvDate($rows["invtax_date"]) . '</td>
                                         <td >' . $rows["invtax_name"] . '</td>
                                         
-                                        <td >' . number_format($rows["invtax_total"], 2) . '</td>
+                                        <td class="text-end">' . number_format($rows["invtax_total"], 2) . '</td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4"

@@ -44,12 +44,12 @@ unset($_SESSION['input_content']);
                     <div class="table-responsive text-dark">
                         <table class="table table-hover" id="docoutTable">
                             <thead>
-                                <tr class="align-center" class="rows">
-                                    <th style="width:17%" scope="col">เลขที่</th>
-                                    <th style="width:15%" scope="col">วันที่</th>
-                                    <th style="width:30%" scope="col">เรื่อง</th>
-                                    <th style="width:28%" scope="col">เรียน (ถึงใคร)</th>
-                                    <th style="width:10%" scope="col">ตัวเลือก</th>
+                                <tr class="rows align-center">
+                                    <th class="text-start style="width:10%" scope="col">เลขที่</th>
+                                    <th class="text-center" style="width:15%" scope="col">วันที่</th>
+                                    <th style="width:35%" scope="col">เรื่อง</th>
+                                    <th style="width:30%" scope="col">เรียน (ถึงใคร)</th>
+                                    <th class="text-center" style="width:10%" scope="col">ตัวเลือก</th>
                                 </tr>
                             </thead>
                             <?php
@@ -58,8 +58,8 @@ unset($_SESSION['input_content']);
                             while ($rows = $query->fetch_assoc()) {
                                 echo '
                                     <tr>
-                                        <td>' . $rows["docout_no"] . '</td>
-                                        <td>' . $rows["docout_date"] . '</td>
+                                        <td class="text-start" >' . $rows["docout_no"] . '</td>
+                                        <td>' . ConvDate($rows["docout_date"]) . '</td>
                                         <td>' . $rows["docout_title"] . '</td>
                                         <td>' . $rows["docout_to"] . '</td>
                                         <td>

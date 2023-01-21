@@ -1,4 +1,5 @@
 <?php
+
 if (isset($_GET["deleteinvbill"])) {
     $id = $_GET["deleteinvbill"];
 
@@ -43,24 +44,23 @@ unset($_SESSION['svinput']);unset($_SESSION['deli']);
                         <table class="table table-hover" id="invbillTable">
                             <thead>
                                 <tr class="rows align-center">
-                                    <th scope="col" class="text-center" style="width:10%;">เลขที่</th>
-                                    <th scope="col" class="text-center" style="width:14%;">วันที่ในใบวางบิล</th>
-                                    <th scope="col" class="text-center" style="width:26%;">ชื่อลูกค้า</th>
-                                    <th scope="col" class="text-center" style="width:11%;">จำนวนเงินรวม</th>
+                                    <th scope="col" class="text-start" style="width:10%;">เลขที่</th>
+                                    <th scope="col" class="text-center" style="width:17%;">วันที่ในใบวางบิล</th>
+                                    <th scope="col" class="text-left" style="width:48%;">ชื่อลูกค้า</th>
+                                    <th scope="col" class="text-center" style="width:15%;">จำนวนเงินรวม</th>
                                     <th scope="col" class="text-center" style="width:10%;">ตัวเลือก</th>
                                 </tr>
                             </thead>
                             <?php
-
                             $sql = "SELECT * FROM invoicebill";
                             $query = $conn->query($sql);
                             while ($rows = $query->fetch_assoc()) {
                                 echo '
                                     <tr>
-                                        <td class="text-center">' . $rows["invbill_no"] . '</td>
-                                        <td class="text-center">' . $rows["invbill_date"] . '</td>
+                                        <td class="text-start">' . $rows["invbill_no"] . '</td>
+                                        <td class="text-center">' . ConvDate($rows["invbill_date"]) . '</td>
                                         <td class="text-start">' . $rows["invbill_name"] . '</td>
-                                        <td class="text-start">' . $rows["invbill_total"] . '</td>
+                                        <td align="right">' . number_format($rows["invbill_total"], 2) . '</td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4"

@@ -42,7 +42,7 @@ if(isset($_GET["deletecontract"]))
         <div class="container">
             <div id="listquotation" class="py-4 p-md-5 text-white">
                 <div class="text-center text-md-start">
-                    <h3>เอกสารสัญญา</h3>
+                    <h3>เอกสารสัญญาแนบเข้า</h3>
                 </div>
                 <div class="my-4 my-md-3 text-center text-md-end">
                     <a class="btn btn-addpay px-md-4 rounded-3 " href="?page=contract_add">
@@ -52,13 +52,13 @@ if(isset($_GET["deletecontract"]))
                     <div class="table-responsive text-dark">
                         <table class="table table-hover" id="contractTable">
                             <thead>
-                                <tr class="align-center" class="rows">
-                                    <th style="width:10%" scope="col">วันที่ส่ง LG</th>
-                                    <th style="width:10%" scope="col">วันหมดอายุ LG</th>
-                                    <th style="width:20%" scope="col">ชื่อบริษัท</th>
+                                <tr class="rows align-center">
+                                    <th class="text-center"style="width:15%" scope="col">วันที่ส่ง LG</th>
+                                    <th class="text-center" style="width:15%" scope="col">วันหมดอายุ LG</th>
+                                    <th style="width:25%" scope="col">ชื่อบริษัท</th>
                                     <th style="width:20%" scope="col">ชื่อสัญญา</th>
-                                    <th style="width:10%" scope="col">วันประกาศผล</th>
-                                    <th style="width:10%" scope="col">ตัวเลือก</th>
+                                    <th class="text-center" style="width:15%" scope="col">วันประกาศผล</th>
+                                    <th class="text-center" style="width:10%" scope="col">ตัวเลือก</th>
                                 </tr>
                             </thead>
                             <?php
@@ -68,11 +68,11 @@ if(isset($_GET["deletecontract"]))
                                 while ($rows = $query->fetch_assoc()) {
                                     echo '
                                     <tr>
-                                        <td>'.$rows["contract_lgdeld"].'</td>
-                                        <td>'.$rows["contract_lgexpd"].'</td>
+                                        <td class="text-center" >'.ConvDate($rows["contract_lgdeld"]).'</td>
+                                        <td class="text-center" >'.ConvDate($rows["contract_lgexpd"]).'</td>
                                         <td>'.$rows["contract_comp"].'</td>
                                         <td>'.$rows["contract_title"].'</td>
-                                        <td>'.$rows["contract_ann"].'</td>
+                                        <td class="text-center" >'.ConvDate($rows["contract_ann"]).'</td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4"

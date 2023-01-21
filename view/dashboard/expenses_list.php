@@ -47,13 +47,13 @@ if (isset($_GET["deleteexpenses"])) {
                     <div class="table-responsive text-dark">
                         <table class="table table-hover" id="expensesTable">
                             <thead>
-                                <tr class="align-center" class="rows">
-                                    <th style="width:15%" scope="col">เลขที่</th>
-                                    <th style="width:15%" scope="col">วันที่จ่าย</th>
-                                    <th style="width:30%" scope="col">รายการ</th>
-                                    <th style="width:20%" scope="col">จำนวนเงิน</th>
-                                    <th style="width:10%" scope="col">ประเภท</th>
-                                    <th style="width:10%" scope="col">ตัวเลือก</th>
+                                <tr class="rows align-center">
+                                    <th class="text-start" style="width:10%" scope="col">เลขที่</th>
+                                    <th class="text-center" style="width:15%" scope="col">วันที่จ่าย</th>
+                                    <th class="text-left" style="width:35%" scope="col">รายการ</th>
+                                    <th class="text-center" style="width:15%" scope="col">จำนวนเงิน</th>
+                                    <th class="text-center" style="width:15%" scope="col">ประเภท</th>
+                                    <th class="text-center" style="width:10%" scope="col">ตัวเลือก</th>
                                 </tr>
                             </thead>
 
@@ -64,11 +64,11 @@ if (isset($_GET["deleteexpenses"])) {
                             while ($rows = $query->fetch_assoc()) {
                                 echo '
                                     <tr>
-                                        <td>' . $rows["expenses_id"] . '</td>
-                                        <td>' . $rows["expenses_date"] . '</td>
+                                        <td align="start">' . $rows["expenses_id"] . '</td>
+                                        <td align="center">' . ConvDate($rows["expenses_date"]) . '</td>
                                         <td>' . $rows["expenses_list"] . '</td>
-                                        <td>' . $rows["expenses_price"] . '</td>
-                                        <td>' . $rows["expenses_type"] . '</td>
+                                        <td align="right">' . number_format($rows["expenses_price"], 2). '</td>
+                                        <td align="center">' . $rows["expenses_type"] . '</td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4"

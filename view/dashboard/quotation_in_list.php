@@ -52,11 +52,11 @@ if (isset($_GET["deletequoin"])) {
                         <table class="table table-hover" id="quotationinTable">
                             <thead>
                                 <tr class="rows align-center">
-                                    <th scope="col" style="width:15%;">เลขที่</th>
-                                    <th scope="col" style="width:15%;">วันที่ในใบเสนอราคา</th>
-                                    <th scope="col" style="width:40%;">บริษัทที่ออกใบเสนอราคา</th>
-                                    <th scope="col" style="width:20%;">สถานะ</th>
-                                    <th scope="col" style="width:10%;">ตัวเลือก</th>
+                                    <th class="text-start" scope="col" style="width:10%;">เลขที่</th>
+                                    <th class="text-center" scope="col" style="width:20%;">วันที่ในใบเสนอราคา</th>
+                                    <th class="text-start" scope="col" style="width:40%;">บริษัทที่ออกใบเสนอราคา</th>
+                                    <th class="text-center" scope="col" style="width:20%;">สถานะ</th>
+                                    <th class="text-center" scope="col" style="width:10%;">ตัวเลือก</th>
                                 </tr>
                             </thead>
                             <?php
@@ -67,9 +67,9 @@ if (isset($_GET["deletequoin"])) {
                                 echo '
                                     <tr>
                                         <td>' . $rows["quoin_no"] . '</td>
-                                        <td>' . $rows["quoin_date"] . '</td>
+                                        <td class="text-center" >' . ConvDate($rows["quoin_date"]) . '</td>
                                         <td>' . $rows["quoin_company"] . '</td>
-                                        <td>' . $rows["quoin_status"] . '</td>
+                                        <td class="text-center" >' . $rows["quoin_status"] . '</td>
                                         
                                         <td>
                                             <div class="btn-group">
