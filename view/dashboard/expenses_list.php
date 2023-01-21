@@ -61,10 +61,12 @@ if (isset($_GET["deleteexpenses"])) {
 
                             $sql = "SELECT * FROM expenses";
                             $query = $conn->query($sql);
+                            $nr=0;
                             while ($rows = $query->fetch_assoc()) {
+                                $nr++;
                                 echo '
                                     <tr>
-                                        <td>' . $rows["expenses_id"] . '</td>
+                                        <td>'.$nr.'</td>
                                         <td>' . $rows["expenses_date"] . '</td>
                                         <td>' . $rows["expenses_list"] . '</td>
                                         <td>' . $rows["expenses_price"] . '</td>
