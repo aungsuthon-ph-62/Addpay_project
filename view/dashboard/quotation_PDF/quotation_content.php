@@ -63,7 +63,7 @@ echo '
             </tr>
             <tr>
                 <td style="width:150px;">
-                    <p class="text-left ">ลูกค้า /หน่วยงาน </p>
+                    <p class="text-left ">ลูกค้า /หน่วยงาน</p>
                 </td>
                 <td class="underline" style="width:692px;">
                     <p class="text-left "><span>&nbsp;'. $infoquo['quo_name'] . ' &nbsp;&nbsp;</span></p>
@@ -71,7 +71,7 @@ echo '
             </tr>
             <tr>
                 <td style="width:150px;">
-                    <p class="text-left ">ที่อยู่ </p>
+                    <p class="text-left ">ที่อยู่</p>
                 </td>
                 <td class="underline" style="width:692px;">
                     <p class="text-left"><span>&nbsp;'. $infoquo['quo_address'] . ' &nbsp;&nbsp;</span></p>
