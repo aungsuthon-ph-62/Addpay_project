@@ -41,8 +41,8 @@ unset($_SESSION['input_content']);
                 </div>
 
                 <div class="p-3 p-md-5 bg-light rounded-5 shadow-lg" id="main_row">
-                    <div class="table-responsive">
-                        <table class="table" id="docoutTable">
+                    <div class="table-responsive text-dark">
+                        <table class="table table-hover" id="docoutTable">
                             <thead>
                                 <tr class="align-center" class="rows">
                                     <th style="width:17%" scope="col">เลขที่</th>

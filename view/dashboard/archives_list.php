@@ -47,8 +47,8 @@ if(isset($_GET["deletearchives"]))
                         <i class="fa-solid fa-file-circle-plus"></i> เพิ่มข้อมูล</a>
                 </div>
                 <div class="p-3 p-md-5 bg-light rounded-5 shadow-lg" id="main_row">
-                    <div class="table-responsive">
-                        <table class="table" id="archivesTable">
+                    <div class="table-responsive text-dark">
+                        <table class="table table-hover" id="archivesTable">
                             <thead>
                                 <tr class="align-center" class="rows">
                                     <th scope="col" style="width:55%">ชื่อเอกสาร</th>

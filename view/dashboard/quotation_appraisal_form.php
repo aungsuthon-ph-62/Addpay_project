@@ -137,7 +137,7 @@ $head = '
                 <p class="text-left ">โครงการ</p>
             </td>
             <td class="underline" style="width:692px;">
-                <p class="text-left "> <span>&nbsp; ' . $infoquo['quo_namepj'] . ' &nbsp;&nbsp;</span> </p>
+                <p class="text-left "><span>&nbsp;' . $infoquo['quo_namepj'] . ' &nbsp;&nbsp;</span> </p>
             </td>
         </tr>
         <tr>
@@ -145,7 +145,7 @@ $head = '
                 <p class="text-left ">ลูกค้า /หน่วยงาน </p>
             </td>
             <td class="underline" style="width:692px;">
-                <p class="text-left "> <span>&nbsp;' . $infoquo['quo_name'] . ' &nbsp;&nbsp;</span> </p>
+                <p class="text-left "><span>&nbsp;' . $infoquo['quo_name'] . ' &nbsp;&nbsp;</span> </p>
             </td>
         </tr>
         <tr>
@@ -153,7 +153,7 @@ $head = '
                 <p class="text-left ">ที่อยู่ </p>
             </td>
             <td class="underline" style="width:692px;">
-                <p class="text-left"> <span>&nbsp;' . $infoquo['quo_address'] . ' &nbsp;&nbsp;</span> </p>
+                <p class="text-left"><span>&nbsp;' . $infoquo['quo_address'] . ' &nbsp;&nbsp;</span> </p>
             </td>
         </tr>
     </table>

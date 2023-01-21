@@ -1,7 +1,7 @@
 <header class="navbar navbar-dark sticky-top bg-secondary-addpay shadow">
     <div class="container-fluid">
         <div class="d-flex col-12 col-md-4 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-evenly align-items-center py-2 py-md-0">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="index">
                 <img src="image/logo-removebg-preview (1).png" class="img-fluid" alt="Addpay logo" style="width: auto; height: 2rem;">
             </a>
             <h5 class="d-none d-md-block text-white">ระบบบริหารจัดการงานบริหาร</h5>
@@ -13,10 +13,12 @@
         <!-- <a href="#" class="text-decoration-none">
                 <img src="image/addpaylogo.png" alt="Profile Picture" class="img-fluid rounded-circle shadow " style="width: auto; height: 3rem;">
             </a> -->
-        <form action="php/action.php" method="post">
-            <input type="hidden" name="action" value="logout">
-            <button type="submit" class="btn btn-danger me-md-5">ออกจากระบบ <i class="fa-solid fa-right-from-bracket"></i></button>
-        </form>
+        <div class="d-none d-md-block">
+            <form action="php/action.php" method="post">
+                <input type="hidden" name="action" value="logout">
+                <button type="submit" class="btn btn-danger me-md-5">ออกจากระบบ <i class="fa-solid fa-right-from-bracket"></i></button>
+            </form>
+        </div>
 
     </div>
 </header>
