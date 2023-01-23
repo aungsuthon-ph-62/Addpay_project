@@ -42,11 +42,11 @@ unset($_SESSION['svinput']);unset($_SESSION['deli']);unset($_SESSION['spe']);
                     <div class="table-responsive text-dark">
                         <table class="table table-hover" id="quotationoutTable">
                             <thead>
-                                <tr class="align-center" class="rows">
-                                    <th scope="col" class="text-center" style="width:15%">เลขที่ใบเสนอราคา</th>
-                                    <th scope="col" class="text-center" style="width:15%">วันที่ในใบเสนอราคา</th>
-                                    <th scope="col" class="text-center" style="width:38%">ชื่อลูกค้า</th>
-                                    <th scope="col" class="text-center" style="width:11%">จำนวนเงินรวม</th>
+                                <tr class="rows align-center">
+                                    <th scope="col" class="text-start" style="width:10%">เลขที่</th>
+                                    <th scope="col" class="text-center" style="width:20%">วันที่ในใบเสนอราคา</th>
+                                    <th scope="col" class="text-start" style="width:45%">ชื่อลูกค้า</th>
+                                    <th scope="col" class="text-center" style="width:15%">จำนวนเงินรวม</th>
                                     <th scope="col" class="text-center" style="width:10%">ตัวเลือก</th>
                                 </tr>
                             </thead>
@@ -57,8 +57,8 @@ unset($_SESSION['svinput']);unset($_SESSION['deli']);unset($_SESSION['spe']);
                             while ($rows = $query->fetch_assoc()) {
                                 echo '
                                     <tr>
-                                        <td class="text-center">' . $rows["quoout_no"] . '</td>
-                                        <td class="text-center">' . $rows["quoout_date"] . '</td>
+                                        <td class="text-start">' . $rows["quoout_no"] . '</td>
+                                        <td class="text-center">' . ConvDate($rows["quoout_date"]) . '</td>
                                         <td class="text-start">' . $rows["quoout_name"] . '</td>
                                         <td class="text-end">' . number_format($rows["quoout_total"], 2) . '</td>
                                         <td>

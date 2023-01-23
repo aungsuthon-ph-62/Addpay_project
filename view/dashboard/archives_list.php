@@ -50,10 +50,10 @@ if(isset($_GET["deletearchives"]))
                     <div class="table-responsive text-dark">
                         <table class="table table-hover" id="archivesTable">
                             <thead>
-                                <tr class="align-center" class="rows">
-                                    <th scope="col" style="width:55%">ชื่อเอกสาร</th>
+                                <tr class="rows align-center">
+                                    <th scope="col" style="width:50%">ชื่อเอกสาร</th>
                                     <th scope="col" style="width:40%">ไฟล์</th>
-                                    <th scope="col" style="width:10%">ตัวเลือก</th>
+                                    <th class="text-center" scope="col" style="width:10%">ตัวเลือก</th>
                                 </tr>
                             </thead>
                             <?php

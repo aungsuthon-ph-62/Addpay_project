@@ -55,11 +55,11 @@ if(isset($_GET["deletedocin"])){
                         <table class="table table-hover" id="docinTable">
                             <thead>
                                 <tr class="align-center col">
-                                    <th style="width:25%" scope="col">เลขที่</th>
-                                    <th style="width:15%" scope="col">วันที่</th>
-                                    <th style="width:30%" scope="col">ชื่อบริษัทต้นทาง</th>
+                                    <th class="text-left" style="width:10%" scope="col">เลขที่</th>
+                                    <th class="text-center"style="width:15%" scope="col">วันที่</th>
+                                    <th style="width:25%" scope="col">ชื่อบริษัทต้นทาง</th>
                                     <th style="width:30%" scope="col">เรื่อง</th>
-                                    <th style="width:10%" scope="col">ตัวเลือก</th>
+                                    <th class="text-center"style="width:10%" scope="col">ตัวเลือก</th>
                                 </tr>
                             </thead>
                             <?php
@@ -68,8 +68,8 @@ if(isset($_GET["deletedocin"])){
                             while ($rows = $query->fetch_assoc()) {
                                 echo '
                                     <tr>
-                                        <td>'.$rows["docin_no"].'</td>
-                                        <td>'.$rows["docin_date"].'</td>
+                                        <td class="text-left" >'.$rows["docin_no"].'</td>
+                                        <td class="text-center" >'.ConvDate($rows["docin_date"]).'</td>
                                         <td>'.$rows["docin_srcname"].'</td>
                                         <td>'.$rows["docin_title"].'</td>
                                         <td>

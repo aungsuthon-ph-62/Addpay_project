@@ -42,13 +42,13 @@ unset($_SESSION['svinput']);unset($_SESSION['deli']);unset($_SESSION['spe']);
                     <div class="table-responsive text-dark">
                         <table class="table table-hover" id="quotationTable">
                             <thead>
-                                <tr class="align-center" class="rows">
-                                    <th scope="col" style="width:12%">เลขที่ใบ<br>เสนอราคา</th>
-                                    <th scope="col" style="width:10%">วันที่ในใบ<br>เสนอราคา</th>
-                                    <th scope="col" style="width:26%">ชื่อโครงการ</th>
-                                    <th scope="col" style="width:26%">ชื่อลูกค้า<br>หน่วยงาน</th>
-                                    <th scope="col" style="width:13%">จำนวนเงินรวม</th>
-                                    <th scope="col" style="width:10%">ตัวเลือก</th>
+                                <tr class="rows align-center">
+                                    <th class="text-start" scope="col" style="width:10%">เลขที่</th>
+                                    <th class="text-center" scope="col" style="width:20%">วันที่ในใบเสนอราคา</th>
+                                    <th  scope="col" style="width:25%">ชื่อโครงการ</th>
+                                    <th scope="col" style="width:20%">ชื่อลูกค้าหน่วยงาน</th>
+                                    <th class="text-center" scope="col" style="width:15%">จำนวนเงินรวม</th>
+                                    <th class="text-center" scope="col" style="width:10%">ตัวเลือก</th>
                                 </tr>
                             </thead>
                             <?php
@@ -58,11 +58,11 @@ unset($_SESSION['svinput']);unset($_SESSION['deli']);unset($_SESSION['spe']);
                             while ($rows = $query->fetch_assoc()) {
                                 echo '
                                     <tr>
-                                        <td>' . $rows["quo_no"] . '</td>
-                                        <td>' . $rows["quo_date"] . '</td>
-                                        <td>' . $rows["quo_namepj"] . '</td>
-                                        <td>' . $rows["quo_name"] . '</td>
-                                        <td>' . $rows["quo_total"] . '</td>
+                                        <td class="text-start">' . $rows["quo_no"] . '</td>
+                                        <td class="text-center">' . ConvDate($rows["quo_date"]) . '</td>
+                                        <td class="text-start">' . $rows["quo_namepj"] . '</td>
+                                        <td class="text-start">' . $rows["quo_name"] . '</td>
+                                        <td class="text-end">' . number_format($rows["quo_total"] , 2). '</td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4"

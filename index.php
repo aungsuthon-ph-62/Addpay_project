@@ -3,6 +3,8 @@ session_start();
 include_once 'layout/head.php';
 require_once "php/action.php";
 require_once "php/key.inc.php";
+
+include_once 'view/dashboard/PDF_set/thaidate.php';
 ?>
 <style>
     body {
