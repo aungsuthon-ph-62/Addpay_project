@@ -128,7 +128,7 @@ if(isset($_POST['action'])){
                         </div>
 
                         <div class="col-md-9">
-                            <input type="file" id="input_file" name="input_file" class="form-control " required>
+                            <input type="file" id="input_file" name="input_file" class="form-control ">
                         </div>
                     </div>
 
