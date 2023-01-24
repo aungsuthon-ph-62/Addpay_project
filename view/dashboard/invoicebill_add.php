@@ -82,7 +82,7 @@ if (isset($_POST['action'])) {
 
                 $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
                 unset($_SESSION['svinput']);unset($_SESSION['deli']);
-                if($input_quo_deli>0){$_SESSION['deli'] = $input_quo_deli;}
+                if($input_invbill_deli>0){$_SESSION['deli'] = $input_invbill_deli;}
                 
                 $inputArray = array();
                 
@@ -292,7 +292,7 @@ table tr td:first-child::before {
                                 </div>
                                 <div class="col-md-5">
                                     <input type="number" id="input_invbill_page" name="input_invbill_page"
-                                        class="form-control ">
+                                        class="form-control " required>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="input_invbill_page" class="col-form-label">ฉบับ</label>
