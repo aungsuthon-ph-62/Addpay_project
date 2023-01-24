@@ -103,7 +103,7 @@ unset($_SESSION['svinput']);unset($_SESSION['deli']);unset($_SESSION['spe']);
                             cancelButtonText: 'no'
                         }).then((result) => {
                             if (result.value) {
-                                window.location.href = "?page&deletequoout=" + id;
+                                window.location.href = "?page=quo_out&deletequoout=" + id;
                             }
                         });
                     });

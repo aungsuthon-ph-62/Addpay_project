@@ -241,7 +241,7 @@ table tr td:first-child::before {
                                     ?>
                                     <tr id="row_id_1">
                                         <td><span id="sr_no"></span></td>
-                                        <td><input type="text" name="item_name[]" id="item_name1"
+                                        <td><input type="text" name="item_name[]" id="item_name1" data-srno="1"
                                                 class="form-control input-sm item_name" required />
                                         </td>
                                         <td>
@@ -263,8 +263,8 @@ table tr td:first-child::before {
                                 ?>
                                 </table>
                                 <div class="text-center">
-                                    <button type="button" id="add_row" class="btn btn-addpay px-md-4 rounded-3"
-                                        id="add_sub"><i class="fa fa-plus-circle text-white"></i> เพิ่มรายการ</button>
+                                    <button type="button" id="add_row" class="btn btn-addpay px-md-4 rounded-3"><i
+                                            class="fa fa-plus-circle text-white"></i> เพิ่มรายการ</button>
                                 </div>
                             </div>
                         </div>

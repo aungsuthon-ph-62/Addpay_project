@@ -63,21 +63,29 @@ if (isset($_POST['action'])) {
                     $item_name = mysqli_real_escape_string($conn, trim($_POST['item_name'][$count]));
                     $item_inv_date = mysqli_real_escape_string($conn, trim($_POST['item_inv_date'][$count]));
                     $item_due_date = mysqli_real_escape_string($conn, trim($_POST['item_due_date'][$count]));
-                    
                     $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
                     $item_vat = mysqli_real_escape_string($conn, trim($_POST['item_vat'][$count]));
                     $item_total = mysqli_real_escape_string($conn, trim($_POST['item_total'][$count]));
 
-
-                    $query = "INSERT INTO invoicebill_details (invbilld_bid, invbilld_item, invbilld_inv_date, invbilld_due_date, invbilld_price, invbilld_vat, invbilld_result, invbilld_create, invbilld_uid)
-                    VALUES ('$last_id', '$item_name', '$item_inv_date', '$item_due_date', '$item_price', '$item_vat', '$item_total', '$date', '$uid')";
+                    $query = "INSERT INTO invoicebill_details (invbilld_bid, invbilld_item, invbilld_price, invbilld_vat, invbilld_result, invbilld_create, invbilld_uid)
+                    VALUES ('$last_id', '$item_name', '$item_price', '$item_vat', '$item_total', '$date', '$uid')";
                     $conn->query($query);
+                    
+                    if($item_inv_date>0){
+                        $query = "UPDATE invoicebill_details SET invbilld_inv_date='$item_inv_date' WHERE invbilld_bid = '$last_id'";
+                        $conn->query($query);
+                    }
+                    if($item_due_date>0){
+                        $query = "UPDATE invoicebill_details SET invbilld_due_date='$item_due_date' WHERE invbilld_bid = '$last_id'";
+                        $conn->query($query);
+                    }
                 }
                 
                 $_SESSION['success'] = "บันทึกใบวางบิลสำเร็จ!";
                 unset($_SESSION['svinput']);unset($_SESSION['deli']);
                 echo("<script> window.location.href='?page=invoicebill'</script>");
                 exit;
+                
             } else {
 
                 $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
@@ -221,24 +229,36 @@ table tr td:first-child::before {
                                             ?>
                                     <tr id="row_id_<?= $n; ?>">
                                         <td><span id="sr_no"></span></td>
-                                        <td><input type="text" name="item_name[]" id="item_name<?= $n; ?>"
-                                                class="form-control input-sm" value="<?= $svinput[$index][0] ?>"
-                                                required /></td>
-                                        <td><input type="date" name="item_inv_date[]" id="item_inv_date<?= $n; ?>"
-                                                class="form-control input-sm item_inv_date"
-                                                value="<?= $svinput[$index][1] ?>" /></td>
-                                        <td><input type="date" name="item_due_date[]" id="item_due_date<?= $n; ?>"
-                                                class="form-control input-sm item_due_date"
-                                                value="<?= $svinput[$index][2] ?>" /></td>
-                                        <td><input type="number" name="item_price[]" id="item_price<?= $n; ?>" data-srno="<?= $n; ?>"
-                                                class="form-control input-sm item_price" step="any"
-                                                value="<?= $svinput[$index][3] ?>" required /></td>
-                                        <td><input type="number" name="item_vat[]" id="item_vat<?= $n; ?>" data-srno="<?= $n; ?>"
-                                                class="form-control input-sm item_vat"
-                                                value="<?= $svinput[$index][4] ?>" required readonly /></td>
-                                        <td><input type="number" name="item_total[]" id="item_total<?= $n; ?>" data-srno="<?= $n; ?>"
-                                                class="form-control input-sm item_total"
-                                                value="<?= $svinput[$index][5] ?>" required readonly /></td>
+                                        <td>
+                                            <input type="text" name="item_name[]" id="item_name<?= $n; ?>"
+                                                class="form-control input-sm item_name" data-srno="<?= $n; ?>"
+                                                value="<?= $svinput[$index][0] ?>" required />
+                                        </td>
+                                        <td>
+                                            <input type="date" name="item_inv_date[]" id="item_inv_date<?= $n; ?>"
+                                                class="form-control input-sm item_inv_date" data-srno="<?= $n; ?>"
+                                                value="<?= $svinput[$index][1] ?>" />
+                                        </td>
+                                        <td>
+                                            <input type="date" name="item_due_date[]" id="item_due_date<?= $n; ?>"
+                                                class="form-control input-sm item_due_date" data-srno="<?= $n; ?>"
+                                                value="<?= $svinput[$index][2] ?>" />
+                                        </td>
+                                        <td>
+                                            <input type="number" name="item_price[]" id="item_price<?= $n; ?>"
+                                                data-srno="<?= $n; ?>" class="form-control input-sm item_price"
+                                                step="any" value="<?= $svinput[$index][3] ?>" required />
+                                        </td>
+                                        <td>
+                                            <input type="number" name="item_vat[]" id="item_vat<?= $n; ?>"
+                                                data-srno="<?= $n; ?>" class="form-control input-sm item_vat"
+                                                value="<?= $svinput[$index][4] ?>" required readonly />
+                                        </td>
+                                        <td>
+                                            <input type="number" name="item_total[]" id="item_total<?= $n; ?>"
+                                                data-srno="<?= $n; ?>" class="form-control input-sm item_total"
+                                                value="<?= $svinput[$index][5] ?>" required readonly />
+                                        </td>
                                         <td>
                                             <button type="button" name="remove_row" id="<?= $n; ?>"
                                                 class="btn btn-danger btn-xs remove_row">X</button>
@@ -251,18 +271,30 @@ table tr td:first-child::before {
                                     ?>
                                     <tr id="row_id_1">
                                         <td><span id="sr_no"></span></td>
-                                        <td><input type="text" name="item_name[]" id="item_name1"
-                                                class="form-control input-sm" required /></td>
-                                        <td><input type="date" name="item_inv_date[]" id="item_inv_date1"
-                                                class="form-control input-sm item_inv_date" /></td>
-                                        <td><input type="date" name="item_due_date[]" id="item_due_date1"
-                                                class="form-control input-sm item_due_date" /></td>
-                                        <td><input type="number" name="item_price[]" id="item_price1" data-srno="1"
-                                                class="form-control input-sm item_price" step="any" required /></td>
-                                        <td><input type="number" name="item_vat[]" id="item_vat1" data-srno="1"
-                                                class="form-control input-sm item_vat" required readonly /></td>
-                                        <td><input type="number" name="item_total[]" id="item_total1" data-srno="1"
-                                                class="form-control input-sm item_total" required readonly /></td>
+                                        <td>
+                                            <input type="text" name="item_name[]" id="item_name1" data-srno="1"
+                                                class="form-control input-sm item_name" required />
+                                        </td>
+                                        <td>
+                                            <input type="date" name="item_inv_date[]" id="item_inv_date1" data-srno="1"
+                                                class="form-control input-sm item_inv_date" />
+                                        </td>
+                                        <td>
+                                            <input type="date" name="item_due_date[]" id="item_due_date1" data-srno="1"
+                                                class="form-control input-sm item_due_date" />
+                                        </td>
+                                        <td>
+                                            <input type="number" name="item_price[]" id="item_price1" data-srno="1"
+                                                class="form-control input-sm item_price" step="any" required />
+                                        </td>
+                                        <td>
+                                            <input type="number" name="item_vat[]" id="item_vat1" data-srno="1"
+                                                class="form-control input-sm item_vat" required readonly />
+                                        </td>
+                                        <td>
+                                            <input type="number" name="item_total[]" id="item_total1" data-srno="1"
+                                                class="form-control input-sm item_total" required readonly />
+                                        </td>
                                     </tr>
                                     <?php 
                                 } 

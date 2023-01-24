@@ -61,7 +61,7 @@ if(isset($_POST['action'])){
                             
                         } else {
                             
-                            unlink("ploadfile/archivesfile/$fileName");
+                            unlink("uploadfile/archivesfile/$fileName");
                             $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
                             echo "<script> window.history.back()</script>";
                             exit;
@@ -82,14 +82,13 @@ if(isset($_POST['action'])){
                     exit;
                     
                 }
-            }
+            }else {
             
-        } else {
+                $_SESSION['success'] = "บันทึกเอกสารสำคัญสำเร็จ!";
+                echo "<script> window.location.href='?page=archives';</script>";
+                exit;
             
-            $_SESSION['success'] = "บันทึกหนังสือสำคัญสำเร็จ!";
-            echo "<script> window.location.href='?page=archives';</script>";
-            exit;
-            
+            } 
         }   
     }
 }
@@ -141,6 +140,8 @@ if(isset($_POST['action'])){
                                 <button type="submit" name="action" value="edit_archives"
                                     class=" btn btn-addpay text-white">บันทึกการแก้ไข<i
                                         class="fa-solid fa-cloud-arrow-up"></i></button>
+                                <input type="hidden" name="archives_id" id="archives_id"
+                                    value="<?= $row['archives_id'];?>" />
                             </div>
                         </div>
                     </div>
