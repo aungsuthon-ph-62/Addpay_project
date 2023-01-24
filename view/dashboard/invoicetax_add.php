@@ -70,7 +70,7 @@ if (isset($_POST['action'])) {
                 // header("Location: invoicetax_list.php");
                 exit;
             } else {
-                echo "Error: " . $query . "<br>" . $conn->error;
+            
                 $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
                 unset($_SESSION['svinput']);
                 $inputArray = array();
