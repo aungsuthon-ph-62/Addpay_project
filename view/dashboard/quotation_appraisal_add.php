@@ -278,7 +278,7 @@ table tr td:first-child::before {
                                 <div class="col-md-6">
                                     <input type="number" id="input_quo_deli" name="input_quo_deli" class="form-control"
                                         placeholder="0.00" title="กรุณากรอกค่าขนส่ง หากมี"
-                                        value="<?php if(isset($_SESSION['deli'])) {echo $_SESSION["deli"];} ?>">
+                                        value="<?php if(isset($_SESSION['deli'])) {echo $_SESSION["deli"];}else{echo 0;} ?>">
                                 </div>
                             </div>
                         </div>
@@ -303,7 +303,7 @@ table tr td:first-child::before {
                                 <div class="col-md-6">
                                     <input type="number" id="input_quo_specialdis" name="input_quo_specialdis"
                                         class="form-control " placeholder="0.00" title="กรุณากรอกส่วนลด หากมี"
-                                        value="<?php if(isset($_SESSION['spe'])) {echo $_SESSION["spe"];} ?>">
+                                        value="<?php if(isset($_SESSION['spe'])) {echo $_SESSION["spe"];}else{echo 0;}  ?>">
                                 </div>
                             </div>
                             <div class="row align-items-center text-dark px-md-5 mb-3">
