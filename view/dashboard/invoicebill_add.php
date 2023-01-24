@@ -221,22 +221,22 @@ table tr td:first-child::before {
                                             ?>
                                     <tr id="row_id_<?= $n; ?>">
                                         <td><span id="sr_no"></span></td>
-                                        <td><input type="text" name="item_name[]" id="item_name1"
+                                        <td><input type="text" name="item_name[]" id="item_name<?= $n; ?>"
                                                 class="form-control input-sm" value="<?= $svinput[$index][0] ?>"
                                                 required /></td>
-                                        <td><input type="date" name="item_inv_date[]" id="item_inv_date1"
+                                        <td><input type="date" name="item_inv_date[]" id="item_inv_date<?= $n; ?>"
                                                 class="form-control input-sm item_inv_date"
                                                 value="<?= $svinput[$index][1] ?>" /></td>
-                                        <td><input type="date" name="item_due_date[]" id="item_due_date1"
+                                        <td><input type="date" name="item_due_date[]" id="item_due_date<?= $n; ?>"
                                                 class="form-control input-sm item_due_date"
                                                 value="<?= $svinput[$index][2] ?>" /></td>
-                                        <td><input type="number" name="item_price[]" id="item_price1" data-srno="1"
+                                        <td><input type="number" name="item_price[]" id="item_price<?= $n; ?>" data-srno="<?= $n; ?>"
                                                 class="form-control input-sm item_price" step="any"
                                                 value="<?= $svinput[$index][3] ?>" required /></td>
-                                        <td><input type="number" name="item_vat[]" id="item_vat1" data-srno="1"
+                                        <td><input type="number" name="item_vat[]" id="item_vat<?= $n; ?>" data-srno="<?= $n; ?>"
                                                 class="form-control input-sm item_vat"
                                                 value="<?= $svinput[$index][4] ?>" required readonly /></td>
-                                        <td><input type="number" name="item_total[]" id="item_total1" data-srno="1"
+                                        <td><input type="number" name="item_total[]" id="item_total<?= $n; ?>" data-srno="<?= $n; ?>"
                                                 class="form-control input-sm item_total"
                                                 value="<?= $svinput[$index][5] ?>" required readonly /></td>
                                         <td>
