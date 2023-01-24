@@ -61,7 +61,7 @@ if(isset($_POST['action'])){
                             
                         } else {
                             
-                            unlink("ploadfile/archivesfile/$fileName");
+                            unlink("uploadfile/archivesfile/$fileName");
                             $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
                             echo "<script> window.history.back()</script>";
                             exit;
@@ -82,15 +82,14 @@ if(isset($_POST['action'])){
                     exit;
                     
                 }
+            }else {
+            
+                $_SESSION['success'] = "บันทึกหนังสือสำคัญสำเร็จ!";
+                echo "<script> window.location.href='?page=archives';</script>";
+                exit;
+            
             }
-            
-        } else {
-            
-            $_SESSION['success'] = "บันทึกหนังสือสำคัญสำเร็จ!";
-            echo "<script> window.location.href='?page=archives';</script>";
-            exit;
-            
-        }   
+        }    
     }
 }
 
@@ -128,7 +127,7 @@ if(isset($_POST['action'])){
                         </div>
 
                         <div class="col-md-9">
-                            <input type="file" id="input_file" name="input_file" class="form-control " required>
+                            <input type="file" id="input_file" name="input_file" class="form-control ">
                         </div>
                     </div>
 
@@ -140,7 +139,9 @@ if(isset($_POST['action'])){
                                         class="fa-solid fa-arrow-rotate-left"></i> ล้างข้อมูล</button>
                                 <button type="submit" name="action" value="edit_archives"
                                     class=" btn btn-addpay text-white">บันทึกการแก้ไข<i
-                                        class="fa-solid fa-cloud-arrow-up"></i></button>
+                                        class="fa-solid fa-cloud-arrow-up"></i>
+                                    <input type="hidden" name="archives_id" id="archives_id"
+                                        value="<?= $row['archives_id'];?>" /></button>
                             </div>
                         </div>
                     </div>
