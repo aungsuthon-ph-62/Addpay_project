@@ -83,15 +83,15 @@ function edit_invbill()
             $item_total = mysqli_real_escape_string($conn, trim($_POST['item_total'][$count]));
 
             $query = "INSERT INTO invoicebill_details (invbilld_bid, invbilld_item, invbilld_price, invbilld_vat, invbilld_result, invbilld_create, invbilld_uid)
-            VALUES ('$last_id', '$item_name', '$item_price', '$item_vat', '$item_total', '$date', '$uid')";
+            VALUES ('$id', '$item_name', '$item_price', '$item_vat', '$item_total', '$date', '$uid')";
             $conn->query($query);
             
             if($item_inv_date>0){
-                $query = "UPDATE invoicebill_details SET invbilld_inv_date='$item_inv_date' WHERE invbilld_bid = '$last_id'";
+                $query = "UPDATE invoicebill_details SET invbilld_inv_date='$item_inv_date' WHERE invbilld_bid = '$id'";
                 $conn->query($query);
             }
             if($item_due_date>0){
-                $query = "UPDATE invoicebill_details SET invbilld_due_date='$item_due_date' WHERE invbilld_bid = '$last_id'";
+                $query = "UPDATE invoicebill_details SET invbilld_due_date='$item_due_date' WHERE invbilld_bid = '$id'";
                 $conn->query($query);
             }
         }
