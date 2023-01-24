@@ -308,7 +308,7 @@ table tr td:first-child::before {
                                 <div class="col-auto">
                                     <input type="number" id="input_invbill_deli" name="input_invbill_deli"
                                         class="form-control" placeholder="0.00" title="กรุณากรอกค่าขนส่ง หากมี"
-                                        value="<?php if(isset($_SESSION['deli'])) {echo $_SESSION["deli"];} ?>">
+                                        value="<?php if(isset($_SESSION['deli'])) {echo $_SESSION["deli"];}else{echo 0;} ?>">
                                 </div>
                             </div>
 
