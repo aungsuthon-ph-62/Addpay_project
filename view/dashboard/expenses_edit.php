@@ -156,7 +156,7 @@ if (isset($_POST['action'])) {
                             <label for="inputAmount" class="col-form-label">จำนวนเงิน </label>
                         </div>
                         <div class="col-md-9">
-                            <input type="number" id="inputAmount" name="inputAmount" class="form-control " required
+                            <input type="number" id="inputAmount" name="inputAmount" class="form-control " step="any" required
                                 value="<?= $row['expenses_price'] ?>">
                         </div>
                     </div>
