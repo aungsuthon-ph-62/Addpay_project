@@ -20,13 +20,13 @@ if (isset($_POST['action'])) {
 
         if ($check) {
             $_SESSION['error'] = "เลขที่ใบเสนอราคานี้มีในระบบแล้ว!";
-            header("Location: quotation_in_add.php");
+            echo("<script> window.history.back()</script>");
             exit;
         } else {
 
             if (!empty($_FILES["input_quoin_file"]["name"])) {
 
-                $targetDir = "../../uploadfile/quotationinfile/";
+                $targetDir = "uploadfile/quotationinfile/";
 
                 $temp = explode(".", $_FILES["input_quoin_file"]["name"]);
                 $fileName = 'quotationin-' . $namedate . '.' . end($temp);
@@ -44,24 +44,24 @@ if (isset($_POST['action'])) {
                         if ($conn->query($query)) {
 
                             $_SESSION['success'] = "บันทึกหนังสือเข้าสำเร็จ!";
-                            header("Location: quotation_in_list.php");
+                            echo("<script> window.location.href='?page=quo_in'</script>");
                             exit;
                         } else {
 
-                            unlink("../../uploadfile/quotationinfile/$fileName");
+                            unlink("uploadfile/quotationinfile/$fileName");
                             $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-                            header("Location: quotation_in_add.php");
+                            echo("<script> window.history.back()</script>");
                             exit;
                         }
                     } else {
 
                         $_SESSION['error'] = "เกิดข้อผิดพลาด! อัพโหลดไฟล์ไม่สำเร็จ!";
-                        header("Location: quotation_in_add.php");
+                        echo("<script> window.history.back()</script>");
                         exit;
                     }
                 } else {
                     $_SESSION['error'] = "เกิดข้อผิดพลาด! ไม่รองรับนามสกุลไฟล์ชนิดนี้!";
-                    header("Location: quotation_in_add.php");
+                    echo("<script> window.history.back()</script>");
                     exit;
                 }
             }
@@ -72,19 +72,19 @@ if (isset($_POST['action'])) {
 
 ?>
 <style>
-    table {
-        counter-reset: rowNumber;
-    }
+table {
+    counter-reset: rowNumber;
+}
 
-    table tr:not(:first-child) {
-        counter-increment: rowNumber;
-    }
+table tr:not(:first-child) {
+    counter-increment: rowNumber;
+}
 
-    table tr td:first-child::before {
-        content: counter(rowNumber);
-        min-width: 1em;
-        margin-right: 0.5em;
-    }
+table tr td:first-child::before {
+    content: counter(rowNumber);
+    min-width: 1em;
+    margin-right: 0.5em;
+}
 </style>
 
 <nav aria-label="breadcrumb">
@@ -117,7 +117,8 @@ if (isset($_POST['action'])) {
                             <h6 class="col-form-label">วันที่ในใบเสนอราคา date.</h6>
                         </div>
                         <div class="col-auto">
-                            <input type="date" id="input_quoin_date" name="input_quoin_date" class="form-control " required>
+                            <input type="date" id="input_quoin_date" name="input_quoin_date" class="form-control "
+                                required>
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
@@ -125,7 +126,8 @@ if (isset($_POST['action'])) {
                             <h6 class="col-form-label">ชื่อบริษัทที่ออกใบเสนอราคา :</h6>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" id="input_quoin_company" name="input_quoin_company" class="form-control " required>
+                            <input type="text" id="input_quoin_company" name="input_quoin_company" class="form-control "
+                                required>
                         </div>
                     </div>
 
@@ -134,7 +136,8 @@ if (isset($_POST['action'])) {
                             <h6 class="col-form-label">อัพโหลดไฟล์ :</h6>
                         </div>
                         <div class="col-md-8">
-                            <input class="form-control" type="file" id="input_quoin_file" name="input_quoin_file" required>
+                            <input class="form-control" type="file" id="input_quoin_file" name="input_quoin_file"
+                                required>
                         </div>
                     </div>
                     <div class="row align-items-center text-dark px-md-5 mb-3">
@@ -144,15 +147,18 @@ if (isset($_POST['action'])) {
 
                         <div class="col-md-8">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="input_quoin_status" id="input_quoin_status0" value="อนุมัติ" required>
+                                <input class="form-check-input" type="radio" name="input_quoin_status"
+                                    id="input_quoin_status0" value="อนุมัติ" required>
                                 <label class="form-check-label" for="input_quoin_status0">อนุมัติ</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="input_quoin_status" id="input_quoin_status1" value="รออนุมัติ" required>
+                                <input class="form-check-input" type="radio" name="input_quoin_status"
+                                    id="input_quoin_status1" value="รออนุมัติ" required>
                                 <label class="form-check-label" for="input_quoin_status1">รออนุมัติ</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="input_quoin_status" id="input_quoin_status2" value="ไม่อนุมัติ" required>
+                                <input class="form-check-input" type="radio" name="input_quoin_status"
+                                    id="input_quoin_status2" value="ไม่อนุมัติ" required>
                                 <label class="form-check-label" for="input_quoin_status2">ไม่อนุมัติ</label>
                             </div>
                         </div>
@@ -169,8 +175,11 @@ if (isset($_POST['action'])) {
                     <div class="row mt-5">
                         <div class="col-md-12">
                             <div class="d-flex justify-content-end">
-                                <button type="reset" class="btn bg-secondary-addpay text-white me-3"><i class="fa-solid fa-arrow-rotate-left"></i> ล้างข้อมูล</button>
-                                <button type="submit" name="action" value="create_quoin" class="btn btn-addpay text-white">บันทึก <i class="fa-solid fa-cloud-arrow-up"></i></button>
+                                <button type="reset" class="btn bg-secondary-addpay text-white me-3"><i
+                                        class="fa-solid fa-arrow-rotate-left"></i> ล้างข้อมูล</button>
+                                <button type="submit" name="action" value="create_quoin"
+                                    class="btn btn-addpay text-white">บันทึก <i
+                                        class="fa-solid fa-cloud-arrow-up"></i></button>
                             </div>
                         </div>
                     </div>

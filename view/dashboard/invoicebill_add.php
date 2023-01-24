@@ -335,7 +335,7 @@ table tr td:first-child::before {
                                         class="fa-solid fa-cloud-arrow-up"></i></button>
                             </div>
                         </div>
-                        <input type="hidden" name="total_item" id="total_item" value="1" />
+                        <input type="hidden" name="total_item" id="total_item" value="<?=$n;?>" />
                     </div>
 
                 </form>
