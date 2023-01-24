@@ -46,8 +46,8 @@ unset($_SESSION['svinput']);unset($_SESSION['deli']);
                                 <tr class="rows align-center">
                                     <th scope="col" class="text-start" style="width:10%;">เลขที่</th>
                                     <th scope="col" class="text-center" style="width:17%;">วันที่ในใบวางบิล</th>
-                                    <th scope="col" class="text-left" style="width:48%;">ชื่อลูกค้า</th>
-                                    <th scope="col" class="text-center" style="width:15%;">จำนวนเงินรวม</th>
+                                    <th scope="col" class="text-left" style="width:46%;">ชื่อลูกค้า</th>
+                                    <th scope="col" class="text-center" style="width:17%;">จำนวนเงินรวม</th>
                                     <th scope="col" class="text-center" style="width:10%;">ตัวเลือก</th>
                                 </tr>
                             </thead>
