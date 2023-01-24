@@ -77,7 +77,7 @@ if (isset($_GET["deletequoin"])) {
                                                     data-bs-toggle="dropdown" aria-expanded="false"><b>เลือก</b>
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item"
+                                                    <li><a class="dropdown-item" target="_blank"
                                                             href="uploadfile/quotationinfile/' . $rows["quoin_file"] . '">เปิดเอกสาร</a>
                                                     </li>
                                                     <li><a class="dropdown-item"
