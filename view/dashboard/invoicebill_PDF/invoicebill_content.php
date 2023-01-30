@@ -49,7 +49,7 @@ echo '
                     <b>ชื่อลูกค้า / Customer :</b> <br>
                 </td>
                 <td VALIGN="TOP" align="left" style=" width: 422px; padding:3px 100px 3px 0;">
-                    ' .  $infoinvb['invbill_name']  . '><br>
+                    ' .  $infoinvb['invbill_name']  . '<br>
                 </td>
                 <td VALIGN="TOP" align="left" style="border-left: 1px solid; width: 200px;">
                     <b>เลขที่ / No.</b> &nbsp;&nbsp;' .  $infoinvb['invbill_no']  . '<br>
