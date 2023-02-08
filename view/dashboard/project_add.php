@@ -121,11 +121,9 @@ table tr td:first-child::before {
                             <div class="table-responsive">
                                 <table id="project-item-table" class="table ">
                                     <tr>
-                                        <th width="7%">ลำดับ <br>Number</th>
-                                        <th width="40%">รายการ <br> Description </th>
-                                        <th width="13%">จำนวน <br> Amount</th>
-                                        <th width="15%">ราคา/หน่วย <br> Price/Unit</th>
-                                        <th width="20%">จำนวนเงิน(บาท)</th>
+                                        <th width="7%">ลำดับ</th>
+                                        <th width="30%">หัวข้อ</th>
+                                        <th width="58%">รายละเอียด</th>
                                         <th width="5%">ลบ</th>
                                     </tr>
                                     <?php if(isset($_SESSION['svinput'])) {
@@ -139,24 +137,13 @@ table tr td:first-child::before {
                                     <tr id="row_id_<?= $n; ?>">
                                         <td><span id="sr_no"></span></td>
                                         <td>
-                                            <input type="text" name="item_name[]" id="item_name<?= $n; ?>"
-                                                class="form-control input-sm item_name" data-srno="<?= $n; ?>"
+                                            <input type="text" name="title_name[]" id="title_name<?= $n; ?>"
+                                                class="form-control input-sm title_name" data-srno="<?= $n; ?>"
                                                 value="<?= $svinput[$index][0] ?>" required />
                                         </td>
                                         <td>
-                                            <input type="number" name="item_amount[]" id="item_amount<?= $n; ?>"
-                                                data-srno="<?= $n; ?>" class="form-control input-sm item_amount"
-                                                value="<?= $svinput[$index][1] ?>" required />
-                                        </td>
-                                        <td>
-                                            <input type="number" name="item_price[]" id="item_price<?= $n; ?>"
-                                                data-srno="<?= $n; ?>" class="form-control input-sm  item_price"
-                                                value="<?= $svinput[$index][2] ?>" required />
-                                        </td>
-                                        <td>
-                                            <input type="number" name="total_price[]" id="total_price<?= $n; ?>"
-                                                data-srno="<?= $n; ?>" class="form-control input-sm total_price"
-                                                value="<?= $svinput[$index][3] ?>" readonly />
+                                            <textarea class="form-control title_detail" name="title_detail[]" id="title_detail<?= $n; ?>" 
+                                            data-srno="<?= $n; ?>"rows="3" value="<?= $svinput[$index][1] ?>" required></textarea>
                                         </td>
                                         <td>
                                             <button type="button" name="remove_row" id="<?= $n; ?>"
@@ -170,20 +157,12 @@ table tr td:first-child::before {
                                     ?>
                                     <tr id="row_id_1">
                                         <td><span id="sr_no"></span></td>
-                                        <td><input type="text" name="item_name[]" id="item_name1" data-srno="1"
-                                                class="form-control input-sm item_name" required />
+                                        <td><input type="text" name="title_name[]" id="title_name1" data-srno="1"
+                                                class="form-control input-sm title_name" required />
                                         </td>
                                         <td>
-                                            <input type="number" name="item_amount[]" id="item_amount1" data-srno="1"
-                                                class="form-control input-sm item_amount" required />
-                                        </td>
-                                        <td>
-                                            <input type="number" name="item_price[]" id="item_price1" data-srno="1"
-                                                class="form-control input-sm  item_price" step="any" required />
-                                        </td>
-                                        <td>
-                                            <input type="number" name="total_price[]" id="total_price1" data-srno="1"
-                                                class="form-control input-sm total_price" readonly />
+                                            <textarea class="form-control title_detail" name="title_detail[]" id="title_detail1" 
+                                                data-srno="1"rows="3"  required></textarea>
                                         </td>
                                         <td></td>
                                     </tr>
@@ -194,77 +173,6 @@ table tr td:first-child::before {
                                 <div class="text-center">
                                     <button type="button" id="add_row" class="btn btn-addpay px-md-4 rounded-3"><i
                                             class="fa fa-plus-circle text-white"></i> เพิ่มรายการ</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="row align-items-center text-dark px-md-5 mb-3">
-                                <div class="col-md-6 text-md-end">
-                                    <h6>ค่าขนส่ง(บาท) :</h6>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="number" id="input_quo_deli" name="input_quo_deli" class="form-control"
-                                        placeholder="0.00" title="กรุณากรอกค่าขนส่ง หากมี"
-                                        value="<?php if(isset($_SESSION['deli'])) {echo $_SESSION["deli"];}else{echo 0;} ?>">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="row align-items-center text-dark px-md-5 mb-3">
-                                <div class="col-md-6 text-md-end">
-                                    <label for="input_quo_sum" class="col-form-label">รวมเป็นเงิน(บาท) :</label>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <input type="number" id="input_quo_sum" name="input_quo_sum" class="form-control "
-                                        placeholder="0.00" readonly>
-                                </div>
-                            </div>
-                            <div class="row align-items-center text-dark px-md-5 mb-3">
-                                <div class="col-md-6 text-md-end">
-                                    <label for="input_quo_specialdis"
-                                        class="col-form-label text-danger ">หักส่วนลดพิเศษ(บาท)
-                                        :</label>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <input type="number" id="input_quo_specialdis" name="input_quo_specialdis"
-                                        class="form-control " placeholder="0.00" title="กรุณากรอกส่วนลด หากมี"
-                                        value="<?php if(isset($_SESSION['spe'])) {echo $_SESSION["spe"];}else{echo 0;}  ?>">
-                                </div>
-                            </div>
-                            <div class="row align-items-center text-dark px-md-5 mb-3">
-                                <div class="col-md-6 text-md-end">
-                                    <label for="input_quo_afterdis" class="col-form-label">ยอดรวมหลังหักส่วนลด(บาท)
-                                        :</label>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <input type="number" id="input_quo_afterdis" name="input_quo_afterdis"
-                                        class="form-control " placeholder="0.00" readonly>
-                                </div>
-                            </div>
-                            <div class="row align-items-center text-dark px-md-5 mb-3">
-                                <div class="col-md-6 text-md-end">
-                                    <label for="input_quo_vat" class="col-form-label">ภาษีมูลค่าเพิ่ม 7%(บาท) :</label>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <input type="number" id="input_quo_vat" name="input_quo_vat" class="form-control "
-                                        placeholder="0.00" readonly>
-                                </div>
-                            </div>
-                            <div class="row align-items-center text-dark px-md-5 mb-3">
-                                <div class="col-md-6 text-md-end">
-                                    <label for="input_quo_total" class="col-form-label">จํานวนเงินรวมทั้งสิ้น(บาท)
-                                        :</label>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <input type="number" id="input_quo_total" name="input_quo_total"
-                                        class="form-control " placeholder="0.00" readonly>
                                 </div>
                             </div>
                         </div>
@@ -294,30 +202,22 @@ table tr td:first-child::before {
                         total_item++;
                         $('#total_item').val(total_item);
                         var html_code = '';
-                        html_code += '<tr id=" row_id_' + count + '">';
-                        html_code
-                            += '<td><span id="sr_no"></span></td>';
-                        html_code
-                            += '<td><input type="text" name="item_name[]" id="item_name' + count +
-                            '" class="form-control input-sm" required /></td>';
-                        html_code
-                            += '<td><input type="number" name="item_amount[]" id="item_amount' + count +
-                            '" data-srno="' +
-                            count +
-                            '" class="form-control input-sm number_only item_amount" required /></td>';
-                        html_code += '<td><input type="number" name="item_price[]" id="item_price' +
-                            count +
-                            '" data-srno="' + count +
-                            '" class="form-control input-sm number_only item_price" required step="any" /></td>';
-                        html_code += '<td><input type="text" name="total_price[]" id="total_price' +
-                            count +
-                            '" data-srno="' + count +
-                            '" class="form-control input-sm total_price" readonly /></td>';
-                        html_code += '<td><button type="button" name="remove_row" id="' + count +
+                        html_code += '<tr id="row_id_' + count + '">';
+                        html_code += '<td><span id="sr_no"></span></td>';
+
+                        html_code +=
+                            '<td><input type="text" name="title_name[]" id="title_name' + count +
+                            '" class="form-control input-sm" required/></td>';
+                        html_code +=
+                            '<td><textarea class="form-control title_detail" name="title_detail[]" id="title_detail' + count + 
+                             '" data-srno="' + count +'" rows="3" required/></textarea></td>';
+                        html_code +=
+                            '<td><button type="button" name="remove_row" id="' + count +
                             '" class="btn btn-danger btn-xs remove_row">X</button></td>';
                         html_code += '</tr>';
-                        $('#quotation-item-table').append(html_code);
+                        $('#project-item-table').append(html_code);
                     });
+                    
                     $(document).on('click', '.remove_row',
                         function() {
                             var row_id = $(this).attr("id");
