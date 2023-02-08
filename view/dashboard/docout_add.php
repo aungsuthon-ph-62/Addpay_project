@@ -188,11 +188,10 @@ if (isset($_POST['action'])) {
 <script>
 // This sample still does not showcase all CKEditor 5 features (!)
 // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
-CKEDITOR.ClassicEditor.create(document.getElementById("input_content"), {
+CKEDITOR.ClassicEditor.create(document.getElementById("input_send"), {
     // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
     toolbar: {
         items: [
-            'exportPDF', 'exportWord', '|',
             'findAndReplace', 'selectAll', '|',
             'heading', '|',
             'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript',
@@ -203,10 +202,9 @@ CKEDITOR.ClassicEditor.create(document.getElementById("input_content"), {
             '-',
             'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
             'alignment', '|',
-            'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
+            'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', '|',
             'specialCharacters', 'horizontalLine', 'pageBreak', '|',
-            'textPartLanguage', '|',
-            'sourceEditing'
+            'textPartLanguage', '|'
         ],
         shouldNotGroupWhenFull: true
     },
@@ -363,11 +361,10 @@ CKEDITOR.ClassicEditor.create(document.getElementById("input_content"), {
 });
 
 
-CKEDITOR.ClassicEditor.create(document.getElementById("input_send"), {
+CKEDITOR.ClassicEditor.create(document.getElementById("input_content"), {
     // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
     toolbar: {
         items: [
-            'exportPDF', 'exportWord', '|',
             'findAndReplace', 'selectAll', '|',
             'heading', '|',
             'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript',
@@ -378,10 +375,9 @@ CKEDITOR.ClassicEditor.create(document.getElementById("input_send"), {
             '-',
             'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
             'alignment', '|',
-            'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
+            'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', '|',
             'specialCharacters', 'horizontalLine', 'pageBreak', '|',
-            'textPartLanguage', '|',
-            'sourceEditing'
+            'textPartLanguage', '|'
         ],
         shouldNotGroupWhenFull: true
     },
