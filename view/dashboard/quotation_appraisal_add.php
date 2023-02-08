@@ -365,30 +365,31 @@ table tr td:first-child::before {
                         total_item++;
                         $('#total_item').val(total_item);
                         var html_code = '';
-                        html_code += '<tr id=" row_id_' + count + '">';
-                        html_code
-                            += '<td><span id="sr_no"></span></td>';
-                        html_code
-                            += '<td><input type="text" name="item_name[]" id="item_name' + count +
-                            '" class="form-control input-sm" required /></td>';
-                        html_code
-                            += '<td><input type="number" name="item_amount[]" id="item_amount' + count +
-                            '" data-srno="' +
-                            count +
-                            '" class="form-control input-sm number_only item_amount" required /></td>';
-                        html_code += '<td><input type="number" name="item_price[]" id="item_price' +
-                            count +
-                            '" data-srno="' + count +
-                            '" class="form-control input-sm number_only item_price" required step="any" /></td>';
-                        html_code += '<td><input type="text" name="total_price[]" id="total_price' +
-                            count +
-                            '" data-srno="' + count +
+                        html_code += '<tr id="row_id_' + count + '">';
+                        html_code += '<td><span id="sr_no"></span></td>';
+
+                        html_code +=
+                            '<td><input type="text" name="item_name[]" id="item_name' + count +
+                            '" class="form-control input-sm" required/></td>';
+                        html_code +=
+                            '<td><input type="number" name="item_amount[]" id="item_amount' +
+                            count + '" data-srno="' + count +
+                            '" class="form-control input-sm number_only item_amount" required/></td>';
+                        html_code +=
+                            '<td><input type="number" name="item_price[]" id="item_price' +
+                            count + '" data-srno="' + count +
+                            '" class="form-control input-sm number_only item_price" required step="any"/></td>';
+                        html_code +=
+                            '<td><input type="text" name="total_price[]" id="total_price' +
+                            count + '" data-srno="' + count +
                             '" class="form-control input-sm total_price" readonly /></td>';
-                        html_code += '<td><button type="button" name="remove_row" id="' + count +
+                        html_code +=
+                            '<td><button type="button" name="remove_row" id="' + count +
                             '" class="btn btn-danger btn-xs remove_row">X</button></td>';
                         html_code += '</tr>';
                         $('#quotation-item-table').append(html_code);
                     });
+                    
                     $(document).on('click', '.remove_row',
                         function() {
                             var row_id = $(this).attr("id");
