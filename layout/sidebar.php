@@ -21,9 +21,9 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="?page=">
+                <a class="nav-link text-white" href="?page=project">
                     <span></span>
-                    งานที่จะประมูล
+                    โครงการประมูล
                 </a>
             </li>
             <li class="nav-item">

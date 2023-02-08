@@ -176,6 +176,16 @@ include_once 'view/dashboard/PDF_set/thaidate.php';
                             case "expenses_edit":
                                 include_once 'view/dashboard/expenses_edit.php';
                                 break;
+                            case "project":
+                                include_once 'view/dashboard/project_list.php';
+                                break;
+                            case "project_add":
+                                include_once 'view/dashboard/project_add.php';
+                                break;
+                            case "project_edit":
+                                include_once 'view/dashboard/project_edit.php';
+                                break;
+
                             default:
                                 include_once 'view/dashboard.php';
                         }
