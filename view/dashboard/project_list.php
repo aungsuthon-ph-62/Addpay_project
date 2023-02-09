@@ -1,32 +1,32 @@
 <?php
 unset($_SESSION['svinput']);
 
-// if(isset($_GET["deleteproject"])){
+if(isset($_GET["deleteproject"])){
     
-//     $id = $_GET["deleteproject"];
+    $id = $_GET["deleteproject"];
     
-//     $sql = "SELECT project_file FROM project WHERE project_id = '$id'";
-//     $query = $conn->query($sql);
-//     $row = $query->fetch_assoc();
-//     $oldfile = $row['project_file'];
+    $sql = "SELECT project_file FROM project WHERE project_id = '$id'";
+    $query = $conn->query($sql);
+    $row = $query->fetch_assoc();
+    $oldfile = $row['project_file'];
     
-//     $sql = "DELETE FROM project WHERE project_id = '$id'";
-//     $query = $conn->query($sql);
+    $sql = "DELETE FROM project WHERE project_id = '$id'";
+    $query = $conn->query($sql);
     
-//     if($query){
+    if($query){
             
-//         unlink("uploadfile/projectfile/$oldfile");
-//         $_SESSION['success'] = "ลบหนังสือเข้าสำเร็จ!";
-//         echo "<script> window.history.back()</script>";
-//         exit; 
+        unlink("uploadfile/projectfile/$oldfile");
+        $_SESSION['success'] = "ลบโครงการสำเร็จ!";
+        echo "<script> window.history.back()</script>";
+        exit; 
         
-//     }
+    }
     
-//     $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-//     echo "<script> window.history.back()</script>";
-//     exit;
+    $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
+    echo "<script> window.history.back()</script>";
+    exit;
     
-//   }
+  }
 
 ?>
 
@@ -59,93 +59,69 @@ unset($_SESSION['svinput']);
                                     <th class="text-left" style="width:13%" scope="col">วันที่บันทึก</th>
                                     <th class="text-left" style="width:32%" scope="col">โครงการ</th>
                                     <th class="text-left" style="width:25%" scope="col">หน่วยงานเจ้าของโครงการ</th>
-                                    <th class="text-left" style="width:20%" scope="col">เลขที่ใบเสนอราคากลาง</th>
+                                    <th class="text-center" style="width:20%" scope="col">เลขที่ใบเสนอราคากลาง</th>
                                     <th class="text-center" style="width:10%" scope="col">ตัวเลือก</th>
                                 </tr>
                             </thead>
-                            <tr>
-                                <td class="text-left">14/1/2566</td>
-                                <td class="text-left">โครงการพัฒนาระบบงานบริหารของบริษัท</td>
-                                <td class="text-left">บริษัท แอดเพย์ </td>
-                                <td class="text-center">54862</td>
-                                <td>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4"
-                                            data-bs-toggle="dropdown" aria-expanded="false"><b>เลือก</b>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" target="_blank" href="#">เปิดใบเสนอราคากลาง</a>
-                                            </li>
-                                            <li><a class="dropdown-item" href="#">แก้ไข</a>
-                                            </li>
-                                            <li><a class="dropdown-item deleteproject" href="#" data-docin-no="#">ลบ</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
                             <?php
-                            // $sql = "SELECT * FROM docin";
-                            // $query = $conn->query($sql);
-                            // while ($rows = $query->fetch_assoc()) {
-                            //     echo '
-                            //         <tr>
-                            //             <td class="text-left" >'.$rows["docin_no"].'</td>
-                            //             <td class="text-center" >'.ConvDate($rows["docin_date"]).'</td>
-                            //             <td>'.$rows["docin_srcname"].'</td>
-                            //             <td>'.$rows["docin_title"].'</td>
-                            //             <td>
-                            //                 <div class="btn-group">
-                            //                     <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4"
-                            //                         data-bs-toggle="dropdown" aria-expanded="false"><b>เลือก</b>
-                            //                     </button>
-                            //                     <ul class="dropdown-menu">
-                            //                         <li><a class="dropdown-item" target="_blank"
-                            //                                 href="uploadfile/docinfile/'.$rows["docin_file"].'">เปิดเอกสาร</a>
-                            //                         </li>
-                            //                         <li><a class="dropdown-item"
-                            //                                 href="?page=doc_in_edit&editdocin=' . encode($rows["docin_id"], secret_key()) . '">แก้ไข</a>
-                            //                         </li>
-                            //                         <li><a class="dropdown-item deletedocin" href="#" data-docin-no="'.$rows["docin_no"].'" id="'.$rows["docin_id"].'" >ลบ</a></li>
-                            //                     </ul>
-                            //                 </div>
-                            //             </td>
-                            //         </tr>
-                            //         ';
-                            //     }
+                            $sql = "SELECT * FROM project";
+                            $query = $conn->query($sql);
+                            while ($rows = $query->fetch_assoc()) {
+                                echo '
+                                    <tr>
+                                        <td class="text-left" >'.ConvDate($rows["project_create"]).'</td>
+                                        <td class="text-left" >'.$rows["project_name"].'</td>
+                                        <td>'.$rows["project_agency"].'</td>
+                                        <td class="text-center">'.$rows["project_quono"].'</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-dark dropdown-toggle px-2 px-md-4"
+                                                    data-bs-toggle="dropdown" aria-expanded="false"><b>เลือก</b>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" target="_blank"
+                                                            href="uploadfile/projectfile/'.$rows["project_file"].'">เปิดเอกสาร</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item"
+                                                            href="?page=project_edit&editproject=' . encode($rows["project_id"], secret_key()) . '">แก้ไข</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item deleteproject" href="#" data-project-title="'.$rows["project_name"].'" id="'.$rows["project_id"].'" >ลบ</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    ';
+                                }
                             ?>
                         </table>
                     </div>
                 </div>
-                <!-- Data table -->
-                <script type="text/javascript">
-                $(document).ready(function() {
-                    $('#projectTable').DataTable();
-                });
-
-                $(document).on('click', '.deleteproject', function() {
-                    var id = $(this).attr("id");
-                    var show_project_title = $(this).attr("data-project-title");
-                    swal.fire({
-                        title: 'ต้องการลบโครงการนี้ !',
-                        text: "ชื่อโครงการ : " + show_project_title,
-                        type: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#d33',
-                        cancelButtonColor: '#3085d6',
-                        confirmButtonText: 'yes!',
-                        cancelButtonText: 'no'
-                    }).then((result) => {
-                        if (result.value) {
-                            window.location.href = "?page=project&deleteproject=" + id;
-                        }
-                    });
-                });
-                </script>
-                <!-- Data table -->
-
             </div>
         </div>
     </div>
 </div>
 <?php $conn->close(); ?>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#projectTable').DataTable();
+});
+
+$(document).on('click', '.deleteproject', function() {
+    var id = $(this).attr("id");
+    var show_project_title = $(this).attr("data-project-title");
+    swal.fire({
+        title: 'ต้องการลบโครงการนี้ !',
+        text: "ชื่อโครงการ : " + show_project_title,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'yes!',
+        cancelButtonText: 'no'
+    }).then((result) => {
+        if (result.value) {
+            window.location.href = "?page=project&deleteproject=" + id;
+        }
+    });
+});
+</script>

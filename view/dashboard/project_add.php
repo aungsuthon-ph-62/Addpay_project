@@ -13,6 +13,7 @@ if (isset($_POST['action'])) {
         $input_budget = mysqli_real_escape_string($conn, trim($_POST['input_budget']));
         $input_detail = mysqli_real_escape_string($conn, trim($_POST['input_detail']));
         $input_id = mysqli_real_escape_string($conn, trim($_POST['qid']));
+        $input_no = mysqli_real_escape_string($conn, trim($_POST['input_no']));
         $input_date = mysqli_real_escape_string($conn, trim($_POST['input_date']));
         $input_num = mysqli_real_escape_string($conn, trim($_POST['input_num']));
         $uid = $_SESSION['id'];
@@ -52,8 +53,8 @@ if (isset($_POST['action'])) {
                     
                     if (move_uploaded_file($_FILES["input_file"]["tmp_name"], $targetFilePath)) {
 
-                        $query = "INSERT INTO project (project_name, project_agency, project_budget, project_detail, project_quoid, project_file, project_create, project_uid)
-                            VALUES ('$input_pjname', '$input_agency', '$input_budget', '$input_detail', '$input_id', '$fileName', '$date', '$uid')";
+                        $query = "INSERT INTO project (project_name, project_agency, project_budget, project_detail, project_quoid, project_quono, project_file, project_create, project_uid)
+                            VALUES ('$input_pjname', '$input_agency', '$input_budget', '$input_detail', '$input_id', '$input_no', '$fileName', '$date', '$uid')";
 
                         if ( $conn->query($query) === TRUE) {
 
@@ -346,7 +347,7 @@ table tr td:first-child::before {
                                 success: function(response) {
                                     var jsonData = JSON.parse(response);
                                     if (jsonData.success == "1") {
-                                        console.log("yes");
+
                                         var result1 = jsonData.quo_id;
                                         var result2 = jsonData.quo_date;
                                         var result3 = jsonData.quo_total;
