@@ -6,10 +6,13 @@ if(isset($_POST['keyquono'])){
     $sql = "SELECT * FROM quotation_appraisal WHERE quo_no ='$no'";
     $query = $conn->query($sql);
     $row = $query->fetch_assoc();
-    if($row){
+    if($row){ 
+        
+        $qid = $row['quo_id'];
         $rd = $row['quo_date'];
         $rt = $row['quo_total'];
-        echo json_encode(array('success' => 1,'quodate'=>$rd,'quototal'=>$rt));
+       
+        echo json_encode(array('success' => 1, 'quo_id'=>$qid, 'quo_date'=>$rd, 'quo_total'=>$rt));
         
     }else{
         echo json_encode(array('success' => 2));

@@ -5,19 +5,36 @@ if (isset($_POST['action'])) {
 
         date_default_timezone_set('Asia/Bangkok');
         $date = date("Y-m-d H:i:s");
+        $namedate = date('YmdHis');
         global $conn;
 
         $input_pjname = mysqli_real_escape_string($conn, trim($_POST['input_pjname']));
         $input_agency = mysqli_real_escape_string($conn, trim($_POST['input_agency']));
         $input_budget = mysqli_real_escape_string($conn, trim($_POST['input_budget']));
         $input_detail = mysqli_real_escape_string($conn, trim($_POST['input_detail']));
-        $input_no = mysqli_real_escape_string($conn, trim($_POST['input_no']));
+        $input_id = mysqli_real_escape_string($conn, trim($_POST['qid']));
         $input_date = mysqli_real_escape_string($conn, trim($_POST['input_date']));
         $input_num = mysqli_real_escape_string($conn, trim($_POST['input_num']));
         $uid = $_SESSION['id'];
 
-        if($input_date==" "||$input_num==" "){
+        unset($_SESSION['svinput']);
+        $inputArray = array();
+
+        for ($count = 0; $count < $_POST["total_item"]; $count++) {
+            
+            $title_name = mysqli_real_escape_string($conn, trim($_POST['title_name'][$count]));
+            $title_detail = mysqli_real_escape_string($conn, trim($_POST['title_detail'][$count]));
+            
+            $subinputArray = array($item_name,$item_amount,$item_price,$total_price);
+            $inputArray[] = $subinputArray;
+    
+        }
+
+        $_SESSION['svinput']=$inputArray;
+
+        if(empty($input_id)||empty($input_date)||empty($input_num)){
             $_SESSION['error'] = "ไม่มีข้อมูลใบเสนอราคา";
+            echo "<script> window.history.back()</script>";
             exit;
             
         }else{
@@ -32,13 +49,13 @@ if (isset($_POST['action'])) {
                 $allowTypes = array('jpg', 'png', 'jpeg', 'pdf', 'word', 'txt', 'doc', 'docx', 'ppt', 'pptx', 'PDF');
 
                 if (in_array($fileType, $allowTypes)) {
-
+                    
                     if (move_uploaded_file($_FILES["input_file"]["tmp_name"], $targetFilePath)) {
 
                         $query = "INSERT INTO project (project_name, project_agency, project_budget, project_detail, project_quoid, project_file, project_create, project_uid)
-                            VALUES ('$input_pjname', '$input_agency', '$input_budget', '$input_detail', '$input_no', '$fileName', '$date', '$uid')";
+                            VALUES ('$input_pjname', '$input_agency', '$input_budget', '$input_detail', '$input_id', '$fileName', '$date', '$uid')";
 
-                        if ($conn->query($query)=== TRUE) {
+                        if ( $conn->query($query) === TRUE) {
 
                             $last_id = $conn->insert_id;
 
@@ -53,28 +70,14 @@ if (isset($_POST['action'])) {
                             }
 
                             $_SESSION['success'] = "บันทึกโครงการสำเร็จ!";
-                            echo "<script> window.location.href='?page=doc_in';</script>";
+                            unset($_SESSION['svinput']);
+                            echo "<script> window.location.href='?page=project';</script>";
                             exit;
                             
                         } else {
 
                             unlink("uploadfile/projectfile/$fileName");
-                            $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";
-                            unset($_SESSION['svinput']);
-                            $inputArray = array();
-            
-                            for ($count = 0; $count < $_POST["total_item"]; $count++) {
-                                
-                                $title_name = mysqli_real_escape_string($conn, trim($_POST['title_name'][$count]));
-                                $title_detail = mysqli_real_escape_string($conn, trim($_POST['title_detail'][$count]));
-                                
-                                $subinputArray = array($item_name,$item_amount,$item_price,$total_price);
-                                $inputArray[] = $subinputArray;
-                        
-                            }
-                
-                            $_SESSION['svinput']=$inputArray;
-                            
+                            $_SESSION['error'] = "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง";                            
                             echo "<script> window.history.back()</script>";
                             exit;
                         }
@@ -135,7 +138,8 @@ table tr td:first-child::before {
                 <div class="text-center text-md-start text-dark my-3">
                     <h3>เพิ่มโครงการประมูล</h3>
                 </div>
-                <form method="post" id="project_form" action="?page=project_add" class=" mt-md-5">
+                <form method="post" id="project_form" name="project_form" action="?page=project_add" class="mt-md-5"
+                    enctype="multipart/form-data">
                     <div class="row align-items-center text-dark px-md-5 mb-3">
                         <div class="col-md-3 text-md-end">
                             <h6 class="col-form-label">ชื่อโครงการ :</h6>
@@ -212,9 +216,6 @@ table tr td:first-child::before {
                         </div>
                     </div>
 
-
-
-
                     <div class="row align-items-center text-dark px-md-5 mb-3">
                         <div class="col-md-3">
                             <h6>รายการตาม TOR :</h6>
@@ -256,7 +257,7 @@ table tr td:first-child::before {
 
                                     <?php }
                                 }else{ 
-                                    $n=1;$deli=0;$spe=0;
+                                    $n=1;
                                     ?>
                                     <tr id="row_id_1">
                                         <td><span id="sr_no"></span></td>
@@ -291,6 +292,7 @@ table tr td:first-child::before {
                                         class="fa-solid fa-cloud-arrow-up"></i></button>
                             </div>
                         </div>
+                        <input type="hidden" name="qid" id="qid" />
                         <input type="hidden" name="total_item" id="total_item" value="<?=$n;?>" />
                     </div>
                 </form>
@@ -329,7 +331,6 @@ table tr td:first-child::before {
                         $('#row_id_' + row_id).remove();
                         total_item--;
                         $('#total_item').val(total_item);
-                        cal_final_total(count);
                     });
 
                     $(document).on('click', '.keyquono', function() {
@@ -346,10 +347,13 @@ table tr td:first-child::before {
                                     var jsonData = JSON.parse(response);
                                     if (jsonData.success == "1") {
                                         console.log("yes");
-                                        var result1 = jsonData.quodate;
-                                        var result2 = jsonData.quototal;
-                                        $('#input_date').val(result1);
-                                        $('#input_num').val(result2);
+                                        var result1 = jsonData.quo_id;
+                                        var result2 = jsonData.quo_date;
+                                        var result3 = jsonData.quo_total;
+
+                                        $('#qid').val(result1);
+                                        $('#input_date').val(result2);
+                                        $('#input_num').val(result3);
 
                                     } else if (jsonData.success == "2") {
                                         Swal.fire({

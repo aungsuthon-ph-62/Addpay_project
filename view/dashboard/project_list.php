@@ -1,4 +1,5 @@
 <?php
+unset($_SESSION['svinput']);
 
 // if(isset($_GET["deleteproject"])){
     
@@ -59,7 +60,7 @@
                                     <th class="text-left" style="width:32%" scope="col">โครงการ</th>
                                     <th class="text-left" style="width:25%" scope="col">หน่วยงานเจ้าของโครงการ</th>
                                     <th class="text-left" style="width:20%" scope="col">เลขที่ใบเสนอราคากลาง</th>
-                                    <th class="text-center"style="width:10%" scope="col">ตัวเลือก</th>
+                                    <th class="text-center" style="width:10%" scope="col">ตัวเลือก</th>
                                 </tr>
                             </thead>
                             <tr>
@@ -73,13 +74,12 @@
                                             data-bs-toggle="dropdown" aria-expanded="false"><b>เลือก</b>
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" target="_blank"
-                                                    href="#">เปิดใบเสนอราคากลาง</a>
+                                            <li><a class="dropdown-item" target="_blank" href="#">เปิดใบเสนอราคากลาง</a>
                                             </li>
-                                            <li><a class="dropdown-item"
-                                                    href="#">แก้ไข</a>
+                                            <li><a class="dropdown-item" href="#">แก้ไข</a>
                                             </li>
-                                            <li><a class="dropdown-item deleteproject" href="#" data-docin-no="#" >ลบ</a></li>
+                                            <li><a class="dropdown-item deleteproject" href="#" data-docin-no="#">ลบ</a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </td>
