@@ -52,12 +52,7 @@ if (isset($_POST['action'])) {
                 $allowTypes = array('jpg', 'png', 'jpeg', 'pdf', 'word', 'txt', 'doc', 'docx', 'ppt', 'pptx', 'PDF');
 
                 if (in_array($fileType, $allowTypes)) {
-
-                    $sql = "SELECT project_file FROM project WHERE project_id = '$id'";
-                    $query = $conn->query($sql);
-                    $row = $query->fetch_assoc();
-                    $oldfile = $row['project_file'];
-
+                    
                     if (move_uploaded_file($_FILES["input_file"]["tmp_name"], $targetFilePath)) {
 
                         $query1 = "UPDATE project SET project_name='$input_pjname', project_agency='$input_agency'
@@ -80,7 +75,6 @@ if (isset($_POST['action'])) {
                                 $conn->query($query);
                             }
 
-                            unlink("uploadfile/projectfile/$oldfile");
                             $_SESSION['success'] = "บันทึกโครงการสำเร็จ!";
                             echo "<script> window.location.href='?page=project';</script>";
                             exit;
@@ -256,7 +250,7 @@ table tr td:first-child::before {
                             <h6 class="col-form-label">ไฟล์ใบเสนอราคาที่เซ็นอนุมัติ :</h6>
                         </div>
                         <div class="col-md-6">
-                            <input type="file" id="input_file" name="input_file" class=" form-control ">
+                            <input type="file" id="input_file" name="input_file" class=" form-control " required>
                         </div>
                     </div>
 
