@@ -279,12 +279,12 @@ table tr td:first-child::before {
                                         <td>
                                             <input type="text" name="title_name[]" id="title_name<?= $n; ?>"
                                                 class="form-control input-sm title_name" data-srno="<?= $n; ?>"
-                                                value="<?= $row['projtor_title'] ?>" required />
+                                                value="<?= $rows['projtor_title'] ?>" required />
                                         </td>
                                         <td>
                                             <textarea class="form-control title_detail" name="title_detail[]"
                                                 id="title_detail<?= $n; ?>" data-srno="<?= $n; ?>" rows="3"
-                                                value="<?= $row['projtor_detail'] ?>" required></textarea>
+                                                value="<?= $rows['projtor_detail'] ?>" required></textarea>
                                         </td>
                                         <td>
                                             <button type="button" name="remove_row" id="<?= $n; ?>"
