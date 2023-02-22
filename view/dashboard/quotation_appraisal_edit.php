@@ -83,8 +83,8 @@ function edit_quo()
             $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
             $total_price = mysqli_real_escape_string($conn, trim($_POST['total_price'][$count]));
 
-            $query = "INSERT INTO quotation_appraisal_details (quode_quoid, quode_item, quode_amount, quode_price,  quode_result, quode_create, quode_update, quode_uid)
-                VALUES ('$id', '$item_name', '$item_amount', '$item_price', '$total_price', '$quo_date_create', '$date', '$uid')";
+            $query = "INSERT INTO quotation_appraisal_details (quode_quoid, quode_item, quode_amount, quode_price,  quode_result, quode_create, quode_update)
+                VALUES ('$id', '$item_name', '$item_amount', '$item_price', '$total_price', '$quo_date_create', '$date')";
             $conn->query($query);
         }
 

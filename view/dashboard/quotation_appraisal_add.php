@@ -65,8 +65,8 @@ if (isset($_POST['action'])) {
                     $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
                     $total_price = mysqli_real_escape_string($conn, trim($_POST['total_price'][$count]));
 
-                    $query = "INSERT INTO quotation_appraisal_details (quode_quoid, quode_item, quode_amount, quode_price, quode_result, quode_create, quode_uid)
-                        VALUES ('$last_id', '$item_name', '$item_amount', '$item_price', '$total_price', '$date', '$uid')";
+                    $query = "INSERT INTO quotation_appraisal_details (quode_quoid, quode_item, quode_amount, quode_price, quode_result, quode_create)
+                        VALUES ('$last_id', '$item_name', '$item_amount', '$item_price', '$total_price', '$date')";
                     $conn->query($query);
                 }
 

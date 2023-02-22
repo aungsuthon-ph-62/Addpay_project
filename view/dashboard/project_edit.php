@@ -70,8 +70,8 @@ if (isset($_POST['action'])) {
                                 $title_name = mysqli_real_escape_string($conn, trim($_POST['title_name'][$count]));
                                 $title_detail = mysqli_real_escape_string($conn, trim($_POST['title_detail'][$count]));
                 
-                                $query = "INSERT INTO project_tor (projtor_pid, projtor_title, projtor_detail, projtor_create, projtor_update, projtor_uid)
-                                    VALUES ('$last_id', '$title_name', '$title_detail', '$date', '$pjdate', '$uid')";
+                                $query = "INSERT INTO project_tor (projtor_pid, projtor_title, projtor_detail, projtor_create, projtor_update)
+                                    VALUES ('$last_id', '$title_name', '$title_detail', '$date', '$pjdate')";
                                 $conn->query($query);
                             }
 
@@ -115,8 +115,8 @@ if (isset($_POST['action'])) {
                         $title_name = mysqli_real_escape_string($conn, trim($_POST['title_name'][$count]));
                         $title_detail = mysqli_real_escape_string($conn, trim($_POST['title_detail'][$count]));
         
-                        $query = "INSERT INTO project_tor (projtor_pid, projtor_title, projtor_detail, projtor_create, projtor_update, projtor_uid)
-                            VALUES ('$last_id', '$title_name', '$title_detail', '$date', '$pjdate', '$uid')";
+                        $query = "INSERT INTO project_tor (projtor_pid, projtor_title, projtor_detail, projtor_create, projtor_update)
+                            VALUES ('$last_id', '$title_name', '$title_detail', '$date', '$pjdate')";
                         $conn->query($query);
                     }
 

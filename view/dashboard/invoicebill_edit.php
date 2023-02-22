@@ -82,8 +82,8 @@ function edit_invbill()
             $item_vat = mysqli_real_escape_string($conn, trim($_POST['item_vat'][$count]));
             $item_total = mysqli_real_escape_string($conn, trim($_POST['item_total'][$count]));
 
-            $query = "INSERT INTO invoicebill_details (invbilld_bid, invbilld_item, invbilld_price, invbilld_vat, invbilld_result, invbilld_create, invbilld_uid)
-            VALUES ('$id', '$item_name', '$item_price', '$item_vat', '$item_total', '$date', '$uid')";
+            $query = "INSERT INTO invoicebill_details (invbilld_bid, invbilld_item, invbilld_price, invbilld_vat, invbilld_result, invbilld_create)
+            VALUES ('$id', '$item_name', '$item_price', '$item_vat', '$item_total', '$date')";
             $conn->query($query);
             
             if($item_inv_date>0){

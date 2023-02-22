@@ -79,8 +79,8 @@ function edit_invtax()
             $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
             $total_price = mysqli_real_escape_string($conn, trim($_POST['total_price'][$count]));
 
-            $query = "INSERT INTO invoicetax_details (invtaxd_tid, invtaxd_item, invtaxd_amount, invtaxd_price, invtaxd_result, invtaxd_create, invtaxd_update, invtaxd_uid)
-                        VALUES ('$id', '$item_name', '$item_amount', '$item_price',  '$total_price','$invtax_date_create', '$date', '$uid')";
+            $query = "INSERT INTO invoicetax_details (invtaxd_tid, invtaxd_item, invtaxd_amount, invtaxd_price, invtaxd_result, invtaxd_create, invtaxd_update)
+                        VALUES ('$id', '$item_name', '$item_amount', '$item_price',  '$total_price','$invtax_date_create', '$date')";
             $conn->query($query);
         }
 

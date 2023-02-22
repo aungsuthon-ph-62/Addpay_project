@@ -65,8 +65,8 @@ if (isset($_POST['action'])) {
                                 $title_name = mysqli_real_escape_string($conn, trim($_POST['title_name'][$count]));
                                 $title_detail = mysqli_real_escape_string($conn, trim($_POST['title_detail'][$count]));
                 
-                                $query = "INSERT INTO project_tor (projtor_pid, projtor_title, projtor_detail, projtor_create, projtor_uid)
-                                    VALUES ('$last_id', '$title_name', '$title_detail', '$date', '$uid')";
+                                $query = "INSERT INTO project_tor (projtor_pid, projtor_title, projtor_detail, projtor_create)
+                                    VALUES ('$last_id', '$title_name', '$title_detail', '$date')";
                                 $conn->query($query);
                             }
 

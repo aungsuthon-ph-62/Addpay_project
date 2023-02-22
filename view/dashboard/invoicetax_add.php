@@ -59,8 +59,8 @@ if (isset($_POST['action'])) {
                     $item_price = mysqli_real_escape_string($conn, trim($_POST['item_price'][$count]));
                     $total_price = mysqli_real_escape_string($conn, trim($_POST['total_price'][$count]));
 
-                    $query = "INSERT INTO invoicetax_details (invtaxd_tid, invtaxd_item, invtaxd_amount, invtaxd_price, invtaxd_result, invtaxd_create, invtaxd_uid)
-                        VALUES ('$last_id', '$item_name', '$item_amount', '$item_price',  '$total_price', '$date', '$uid')";
+                    $query = "INSERT INTO invoicetax_details (invtaxd_tid, invtaxd_item, invtaxd_amount, invtaxd_price, invtaxd_result, invtaxd_create)
+                        VALUES ('$last_id', '$item_name', '$item_amount', '$item_price',  '$total_price', '$date')";
                     $conn->query($query);
                 }
 
