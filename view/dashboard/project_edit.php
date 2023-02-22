@@ -284,7 +284,7 @@ table tr td:first-child::before {
                                         <td>
                                             <textarea class="form-control title_detail" name="title_detail[]"
                                                 id="title_detail<?= $n; ?>" data-srno="<?= $n; ?>" rows="3"
-                                                value="<?= $row['project_detail'] ?>" required></textarea>
+                                                value="<?= $row['projtor_detail'] ?>" required></textarea>
                                         </td>
                                         <td>
                                             <button type="button" name="remove_row" id="<?= $n; ?>"
