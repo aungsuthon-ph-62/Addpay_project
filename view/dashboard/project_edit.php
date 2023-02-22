@@ -268,7 +268,7 @@ table tr td:first-child::before {
                                         <th width="5%">ลบ</th>
                                     </tr>
                                     <?php 
-                                        $sql = "SELECT * FROM project WHERE project_id ='$id'";
+                                        $sql = "SELECT * FROM project_tor WHERE projtor_pid ='$id'";
                                         $query = $conn->query($sql);
                                         $n = 0;
                                         while ($rows = $query->fetch_assoc()) {
