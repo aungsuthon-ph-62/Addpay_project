@@ -16,6 +16,7 @@ if (isset($_GET['editproject'])) {
     }
 }
 
+
 if (isset($_POST['action'])) {
     if ($_POST['action'] == 'edit_project') {
 
@@ -57,7 +58,7 @@ if (isset($_POST['action'])) {
 
                         $query1 = "UPDATE project SET project_name='$input_pjname', project_agency='$input_agency'
                                 , project_budget='$input_budget', project_detail='$input_detail', project_quoid='$input_id'
-                                , project_quono='$input_no', project_file='$fileName', project_update='$date', project_uid='$uid'";
+                                , project_quono='$input_no', project_file='$fileName', project_update='$date', project_uid='$uid' WHERE project_id = '$id' ";
 
                         $query2 = "DELETE FROM project_tor WHERE projtor_pid = '$id'";
 
@@ -102,7 +103,7 @@ if (isset($_POST['action'])) {
                 
                 $query1 = "UPDATE project SET project_name='$input_pjname', project_agency='$input_agency'
                         , project_budget='$input_budget', project_detail='$input_detail', project_quoid='$input_id'
-                        , project_quono='$input_no', project_update='$date', project_uid='$uid'";
+                        , project_quono='$input_no', project_update='$date', project_uid='$uid'  WHERE project_id = '$id' ";
 
                 $query2 = "DELETE FROM project_tor WHERE projtor_pid = '$id'";
 
@@ -172,7 +173,7 @@ table tr td:first-child::before {
                     <h3>แก้ไขโครงการประมูล</h3>
                 </div>
                 <form method="post" id="project_form" name="project_form"
-                    action="?page=project_add&editproject=<?php echo encode($row['project_id'], secret_key()); ?>"
+                    action="?page=project_edit&editproject=<?php echo encode($row['project_id'], secret_key()); ?>"
                     class="mt-md-5" enctype="multipart/form-data">
                     <div class="row align-items-center text-dark px-md-5 mb-3">
                         <div class="col-md-3 text-md-end">
@@ -250,7 +251,7 @@ table tr td:first-child::before {
                             <h6 class="col-form-label">ไฟล์ใบเสนอราคาที่เซ็นอนุมัติ :</h6>
                         </div>
                         <div class="col-md-6">
-                            <input type="file" id="input_file" name="input_file" class=" form-control " required>
+                            <input type="file" id="input_file" name="input_file" class=" form-control ">
                         </div>
                     </div>
 
@@ -307,7 +308,7 @@ table tr td:first-child::before {
                             <div class="d-flex justify-content-end">
                                 <button type="reset" class="btn bg-secondary-addpay text-white me-3"><i
                                         class="fa-solid fa-arrow-rotate-left"></i> ล้างข้อมูล</button>
-                                <button type="submit" name="action" value="create_project"
+                                <button type="submit" name="action" value="edit_project"
                                     class="btn btn-addpay text-white">บันทึก <i
                                         class="fa-solid fa-cloud-arrow-up"></i></button>
                             </div>
