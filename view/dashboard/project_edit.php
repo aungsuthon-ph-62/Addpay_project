@@ -52,7 +52,12 @@ if (isset($_POST['action'])) {
                 $allowTypes = array('jpg', 'png', 'jpeg', 'pdf', 'word', 'txt', 'doc', 'docx', 'ppt', 'pptx', 'PDF');
 
                 if (in_array($fileType, $allowTypes)) {
-                    
+                    $sql = "SELECT project_file FROM project WHERE project_id = '$id'";
+                    $query = $conn->query($sql);
+                    $row = $query->fetch_assoc();
+                    $oldfile = $row['project_file'];
+
+
                     if (move_uploaded_file($_FILES["input_file"]["tmp_name"], $targetFilePath)) {
 
                         $query1 = "UPDATE project SET project_name='$input_pjname', project_agency='$input_agency'
@@ -74,7 +79,7 @@ if (isset($_POST['action'])) {
                                     VALUES ('$last_id', '$title_name', '$title_detail', '$date', '$pjdate')";
                                 $conn->query($query);
                             }
-
+                            unlink("uploadfile/docinfile/$oldfile");
                             $_SESSION['success'] = "บันทึกโครงการสำเร็จ!";
                             echo "<script> window.location.href='?page=project';</script>";
                             exit;
@@ -169,7 +174,7 @@ table tr td:first-child::before {
         <div id="paperproject" class="container p-3 p-md-5">
             <div class="p-4 p-md-5 bg-white rounded-5 shadow-lg">
                 <div class="text-center text-md-start text-dark my-3">
-                    <h3>แก้ไขโครงการประมูล</h3>
+                    <h3>แก้ไขโครงการประมูล99</h3>
                 </div>
                 <form method="post" id="project_form" name="project_form"
                     action="?page=project_add&editproject=<?php echo encode($row['project_id'], secret_key()); ?>"
